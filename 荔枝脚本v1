@@ -43,8 +43,9 @@ local Tab = Window:Tab({
     Icon = "bird",
     Locked = false,
 })
-local Paragraph = Tab:无更新({
-    Title = "群:746820543",
+
+local Paragraph = Tab:Paragraph({
+    Title = "Paragraph with Image, Thumbnail, Buttons",
     Desc = "Test Paragraph",
     Color = "Red",
     Image = "",
