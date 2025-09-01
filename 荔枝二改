@@ -19,6 +19,9 @@ Window:DisableTopbarButtons({
 })
 
 
+--                        ↓ Special name     ↓ Icon     ↓ Callback                         ↓ Order
+Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
@@ -50,8 +53,6 @@ WindUI:Popup({
         }
     }
 })
-
-
 
 
 Window:EditOpenButton({
