@@ -14,6 +14,12 @@ local Window = WindUI:CreateWindow({
 })
 
 
+Window:Tag({
+    Title = "v1.1.1",
+    Color = Color3.fromHex("#30ff6a")
+})
+
+
 local Tab = Window:Tab({
     Title = "Tab Title",
     Icon = "bird",
