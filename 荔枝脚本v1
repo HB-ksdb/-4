@@ -46,7 +46,7 @@ local Button = Tab:Button({
     Title = "Button",
     Desc = "Test Button",
     Locked = false,
-    Callback = loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()()
+    Callback = loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()
         print("clicked")
     end
 })
