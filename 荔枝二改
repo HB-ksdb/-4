@@ -14,26 +14,6 @@ local Window = WindUI:CreateWindow({
 })
 
 
-WindUI:Popup({
-    Title = "荔枝脚本欢迎你",
-    Icon = "info",
-    Content = "荔枝脚本免费用",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "进入",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
-})
-
-
 Window:Tag({
     Title = "v1.1.1",
     Color = Color3.fromHex("#30ff6a")
