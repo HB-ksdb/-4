@@ -27,6 +27,16 @@ local Tab = Window:Tab({
 })
 
 
+local Button = Tab:Button({
+    Title = "Button",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
+})
+
+
 Window:SelectTab(2) -- Number of Tab
 
 
