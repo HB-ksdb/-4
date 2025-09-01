@@ -27,19 +27,6 @@ local Tab = Window:Tab({
 })
 
 
-local Input = Tab:Input({
-    Title = "群→746820543",
-    Desc = "群→746820543",
-    Value = "群：746820543",
-    InputIcon = "bird",
-    Type = "Input", -- or "Textarea"
-    Placeholder = "Enter text...",
-    Callback = function(input) 
-        print("text entered: " .. input)
-    end
-})
-
-
 Window:SelectTab(2) -- Number of Tab
 
 
