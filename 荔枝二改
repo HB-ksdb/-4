@@ -1,76 +1,179 @@
-local Library = loadstring(game:HttpGet("https://pastebin.com/raw/Q5DRf1AG",true))()
+_G.JxereasExistingHooks = _G.JxereasExistingHooks or {}
+if not _G.JxereasExistingHooks.GuiDetectionBypass then
+    local CoreGui = game.CoreGui
+    local ContentProvider = game.ContentProvider
+    local RobloxGuis = { "RobloxGui", "TeleportGui", "RobloxPromptGui", "RobloxLoadingGui", "PlayerList",
+        "RobloxNetworkPauseNotification", "PurchasePrompt", "HeadsetDisconnectedDialog", "ThemeProvider",
+        "DevConsoleMaster" }
 
-local Forums = Library.new('DarkTheme')
+    local function FilterTable(tbl)
+        local context = syn_context_get()
+        syn_context_set(7)
+        local new = {}
+        for i, v in ipairs(tbl) do
+            if typeof(v) ~= "Instance" then
+                table.insert(new, v)
+            else
+                if v == CoreGui or v == game then
+                    for i, v in pairs(RobloxGuis) do
+                        local gui = CoreGui:FindFirstChild(v)
+                        if gui then
+                            table.insert(new, gui)
+                        end
+                    end
 
-local preview = Forums:NewSection("页面")
-local preview1 = Forums:NewSection("页面2")
-
-preview:NewButton("按钮", function()
-
-end)
-preview:NewToggle("开关", function(state)
-print("Toggle: "..state)
-end)
-preview:NewTextBox("输入框", function(text)
-print(text)
-end)
-preview:NewSlider("滑块", 0, 400, function(value)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
-end)
-local list = {
-    "Option 1",
-    "Option 2",
-    "Option 3",
-}
-preview:NewDropdown("列表", list, function(item)
-   
-end)
-
-preview1:Seperator()
-
-local btn = preview1:NewButton("按钮", function()
-    print("Button")
-end)
-preview1:NewButton("更新按钮内容", function()
-    btn:Update("更新")
-end)
-
-preview1:Seperator()
-getgenv().stt = false
-local toggle = preview1:NewToggle("开关: ", function(status)
-    getgenv().stt = status
-end)
-coroutine.wrap(function()
-    while wait() do
-        toggle:Update("开关: "..tostring(getgenv().stt))
-    end
-end)()
-preview1:Seperator()
-
-getgenv().newTxt = "等待输入"
-local box = preview1:NewTextBox("等待输入", function(newText)
-    getgenv().newTxt = newText
-end)
-coroutine.wrap(function()
-    while wait() do
-        box:Update(tostring(getgenv().newTxt))
-    end
-end)()
-
-preview1:Seperator()
-
-local drop = preview1:NewDropdown("玩家列表", {}, function(item)
-   print(item)
-end)
-local plrTable = {}
-preview1:NewButton("刷新玩家列表", function()
-    for i,v in pairs(game.Players:GetChildren()) do
-        if v ~= game.Players.LocalPlayer then
-            table.insert(plrTable, v.Name)
+                    if v == game then
+                        for i, v in pairs(game:GetChildren()) do
+                            if v ~= CoreGui then
+                                table.insert(new, v)
+                            end
+                        end
+                    end
+                else
+                    if not CoreGui:IsAncestorOf(v) then
+                        table.insert(new, v)
+                    else
+                        for j, k in pairs(RobloxGuis) do
+                            local gui = CoreGui:FindFirstChild(k)
+                            if gui then
+                                if v == gui or gui:IsAncestorOf(v) then
+                                    table.insert(new, v)
+                                    break
+                                end
+                            end
+                        end
+                    end
+                end
+            end
         end
+        syn_context_set(context)
+        return new
     end
-    drop:Refresh(plrTable)
-    plrTable = {}
-end)
 
-preview1:Seperator()
+    local old
+    old = hookfunc(ContentProvider.PreloadAsync, function(self, tbl, cb)
+        if self ~= ContentProvider or type(tbl) ~= "table" or type(cb) ~= "function" then
+            return old(self, tbl, cb)
+        end
+
+
+        local err
+        task.spawn(function()
+            local s, e = pcall(old, self, tbl)
+            if not s and e then
+                err = e
+            end
+        end)
+
+        if err then
+            return old(self, tbl)
+        end
+
+        tbl = FilterTable(tbl)
+        return old(self, tbl, cb)
+    end)
+
+    local old
+    old = hookmetamethod(game, "__namecall", function(self, ...)
+        local method = getnamecallmethod()
+        if self == ContentProvider and (method == "PreloadAsync" or method == "preloadAsync") then
+            local args = { ... }
+            if type(args[1]) ~= "table" or type(args[2]) ~= "function" then
+                return old(self, ...)
+            end
+
+            local err
+            task.spawn(function()
+                setnamecallmethod(method)
+                local s, e = pcall(old, self, args[1])
+                if not s and e then
+                    err = e
+                end
+            end)
+
+            if err then
+                return old(self, args[1])
+            end
+
+            args[1] = FilterTable(args[1])
+            setnamecallmethod(method)
+            return old(self, args[1], args[2])
+        end
+        return old(self, ...)
+    end)
+
+    _G.JxereasExistingHooks.GuiDetectionBypass = true
+end
+
+local Notification = {}
+Notification.__index = Notification
+
+local ts = game:GetService("TweenService")
+local ss = game:GetService("SoundService")
+local txtS = game:GetService("TextService")
+
+local openSound = Instance.new("Sound")
+local closeSound = Instance.new("Sound")
+
+local notifications = Instance.new("ScreenGui")
+local notifsHolderFrame = Instance.new("Frame")
+local notifHolderListLayout = Instance.new("UIListLayout")
+local errorTemplate = Instance.new("Frame")
+local errorTemplateFrame = Instance.new("Frame")
+local errorTemplateCorner = Instance.new("UICorner")
+local errorSeverityFrame = Instance.new("Frame")
+local errorSeverityCorner = Instance.new("UICorner")
+local hideErrorSeverityCornerFrame = Instance.new("Frame")
+local errorImage = Instance.new("ImageLabel")
+local errorInformationFrame = Instance.new("Frame")
+local errorHeadingText = Instance.new("TextLabel")
+local errorBodyText = Instance.new("TextLabel")
+local errorCornerHidingFrame = Instance.new("Frame")
+local errorCloseButton = Instance.new("ImageButton")
+local infoTemplate = Instance.new("Frame")
+local infoTemplateFrame = Instance.new("Frame")
+local infoSeverityFrame = Instance.new("Frame")
+local infoSeverityCorner = Instance.new("UICorner")
+local hideInfoSeverityCornerFrame = Instance.new("Frame")
+local infoImage = Instance.new("ImageLabel")
+local infoInformationFrame = Instance.new("Frame")
+local infoHeadingText = Instance.new("TextLabel")
+local infoBodyText = Instance.new("TextLabel")
+local infoCornerHidingFrame = Instance.new("Frame")
+local infoCloseButton = Instance.new("ImageButton")
+local infoTemplateCorner = Instance.new("UICorner")
+local messageTemplate = Instance.new("Frame")
+local messageTemplateFrame = Instance.new("Frame")
+local messageTemplateCorner = Instance.new("UICorner")
+local messageSeverityFrame = Instance.new("Frame")
+local messageSeverityCorner = Instance.new("UICorner")
+local hideMessageSeverityCornerFrame = Instance.new("Frame")
+local messageInformationFrame = Instance.new("Frame")
+local messageHeadingText = Instance.new("TextLabel")
+local messageBodyText = Instance.new("TextLabel")
+local messageCornerHidingFrame = Instance.new("Frame")
+local messageCloseButton = Instance.new("ImageButton")
+local successTemplate = Instance.new("Frame")
+local successTemplateFrame = Instance.new("Frame")
+local successTemplateCorner = Instance.new("UICorner")
+local successSeverityFrame = Instance.new("Frame")
+local successSeverityCorner = Instance.new("UICorner")
+local hideSuccessSeverityCornerFrame = Instance.new("Frame")
+local successImage = Instance.new("ImageLabel")
+local successInformationFrame = Instance.new("Frame")
+local successHeadingText = Instance.new("TextLabel")
+local successBodyText = Instance.new("TextLabel")
+local successCornerHidingFrame = Instance.new("Frame")
+local successCloseButton = Instance.new("ImageButton")
+local warningTemplate = Instance.new("Frame")
+local warningTemplateFrame = Instance.new("Frame")
+local warningTemplateCorner = Instance.new("UICorner")
+local warningSeverityFrame = Instance.new("Frame")
+local warningSeverityCorner = Instance.new("UICorner")
+local hideWarningSeverityCornerFrame = Instance.new("Frame")
+local warningImage = Instance.new("ImageLabel")
+local warningInformationFrame = Instance.new("Frame")
+local warningHeadingText = Instance.new("TextLabel")
+local warningBodyText = Instance.new("TextLabel")
+local warningCornerHidingFrame = Instance.new("Frame")
+local warningCloseButton = Instance.new("ImageButt
