@@ -1,5 +1,23 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua")
 
+WindUI:Popup({
+    Title = "Popup Title",
+    Icon = "info",
+    Content = "Popup content",
+    Buttons = {
+        {
+            Title = "Cancel",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
+})
 
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
@@ -19,22 +37,11 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
-
-local Tab = Window:Tab({
-    Title = "通知",
+local Section = Window:Section({
+    Title = "Section for the tabs",
     Icon = "bird",
-    Locked = false,
+    Opened = true,
 })
-
-
-local Tab = Window:Tab({
-    Title = "通用",
-    Icon = "bird",
-    Locked = false,
-})
-
-
-Window:SelectTab(2) -- Number of Tab
 
 
 WindUI:AddTheme({
