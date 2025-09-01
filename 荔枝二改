@@ -28,8 +28,8 @@ local Tab = Window:Tab({
 
 
 local Input = Tab:Input({
-    Title = "群→",
-    Desc = "群→",
+    Title = "群→746820543",
+    Desc = "群→746820543",
     Value = "群：746820543",
     InputIcon = "81985649222682",
     Type = "Input", -- or "Textarea"
