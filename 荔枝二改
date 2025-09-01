@@ -1,5 +1,22 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+WindUI:SetNotificationLower(true)
+WindUI:SetFont("rbxassetid://font-id-here")
+WindUI:SetTheme("Dark")
+
+WindUI:AddTheme({
+    Name = "Dark",
+    Accent = "#18181b",
+    Dialog = "#18181b",
+    Outline = "#FFFFFF",
+    Text = "#FFFFFF",
+    Placeholder = "#999999",
+    Background = "#0e0e10",
+    Button = "#52525b",
+    Icon = "#a1a1aa",
+})
+
+
 WindUI:Popup({
     Title = "Popup Title",
     Icon = "info",
