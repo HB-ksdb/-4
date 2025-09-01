@@ -1,44 +1,76 @@
--- 首先加载WindUI库
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/Q5DRf1AG",true))()
 
--- 设置主题（先设置默认主题）
-WindUI:SetTheme("Dark")
+local Forums = Library.new('DarkTheme')
 
--- 设置字体（需要替换为实际的字体ID）
--- WindUI:SetFont("rbxassetid://12187365364")  -- 示例字体ID
+local preview = Forums:NewSection("页面")
+local preview1 = Forums:NewSection("页面2")
 
--- 设置通知位置
-WindUI:SetNotificationLower(true)
+preview:NewButton("按钮", function()
 
--- 添加或修改主题（如果需要自定义）
-WindUI:AddTheme({
-    Name = "Dark",
-    Accent = "#18181b",
-    Dialog = "#18181b",
-    Outline = "#FFFFFF",
-    Text = "#FFFFFF",
-    Placeholder = "#999999",
-    Background = "#0e0e10",
-    Button = "#52525b",
-    Icon = "#a1a1aa",
-})
+end)
+preview:NewToggle("开关", function(state)
+print("Toggle: "..state)
+end)
+preview:NewTextBox("输入框", function(text)
+print(text)
+end)
+preview:NewSlider("滑块", 0, 400, function(value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+local list = {
+    "Option 1",
+    "Option 2",
+    "Option 3",
+}
+preview:NewDropdown("列表", list, function(item)
+   
+end)
 
--- 重新应用主题以确保设置生效
-WindUI:SetTheme("Dark")
+preview1:Seperator()
 
--- 示例：创建窗口
-local Window = WindUI:CreateWindow({
-    Title = "我的脚本",
-    Size = UDim2.fromOffset(400, 300),
-    Position = UDim2.fromScale(0.5, 0.5)
-})
+local btn = preview1:NewButton("按钮", function()
+    print("Button")
+end)
+preview1:NewButton("更新按钮内容", function()
+    btn:Update("更新")
+end)
 
--- 添加一些控件
-local Tab = Window:AddTab("主要")
-
-Tab:AddButton({
-    Text = "测试按钮",
-    Callback = function()
-        WindUI:Notify("提示", "按钮被点击了！")
+preview1:Seperator()
+getgenv().stt = false
+local toggle = preview1:NewToggle("开关: ", function(status)
+    getgenv().stt = status
+end)
+coroutine.wrap(function()
+    while wait() do
+        toggle:Update("开关: "..tostring(getgenv().stt))
     end
-})
+end)()
+preview1:Seperator()
+
+getgenv().newTxt = "等待输入"
+local box = preview1:NewTextBox("等待输入", function(newText)
+    getgenv().newTxt = newText
+end)
+coroutine.wrap(function()
+    while wait() do
+        box:Update(tostring(getgenv().newTxt))
+    end
+end)()
+
+preview1:Seperator()
+
+local drop = preview1:NewDropdown("玩家列表", {}, function(item)
+   print(item)
+end)
+local plrTable = {}
+preview1:NewButton("刷新玩家列表", function()
+    for i,v in pairs(game.Players:GetChildren()) do
+        if v ~= game.Players.LocalPlayer then
+            table.insert(plrTable, v.Name)
+        end
+    end
+    drop:Refresh(plrTable)
+    plrTable = {}
+end)
+
+preview1:Seperator()
