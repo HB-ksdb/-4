@@ -23,6 +23,14 @@ WindUI:Notify({
     Icon = "bird",
 })
 
+local Keybind = Tab:Keybind({
+    Title = "Keybind",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        Window:SetToggleKey(Enum.KeyCode[v])
+    end
+})
 
 WindUI:AddTheme({
     Name = "Dark",
@@ -42,16 +50,6 @@ local Tab = Window:Tab({
     Icon = "bird",
     Locked = false,
 })
-
-local Keybind = Tab:Keybind({
-    Title = "Keybind",
-    Desc = "Keybind to open ui",
-    Value = "G",
-    Callback = function(v)
-        Window:SetToggleKey(Enum.KeyCode[v])
-    end
-})
-
 
 local Tab = Window:Tab({
     Title = "通用",
