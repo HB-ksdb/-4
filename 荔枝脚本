@@ -54,3 +54,30 @@
     XKNB:Textbox("输入文本", "", "输入", function(s)
 	
     end)
+    
+    local DripESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/DevSloPo/ESP_Xuan/refs/heads/main/ESP.lua"))()
+
+A:AddToggle("ShopkeeperESP", {
+    Text = "Toggle，换成你的UI的Toggle样式",
+    Default = false,
+    Callback = function(state)
+        local id = "删除的ID"
+        if state then
+            DripESP.SetOptions(id, {
+                TargetName = "要透视模型的名字",
+                TargetType = "Model",
+                CustomText = "显示文本",
+                TextColor = Color3.fromRGB(0, 255, 0),--文本颜色
+                TextSize = 20,--字体大小
+                CheckForHumanoid = false,--检查有没有Humanoid
+                FillColor = Color3.fromRGB(0, 255, 0),--高亮颜色
+                FillTransparency = 0.5,--高亮颜色深浅
+                OutlineColor = Color3.fromRGB(0, 0, 0),--轮廓颜色
+                OutlineTransparency = 0--深浅
+            })
+            DripESP.Enable(id)
+        else
+            DripESP.Disable(id)
+        end
+    end
+})
