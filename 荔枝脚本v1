@@ -19,7 +19,7 @@ Window:Tag({
 WindUI:Notify({
     Title = "荔枝脚本通知",
     Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
-    Duration = 3, -- 10 seconds
+    Duration = 3, -- 3 seconds
     Icon = "bird",
 })
 
