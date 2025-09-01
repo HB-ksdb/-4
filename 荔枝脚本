@@ -1,23 +1,5 @@
     local library = loadstring(game:HttpGet(('https://github.com/DevSloPo/Auto/raw/main/Ware-obfuscated.lua')))()
     
-WindUI:Popup({
-    Title = "Popup Title",
-    Icon = "info",
-    Content = "Popup content",
-    Buttons = {
-        {
-            Title = "Cancel",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "Continue",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
-})
 
     local window = library:new("荔枝脚本")
     local XKHub = window:Tab("关于", "7733774602")
