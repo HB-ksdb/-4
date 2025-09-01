@@ -41,7 +41,14 @@ local Tab = Window:Tab({
     Icon = "bird",
     Locked = false,
 })
-Button:Unlock(loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))())
+local Button = Tab:Button({
+    Title = "Button",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
+})
 
 
 Window:SelectTab(2) -- Number of Tab
