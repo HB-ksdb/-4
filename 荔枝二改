@@ -27,6 +27,13 @@ local Tab = Window:Tab({
 })
 
 
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
+
+
 Window:SelectTab(2) -- Number of Tab
 
 
