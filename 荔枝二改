@@ -1,9 +1,17 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+    WindUI:SetTheme("Dark")
+    WindUI:SetFont("rbxassetid://font-id-here")
+    WindUI:SetNotificationLower(true)
     
-    local Tab = Window:Tab({
-    Title = "Tab Title",
-    Icon = "bird",
-    Locked = false,
+    WindUI:AddTheme({
+    Name = "Dark",
+    Accent = "#18181b",
+    Dialog = "#18181b",
+    Outline = "#FFFFFF",
+    Text = "#FFFFFF",
+    Placeholder = "#999999",
+    Background = "#0e0e10",
+    Button = "#52525b",
+    Icon = "#a1a1aa",
 })
-Window:SelectTab(2) -- Number of Tab
-    
