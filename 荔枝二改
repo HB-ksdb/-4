@@ -21,6 +21,16 @@ local Section = Window:Section({
 })
 
 
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
+
+
+Window:SelectTab(2) -- Number of Tab
+
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
