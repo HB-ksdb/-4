@@ -1,3 +1,18 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+
+WindUI:SetNotificationLower(true)
+WindUI:SetFont("rbxassetid://font-id-here")
+WindUI:SetTheme("Dark")
+
+
+local Window = WindUI:CreateWindow({
+    Title = "荔枝脚本 | 欢迎你",
+    Icon = "door-open",
+    Author = "Example UI",
+    Folder = "MyTestHub",
+})
+
 
 WindUI:Popup({
     Title = "Popup Title",
@@ -16,22 +31,6 @@ WindUI:Popup({
             Variant = "Primary",
         }
     }
-})
-
-
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-
-
-WindUI:SetNotificationLower(true)
-WindUI:SetFont("rbxassetid://font-id-here")
-WindUI:SetTheme("Dark")
-
-
-local Window = WindUI:CreateWindow({
-    Title = "荔枝脚本 | 欢迎你",
-    Icon = "door-open",
-    Author = "Example UI",
-    Folder = "MyTestHub",
 })
 
 
