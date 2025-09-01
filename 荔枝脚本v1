@@ -5,9 +5,9 @@ WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
 
 local Window = WindUI:CreateWindow({
-    Title = "My Super script | Test Hub",
+    Title = "荔枝脚本 | 免费",
     Icon = "door-open",
-    Author = "Example UI",
+    Author = "荔枝 UI",
     Folder = "MyTestHub",
 })
 
@@ -25,7 +25,7 @@ WindUI:AddTheme({
 
 
 local Tab = Window:Tab({
-    Title = "Tab Title",
+    Title = "通知",
     Icon = "bird",
     Locked = false,
 })
