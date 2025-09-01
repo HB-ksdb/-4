@@ -5,16 +5,6 @@ WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
 
 
-local Tab = Window:Tab({
-    Title = "Tab Title",
-    Icon = "bird",
-    Locked = false,
-})
-
-
-Window:SelectTab(2) -- Number of Tab
-
-
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 欢迎你",
     Icon = "door-open",
@@ -29,9 +19,6 @@ Window:DisableTopbarButtons({
     "Fullscreen",
 })
 
-
---                        ↓ Special name     ↓ Icon     ↓ Callback                         ↓ Order
-Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
 
 WindUI:AddTheme({
     Name = "Dark",
