@@ -41,9 +41,9 @@ local Tab = Window:Tab({
     Icon = "bird",
     Locked = false,
 })
-local Button = Tab:Button({
-    Title = "Button",
-    Desc = "Test Button",
+local Button = Tab:无卡密({
+    Title = "NE 0hio",
+    Desc = "loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()",
     Locked = false,
     Callback = function()
         print("clicked")
