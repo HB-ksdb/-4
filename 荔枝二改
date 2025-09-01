@@ -13,13 +13,6 @@ local Window = WindUI:CreateWindow({
 })
 
 
-Window:DisableTopbarButtons({
-    "Close", 
-    "Minimize", 
-    "Fullscreen",
-})
-
-
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
