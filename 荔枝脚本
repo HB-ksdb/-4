@@ -31,6 +31,10 @@
     local XKHub = window:Tab("关于", "81985649222682")
     local XKNB = XKHub:section("内容", true)
     
-    XKNB:Label("文本标签")
+    XKNB:Label("群：746820543")
+    
+    XKNB:Label("荔枝脚本，祝你们身体健康")
+    
+    XKNB:Label("正在更新")
     
     
