@@ -56,16 +56,3 @@
     end)
     
     
-    
-    local XKHub = window:Tab("被遗弃", "81985649222682")
-    local XKNB = XKHub:section("内容", true)
-    
-    XKNB:Label("文本标签")
-    
-    XKNB:Button(
-        "点击",
-        function loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-            
-        end)
-    
-    
