@@ -46,7 +46,7 @@ local Tab = Window:Tab({
 
 local Paragraph = Tab:Paragraph({
     Title = "更新中…",
-    Desc = "正在更新中…",
+    Desc = "正在更新",
     Color = "grey",
     Image = "81985649222682",
     ImageSize = 30,
