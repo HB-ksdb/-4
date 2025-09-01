@@ -43,6 +43,16 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+local Keybind = Tab:Keybind({
+    Title = "Keybind",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        Window:SetToggleKey(Enum.KeyCode[v])
+    end
+})
+
+
 local Tab = Window:Tab({
     Title = "通用",
     Icon = "bird",
