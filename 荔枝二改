@@ -1,10 +1,17 @@
+-- 首先加载WindUI库
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-    WindUI:SetTheme("Dark")
-    WindUI:SetFont("rbxassetid://font-id-here")
-    WindUI:SetNotificationLower(true)
-    
-    WindUI:AddTheme({
+-- 设置主题（先设置默认主题）
+WindUI:SetTheme("Dark")
+
+-- 设置字体（需要替换为实际的字体ID）
+-- WindUI:SetFont("rbxassetid://12187365364")  -- 示例字体ID
+
+-- 设置通知位置
+WindUI:SetNotificationLower(true)
+
+-- 添加或修改主题（如果需要自定义）
+WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
     Dialog = "#18181b",
@@ -14,4 +21,24 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
     Background = "#0e0e10",
     Button = "#52525b",
     Icon = "#a1a1aa",
+})
+
+-- 重新应用主题以确保设置生效
+WindUI:SetTheme("Dark")
+
+-- 示例：创建窗口
+local Window = WindUI:CreateWindow({
+    Title = "我的脚本",
+    Size = UDim2.fromOffset(400, 300),
+    Position = UDim2.fromScale(0.5, 0.5)
+})
+
+-- 添加一些控件
+local Tab = Window:AddTab("主要")
+
+Tab:AddButton({
+    Text = "测试按钮",
+    Callback = function()
+        WindUI:Notify("提示", "按钮被点击了！")
+    end
 })
