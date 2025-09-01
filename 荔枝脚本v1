@@ -44,10 +44,10 @@ local Tab = Window:Tab({
     Locked = false,
 })
 local Paragraph = Tab:无更新({
-    Title = "群：746820543",
+    Title = "群:746820543",
     Desc = "Test Paragraph",
-    Color = "grey",
-    Image = "81985649222682",
+    Color = "Red",
+    Image = "",
     ImageSize = 30,
     Thumbnail = "",
     ThumbnailSize = 80,
