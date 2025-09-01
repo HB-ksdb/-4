@@ -27,6 +27,14 @@ local Tab = Window:Tab({
 })
 
 
+WindUI:Notify({
+    Title = "Notification Title",
+    Content = "Notification Content example!",
+    Duration = 3, -- 3 seconds
+    Icon = "bird",
+})
+
+
 Window:SelectTab(2) -- Number of Tab
 
 
