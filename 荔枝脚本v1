@@ -44,23 +44,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "更新中…",
-    Desc = "正在更新",
-    Color = "Red",
-    Image = "",
-    ImageSize = 30,
-    Thumbnail = "",
-    ThumbnailSize = 80,
-    Locked = false,
-    Buttons = {
-        {
-            Icon = "bird",
-            Title = "群：746820543",
-            Callback = function() print("1 Button") end,
-        }
-    }
-})
 
 local Tab = Window:Tab({
     Title = "通用",
