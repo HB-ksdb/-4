@@ -15,17 +15,17 @@ local Window = WindUI:CreateWindow({
 
 
 WindUI:Popup({
-    Title = "Popup Title",
+    Title = "荔枝脚本欢迎你",
     Icon = "info",
-    Content = "Popup content",
+    Content = "荔枝脚本免费用",
     Buttons = {
         {
-            Title = "Cancel",
+            Title = "关闭",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "Continue",
+            Title = "进入",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
@@ -60,26 +60,6 @@ WindUI:AddTheme({
     Background = "#0e0e10",
     Button = "#52525b",
     Icon = "#a1a1aa",
-})
-
-
-WindUI:Popup({
-    Title = "荔枝脚本欢迎你",
-    Icon = "info",
-    Content = "荔枝脚本免费用",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "进入",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
 })
 
 
