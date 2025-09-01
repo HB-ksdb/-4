@@ -27,7 +27,17 @@ local Tab = Window:Tab({
 })
 
 
-Button:SetTitle("Title Example")
+local Input = Tab:Input({
+    Title = "Input",
+    Desc = "Input Description",
+    Value = "Default value",
+    InputIcon = "bird",
+    Type = "Input", -- or "Textarea"
+    Placeholder = "Enter text...",
+    Callback = function(input) 
+        print("text entered: " .. input)
+    end
+})
 
 
 Window:SelectTab(2) -- Number of Tab
