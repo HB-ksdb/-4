@@ -47,7 +47,7 @@ WindUI:Popup({
 
 
 Window:EditOpenButton({
-    Title = "Open Example UI",
+    Title = "荔枝脚本 UI",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
