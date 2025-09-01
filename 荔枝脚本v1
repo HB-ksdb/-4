@@ -41,33 +41,4 @@ local Tab = Window:Tab({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Section = Window:Section({
-    Title = "Section for the tabs",
-    Icon = "bird",
-    Opened = true,
-})
-
-
-WindUI:Popup({
-    Title = "Popup Title",
-    Icon = "info",
-    Content = "Popup content",
-    Buttons = {
-        {
-            Title = "Cancel",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "Continue",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
-})
-
-
-
-
 
