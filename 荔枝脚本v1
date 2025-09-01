@@ -16,6 +16,14 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
+WindUI:Notify({
+    Title = "Notification Title",
+    Content = "Notification Content example!",
+    Duration = 3, -- 3 seconds
+    Icon = "bird",
+})
+
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
