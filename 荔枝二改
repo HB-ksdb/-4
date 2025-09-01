@@ -11,6 +11,14 @@ local Window = WindUI:CreateWindow({
     Folder = "MyTestHub",
 })
 
+
+Window:DisableTopbarButtons({
+    "Close", 
+    "Minimize", 
+    "Fullscreen",
+})
+
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
