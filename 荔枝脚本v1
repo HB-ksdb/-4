@@ -36,6 +36,12 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+})
+
 Window:SelectTab(2) -- Number of Tab
 
 
