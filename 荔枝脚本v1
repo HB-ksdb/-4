@@ -23,7 +23,22 @@ WindUI:AddTheme({
     Icon = "#a1a1aa",
 })
 
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
 
+
+
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
+
+
+Window:SelectTab(2) -- Number of Tab
 
 
 
