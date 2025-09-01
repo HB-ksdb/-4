@@ -5,7 +5,7 @@ WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
 
 local Window = WindUI:CreateWindow({
-    Title = "My Super script | Test Hub",
+    Title = "荔枝脚本 | 欢迎你",
     Icon = "door-open",
     Author = "Example UI",
     Folder = "MyTestHub",
@@ -25,17 +25,17 @@ WindUI:AddTheme({
 
 
 WindUI:Popup({
-    Title = "Popup Title",
+    Title = "荔枝脚本欢迎你",
     Icon = "info",
-    Content = "Popup content",
+    Content = "荔枝脚本免费用",
     Buttons = {
         {
-            Title = "Cancel",
+            Title = "关闭",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "Continue",
+            Title = "进入",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
