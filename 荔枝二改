@@ -14,6 +14,13 @@ local Window = WindUI:CreateWindow({
 })
 
 
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+})
+
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
