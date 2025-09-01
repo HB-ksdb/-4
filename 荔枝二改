@@ -49,18 +49,3 @@ WindUI:AddTheme({
     Icon = "#a1a1aa",
 })
 
-
-Window:EditOpenButton({
-    Title = "荔枝脚本 UI",
-    Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 2,
-    Color = ColorSequence.new( -- gradient
-        Color3.fromHex("FF0F7B"), 
-        Color3.fromHex("F89B29")
-    ),
-    OnlyMobile = false,
-    Enabled = true,
-    Draggable = true,
-})
-
