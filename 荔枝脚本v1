@@ -11,6 +11,32 @@ local Window = WindUI:CreateWindow({
     Folder = "MyTestHub",
 })
 
+local Window = WindUI:CreateWindow({
+    -- ...
+    
+    KeySystem = {
+        -- Thumbnail = { ... },
+        Note = "Example Key System. With platoboost, etc.",
+        API = {
+            { -- PlatoBoost
+                -- Here you can write your title, description, and icon.
+                -- Title = "Platoboost", -- optional 
+                -- Desc = "Click to copy.", -- optional
+                -- Icon = "rbxassetid://", -- optional
+                
+                Type = "platoboost", -- type
+                ServiceId = 1234, -- service id
+                Secret = "platoboost-secret", -- platoboost secret
+            },
+            { -- Panda development
+                Type = "pandadevelopment", -- type
+                ServiceId = "myServiceId", -- service id
+            },
+        },
+    },
+})
+
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
