@@ -54,3 +54,9 @@
     XKNB:Textbox("输入文本", "", "输入", function(s)
 	
     end)
+    
+    local XKHub = window:Tab("其他", "78892482588180")
+    local XKNB = XKHub:section("内容", true)
+    
+    
+    
