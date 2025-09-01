@@ -44,12 +44,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Tab = Window:Tab({
-    Title = "通用",
-    Icon = "bird",
-    Locked = false,
-})
-
 local Paragraph = Tab:Paragraph({
     Title = "Paragraph with Image, Thumbnail, Buttons",
     Desc = "Test Paragraph",
@@ -62,10 +56,16 @@ local Paragraph = Tab:Paragraph({
     Buttons = {
         {
             Icon = "bird",
-            Title = "Button",
+            Title = "群：746820543",
             Callback = function() print("1 Button") end,
         }
     }
+})
+
+local Tab = Window:Tab({
+    Title = "通用",
+    Icon = "bird",
+    Locked = false,
 })
 
 local Tab = Window:Tab({
