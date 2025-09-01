@@ -21,14 +21,14 @@ Window:Tag({
 
 
 local Tab = Window:Tab({
-    Title = "Tab Title",
+    Title = "通知",
     Icon = "bird",
     Locked = false,
 })
 
 
 local Tab = Window:Tab({
-    Title = "Tab Title",
+    Title = "通用",
     Icon = "bird",
     Locked = false,
 })
@@ -62,4 +62,24 @@ Window:EditOpenButton({
     OnlyMobile = false,
     Enabled = true,
     Draggable = true,
+})
+
+
+WindUI:Popup({
+    Title = "Popup Title",
+    Icon = "info",
+    Content = "Popup content",
+    Buttons = {
+        {
+            Title = "Cancel",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
 })
