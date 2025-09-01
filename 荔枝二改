@@ -28,9 +28,9 @@ local Tab = Window:Tab({
 
 
 local Input = Tab:Input({
-    Title = "Input",
-    Desc = "Input Description",
-    Value = "Default value",
+    Title = "群→",
+    Desc = "群→",
+    Value = "群：746820543",
     InputIcon = "bird",
     Type = "Input", -- or "Textarea"
     Placeholder = "Enter text...",
