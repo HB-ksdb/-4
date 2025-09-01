@@ -1,7 +1,7 @@
     local library = loadstring(game:HttpGet(('https://github.com/DevSloPo/Auto/raw/main/Ware-obfuscated.lua')))()
     
     local window = library:new("荔枝脚本")
-    local XKHub = window:Tab("通用", "7733774602")
+    local XKHub = window:Tab("通用", "81985649222682")
     local XK = XKHub:section("通用", true)
     
     XK:Label("禁止倒卖，倒卖死浮木")
@@ -28,13 +28,13 @@
 	
     end)    
     
-    local XKHub = window:Tab("关于", "81985649222682")
+    local XKHub = window:Tab("其他（点我）", "81985649222682")
     local XKNB = XKHub:section("内容", true)
     
-    XKNB:Label("群：746820543")
+    XKNB:Label("                     群：746820543")
     
-    XKNB:Label("荔枝脚本，祝你们身体健康")
+    XKNB:Label("                     荔枝脚本，祝你们身体健康")
     
-    XKNB:Label("正在更新")
+    XKNB:Label("                     正在更新")
     
     
