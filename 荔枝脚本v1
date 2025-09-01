@@ -27,5 +27,26 @@ WindUI:AddTheme({
 
 
 
+WindUI:Popup({
+    Title = "Popup Title",
+    Icon = "info",
+    Content = "Popup content",
+    Buttons = {
+        {
+            Title = "Cancel",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
+})
+
+
+
 
 
