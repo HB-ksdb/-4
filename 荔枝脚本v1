@@ -23,14 +23,7 @@ WindUI:Notify({
     Icon = "bird",
 })
 
-local Keybind = Tab:Keybind({
-    Title = "Keybind",
-    Desc = "Keybind to open ui",
-    Value = "G",
-    Callback = function(v)
-        Window:SetToggleKey(Enum.KeyCode[v])
-    end
-})
+
 
 WindUI:AddTheme({
     Name = "Dark",
@@ -55,6 +48,24 @@ local Tab = Window:Tab({
     Title = "通用",
     Icon = "bird",
     Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "Paragraph with Image, Thumbnail, Buttons",
+    Desc = "Test Paragraph",
+    Color = "Red",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
 })
 
 local Tab = Window:Tab({
