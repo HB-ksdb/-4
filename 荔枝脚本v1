@@ -30,18 +30,22 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Button = Tab:Button({
-    Title = "Button",
-    Desc = "Test Button",
-    Locked = false,
-    Callback = function()
-        print("clicked")
-    end
-})
-
 
 Window:SelectTab(2) -- Number of Tab
 
+local Tab = Window:Tab({
+    Title = "通用",
+    Icon = "bird",
+    Locked = false,
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+})
 
 
 WindUI:Popup({
