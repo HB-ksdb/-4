@@ -44,11 +44,11 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "Paragraph with Image, Thumbnail, Buttons",
-    Desc = "Test Paragraph",
+local Paragraph = 更新：无({
+    Title = "正在更新…",
+    Desc = "grey",
     Color = "Red",
-    Image = "",
+    Image = "81985649222682",
     ImageSize = 30,
     Thumbnail = "",
     ThumbnailSize = 80,
