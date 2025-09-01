@@ -53,16 +53,3 @@ local Button = Tab:Button({
 
 
 Window:SelectTab(2) -- Number of Tab
-
-local Section = local Tab = Window:Tab({
-    Title = "Tab Title",
-    Icon = "bird",
-    Locked = false,
-})
-    Title = "Section for the tabs",
-    Icon = "bird",
-    Opened = true,
-})
-
-
-Window:SelectTab(2) -- Number of Tab
