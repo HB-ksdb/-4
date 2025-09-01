@@ -43,12 +43,11 @@ local Tab = Window:Tab({
     Icon = "bird",
     Locked = false,
 })
-
 local Paragraph = 更新：无({
     Title = "正在更新…",
     Desc = "Test Paragraph",
     Color = "grey",
-    Image = "81985649222682",
+    Image = "",
     ImageSize = 30,
     Thumbnail = "",
     ThumbnailSize = 80,
