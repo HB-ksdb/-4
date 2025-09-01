@@ -4,6 +4,13 @@ WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
 
+local Window = WindUI:CreateWindow({
+    Title = "My Super script | Test Hub",
+    Icon = "door-open",
+    Author = "Example UI",
+    Folder = "MyTestHub",
+})
+
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
