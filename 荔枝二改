@@ -1,4 +1,3 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua")
 
 WindUI:Popup({
     Title = "Popup Title",
@@ -18,6 +17,10 @@ WindUI:Popup({
         }
     }
 })
+
+
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua")
 
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
