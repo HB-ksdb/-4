@@ -1,29 +1,29 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-
-
-WindUI:SetNotificationLower(true)
-WindUI:SetFont("rbxassetid://font-id-here")
-WindUI:SetTheme("Dark")
-
-
 WindUI:Popup({
-    Title = "荔枝脚本欢迎",
+    Title = "Popup Title",
     Icon = "info",
-    Content = "荔枝脚本群：746820543",
+    Content = "Popup content",
     Buttons = {
         {
-            Title = "退出",
+            Title = "Cancel",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "进入脚本",
+            Title = "Continue",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
         }
     }
 })
+
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+
+WindUI:SetNotificationLower(true)
+WindUI:SetFont("rbxassetid://font-id-here")
+WindUI:SetTheme("Dark")
 
 
 local Window = WindUI:CreateWindow({
