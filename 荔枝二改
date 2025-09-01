@@ -1,3 +1,24 @@
+
+WindUI:Popup({
+    Title = "Popup Title",
+    Icon = "info",
+    Content = "Popup content",
+    Buttons = {
+        {
+            Title = "Cancel",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
+})
+
+
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 
@@ -24,14 +45,6 @@ local Tab = Window:Tab({
     Title = "Tab Title",
     Icon = "bird",
     Locked = false,
-})
-
-
-WindUI:Notify({
-    Title = "Notification Title",
-    Content = "Notification Content example!",
-    Duration = 3, -- 3 seconds
-    Icon = "bird",
 })
 
 
