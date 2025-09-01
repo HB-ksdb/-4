@@ -35,7 +35,7 @@
     
     XKNB:Button(
         "点击",
-        function loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
             
         end)
     
