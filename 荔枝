@@ -58,24 +58,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Slider = Tab:Slider({
-    Title = "Slider",
-    
-    -- To make float number supported, 
-    -- make the Step a float number.
-    -- example: Step = 0.1
-    Step = 1,
-    
-    Value = {
-        Min = 20,
-        Max = 120,
-        Default = 70,
-    },
-    Callback = function(value)
-        print(value)
-    end
-})
-
 local Button = Tab:Button({
     Title = "飞行v3",
     Desc = "飞行",
