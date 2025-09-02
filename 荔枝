@@ -1,23 +1,8 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-
-WindUI:Popup({
-    Title = "荔枝脚本欢迎你",
-    Icon = "info",
-    Content = "荔枝脚本Q群746820543",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "启动",
-            Icon = "arrow-right",
-            Callback = function() 
-            print("Script started")
-            end,
-            Variant = "Primary",
-        }
-    }
+local Window = WindUI:CreateWindow({
+    Title = "My Super script | Test Hub",
+    Icon = "door-open",
+    Author = "Example UI",
+    Folder = "MyTestHub",
 })
