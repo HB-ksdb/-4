@@ -58,19 +58,4 @@ local Button = Tab:Button({
     end
 })
 
-local Tab = Window:Tab({
-    Title = "俄亥俄州",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = ""0hio,
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
-
 Window:SelectTab(2) -- Number of Tab
