@@ -1,6 +1,25 @@
 local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
+WindUI:Popup({
+    Title = "荔枝脚本欢迎你",
+    Icon = "info",
+    Content = "免费使用Q群746820543",
+    Buttons = {
+        {
+            Title = "关闭",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "继续",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
+})
+
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
@@ -67,6 +86,16 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+
+local Button = Tab:Button({
+    Title = ""0hio,
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
 local Button = Tab:Button({
     Title = "0hio",
     Desc = "不需要卡密",
@@ -91,18 +120,122 @@ local Button = Tab:Button({
     end
 })
 
-local Section = Window:Section({
-    Title = "Section for the tabs",
-    Icon = "bird",
-    Opened = true,
-})
-
 local Tab = Window:Tab({
-    Title = "Tab Title",
-    Icon = "bird",
+    Title = "死铁轨",
+    Icon = "",
     Locked = false,
 })
 
+local Button = Tab:Button({
+    Title = "死铁轨脚本（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "死铁轨自动刷债券（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1"))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "被遗弃",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "被遗弃XK（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "DOORS",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "DOORS 推荐（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "DOORS XK（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "最强战场",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "最强战场 XK（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "最强战场无限侧闪（英文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "森林99夜",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "森林99夜 XK（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "Nico的下一个机器人",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "Nico的下一个机器人（中文）",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
 
 local Tab = Window:Tab({
     Title = "设置",
