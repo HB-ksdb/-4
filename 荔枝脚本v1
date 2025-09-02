@@ -60,7 +60,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Section = Window:Section({
+local Section = Window: kick({
     Title = "脚本↓",
     Icon = "bird",
     Opened = true,
