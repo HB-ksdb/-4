@@ -105,7 +105,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "死铁轨脚本（中文）",
+    Title = "死铁轨脚本",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -114,7 +114,7 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "死铁轨自动刷债券（中文）",
+    Title = "死铁轨自动刷债券",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -129,7 +129,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "被遗弃XK（中文）",
+    Title = "被遗弃XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -144,7 +144,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "DOORS 推荐（中文）",
+    Title = "DOORS 推荐",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -153,7 +153,7 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "DOORS XK（中文）",
+    Title = "DOORS XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -168,7 +168,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "最强战场 XK（中文）",
+    Title = "最强战场 XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -177,7 +177,7 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "最强战场无限侧闪（英文）",
+    Title = "最强战场无限侧闪",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -192,7 +192,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "森林99夜 XK（中文）",
+    Title = "森林99夜 XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -207,7 +207,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "Nico的下一个机器人（中文）",
+    Title = "Nico的下一个机器人",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
