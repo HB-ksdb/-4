@@ -10,17 +10,17 @@ local Window = WindUI:CreateWindow({
 })
 
 WindUI:Popup({
-    Title = "Popup Title",
+    Title = "荔枝脚本欢迎你",
     Icon = "info",
-    Content = "Popup content",
+    Content = "荔枝脚本Q群746820543",
     Buttons = {
         {
-            Title = "Cancel",
+            Title = "关闭",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "Continue",
+            Title = "启动",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
@@ -36,7 +36,7 @@ Window:Tag({
 WindUI:Notify({
     Title = "荔枝脚本通知",
     Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
-    Duration = 3, -- 10 seconds
+    Duration = 10, -- 10 seconds
     Icon = "bird",
 })
 
