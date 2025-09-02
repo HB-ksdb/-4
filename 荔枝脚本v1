@@ -37,7 +37,7 @@ WindUI:AddTheme({
 
 local Tab = Window:Tab({
     Title = "通知",
-    Icon = "81985649222682",
+    Icon = "",
     Locked = false,
 })
 
@@ -73,36 +73,6 @@ local Button = Tab:Button({
 })
 
 
-local Tab = Window:Tab({
-    Title = "死铁轨",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "死铁轨脚本",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
-    end
-})
-
-
-local Tab = Window:Tab({
-    Title = "被遗弃",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "被遗弃XK",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
 
 local Tab = Window:Tab({
     Title = "DOORS",
@@ -136,35 +106,6 @@ local Button = Tab:Button({
     end
 })
 
-local Tab = Window:Tab({
-    Title = "森林99夜",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "森林99夜XK",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
-
-local Tab = Window:Tab({
-    Title = "的下一个机器人",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "的下一个机器人",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
 
 local Tab = Window:Tab({
     Title = "设置",
