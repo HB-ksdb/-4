@@ -1,5 +1,4 @@
-local Version = "1.6.41"
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
@@ -38,29 +37,3 @@ WindUI:Notify({
     Duration = 3, -- 10 seconds
     Icon = "bird",
 })
-
-
-local Tab = Window:Tab({
-    Title = "通知",
-    Icon = "",
-    Locked = false,
-})
-
-
-local Tab = Window:Tab({
-    Title = "通用",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "飞行v3",
-    Desc = "飞行",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
-    end
-})
-
-Window:SelectTab(2) -- Number of Tab
-
