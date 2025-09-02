@@ -73,7 +73,6 @@ local Button = Tab:Button({
 })
 
 
-
 local Tab = Window:Tab({
     Title = "DOORS",
     Icon = "",
@@ -88,29 +87,4 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
     end
 })
-
-
-local Tab = Window:Tab({
-    Title = "最强战场",
-    Icon = "",
-    Locked = false,
-})
-
-
-local Button = Tab:Button({
-    Title = "最强战场无限侧闪",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
-    end
-})
-
-
-local Tab = Window:Tab({
-    Title = "设置",
-    Icon = "Tab",
-    Locked = false,
-})
-
 Window:SelectTab(2) -- Number of Tab
