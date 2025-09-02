@@ -10,17 +10,17 @@ local Window = WindUI:CreateWindow({
 })
 
 WindUI:Popup({
-    Title = "Popup Title",
+    Title = "荔枝脚本欢迎你",
     Icon = "info",
-    Content = "Popup content",
+    Content = "荔枝脚本Q群746820543",
     Buttons = {
         {
-            Title = "Cancel",
+            Title = "启动",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "Continue",
+            Title = "关闭",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
@@ -70,3 +70,67 @@ local Section = Window:Section({
     Icon = "bird",
     Opened = true,
 })
+
+local Tab = Window:Tab({
+    Title = "Ohio",
+    Icon = "bird",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "Ohio",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "被遗弃",
+    Icon = "bird",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "被遗弃XK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "战争大亨",
+    Icon = "bird",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "战争大亨XK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "最强战场",
+    Icon = "bird",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "最强战场无限侧闪",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
