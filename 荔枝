@@ -1,22 +1,68 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Version = "1.6.41"
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+
+WindUI:SetNotificationLower(true)
+WindUI:SetFont("rbxassetid://font-id-here")
+WindUI:SetTheme("Dark")
 
 local Window = WindUI:CreateWindow({
-    Title = "My Super script | Test Hub",
+    Title = "荔枝脚本 | 免费",
     Icon = "door-open",
-    Author = "Example UI",
+    Author = "荔枝 UI",
     Folder = "MyTestHub",
 })
 
-Window:EditOpenButton({
-    Title = "Open Example UI",
-    Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 2,
-    Color = ColorSequence.new( -- gradient
-        Color3.fromHex("FF0F7B"), 
-        Color3.fromHex("F89B29")
-    ),
-    OnlyMobile = false,
-    Enabled = true,
-    Draggable = true,
+Window:Tag({
+    Title = "v1.1.4",
+    Color = Color3.fromHex("#30ff6a")
 })
+
+WindUI:Notify({
+    Title = "荔枝脚本通知",
+    Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
+    Duration = 3, -- 10 seconds
+    Icon = "bird",
+})
+
+WindUI:AddTheme({
+    Name = "Dark",
+    Accent = "#18181b",
+    Dialog = "#18181b",
+    Outline = "#FFFFFF",
+    Text = "#FFFFFF",
+    Placeholder = "#999999",
+    Background = "#0e0e10",
+    Button = "#52525b",
+    Icon = "#a1a1aa",
+})
+
+local Tab = Window:Tab({
+    Title = "通知",
+    Icon = "",
+    Locked = false,
+})
+
+
+local Tab = Window:Tab({
+    Title = "通用",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "飞行v3",
+    Desc = "飞行",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Section = Window:Section({
+    Title = "脚本↓↓↓",
+    Icon = "bird",
+    Opened = true,
+})
+
