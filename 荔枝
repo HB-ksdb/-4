@@ -51,10 +51,29 @@ local Tab = Window:Tab({
 })
 
 
+
 local Tab = Window:Tab({
     Title = "通用",
     Icon = "",
     Locked = false,
+})
+
+local Slider = Tab:Slider({
+    Title = "Slider",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    
+    Value = {
+        Min = 20,
+        Max = 120,
+        Default = 70,
+    },
+    Callback = function(value)
+        print(value)
+    end
 })
 
 local Button = Tab:Button({
@@ -81,21 +100,6 @@ local Section = Window:Section({
     Title = "脚本↓↓↓",
     Icon = "bird",
     Opened = true,
-})
-
-local Tab = Window:Tab({
-    Title = "Ohio",
-    Icon = "bird",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "Ohio",
-    Desc = "无卡密中文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()
-    end
 })
 
 local Tab = Window:Tab({
@@ -148,7 +152,25 @@ local Button = Tab:Button({
 Window:SelectTab(2) -- Number of Tab
 
 local Tab = Window:Tab({
-    Title = "",
+    Title = "DOORS",
     Icon = "bird",
     Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "DOORS推荐",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "DOORSXK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
 })
