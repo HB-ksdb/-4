@@ -1,10 +1,8 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
-
 
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
@@ -18,14 +16,12 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
-
 WindUI:Notify({
     Title = "荔枝脚本通知",
     Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
     Duration = 3, -- 10 seconds
     Icon = "bird",
 })
-
 
 WindUI:AddTheme({
     Name = "Dark",
@@ -67,7 +63,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-
 local Button = Tab:Button({
     Title = ""0hio,
     Desc = "不需要卡密",
@@ -87,21 +82,6 @@ local Button = Tab:Button({
 })
 
 local Tab = Window:Tab({
-    Title = "自然灾害",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "自然灾害",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        print("clicked")
-    end
-})
-
-local Tab = Window:Tab({
     Title = "死铁轨",
     Icon = "",
     Locked = false,
@@ -116,14 +96,6 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
-    Title = "死铁轨自动刷债券",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1"))()
-    end
-})
 
 local Tab = Window:Tab({
     Title = "被遗弃",
@@ -204,13 +176,13 @@ local Button = Tab:Button({
 })
 
 local Tab = Window:Tab({
-    Title = "Nico的下一个机器人",
+    Title = "的下一个机器人",
     Icon = "",
     Locked = false,
 })
 
 local Button = Tab:Button({
-    Title = "Nico的下一个机器人",
+    Title = "的下一个机器人",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
