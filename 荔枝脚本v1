@@ -41,22 +41,27 @@ WindUI:AddTheme({
 
 local Tab = Window:Tab({
     Title = "通知",
-    Icon = "bird",
+    Icon = "通知",
     Locked = false,
 })
 
 
 local Tab = Window:Tab({
     Title = "通用",
-    Icon = "bird",
+    Icon = "General",
     Locked = false,
 })
 
 local Tab = Window:Tab({
     Title = "俄亥俄州",
-    Icon = "bird",
+    Icon = "Notice",
     Locked = false,
 })
 
+local Tab = Window:Tab({
+    Title = "设置",
+    Icon = "Settings",
+    Locked = false,
+})
 
 Window:SelectTab(2) -- Number of Tab
