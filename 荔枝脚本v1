@@ -72,14 +72,6 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
-    Title = "0hio",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()
-    end
-})
 
 local Tab = Window:Tab({
     Title = "死铁轨",
@@ -127,14 +119,6 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
-    Title = "DOORSXK",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
 
 local Tab = Window:Tab({
     Title = "最强战场",
@@ -142,14 +126,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Button = Tab:Button({
-    Title = "最强战场XK",
-    Desc = "不需要卡密",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
 
 local Button = Tab:Button({
     Title = "最强战场无限侧闪",
