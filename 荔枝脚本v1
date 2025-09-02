@@ -1,5 +1,3 @@
-local Version = "1.6.41"
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 WindUI:Popup({
     Title = "荔枝脚本欢迎你",
@@ -19,6 +17,10 @@ WindUI:Popup({
         }
     }
 })
+
+local Version = "1.6.41"
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+
 
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
