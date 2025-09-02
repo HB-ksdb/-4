@@ -1,6 +1,10 @@
 local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
+function WindUI:GetWindowSize()
+    return 450, 450
+end
+
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
     Icon = "door-open",
@@ -142,3 +146,9 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "",
+    Icon = "bird",
+    Locked = false,
+})
