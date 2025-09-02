@@ -1,6 +1,9 @@
 local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
-WindUI:GetWindowSize()
+
+function WindUI:GetWindowSize()
+    return 450, 450
+end
 
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
