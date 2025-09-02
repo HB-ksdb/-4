@@ -91,6 +91,19 @@ local Button = Tab:Button({
     end
 })
 
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+})
+
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
+
+
 local Tab = Window:Tab({
     Title = "设置",
     Icon = "Tab",
