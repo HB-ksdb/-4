@@ -1,67 +1,27 @@
-local Version = "1.6.41"
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+WindUI:Popup({
+    Title = "Popup Title",
+    Icon = "info",
+    Content = "Popup content",
+    Buttons = {
+        {
+            Title = "Cancel",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "Continue",
+            Icon = "arrow-right",
+            Callback = function() end,
+            Variant = "Primary",
+        }
+    }
+})
 
-WindUI:SetNotificationLower(true)
-WindUI:SetFont("rbxassetid://font-id-here")
-WindUI:SetTheme("Dark")
-
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
-    Title = "荔枝脚本 | 免费",
+    Title = "My Super script | Test Hub",
     Icon = "door-open",
-    Author = "荔枝 UI",
+    Author = "Example UI",
     Folder = "MyTestHub",
 })
 
-Window:Tag({
-    Title = "v1.1.4",
-    Color = Color3.fromHex("#30ff6a")
-})
-
-WindUI:Notify({
-    Title = "荔枝脚本通知",
-    Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
-    Duration = 3, -- 10 seconds
-    Icon = "bird",
-})
-
-WindUI:AddTheme({
-    Name = "Dark",
-    Accent = "#18181b",
-    Dialog = "#18181b",
-    Outline = "#FFFFFF",
-    Text = "#FFFFFF",
-    Placeholder = "#999999",
-    Background = "#0e0e10",
-    Button = "#52525b",
-    Icon = "#a1a1aa",
-})
-
-local Tab = Window:Tab({
-    Title = "通知",
-    Icon = "",
-    Locked = false,
-})
-
-
-local Tab = Window:Tab({
-    Title = "通用",
-    Icon = "",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "飞行v3",
-    Desc = "飞行",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
-    end
-})
-
-Window:SelectTab(2) -- Number of Tab
-
-local Section = Window: kick({
-    Title = "脚本↓",
-    Icon = "bird",
-    Opened = true,
-})
