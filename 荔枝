@@ -144,13 +144,4 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
-    Title = "DOORSXK",
-    Desc = "无卡密中文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
-})
-
 Window:SelectTab(2) -- Number of Tab
