@@ -1,9 +1,10 @@
-local Version = "1.6.41"
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
 
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
 WindUI:SetTheme("Dark")
+
 
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
@@ -17,12 +18,14 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
+
 WindUI:Notify({
     Title = "荔枝脚本通知",
     Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
     Duration = 3, -- 10 seconds
     Icon = "bird",
 })
+
 
 WindUI:AddTheme({
     Name = "Dark",
@@ -144,7 +147,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "DOORS 推荐",
+    Title = "DOORS推荐",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -153,7 +156,7 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "DOORS XK",
+    Title = "DOORSXK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -168,7 +171,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "最强战场 XK",
+    Title = "最强战场XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
@@ -192,7 +195,7 @@ local Tab = Window:Tab({
 })
 
 local Button = Tab:Button({
-    Title = "森林99夜 XK",
+    Title = "森林99夜XK",
     Desc = "不需要卡密",
     Locked = false,
     Callback = function()
