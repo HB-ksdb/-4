@@ -128,20 +128,3 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
-local Tab = Window:Tab({
-    Title = "DOORS",
-    Icon = "bird",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "DOORS推荐",
-    Desc = "无卡密中文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
-    end
-})
-
-Window:SelectTab(2) -- Number of Tab
