@@ -45,22 +45,50 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+```lua
+local Paragraph = Tab:Paragraph({
+    Title = "荔枝脚本",
+    Desc = "Q群746820543",
+    Color = "Red",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "rbxassetid://81985649222682",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
+})
+
 
 local Tab = Window:Tab({
     Title = "通用",
-    Icon = "81985649222682",
-    Locked = false,
-})
-
-local Tab = Window:Tab({
-    Title = "俄亥俄州",
-    Icon = "81985649222682",
+    Icon = "",
     Locked = false,
 })
 
 local Button = Tab:Button({
-    Title = "Button",
-    Desc = "Test Button",
+    Title = "飞行v3",
+    Desc = "飞行",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
+    end
+})
+
+local Tab = Window:Tab({
+    Title = "俄亥俄州",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "0hio",
+    Desc = "不需要卡密",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/%E7%89%9B%E9%80%BC%E7%89%9B%E7%9C%9F%E7%89%9B%E9%80%BC.lua"))()
@@ -68,8 +96,23 @@ local Button = Tab:Button({
 })
 
 local Tab = Window:Tab({
+    Title = "自然灾害",
+    Icon = "",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "自然灾害",
+    Desc = "不需要卡密",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
+})
+
+local Tab = Window:Tab({
     Title = "设置",
-    Icon = "81985649222682",
+    Icon = "Tab",
     Locked = false,
 })
 
