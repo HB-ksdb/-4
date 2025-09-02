@@ -1,6 +1,6 @@
 local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
-WindUI:SetFont("rbxassetid://81985649222682")
+WindUI:GetWindowSize()
 
 local Window = WindUI:CreateWindow({
     Title = "荔枝脚本 | 免费",
@@ -15,12 +15,12 @@ WindUI:Popup({
     Content = "荔枝脚本Q群746820543",
     Buttons = {
         {
-            Title = "启动",
+            Title = "关闭",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "关闭",
+            Title = "启动",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
@@ -63,10 +63,19 @@ local Button = Tab:Button({
     end
 })
 
+local Button = Tab:Button({
+    Title = "子追",
+    Desc = "子追不知道有没有用",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
+    end
+})
+
 Window:SelectTab(2) -- Number of Tab
 
 local Section = Window:Section({
-    Title = "脚本↓",
+    Title = "脚本↓↓↓",
     Icon = "bird",
     Opened = true,
 })
@@ -134,3 +143,9 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "",
+    Icon = "bird",
+    Locked = false,
+})
