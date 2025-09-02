@@ -1,7 +1,5 @@
-
 local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
-
 
 WindUI:SetNotificationLower(true)
 WindUI:SetFont("rbxassetid://font-id-here")
@@ -26,8 +24,6 @@ WindUI:Notify({
     Icon = "bird",
 })
 
-
-
 WindUI:AddTheme({
     Name = "Dark",
     Accent = "#18181b",
@@ -38,25 +34,6 @@ WindUI:AddTheme({
     Background = "#0e0e10",
     Button = "#52525b",
     Icon = "#a1a1aa",
-})
-
-WindUI:Popup({
-    Title = "荔枝脚本欢迎你",
-    Icon = "info",
-    Content = "免费使用Q群746820543",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "继续",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
 })
 
 local Tab = Window:Tab({
