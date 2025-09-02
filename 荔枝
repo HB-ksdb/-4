@@ -8,25 +8,6 @@ local Window = WindUI:CreateWindow({
     Folder = "MyTestHub",
 })
 
-WindUI:Popup({
-    Title = "荔枝脚本欢迎你",
-    Icon = "info",
-    Content = "荔枝脚本Q群746820543",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "启动",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
-})
-
 Window:Tag({
     Title = "v1.1.4",
     Color = Color3.fromHex("#30ff6a")
@@ -38,6 +19,7 @@ WindUI:Notify({
     Duration = 3, -- 10 seconds
     Icon = "bird",
 })
+
 
 local Tab = Window:Tab({
     Title = "通知",
@@ -58,15 +40,6 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
-    end
-})
-
-local Button = Tab:Button({
-    Title = "子追",
-    Desc = "子追不知道有没有用",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
     end
 })
 
