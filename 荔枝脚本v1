@@ -41,26 +41,26 @@ WindUI:AddTheme({
 
 local Tab = Window:Tab({
     Title = "通知",
-    Icon = "通知",
+    Icon = "81985649222682",
     Locked = false,
 })
 
 
 local Tab = Window:Tab({
     Title = "通用",
-    Icon = "General",
+    Icon = "81985649222682",
     Locked = false,
 })
 
 local Tab = Window:Tab({
     Title = "俄亥俄州",
-    Icon = "Notice",
+    Icon = "81985649222682",
     Locked = false,
 })
 
 local Tab = Window:Tab({
     Title = "设置",
-    Icon = "Settings",
+    Icon = "81985649222682",
     Locked = false,
 })
 
