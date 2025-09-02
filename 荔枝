@@ -25,15 +25,3 @@ WindUI:Popup({
         }
     }
 })
-
-Window:Tag({
-    Title = "v1.1.4",
-    Color = Color3.fromHex("#30ff6a")
-})
-
-WindUI:Notify({
-    Title = "荔枝脚本通知",
-    Content = "荔枝脚本，禁止倒卖否则死浮木😡😡😡",
-    Duration = 3, -- 10 seconds
-    Icon = "bird",
-})
