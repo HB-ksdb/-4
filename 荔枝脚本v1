@@ -45,25 +45,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-```lua
-local Paragraph = Tab:Paragraph({
-    Title = "荔枝脚本",
-    Desc = "Q群746820543",
-    Color = "Red",
-    Image = "",
-    ImageSize = 30,
-    Thumbnail = "rbxassetid://81985649222682",
-    ThumbnailSize = 80,
-    Locked = false,
-    Buttons = {
-        {
-            Icon = "",
-            Title = "信息",
-            Callback = function() print("1 Button") end,
-        }
-    }
-})
-
 
 local Tab = Window:Tab({
     Title = "通用",
