@@ -4,7 +4,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 WindUI:Popup({
     Title = "欢迎使用3K 脚本",
     Icon = "sparkles",
-    Content = "尊敬的3K用户👑,祝你天天开心",
+    Content = "尊敬的3K用户,祝你天天开心",
     Buttons = {
         {
             Title = "启动3K KFI",
@@ -43,7 +43,7 @@ function createMainWindow()
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://81583956354615"
+        Background = "rbxassetid://103506480252017"
     })
     
         local TimeTag = Window:Tag({
@@ -114,7 +114,7 @@ function createMainWindow()
         Desc = "QQ群 746820543",
         Image = "rbxassetid://81985649222682",
         ImageSize = 42,
-        Thumbnail = "rbxassetid://96291371536118",
+        Thumbnail = "rbxassetid://81583956354615",
         ThumbnailSize = 120
     })
     
