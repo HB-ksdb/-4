@@ -125,12 +125,6 @@ local Tabs = {
     Utilities = Window:Section({ Title = "loc:UTILITIES", Opened = true })
 }
 
-local TabHandles = {
-    Elements = Tabs.Main:Tab({ Title = "Hi", Icon = "layout-grid", Desc = "UI Elements Example" }),
-    Appearance = Tabs.Settings:Tab({ Title = "Hello", Icon = "brush" }),
-    Config = Tabs.Utilities:Tab({ Title = "Bruh", Icon = "settings" })
-}
-
 local Tab = Window:Tab({
     Title = "被遗弃",
     Icon = "layout-grid",
@@ -258,3 +252,9 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+
+local TabHandles = {
+    Elements = Tabs.Main:Tab({ Title = "Hi", Icon = "layout-grid", Desc = "UI Elements Example" }),
+    Appearance = Tabs.Settings:Tab({ Title = "Hello", Icon = "brush" }),
+    Config = Tabs.Utilities:Tab({ Title = "Bruh", Icon = "settings" })
+}
