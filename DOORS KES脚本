@@ -13,22 +13,8 @@ Window:Tag({
 })
 
 local Tab = Window:Tab({
-    Title = "公告",
-    Icon = "bird",
-    Locked = false,
-})
-
-local Tabs = {
-    Main = Window:Section({ Title = "DOORS", Opened = true }),
-    Settings = Window:Section({ Title = "DOORS", Opened = true }),
-    Utilities = Window:Section({ Title = "设置", Opened = true })
-}
-
-Window:SelectTab(2) -- Number of Tab
-
-local Tab = Tabs.Settings:Tab({
-    Title = "功能",
-    Icon = "door-open",
+    Title = "通用",
+    Icon = "layout-grid",
     Locked = false,
 })
 
@@ -45,6 +31,18 @@ local Slider = Tab:Slider({
             game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = value
         end
     end
+})
+
+local Tabs = {
+    Main = Window:Section({ Title = "DOORS", Opened = true }),
+    Settings = Window:Section({ Title = "DOORS", Opened = true }),
+    Utilities = Window:Section({ Title = "设置", Opened = true })
+}
+
+local Tab = Tabs.Settings:Tab({
+    Title = "功能 DOORS",
+    Icon = "door-open",
+    Locked = false,
 })
 
 Window:SelectTab(2) -- Number of Tab
