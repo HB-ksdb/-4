@@ -9,7 +9,7 @@ local Window = WindUI:CreateWindow({
 })
 
 WindUI:Popup({
-    Title = "3K脚本欢迎你",
+    Title = "KES脚本欢迎你",
     Icon = "info",
     Content = "KES脚本Q群746820543",
     Buttons = {
