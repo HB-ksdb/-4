@@ -2,7 +2,7 @@ local Version = "1.6.41"
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "3K脚本中心 | 免费",
+    Title = "KES脚本中心 | 免费",
     Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
@@ -11,7 +11,7 @@ local Window = WindUI:CreateWindow({
 WindUI:Popup({
     Title = "3K脚本欢迎你",
     Icon = "info",
-    Content = "3K脚本Q群746820543",
+    Content = "KES脚本Q群746820543",
     Buttons = {
         {
             Title = "关闭",
@@ -33,22 +33,22 @@ Window:Tag({
 })
 
 WindUI:Notify({
-    Title = "3K脚本通知",
-    Content = "3K脚本，禁止倒卖否则死浮木😡😡😡",
+    Title = "KES脚本通知",
+    Content = "KES脚本，禁止倒卖否则死浮木",
     Duration = 10, -- 10 seconds
     Icon = "bird",
 })
 
 
 local Tab = Window:Tab({
-    Title = "3K公告",
+    Title = "KES公告",
     Icon = "layout-grid",
     Locked = false,
 })
 
 
 local Tab = Window:Tab({
-    Title = "3K通用",
+    Title = "KES通用",
     Icon = "layout-grid",
     Locked = false,
 })
@@ -57,7 +57,7 @@ local Slider = Tab:Slider({
     Title = "跳跃",
     Value = {
         Min = 50,
-        Max = 200,
+        Max = 500,
         Default = 50,
     },
     Increment = 1,
@@ -72,7 +72,7 @@ local Slider = Tab:Slider({
     Title = "移速",
     Value = {
         Min = 16,
-        Max = 400,
+        Max = 500,
         Default = 16,
     },
     Increment = 1,
