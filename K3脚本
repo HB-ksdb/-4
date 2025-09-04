@@ -2,16 +2,16 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 -- 添加欢迎弹窗
 WindUI:Popup({
-    Title = "欢迎使用XP KFI脚本",
+    Title = "欢迎使用3K 脚本",
     Icon = "sparkles",
-    Content = "尊敬的XP KFI用户👑,祝你天天开心",
+    Content = "尊敬的3K用户👑,祝你天天开心",
     Buttons = {
         {
-            Title = "启动XP KFI",
+            Title = "启动3K KFI",
             Icon = "arrow-right",
             Variant = "Primary",
             Callback = function() 
-                print("启动XP")
+                print("启动3K")
                 -- 创建主窗口
                 createMainWindow()
             end
@@ -27,11 +27,11 @@ function createMainWindow()
     local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
     local Window = WindUI:CreateWindow({
-        Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
-        Icon = "rbxassetid://4483362748",
+        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ohio",
+        Icon = "rbxassetid://81583956354615",
         IconTransparency = 0.5,
         IconThemed = true,
-        Author = "作者:教主",
+        Author = "作者:不知道",
         Folder = "CloudHub",
         Size = UDim2.fromOffset(400, 300),
         Transparent = true,
@@ -79,7 +79,7 @@ function createMainWindow()
     })
 
     Window:EditOpenButton({
-        Title = "XP KFI脚本",
+        Title = "3K 脚本",
         Icon = "crown",
         CornerRadius = UDim.new(0,16),
         StrokeThickness = 2,
@@ -111,15 +111,15 @@ function createMainWindow()
     
     MainTab:Paragraph({
         Title = "欢迎使用 XP KFL",
-        Desc = "QQ群 1056927323",
-        Image = "rbxassetid://114477834305321",
+        Desc = "QQ群 746820543",
+        Image = "rbxassetid://81985649222682",
         ImageSize = 42,
         Thumbnail = "rbxassetid://96291371536118",
         ThumbnailSize = 120
     })
     
     MainTab:Paragraph({
-        Title = "感谢XP用户的支持",
+        Title = "感谢3K用户的支持",
         Desc = "当前服务器ID: " .. game.PlaceId, -- 显示服务器ID
     })
     
