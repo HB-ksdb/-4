@@ -39,10 +39,21 @@ local Tabs = {
     Utilities = Window:Section({ Title = "设置", Opened = true })
 }
 
-local Tab = Tabs.Settings:Tab({
+local Tab = Tabs.Main:Tab({
     Title = "功能 DOORS",
     Icon = "door-open",
     Locked = false,
+})
+
+local Toggle = Tab:Toggle({
+    Title = "柜子透视",
+    Desc = "能看到透视柜子",
+    Icon = "",
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state) 
+        print("Toggle Activated" .. tostring(state))
+    end
 })
 
 Window:SelectTab(2) -- Number of Tab
