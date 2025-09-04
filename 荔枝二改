@@ -54,41 +54,47 @@ local Tab = Window:Tab({
 })
 
 local Slider = Tab:Slider({
-    Title = "正在更新…",
-    
-    -- To make float number supported, 
-    -- make the Step a float number.
-    -- example: Step = 0.1
-    Step = 1,
-    
+    Title = "跳跃",
     Value = {
-        Min = 20,
+        Min = 50,
         Max = 200,
         Default = 50,
     },
+    Increment = 1,
     Callback = function(value)
-        print(value)
+        if game.Players.LocalPlayer.Character then
+            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = value
+        end
     end
 })
 
 local Slider = Tab:Slider({
-    Title = "正在更新…",
-    
-    -- To make float number supported, 
-    -- make the Step a float number.
-    -- example: Step = 0.1
-    Step = 1,
-    
+    Title = "移速",
     Value = {
-        Min = 20,
-        Max = 200,
-        Default = 50,
+        Min = 16,
+        Max = 400,
+        Default = 16,
     },
+    Increment = 1,
     Callback = function(value)
-        print(value)
+        if game.Players.LocalPlayer.Character then
+            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = value
+        end
     end
 })
         
+local Slider = Tab:Slider({
+    Title = "重力",
+    Value = {
+        Min = 0.1,
+        Max = 500.0,
+        Default = 196.2,
+    },
+    Step = 0.1,
+    Callback = function(value)
+        game.Workspace.Gravity = value
+    end
+})
 
 local Button = Tab:Button({
     Title = "飞行v3",
@@ -148,7 +154,7 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Button = Tabs.Settings:Tab({
+local Button = Tab:Button({
     Title = "战争大亨XK",
     Desc = "无卡密中文",
     Locked = false,
@@ -249,6 +255,22 @@ local Button = Tab:Button({
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
     end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Main:Tab({
+    Title = "黑名单",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Utilities:Tab({
+    Title = "设置",
+    Icon = "settings",
+    Locked = false,
 })
 
 Window:SelectTab(2) -- Number of Tab
