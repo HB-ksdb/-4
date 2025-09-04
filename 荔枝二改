@@ -1,16 +1,25 @@
+local Version = "1.6.41"
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+
+local Window = WindUI:CreateWindow({
+    Title = "3K脚本中心 | 免费",
+    Icon = "door-open",
+    Author = "3K创作者",
+    Folder = "MyTestHub",
+})
 
 WindUI:Popup({
-    Title = "Popup Title",
+    Title = "3K脚本欢迎你",
     Icon = "info",
-    Content = "Popup content",
+    Content = "3K脚本Q群746820543",
     Buttons = {
         {
-            Title = "Cancel",
+            Title = "关闭",
             Callback = function() end,
             Variant = "Tertiary",
         },
         {
-            Title = "Continue",
+            Title = "启动",
             Icon = "arrow-right",
             Callback = function() end,
             Variant = "Primary",
@@ -18,58 +27,223 @@ WindUI:Popup({
     }
 })
 
-
-
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua")
-
-WindUI:SetNotificationLower(true)
-WindUI:SetFont("rbxassetid://font-id-here")
-WindUI:SetTheme("Dark")
-
-Window:EditOpenButton({
-    Title = "Open Example UI",
-    Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 2,
-    Color = ColorSequence.new( -- gradient
-        Color3.fromHex("FF0F7B"), 
-        Color3.fromHex("F89B29")
-    ),
-    OnlyMobile = false,
-    Enabled = true,
-    Draggable = true,
-})
-
-
-local Window = WindUI:CreateWindow({
-    Title = "荔枝脚本 | 欢迎你",
-    Icon = "door-open",
-    Author = "Example UI",
-    Folder = "MyTestHub",
-})
-
-
 Window:Tag({
-    Title = "v1.1.1",
+    Title = "v1.1.4",
     Color = Color3.fromHex("#30ff6a")
 })
 
-local Section = Window:Section({
-    Title = "Section for the tabs",
+WindUI:Notify({
+    Title = "3K脚本通知",
+    Content = "3K脚本，禁止倒卖否则死浮木😡😡😡",
+    Duration = 10, -- 10 seconds
     Icon = "bird",
-    Opened = true,
 })
 
 
-WindUI:AddTheme({
-    Name = "Dark",
-    Accent = "#18181b",
-    Dialog = "#18181b",
-    Outline = "#FFFFFF",
-    Text = "#FFFFFF",
-    Placeholder = "#999999",
-    Background = "#0e0e10",
-    Button = "#52525b",
-    Icon = "#a1a1aa",
+local Tab = Window:Tab({
+    Title = "3K公告",
+    Icon = "layout-grid",
+    Locked = false,
 })
 
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "3K通用",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Slider = Tab:Slider({
+    Title = "正在更新…",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    
+    Value = {
+        Min = 20,
+        Max = 200,
+        Default = 50,
+    },
+    Callback = function(value)
+        print(value)
+    end
+})
+
+local Slider = Tab:Slider({
+    Title = "正在更新…",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    
+    Value = {
+        Min = 20,
+        Max = 200,
+        Default = 50,
+    },
+    Callback = function(value)
+        print(value)
+    end
+})
+        
+
+local Button = Tab:Button({
+    Title = "飞行v3",
+    Desc = "飞行",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "子追",
+    Desc = "子追",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "隐身",
+    Desc = "别人看不到",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "被遗弃",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "被遗弃XK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "战争大亨",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "战争大亨XK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "最强战场",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "最强战场无限侧闪",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "DOORS",
+    Icon = "door-open",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "DOORS",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "DOORSXK",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "墨水游戏",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "墨水游戏",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterVaz/InkGameAzure/main/Protected_7974105512464815.lua.txt"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "死铁轨",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "死铁轨",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "林森99夜",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "林森99夜",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
