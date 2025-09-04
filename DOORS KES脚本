@@ -12,17 +12,17 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
+local Tab = Window:Tab({
+    Title = "公告",
+    Icon = "bird",
+    Locked = false,
+})
+
 local Tabs = {
-    Main = Window:Section({ Title = "公告 KES", Opened = true }),
+    Main = Window:Section({ Title = "DOORS", Opened = true }),
     Settings = Window:Section({ Title = "DOORS", Opened = true }),
     Utilities = Window:Section({ Title = "设置", Opened = true })
 }
-
-local Tab = Tabs.Main:Tab({
-    Title = "KES",
-    Icon = "layout-grid",
-    Locked = false,
-})
 
 Window:SelectTab(2) -- Number of Tab
 
