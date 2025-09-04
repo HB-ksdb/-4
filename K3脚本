@@ -28,7 +28,7 @@ function createMainWindow()
 
     local Window = WindUI:CreateWindow({
         Title = "3K 脚本<font color='#00FF00'>1.0</font> / ohio",
-        Icon = "rbxassetid://81583956354615",
+        Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:不知道",
@@ -43,7 +43,7 @@ function createMainWindow()
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://73416826039813"
+        Background = "rbxassetid://81583956354615"
     })
     
         local TimeTag = Window:Tag({
