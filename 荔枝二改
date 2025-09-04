@@ -142,13 +142,13 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "战争大亨",
     Icon = "layout-grid",
     Locked = false,
 })
 
-local Button = Tab:Button({
+local Button = Tabs.Settings:Tab({
     Title = "战争大亨XK",
     Desc = "无卡密中文",
     Locked = false,
@@ -159,7 +159,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "最强战场",
     Icon = "layout-grid",
     Locked = false,
@@ -176,7 +176,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "DOORS",
     Icon = "door-open",
     Locked = false,
@@ -202,7 +202,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "墨水游戏",
     Icon = "layout-grid",
     Locked = false,
@@ -219,7 +219,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "死铁轨",
     Icon = "layout-grid",
     Locked = false,
@@ -236,7 +236,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "林森99夜",
     Icon = "layout-grid",
     Locked = false,
