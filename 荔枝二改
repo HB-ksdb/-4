@@ -126,9 +126,9 @@ local Button = Tab:Button({
 Window:SelectTab(2) -- Number of Tab
 
 local Tabs = {
-    Main = Window:Section({ Title = "Example 1", Opened = true }),
-    Settings = Window:Section({ Title = "Example 2", Opened = true }),
-    Utilities = Window:Section({ Title = "loc:UTILITIES", Opened = true })
+    Main = Window:Section({ Title = "黑名单", Opened = true }),
+    Settings = Window:Section({ Title = "脚本执行", Opened = true }),
+    Utilities = Window:Section({ Title = "设置", Opened = true })
 }
 
 local Tab = Tabs.Settings:Tab({
