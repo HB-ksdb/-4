@@ -46,7 +46,6 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-Window:SelectTab(2) -- Number of Tab
 
 local Tab = Window:Tab({
     Title = "3K通用",
