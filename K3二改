@@ -1,21 +1,21 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 
--- 添加欢迎弹窗
 WindUI:Popup({
-    Title = "欢迎使用XP KFI脚本",
-    Icon = "sparkles",
-    Content = "尊敬的3K用户👑,祝你天天开心",
+    Title = "3K脚本欢迎你",
+    Icon = "info",
+    Content = "3K脚本Q群746820543",
     Buttons = {
         {
-            Title = "启动3K",
+            Title = "关闭",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "启动",
             Icon = "arrow-right",
+            Callback = function() end,
             Variant = "Primary",
-            Callback = function() 
-                print("启动3K")
-                -- 创建主窗口
-                createMainWindow()
-            end
         }
     }
 })
@@ -32,6 +32,16 @@ Window:Tag({
     Title = "v1.1.4",
     Color = Color3.fromHex("#30ff6a")
 })
+
+Window:Tag({
+        Title = "公益版", -- 标签汉化
+        Color = Color3.fromHex("#315dff")
+    })
+    local TimeTag = Window:Tag({
+        Title = "持续更新",
+        Color = Color3.fromHex("#000000")
+    })
+
 
 WindUI:Notify({
     Title = "3K脚本通知",
