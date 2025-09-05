@@ -320,6 +320,8 @@ local Button = Tab:Button({
     end
 })
 
+Window:SelectTab(2) -- Number of Tab
+
 local Tab = Tabs.Utilities:Tab({
     Title = "设置",
     Icon = "settings",
