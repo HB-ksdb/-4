@@ -324,7 +324,7 @@ local Button = Tab:Button({
     Desc = "无卡密中文 推荐",
     Locked = false,
     Callback = function()
-        print("clicked")
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
     end
 })
 
