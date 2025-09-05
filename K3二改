@@ -24,10 +24,6 @@ local Window = WindUI:CreateWindow({
     Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
-
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-    Background = "rbxassetid://73416826039813"
 }),
 
 Window:Tag({
@@ -320,6 +316,15 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "刀刃球",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        print("clicked")
     end
 })
 
