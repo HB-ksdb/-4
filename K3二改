@@ -1,23 +1,31 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+
+-- 添加欢迎弹窗
 WindUI:Popup({
-    Title = "3K脚本欢迎你",
-    Icon = "info",
-    Content = "3K脚本Q群746820543",
+    Title = "欢迎使用3K 脚本",
+    Icon = "sparkles",
+    Content = "尊敬的3K 用户👑,祝你天天开心",
     Buttons = {
         {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "启动",
+            Title = "启动3K",
             Icon = "arrow-right",
-            Callback = function() end,
             Variant = "Primary",
+            Callback = function() 
+                print("启动3K")
+                -- 创建主窗口
+                createMainWindow()
+            end
         }
     }
-})
+
+function createMainWindow()
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local hum = Character:WaitForChild("HumanoidRootPart")
+    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
 
 local Window = WindUI:CreateWindow({
     Title = "3K脚本中心 | 免费",
