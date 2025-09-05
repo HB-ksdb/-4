@@ -55,7 +55,13 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
-local Tab = Window:Tab({
+local Tabs = {
+    Main = Window:Section({ Title = "通用", Opened = true }),
+    Settings = Window:Section({ Title = "脚本执行", Opened = true }),
+    Utilities = Window:Section({ Title = "设置", Opened = true })
+}
+
+local Tab = Tabs.Main:Tab({
     Title = "3K通用",
     Icon = "layout-grid",
     Locked = false,
@@ -133,11 +139,6 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tabs = {
-    Main = Window:Section({ Title = "黑名单", Opened = true }),
-    Settings = Window:Section({ Title = "脚本执行", Opened = true }),
-    Utilities = Window:Section({ Title = "设置", Opened = true })
-}
 
 local Tab = Tabs.Settings:Tab({
     Title = "被遗弃",
@@ -263,14 +264,6 @@ local Button = Tab:Button({
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
     end
-})
-
-Window:SelectTab(2) -- Number of Tab
-
-local Tab = Tabs.Main:Tab({
-    Title = "黑名单",
-    Icon = "layout-grid",
-    Locked = false,
 })
 
 Window:SelectTab(2) -- Number of Tab
