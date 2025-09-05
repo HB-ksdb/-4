@@ -24,24 +24,13 @@ local Window = WindUI:CreateWindow({
     Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
+}),
 
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-    Background = "rbxassetid://73416826039813"
-})
 
 Window:Tag({
     Title = "v1.1.4",
     Color = Color3.fromHex("#30ff6a")
 })
-
-function createMainWindow()
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-    local hum = Character:WaitForChild("HumanoidRootPart")
-    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-
 
 WindUI:Notify({
     Title = "3K脚本通知",
