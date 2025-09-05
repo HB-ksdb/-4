@@ -2,16 +2,16 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 -- 添加欢迎弹窗
 WindUI:Popup({
-    Title = "欢迎使用3K 脚本",
+    Title = "欢迎使用XP KFI脚本",
     Icon = "sparkles",
-    Content = "尊敬的3K用户,祝你天天开心",
+    Content = "尊敬的XP KFI用户👑,祝你天天开心",
     Buttons = {
         {
-            Title = "启动3K KFI",
+            Title = "启动XP KFI",
             Icon = "arrow-right",
             Variant = "Primary",
             Callback = function() 
-                print("启动3K")
+                print("启动XP")
                 -- 创建主窗口
                 createMainWindow()
             end
@@ -27,11 +27,11 @@ function createMainWindow()
     local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
     local Window = WindUI:CreateWindow({
-        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ohio",
+        Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
-        Author = "作者:不知道",
+        Author = "作者:教主",
         Folder = "CloudHub",
         Size = UDim2.fromOffset(400, 300),
         Transparent = true,
@@ -43,7 +43,7 @@ function createMainWindow()
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://103506480252017"
+        Background = "rbxassetid://73416826039813"
     })
     
         local TimeTag = Window:Tag({
@@ -79,7 +79,7 @@ function createMainWindow()
     })
 
     Window:EditOpenButton({
-        Title = "3K 脚本",
+        Title = "XP KFI脚本",
         Icon = "crown",
         CornerRadius = UDim.new(0,16),
         StrokeThickness = 2,
