@@ -25,7 +25,6 @@ local Window = WindUI:CreateWindow({
     Author = "3K创作者",
     Folder = "MyTestHub",
     Window:SetBackgroundImage("rbxassetid://140055956375514")
-    Window:IsResizable(false)
 }),
 
 
