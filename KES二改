@@ -20,56 +20,12 @@ WindUI:Popup({
     }
 })
 
-function createMainWindow()
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-    local hum = Character:WaitForChild("HumanoidRootPart")
-    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-
-
 local Window = WindUI:CreateWindow({
-    Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
-    Icon = "rbxassetid://4483362748",
-    IconTransparency = 0.5,
-    IconThemed = true,
+    Title = "3K脚本中心 | 免费",
+    Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
-    Size = UDim2.fromOffset(400, 300),
-    Transparent = true,
-    Theme = "Light",
-    User = {
-            Enabled = true,
-            Callback = function() print("clicked") end,
-            Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-    Background = "rbxassetid://73416826039813"
-    })
-    
-    local TimeTag = Window:Tag({
-    Title = "00:00",
-    Color = Color3.fromHex("#30ff6a")
 })
-
--- Rainbow effect & Time 
-    local hue = 0
-    task.spawn(function()
-        while true do
-            local now = os.date("*t")
-            local hours = string.format("%02d", now.hour)
-            local minutes = string.format("%02d", now.min)
-            
-            hue = (hue + 0.01) % 1
-            local color = Color3.fromHSV(hue, 1, 1)
-            
-            TimeTag:SetTitle(hours .. ":" .. minutes)
-            --TimeTag:SetColor(color)
-
-            task.wait(0.06)
-        end
-    end)
 
 Window:Tag({
     Title = "v1.1.4",
@@ -77,22 +33,22 @@ Window:Tag({
 })
 
 WindUI:Notify({
-    Title = "KES脚本通知",
-    Content = "KES脚本，禁止倒卖否则死浮木",
+    Title = "3K脚本通知",
+    Content = "3K脚本，禁止倒卖否则死浮木😡😡😡",
     Duration = 10, -- 10 seconds
     Icon = "bird",
 })
 
 
 local Tab = Window:Tab({
-    Title = "KES公告",
+    Title = "3K公告",
     Icon = "layout-grid",
     Locked = false,
 })
 
 
 local Tab = Window:Tab({
-    Title = "KES通用",
+    Title = "3K通用",
     Icon = "layout-grid",
     Locked = false,
 })
@@ -101,7 +57,7 @@ local Slider = Tab:Slider({
     Title = "跳跃",
     Value = {
         Min = 50,
-        Max = 500,
+        Max = 200,
         Default = 50,
     },
     Increment = 1,
@@ -116,7 +72,7 @@ local Slider = Tab:Slider({
     Title = "移速",
     Value = {
         Min = 16,
-        Max = 500,
+        Max = 400,
         Default = 16,
     },
     Increment = 1,
