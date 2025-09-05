@@ -1,6 +1,5 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-
 WindUI:Popup({
     Title = "3K脚本欢迎你",
     Icon = "info",
@@ -148,6 +147,24 @@ local Button = Tab:Button({
     end
 })
 
+local Button = Tab:Button({
+    Title = "FE假延迟",
+    Desc = "假延迟",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RENZXW/RENZXW-SCRIPTS/main/fakeLAGRENZXW.txt"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "黑客后门v6",
+    Desc = "后门v6",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/iK4oS/backdoor.exe/v6x/source.lua"))()
+    end
+})
+
 Window:SelectTab(2) -- Number of Tab
 
 
@@ -197,6 +214,15 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "最强战场丢垃圾桶",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/V1.0.0.txt"))()
     end
 })
 
@@ -278,6 +304,21 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "刀刃球",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "刀刃球",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
+    end
+})
 
 local Tab = Tabs.Utilities:Tab({
     Title = "设置",
