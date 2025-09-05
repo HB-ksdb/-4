@@ -29,9 +29,26 @@ function createMainWindow()
 
 local Window = WindUI:CreateWindow({
     Title = "3K脚本中心 | 免费",
-    Icon = "door-open",
+    Icon = "rbxassetid://4483362748",
+    IconTransparency = 0.5,
+    IconThemed = true,
     Author = "3K创作者",
     Folder = "MyTestHub",
+    Size = UDim2.fromOffset(400, 300),
+    Transparent = true,
+    Theme = "Light",
+    User = {
+        Enabled = true,
+        Callback = function() print("clicked") end,
+        Anonymous = false
+    },
+    SideBarWidth = 200,
+    ScrollBarEnabled = true,
+    Background = "rbxassetid://73416826039813"
+})
+    local TimeTag = Window:Tag({
+    Title = "00:00",
+    Color = Color3.fromHex("#30ff6a")
 })
 
 Window:Tag({
