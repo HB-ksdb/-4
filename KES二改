@@ -1,54 +1,29 @@
-local Version = "1.6.41"
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
--- 添加欢迎弹窗
 WindUI:Popup({
-    Title = "欢迎使用XP KFI脚本",
-    Icon = "sparkles",
-    Content = "尊敬的XP KFI用户👑,祝你天天开心",
+    Title = "3K脚本欢迎你",
+    Icon = "info",
+    Content = "3K脚本Q群746820543",
     Buttons = {
         {
-            Title = "启动XP KFI",
+            Title = "关闭",
+            Callback = function() end,
+            Variant = "Tertiary",
+        },
+        {
+            Title = "启动",
             Icon = "arrow-right",
+            Callback = function() end,
             Variant = "Primary",
-            Callback = function() 
-                print("启动XP")
-                -- 创建主窗口
-                createMainWindow()
-            end
         }
     }
 })
 
-function createMainWindow()
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-    local hum = Character:WaitForChild("HumanoidRootPart")
-    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-
 local Window = WindUI:CreateWindow({
     Title = "3K脚本中心 | 免费",
-    Icon = "rbxassetid://4483362748",
-    IconTransparency = 0.5,
-    IconThemed = true,
+    Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
-    Size = UDim2.fromOffset(400, 300),
-    Transparent = true,
-    Theme = "Light",
-    User = {
-        Enabled = true,
-        Callback = function() print("clicked") end,
-        Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-    Background = "rbxassetid://73416826039813"
-})
-    local TimeTag = Window:Tag({
-    Title = "00:00",
-    Color = Color3.fromHex("#30ff6a")
 })
 
 Window:Tag({
