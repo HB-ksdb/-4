@@ -103,37 +103,17 @@ function createMainWindow()
         StrokeThickness = 3,  -- 增加边框厚度
     })
     
-    local MainTab = Window:Tab({
-        Title = "主页",
-        Icon = "zap",
-        Locked = false,
-    })
-
-    
-    
-    MainTab:Paragraph({
-        Title = "欢迎使用 3K 脚本",
-        Desc = "QQ群 746820543",
-        Image = "rbxassetid://81985649222682",
-        ImageSize = 42,
-        Thumbnail = "rbxassetid://81583956354615",
-        ThumbnailSize = 120
-    })
-    
-    MainTab:Paragraph({
-        Title = "感谢3K用户的支持",
-        Desc = "当前服务器ID: " .. game.PlaceId, -- 显示服务器ID
-    })
-    
-    MainTab:Paragraph({
-        Title = "您的注入器",
-        Desc = ": " .. identifyexecutor(), -- 显示注入器ID
-    })
-end
-
-local MainTab = Window:Tab({
-    Title = "3K通用",
-    Icon = "layout-grid",
+    local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
     Locked = false,
 })
 
+local Button = Tab:Button({
+    Title = "Button",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
+})
