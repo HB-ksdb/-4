@@ -20,68 +20,12 @@ WindUI:Popup({
     }
 })
 
-function createMainWindow()
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
-    local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-    local hum = Character:WaitForChild("HumanoidRootPart")
-    local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-
-    local Window = WindUI:CreateWindow({
-        Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
-        Icon = "rbxassetid://4483362748",
-        IconTransparency = 0.5,
-        IconThemed = true,
-        Author = "作者:教主",
-        Folder = "CloudHub",
-        Size = UDim2.fromOffset(400, 300),
-        Transparent = true,
-        Theme = "Light",
-        User = {
-            Enabled = true,
-            Callback = function() print("clicked") end,
-            Anonymous = false
-        },
-        SideBarWidth = 200,
-        ScrollBarEnabled = true,
-        Background = "rbxassetid://73416826039813"
-    })
-    
-        local TimeTag = Window:Tag({
-        Title = "00:00",
-        Color = Color3.fromHex("#30ff6a")
-    }
-
--- Rainbow effect & Time 
-    local hue = 0
-    task.spawn(function()
-        while true do
-            local now = os.date("*t")
-            local hours = string.format("%02d", now.hour)
-            local minutes = string.format("%02d", now.min)
-            
-            hue = (hue + 0.01) % 1
-            local color = Color3.fromHSV(hue, 1, 1)
-            
-            TimeTag:SetTitle(hours .. ":" .. minutes)
-            --TimeTag:SetColor(color)
-
-            task.wait(0.06)
-        end
-    end)
-
-   -- 添加彩虹边框效果
-    Window:EditOpenButton({
-        StrokeColor = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),     -- 红色
-            ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 165, 0)), -- 橙色
-            ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 255, 0)), -- 黄色
-            ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 255, 0)),   -- 绿色
-            ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0, 0, 255)),   -- 蓝色
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 0, 128))    -- 紫色
-        }),
-        StrokeThickness = 3,  -- 增加边框厚度
-    })
+local Window = WindUI:CreateWindow({
+    Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
+    Icon = "door-open",
+    Author = "3K创作者",
+    Folder = "MyTestHub",
+})
 
 Window:Tag({
     Title = "v1.1.4",
