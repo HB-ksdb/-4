@@ -20,13 +20,15 @@ WindUI:Popup({
 })
 
 local Window = WindUI:CreateWindow({
-Window:SetBackgroundImage("rbxassetid://140055956375514")
     Title = "3K脚本中心 | 免费",
     Icon = "door-open",
     Author = "3K创作者",
     Folder = "MyTestHub",
-}),
 
+    SideBarWidth = 200,
+    ScrollBarEnabled = true,
+    Background = "rbxassetid://73416826039813"
+}),
 
 Window:Tag({
     Title = "v1.1.4",
