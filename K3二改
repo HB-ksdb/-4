@@ -46,25 +46,14 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-MainTab:Paragraph({
-        Title = "欢迎使用 XP KFL",
-        Desc = "QQ群 1056927323",
-        Image = "rbxassetid://114477834305321",
-        ImageSize = 42,
-        Thumbnail = "rbxassetid://96291371536118",
-        ThumbnailSize = 120
-    })
-    
-    MainTab:Paragraph({
-        Title = "感谢XP用户的支持",
-        Desc = "当前服务器ID: " .. game.PlaceId, -- 显示服务器ID
-    })
-    
-    MainTab:Paragraph({
-        Title = "您的注入器",
-        Desc = ": " .. identifyexecutor(), -- 显示注入器ID
-    })
-end
+local Paragraph = Tab:Paragraph({
+    Title = "欢迎使用 3K脚本",
+    Desc = "QQ群 746820543",
+    Image = "rbxassetid://81583956354615",
+    ImageSize = 42,
+    Thumbnail = "rbxassetid://103506480252017",
+    ThumbnailSize = 120,
+})
 
 local Tab = Window:Tab({
     Title = "3K通用",
