@@ -128,3 +128,9 @@ function createMainWindow()
         Desc = ": " .. identifyexecutor(), -- 显示注入器ID
     })
 end
+
+  local MainTab = Window:Tab({
+         Title = "主页",
+         Icon = "zap",
+         Locked = false,
+    })
