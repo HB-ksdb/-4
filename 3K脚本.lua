@@ -21,7 +21,7 @@ WindUI:Popup({
 
 
 local Window = WindUI:CreateWindow({
-        Title = "XP KFI<font color='#00FF00'>1.0</font> / ohio",
+        Title = "3K <font color='#00FF00'>1.0</font> / ohio",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
