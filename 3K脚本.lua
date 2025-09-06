@@ -21,7 +21,7 @@ WindUI:Popup({
 
 
 local Window = WindUI:CreateWindow({
-        Title = "3K <font color='#00FF00'>1.0</font> / ohio",
+        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ohio",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -77,6 +77,10 @@ local Paragraph = Tab:Paragraph({
     Thumbnail = "rbxassetid://103506480252017",
     ThumbnailSize = 120,
 })
+
+local Paragraph = Tab:Paragraph({
+    Title = "欢迎使用 3K脚本",
+    Desc = "QQ1群 746820543群满人 QQ2群 1059482635",
 
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
@@ -455,6 +459,15 @@ local Button = Tab:Button({
     end
 })
 
+local Button = Tab:Button({
+    Title = "刀刃球",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/autoparrybest"))()
+    end
+})
+
 Window:SelectTab(2) -- Number of Tab
 
 local Tab = Tabs.Settings:Tab({
@@ -466,7 +479,7 @@ local Tab = Tabs.Settings:Tab({
 local Paragraph = Tab:Paragraph({
     Title = "脚本",
     Desc = "偷走脑红",
-    Thumbnail = "rbxassetid://115340624143638",
+    Thumbnail = "rbxassetid://97153288574176",
     ThumbnailSize = 200,
 })
 
