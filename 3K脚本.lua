@@ -80,7 +80,7 @@ local Paragraph = Tab:Paragraph({
 
 local Paragraph = Tab:Paragraph({
     Title = "欢迎使用 3K脚本",
-    Desc = "QQ群 746820543",    
+    Desc = "QQ群满了 746820543 QQ群1059482635",    
     Thumbnail = "rbxassetid://103506480252017",
     ThumbnailSize = 0,
 })
