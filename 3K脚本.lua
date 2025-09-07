@@ -78,6 +78,13 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
+local Paragraph = Tab:Paragraph({
+    Title = "欢迎使用 3K脚本",
+    Desc = "QQ群 746820543",    
+    Thumbnail = "rbxassetid://103506480252017",
+    ThumbnailSize = 0,
+})
+
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
     Settings = Window:Section({ Title = "脚本执行", Opened = true }),
@@ -451,7 +458,7 @@ local Button = Tab:Button({
     Desc = "无卡密中文 推荐",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
     end
 })
 
