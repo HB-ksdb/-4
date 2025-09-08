@@ -21,7 +21,7 @@ WindUI:Popup({
 
 
 local Window = WindUI:CreateWindow({
-        Title = "3K 脚本<font color='#00FF00'>1.0</font> / 🇨🇳",
+        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -301,7 +301,7 @@ local Paragraph = Tab:Paragraph({
 })
 
 local Section = Tab:Section({ 
-    Title = "DOORS🇨🇳",
+    Title = "DOORS",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -503,12 +503,92 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-
-    
-})cal Tab = Tabs.Utilities:Tab({
-    Title = "设置",
-    Icon = "settings",
+local Tab = Window:Tab({
+    Title = "火箭发射模拟器",
+    Icon = "layout-grid",
     Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "火箭发射模拟器",
+    Thumbnail = "rbxassetid://139061316862065",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "火箭发射模拟器",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "火箭发射模拟器禁漫",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/refs/heads/main/jmjmjmjmjmjm114514.txt"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "力量传奇",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "力量传奇",
+    Thumbnail = "rbxassetid://122216219539345",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "力量传奇",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "力量传奇自动吃蛋",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.github.com/114514541883484/Zephyr-wave/main/agreement.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "伐木大享",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "伐木大享",
+    Thumbnail = "rbxassetid://122697398578413",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "伐木大享A",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "伐木大享AXE",
+    Desc = "无卡密文英",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(("https://raw.githubusercontent.com/NOOBARMYSCRIPTER/NOOBARMYSCRIPTER/main/AXE%20LOOP%20SCRIPT"), true))()
+    end
 })
 
 Window:SelectTab(2) -- Number of Tab
