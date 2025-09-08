@@ -21,7 +21,7 @@ WindUI:Popup({
 
 
 local Window = WindUI:CreateWindow({
-        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ohio",
+        Title = "3K 脚本<font color='#00FF00'>1.0</font> / 🇨🇳",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -37,7 +37,7 @@ local Window = WindUI:CreateWindow({
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://103506480252017"
+        Background = "rbxassetid://114457723265156"
     })    
         
 Window:Tag({
@@ -54,18 +54,6 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
-    -- 添加彩虹边框效果
-    Window:EditOpenButton({
-        StrokeColor = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),     -- 红色
-            ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 165, 0)), -- 橙色
-            ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 255, 0)), -- 黄色
-            ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 255, 0)),   -- 绿色
-            ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0, 0, 255)),   -- 蓝色
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 0, 128))    -- 紫色
-        }),
-        StrokeThickness = 3,  -- 增加边框厚度
-    })
 
 WindUI:Notify({
     Title = "3K脚本通知",
@@ -494,7 +482,7 @@ local Tab = Tabs.Settings:Tab({
 local Paragraph = Tab:Paragraph({
     Title = "脚本",
     Desc = "偷走脑红",
-    Thumbnail = "rbxassetid://97153288574176",
+    Thumbnail = "rbxassetid://75315096057062",
     ThumbnailSize = 200,
 })
 
@@ -515,7 +503,154 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Tabs.Utilities:Tab({
+local Tab = Window:Tab({
+    Title = "火箭发射模拟器",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "火箭发射模拟器",
+    Thumbnail = "rbxassetid://139061316862065",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "火箭发射模拟器",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "火箭发射模拟器禁漫",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/refs/heads/main/jmjmjmjmjmjm114514.txt"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "种植花园",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "种植花园",
+    Thumbnail = "rbxassetid:/90415588606367/",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "种植花园",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+lolocal Button = Tab:Button({
+    Title = "种植花园乌托邦",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/eUAzqoCL/raw"))()
+    end
+
+Window:SelectTab(2) -- Number of Tab    
+
+local Tab = Window:Tab({
+    Title = "力量传奇",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "力量传奇",
+    Thumbnail = "rbxassetid://122216219539345",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "力量传奇",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "力量传奇自动吃蛋",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.github.com/114514541883484/Zephyr-wave/main/agreement.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "伐木大享",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "伐木大享",
+    Thumbnail = "rbxassetid://122697398578413",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "伐木大享A",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "伐木大享AXE",
+    Desc = "无卡密文英",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(("https://raw.githubusercontent.com/NOOBARMYSCRIPTER/NOOBARMYSCRIPTER/main/AXE%20LOOP%20SCRIPT"), true))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "种族点击器",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "种族点击器",
+    Thumbnail = "rbxassetid://71853505072478",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "种族点击器",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "种族点击器",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
+    end
+})
+    
+})cal Tab = Tabs.Utilities:Tab({
     Title = "设置",
     Icon = "settings",
     Locked = false,
