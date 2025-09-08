@@ -649,6 +649,8 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
     end
 })
+
+Window:SelectTab(2) -- Number of Tab
     
 })cal Tab = Tabs.Utilities:Tab({
     Title = "设置",
