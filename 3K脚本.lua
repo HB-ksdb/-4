@@ -503,7 +503,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "火箭发射模拟器",
     Icon = "layout-grid",
     Locked = false,
@@ -533,7 +533,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "力量传奇",
     Icon = "layout-grid",
     Locked = false,
@@ -563,7 +563,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "伐木大享",
     Icon = "layout-grid",
     Locked = false,
