@@ -54,6 +54,18 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
+    -- 添加彩虹边框效果
+    Window:EditOpenButton({
+        StrokeColor = ColorSequence.new({
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)),     -- 红色
+            ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255, 165, 0)), -- 橙色
+            ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 255, 0)), -- 黄色
+            ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 255, 0)),   -- 绿色
+            ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0, 0, 255)),   -- 蓝色
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(128, 0, 128))    -- 紫色
+        }),
+        StrokeThickness = 3,  -- 增加边框厚度
+    })
 
 WindUI:Notify({
     Title = "3K脚本通知",
