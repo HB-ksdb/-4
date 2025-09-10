@@ -194,7 +194,7 @@ Window:EditOpenButton({
 })
 
 local LockSection = Window:Section({
-    Title = "稳定功能",
+    Title = "功能区",
     Opened = true,
 })
 
@@ -221,7 +221,7 @@ local D = AddTab(LockSection, "辅助", "rbxassetid://4483362458")
 local E = AddTab(LockSection, "自瞄", "rbxassetid://4483345998")
 
 local FunSection = Window:Section({
-    Title = "娱乐功能",
+    Title = "子追功能",
     Opened = true,
 })
 
@@ -318,23 +318,6 @@ Tg(B,"自动升级",false,function(value)
         getgenv().autoTeleport = value
     end
 )
-
-
-B:Divider()
-
-
-B:Button({
-    Title = "自动重生",
-    Description = "正在开发中..",
-    Locked = true,
-})
-
-B:Button({
-    Title = "自动空投",
-    Description = "正在开发中..",
-    Locked = true,
-})
-
 
 
 getgenv().ESPEnabled = false
@@ -1897,3 +1880,71 @@ pcall(function()
     end)
 
 end)
+
+Tg(F, "子追攻击", false, function(t)
+    shieldAttackActive = t
+
+local bulletTrackingEnabled = true  
+local oldHook = nil
+
+local function setupBulletTracking()
+    local Workspace = game:GetService("Workspace")
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Camera = Workspace.CurrentCamera
+    
+    local function getClosestHead()
+        if not LocalPlayer.Character then return nil end
+        if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return nil end
+        
+        local closestHead = nil
+        local closestDistance = math.huge
+        
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                local character = player.Character
+                local root = character:FindFirstChild("HumanoidRootPart")
+                local head = character:FindFirstChild("Head")
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                local forcefield = character:FindFirstChild("ForceField")
+                
+                if root and head and humanoid and not forcefield and humanoid.Health > 0 then
+                    local distance = (root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestHead = head
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+        
+        return closestHead
+    end
+    
+    if not oldHook then
+        oldHook = hookmetamethod(game, "__namecall", function(self, ...)
+            local method = getnamecallmethod()
+            local args = {...}
+            
+            if bulletTrackingEnabled and method == "Raycast" and not checkcaller() then
+                local origin = args[1] or Camera.CFrame.Position
+                local closestHead = getClosestHead()
+                
+                if closestHead then
+                    return {
+                        Instance = closestHead,
+                        Position = closestHead.Position,
+                        Normal = (origin - closestHead.Position).Unit,
+                        Material = Enum.Material.Plastic,
+                        Distance = (closestHead.Position - origin).Magnitude
+                    }
+                end
+            end
+            
+            return oldHook(self, ...)
+        end)
+    end
+end
+
+bulletTrackingEnabled = true
+setupBulletTracking()
