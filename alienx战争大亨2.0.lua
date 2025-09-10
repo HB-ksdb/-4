@@ -153,29 +153,31 @@ local function addRainbowTitleToLocalPlayer(player, titleText)
     addTitleToCharacter(character)
     player.CharacterAdded:Connect(addTitleToCharacter)
 end
-addRainbowTitleToLocalPlayer(LP, "AlienX VIP")
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syndromehsh/Lua/baff0bc41893a32f8e997d840241ad4b3d26ab4d/AlienX/AlienX%20Wind%203.0%20UI.txt"))()
+addRainbowTitleToLocalPlayer(LP, "")
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = 'AlienX<font color="#00FF00">2.0</font>/ 战争大亨|XI团队出品必是精品',
-    Icon = "rbxassetid://4483362748",
-    IconThemed = true,
-    Author = "AlienX",
-    Folder = "CloudHub",
-    Size = UDim2.fromOffset(580, 440),
-    Transparent = true,
-    Theme = "Dark",
-    User = {
-        Enabled = true,
-        Callback = function() print("clicked") end,
-        Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-})
+        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ",
+        Icon = "rbxassetid://4483362748",
+        IconTransparency = 0.5,
+        IconThemed = true,
+        Author = "作者:3K",
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
+        User = {
+            Enabled = true,
+            Callback = function() print("clicked") end,
+            Anonymous = false
+        },
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://114457723265156"
+    })    
 
 Window:EditOpenButton({
-    Title = "打开脚本",
+    Title = "3K脚本",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -1893,4 +1895,5 @@ pcall(function()
             end
         end
     end)
+
 end)
