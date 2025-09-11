@@ -1,33 +1,26 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-WindUI:Popup({
-    Title = "3K脚本欢迎你",
-    Icon = "info",
-    Content = "3K脚本Q群746820543",
-    Buttons = {
-        {
-            Title = "关闭",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "启动",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
-})
-
 
 local Window = WindUI:CreateWindow({
-        Title = "3K 脚本<font color='#00FF00'>1.0</font> / ",
+        Title = "3K 脚本 99夜<font color='#00FF00'>1.0</font> / ",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:3K",
         Folder = "CloudHub",
-        Size = UDim2.fromOffset(400, 300),
+            
+    -- ↓ This all is Optional. You can remove it.
+        
+    -- ↓ Optional. You can remove it.
+    --[[ You can set 'rbxassetid://' or video to Background.
+        'rbxassetid://':
+            Background = "rbxassetid://", -- rbxassetid
+        Video:
+            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
+    --]]
+    
+    -- ↓ Optional. You can remove it.
+    Size = UDim2.fromOffset(400, 300),
         Transparent = true,
         Theme = "Light",
         User = {
@@ -35,11 +28,32 @@ local Window = WindUI:CreateWindow({
             Callback = function() print("clicked") end,
             Anonymous = false
         },
-        SideBarWidth = 200,
-        ScrollBarEnabled = true,
-        Background = "rbxassetid://114457723265156"
-    })    
+    
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "3K789113", "5678" },
         
+        Note = "请输入你的卡密.",
+        
+        -- ↓ Optional. You can remove it.
+        Thumbnail = {
+            Image = "rbxassetid://114457723265156",
+            Title = "",
+        },
+        
+        -- ↓ Optional. You can remove it.
+        URL = "YOUR LINK TO GET KEY (Discord, Linkvertise, Pastebin, etc.)",
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
+})
+            
 Window:Tag({
     Title = "v1.1.4",
     Color = Color3.fromHex("#30ff6a")
@@ -84,6 +98,17 @@ local Paragraph = Tab:Paragraph({
     Thumbnail = "rbxassetid://103506480252017",
     ThumbnailSize = 0,
 })
+    
+    MainTab:Paragraph({
+        Title = "感谢3K用户的支持",
+        Desc = "当前服务器ID: " .. game.PlaceId, -- 显示服务器ID
+    })
+    
+    MainTab:Paragraph({
+        Title = "您的注入器",
+        Desc = ": " .. identifyexecutor(), -- 显示注入器ID
+    })
+end
 
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
