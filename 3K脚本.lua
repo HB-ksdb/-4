@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 
 local Window = WindUI:CreateWindow({
-        Title = "3K 脚本 99夜<font color='#00FF00'>1.0</font> / ",
+        Title = "3K 脚本 99夜<font color='#00FF00'>1.0</font>  ",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -44,7 +44,7 @@ local Window = WindUI:CreateWindow({
         },
         
         -- ↓ Optional. You can remove it.
-        URL = "YOUR LINK TO GET KEY (Discord, Linkvertise, Pastebin, etc.)",
+        
         
         -- ↓ Optional. You can remove it.
         SaveKey = false, -- automatically save and load the key.
@@ -99,17 +99,6 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 0,
 })
     
-    MainTab:Paragraph({
-        Title = "感谢3K用户的支持",
-        Desc = "当前服务器ID: " .. game.PlaceId, -- 显示服务器ID
-    })
-    
-    MainTab:Paragraph({
-        Title = "您的注入器",
-        Desc = ": " .. identifyexecutor(), -- 显示注入器ID
-    })
-end
-
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
     Settings = Window:Section({ Title = "脚本执行", Opened = true }),
