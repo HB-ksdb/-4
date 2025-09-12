@@ -1,12 +1,11 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
-
 local Window = WindUI:CreateWindow({
-        Title = "3K 脚本 99夜<font color='#00FF00'>1.0</font>  ",
+        Title = "越 HB 脚本<font color='#00FF00'>1.0</font>  ",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
-        Author = "作者:3K",
+        Author = "作者:HB",
         Folder = "CloudHub",
             
     -- ↓ This all is Optional. You can remove it.
@@ -33,15 +32,12 @@ local Window = WindUI:CreateWindow({
     -- !  ↓  if you DON'T need the key system
     KeySystem = { 
         -- ↓ Optional. You can remove it.
-        Key = { "3K789113", "5678" },
+        Key = { "25ytgcjNB", "25ytgcjNB" },
         
-        Note = "请输入你的卡密.",
+        Note = "请输入你的卡密.没卡密加群1055870765",
         
         -- ↓ Optional. You can remove it.
-        Thumbnail = {
-            Image = "rbxassetid://114457723265156",
-            Title = "",
-        },
+        
         
         -- ↓ Optional. You can remove it.
         
@@ -53,60 +49,62 @@ local Window = WindUI:CreateWindow({
         -- API = {} ← Services. Read about it below ↓
     },
 })
+
+Window:EditOpenButton({
+    Title = "越 HB脚本/99夜",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 4,
+    Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromHex("FF0000")),
+        ColorSequenceKeypoint.new(0.16, Color3.fromHex("FF7F00")),
+        ColorSequenceKeypoint.new(0.33, Color3.fromHex("FFFF00")),
+        ColorSequenceKeypoint.new(0.5, Color3.fromHex("00FF00")),
+        ColorSequenceKeypoint.new(0.66, Color3.fromHex("0000FF")),
+        ColorSequenceKeypoint.new(0.83, Color3.fromHex("4B0082")),
+        ColorSequenceKeypoint.new(1, Color3.fromHex("9400D3"))
+    }),
+    Draggable = true,
+})
             
 Window:Tag({
-    Title = "v1.1.4",
+    Title = "v1.4越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
 Window:Tag({
-        Title = "公益版", -- 标签汉化
+        Title = "越 HB版", -- 标签汉化
         Color = Color3.fromHex("#315dff")
     })
     local TimeTag = Window:Tag({
-        Title = "持续更新",
+        Title = "正在更新",
         Color = Color3.fromHex("#000000")
     })
 
 
-WindUI:Notify({
-    Title = "3K脚本通知",
-    Content = "3K脚本，禁止倒卖否则死浮木😡😡😡",
-    Duration = 10, -- 10 seconds
-    Icon = "bird",
-})
-
-
 local Tab = Window:Tab({
-    Title = "3K公告",
+    Title = "公告",
     Icon = "layout-grid",
     Locked = false,
 })
 
 local Paragraph = Tab:Paragraph({
-    Title = "欢迎使用 3K脚本",
+    Title = "欢迎使用 越 HB脚本",
     Desc = "QQ群 746820543",
     Image = "rbxassetid://81583956354615",
     ImageSize = 42,
     Thumbnail = "rbxassetid://103506480252017",
     ThumbnailSize = 120,
 })
-
-local Paragraph = Tab:Paragraph({
-    Title = "欢迎使用 3K脚本",
-    Desc = "QQ群满了 746820543 QQ群1059482635",    
-    Thumbnail = "rbxassetid://103506480252017",
-    ThumbnailSize = 0,
-})
     
 local Tabs = {
-    Main = Window:Section({ Title = "通用", Opened = true }),
-    Settings = Window:Section({ Title = "脚本执行", Opened = true }),
-    Utilities = Window:Section({ Title = "设置", Opened = true })
+    Main = Window:Section({ Title = "越 HB通用", Opened = true }),
+    Settings = Window:Section({ Title = "脚本", Opened = true }),
+    Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
 }
 
 local Tab = Tabs.Main:Tab({
-    Title = "3K通用",
+    Title = "越 HB通用",
     Icon = "layout-grid",
     Locked = false,
 })
@@ -208,13 +206,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "被遗弃",
-    Thumbnail = "rbxassetid://98451503406596",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "被遗弃",
     TextXAlignment = "Left",
@@ -238,13 +229,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "战争大亨",
-    Thumbnail = "rbxassetid://86989609828708",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "战争大亨",
     TextXAlignment = "Left",
@@ -266,13 +250,6 @@ local Tab = Tabs.Settings:Tab({
     Title = "最强战场",
     Icon = "layout-grid",
     Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "最强战场",
-    Thumbnail = "rbxassetid://90567602122435",
-    ThumbnailSize = 200,
 })
 
 local Section = Tab:Section({ 
@@ -307,13 +284,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "DOORS",
-    Thumbnail = "rbxassetid://116737898904419",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "DOORS",
     TextXAlignment = "Left",
@@ -346,13 +316,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "墨水游戏",
-    Thumbnail = "rbxassetid://111009664738456",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "墨水游戏",
     TextXAlignment = "Left",
@@ -376,13 +339,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "死铁轨",
-    Thumbnail = "rbxassetid://78717005349835",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "死铁轨",
     TextXAlignment = "Left",
@@ -404,13 +360,6 @@ local Tab = Tabs.Settings:Tab({
     Title = "林森99夜",
     Icon = "layout-grid",
     Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "森林中的99夜",
-    Thumbnail = "rbxassetid://108669954666414",
-    ThumbnailSize = 200,
 })
 
 local Section = Tab:Section({ 
@@ -443,13 +392,6 @@ local Tab = Tabs.Settings:Tab({
     Title = "刀刃球",
     Icon = "layout-grid",
     Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "刀刃球",
-    Thumbnail = "rbxassetid://134175772855538",
-    ThumbnailSize = 200,
 })
 
 local Section = Tab:Section({ 
@@ -493,13 +435,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "偷走脑红",
-    Thumbnail = "rbxassetid://75315096057062",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "偷走脑红",
     TextXAlignment = "Left",
@@ -521,13 +456,6 @@ local Tab = Tabs.Settings:Tab({
     Title = "火箭发射模拟器",
     Icon = "layout-grid",
     Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "火箭发射模拟器",
-    Thumbnail = "rbxassetid://139061316862065",
-    ThumbnailSize = 200,
 })
 
 local Section = Tab:Section({ 
@@ -553,13 +481,6 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "力量传奇",
-    Thumbnail = "rbxassetid://122216219539345",
-    ThumbnailSize = 200,
-})
-
 local Section = Tab:Section({ 
     Title = "力量传奇",
     TextXAlignment = "Left",
@@ -581,13 +502,6 @@ local Tab = Tabs.Settings:Tab({
     Title = "伐木大享",
     Icon = "layout-grid",
     Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
-    Title = "脚本",
-    Desc = "伐木大享",
-    Thumbnail = "rbxassetid://122697398578413",
-    ThumbnailSize = 200,
 })
 
 local Section = Tab:Section({ 
