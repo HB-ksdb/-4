@@ -6,19 +6,7 @@ local Window = WindUI:CreateWindow({
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:HB",
-        Folder = "CloudHub",
-            
-    -- ↓ This all is Optional. You can remove it.
-        
-    -- ↓ Optional. You can remove it.
-    --[[ You can set 'rbxassetid://' or video to Background.
-        'rbxassetid://':
-            Background = "rbxassetid://", -- rbxassetid
-        Video:
-            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
-    --]]
-    
-    -- ↓ Optional. You can remove it.
+        Folder = "CloudHub",            
     Size = UDim2.fromOffset(100, 100),
         User = {
             Enabled = true,
@@ -196,6 +184,24 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+-----------------------------------------------------------------------------------------------其他脚本
+local Tab = Tabs.Main:Tab({
+    Title = "其他脚本",
+    Icon = "layout-grid",
+    Locked = false,
+})
+-----------------------------------------------------------------------------------------------xk脚本
+local Button = Tab:Button({
+    Title = "XK脚本",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
 -----------------------------------------------------------------------------------------------自然灾害
 local Tab = Tabs.Settings:Tab({
     Title = "自然灾害",
