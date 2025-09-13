@@ -176,6 +176,24 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
     end
 })
+-----------------------------------------------------------------------------------------------透视
+local Button = Tab:Button({
+    Title = "透视",
+    Desc = "91",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP.lua"))()
+    end
+})
+-----------------------------------------------------------------------------------------------越快越慢
+local Button = Tab:Button({
+    Title = "跑的越快就越慢",
+    Desc = "继续跑🤫",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
+    end
+})
 
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------自然灾害
