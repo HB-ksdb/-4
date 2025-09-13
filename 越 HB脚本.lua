@@ -79,7 +79,7 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
-
+-----------------------------------------------------------------------------------------------公告
 local Tab = Window:Tab({
     Title = "公告",
     Icon = "layout-grid",
@@ -94,7 +94,7 @@ local Paragraph = Tab:Paragraph({
     Thumbnail = "rbxassetid://103506480252017",
     ThumbnailSize = 120,
 })
-    
+-----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
     Settings = Window:Section({ Title = "脚本", Opened = true }),
@@ -106,7 +106,7 @@ local Tab = Tabs.Main:Tab({
     Icon = "layout-grid",
     Locked = false,
 })
-
+-----------------------------------------------------------------------------------------------跳跃
 local Slider = Tab:Slider({
     Title = "跳跃",
     Value = {
@@ -121,7 +121,7 @@ local Slider = Tab:Slider({
         end
     end
 })
-
+-----------------------------------------------------------------------------------------------速度
 local Slider = Tab:Slider({
     Title = "速度",
     Value = {
@@ -136,7 +136,7 @@ local Slider = Tab:Slider({
         end
     end
 })
-        
+-----------------------------------------------------------------------------------------------重量        
 local Slider = Tab:Slider({
     Title = "重量",
     Value = {
@@ -149,7 +149,7 @@ local Slider = Tab:Slider({
         game.Workspace.Gravity = value
     end
 })
-
+-----------------------------------------------------------------------------------------------飞行
 local Button = Tab:Button({
     Title = "飞行v1",
     Desc = "飞行",
@@ -158,7 +158,7 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
     end
 })
-
+-----------------------------------------------------------------------------------------------子追
 local Button = Tab:Button({
     Title = "子追穿墙",
     Desc = "子追",
@@ -167,7 +167,7 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
     end
 })
-
+-----------------------------------------------------------------------------------------------隐身
 local Button = Tab:Button({
     Title = "隐身自己",
     Desc = "别人看不到",
@@ -178,8 +178,31 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+-----------------------------------------------------------------------------------------------自然灾害
+local Tab = Tabs.Settings:Tab({
+    Title = "自然灾害",
+    Icon = "layout-grid",
+    Locked = false,
+})
 
+local Section = Tab:Section({ 
+    Title = "自然灾害",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
 
+local Button = Tab:Button({
+    Title = "黑洞",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Super-ring-Parts-V6-28581"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+-----------------------------------------------------------------------------------------------被遗弃
 local Tab = Tabs.Settings:Tab({
     Title = "被遗弃",
     Icon = "layout-grid",
@@ -202,7 +225,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------战争大亨
 local Tab = Tabs.Settings:Tab({
     Title = "战争大亨",
     Icon = "layout-grid",
@@ -225,7 +248,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------最强战场
 local Tab = Tabs.Settings:Tab({
     Title = "最强战场",
     Icon = "layout-grid",
@@ -257,7 +280,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------DOORS
 local Tab = Tabs.Settings:Tab({
     Title = "DOORS",
     Icon = "door-open",
@@ -289,7 +312,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------墨水游戏
 local Tab = Tabs.Settings:Tab({
     Title = "墨水游戏",
     Icon = "layout-grid",
@@ -312,7 +335,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------死铁轨
 local Tab = Tabs.Settings:Tab({
     Title = "死铁轨",
     Icon = "layout-grid",
@@ -335,7 +358,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------森林99夜
 local Tab = Tabs.Settings:Tab({
     Title = "林森99夜",
     Icon = "layout-grid",
@@ -367,7 +390,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------刀刃球
 local Tab = Tabs.Settings:Tab({
     Title = "刀刃球",
     Icon = "layout-grid",
@@ -408,7 +431,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------偷走脑红
 local Tab = Tabs.Settings:Tab({
     Title = "偷走脑红",
     Icon = "layout-grid",
@@ -431,7 +454,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------火箭发射模拟器
 local Tab = Tabs.Settings:Tab({
     Title = "火箭发射模拟器",
     Icon = "layout-grid",
@@ -454,7 +477,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------力量传奇
 local Tab = Tabs.Settings:Tab({
     Title = "力量传奇",
     Icon = "layout-grid",
@@ -477,7 +500,7 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-
+-----------------------------------------------------------------------------------------------伐木大享
 local Tab = Tabs.Settings:Tab({
     Title = "伐木大享",
     Icon = "layout-grid",
@@ -500,3 +523,4 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
+-----------------------------------------------------------------------------------------------
