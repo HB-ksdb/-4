@@ -182,6 +182,33 @@ local Button = Tab:Button({
         loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
     end
 })
+-----------------------------------------------------------------------------------------------防甩飞
+local Button = Tab:Button({
+    Title = "防甩飞",
+    Desc = "别人甩不掉🤫",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ChinaQY/Scripts/Main/AntiFling.lua"))()
+    end
+})
+-----------------------------------------------------------------------------------------------撸关R15
+local Button = Tab:Button({
+    Title = "撸关R15",
+    Desc = "15",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+    end
+})
+-----------------------------------------------------------------------------------------------撸关R6
+local Button = Tab:Button({
+    Title = "撸关R6",
+    Desc = "6",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+    end
+})
 
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------其他脚本
