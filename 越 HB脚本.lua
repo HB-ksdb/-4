@@ -140,7 +140,7 @@ local Slider = Tab:Slider({
 -----------------------------------------------------------------------------------------------飞行
 local Button = Tab:Button({
     Title = "飞行v1",
-    Desc = "飞行",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
@@ -149,7 +149,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------子追
 local Button = Tab:Button({
     Title = "子追穿墙",
-    Desc = "子追",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
@@ -158,7 +158,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------隐身
 local Button = Tab:Button({
     Title = "隐身自己",
-    Desc = "别人看不到",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
@@ -167,7 +167,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------透视
 local Button = Tab:Button({
     Title = "透视",
-    Desc = "91",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP.lua"))()
@@ -176,7 +176,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------越快越慢
 local Button = Tab:Button({
     Title = "跑的越快就越慢",
-    Desc = "继续跑🤫",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
@@ -185,7 +185,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------防甩飞
 local Button = Tab:Button({
     Title = "防甩飞",
-    Desc = "别人甩不掉🤫",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/ChinaQY/Scripts/Main/AntiFling.lua"))()
@@ -194,7 +194,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------撸关R15
 local Button = Tab:Button({
     Title = "撸关R15",
-    Desc = "15",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
@@ -203,7 +203,7 @@ local Button = Tab:Button({
 -----------------------------------------------------------------------------------------------撸关R6
 local Button = Tab:Button({
     Title = "撸关R6",
-    Desc = "6",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
@@ -220,7 +220,7 @@ local Tab = Tabs.Main:Tab({
 -----------------------------------------------------------------------------------------------xk脚本
 local Button = Tab:Button({
     Title = "XK脚本",
-    Desc = "",
+    Desc = "点击加载",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
