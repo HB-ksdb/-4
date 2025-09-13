@@ -88,7 +88,7 @@ local Tab = Window:Tab({
 
 local Paragraph = Tab:Paragraph({
     Title = "欢迎使用 越 HB脚本",
-    Desc = "QQ群 746820543",
+    Desc = "QQ群 1055870765",
     Image = "rbxassetid://73478000258877",
     ImageSize = 42,
     Thumbnail = "rbxassetid://79087575647853",
