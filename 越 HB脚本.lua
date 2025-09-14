@@ -170,7 +170,7 @@ local Button = Tab:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP.lua"))()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP.lua"))()
     end
 })
 -----------------------------------------------------------------------------------------------越快越慢
@@ -244,7 +244,7 @@ local Section = Tab:Section({
 
 local Button = Tab:Button({
     Title = "黑洞",
-    Desc = "",
+    Desc = "点击加载",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Super-ring-Parts-V6-28581"))()
