@@ -167,22 +167,22 @@ Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
 Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
 Frame.Size = UDim2.new(0, 190, 0, 57)
 
-up.Name = "up"
+up.Name = "上"
 up.Parent = Frame
 up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
 up.Size = UDim2.new(0, 44, 0, 28)
 up.Font = Enum.Font.SourceSans
-up.Text = "up"
+up.Text = "上"
 up.TextColor3 = Color3.fromRGB(0, 0, 0)
 up.TextSize = 14.000
 
-down.Name = "down"
+down.Name = "下"
 down.Parent = Frame
 down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
 down.Position = UDim2.new(0, 0, 0.491228074, 0)
 down.Size = UDim2.new(0, 44, 0, 28)
 down.Font = Enum.Font.SourceSans
-down.Text = "down"
+down.Text = "下"
 down.TextColor3 = Color3.fromRGB(0, 0, 0)
 down.TextSize = 14.000
 
@@ -248,7 +248,7 @@ closebutton.Parent = main.Frame
 closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
 closebutton.Font = "SourceSans"
 closebutton.Size = UDim2.new(0, 45, 0, 28)
-closebutton.Text = "X"
+closebutton.Text = "关闭"
 closebutton.TextSize = 30
 closebutton.Position =  UDim2.new(0, 0, -1, 27)
 
@@ -643,7 +643,62 @@ local Button = Tab:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-       loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP.lua"))()
+       function getplrsname()
+for i,v in pairs(game:GetChildren()) do
+if v.ClassName == "Players" then
+return v.Name
+end
+end
+end
+local players = getplrsname()
+local plr = game[players].LocalPlayer
+coroutine.resume(coroutine.create(function()
+while wait(1) do
+coroutine.resume(coroutine.create(function()
+for _,v in pairs(game[players]:GetPlayers()) do
+if v.Name ~= plr.Name and v.Character then
+v.Character.HeadHB.CanCollide = false
+v.Character.HeadHB.Transparency = 10
+v.Character.HeadHB.Size = Vector3.new(100,100,100)
+v.Character.HumanoidRootPart.CanCollide = false
+v.Character.HumanoidRootPart.Transparency = 10
+v.Character.HumanoidRootPart.Size = Vector3.new(100,100,100)
+end
+end
+end))
+end
+end))
+function CreateSG(name,parent,face)
+local SurfaceGui = Instance.new("SurfaceGui",parent)
+SurfaceGui.Parent = parent
+SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+SurfaceGui.Face = Enum.NormalId[face]
+SurfaceGui.LightInfluence = 0
+SurfaceGui.ResetOnSpawn = false
+SurfaceGui.Name = name
+SurfaceGui.AlwaysOnTop = true
+local Frame = Instance.new("Frame",SurfaceGui)
+Frame.BackgroundColor3 = Color3.fromRGB(85, 170, 255)
+Frame.Size = UDim2.new(1,0,1,0)
+end
+while wait(1) do
+for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+if v ~= game:GetService("Players").LocalPlayer and v.Character ~= nil and
+v.Character:FindFirstChild("LowerTorso") and v.Character.LowerTorso:FindFirstChild("cham") == nil then
+for i,v in pairs (v.Character:GetChildren()) do
+if v:IsA("MeshPart") or v.Name == "LowerTorso" then
+CreateSG("cham",v,"Back")
+CreateSG("cham",v,"Front")
+CreateSG("cham",v,"Left")
+CreateSG("cham",v,"Right")
+CreateSG("cham",v,"Right")
+CreateSG("cham",v,"Top")
+CreateSG("cham",v,"Bottom")
+end
+end
+end
+end
+end
     end
 })
 -----------------------------------------------------------------------------------------------越快越慢
@@ -1264,7 +1319,7 @@ local Credit = Instance.new("TextLabel")
 local Plr = Players.LocalPlayer
 local Clipon = false
 
-Noclip.Name = "Noclip"
+Noclip.Name = "越 HB穿墙"
 Noclip.Parent = game.CoreGui
 
 BG.Name = "BG"
@@ -1284,7 +1339,7 @@ Title.BorderColor3 = Color3.new(0.180392, 0, 0.431373)
 Title.BorderSizePixel = 2
 Title.Size = UDim2.new(0, 210, 0, 33)
 Title.Font = Enum.Font.Highway
-Title.Text = "Noclip"
+Title.Text = "越 HB穿墙"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.FontSize = Enum.FontSize.Size32
 Title.TextSize = 30
@@ -1299,7 +1354,7 @@ Toggle.Position = UDim2.new(0.152380958, 0, 0.374192119, 0)
 Toggle.Size = UDim2.new(0, 146, 0, 36)
 Toggle.Font = Enum.Font.Highway
 Toggle.FontSize = Enum.FontSize.Size28
-Toggle.Text = "Toggle"
+Toggle.Text = "开启"
 Toggle.TextColor3 = Color3.new(1, 1, 1)
 Toggle.TextSize = 25
 Toggle.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
@@ -1313,14 +1368,14 @@ StatusPF.Position = UDim2.new(0.314285725, 0, 0.708661377, 0)
 StatusPF.Size = UDim2.new(0, 56, 0, 20)
 StatusPF.Font = Enum.Font.Highway
 StatusPF.FontSize = Enum.FontSize.Size24
-StatusPF.Text = "Status:"
+StatusPF.Text = "状态:"
 StatusPF.TextColor3 = Color3.new(1, 1, 1)
 StatusPF.TextSize = 20
 StatusPF.TextStrokeColor3 = Color3.new(0.333333, 0.333333, 0.333333)
 StatusPF.TextStrokeTransparency = 0
 StatusPF.TextWrapped = true
 
-Status.Name = "Status"
+Status.Name = "状态"
 Status.Parent = BG
 Status.BackgroundColor3 = Color3.new(1, 1, 1)
 Status.BackgroundTransparency = 1
@@ -1328,7 +1383,7 @@ Status.Position = UDim2.new(0.580952346, 0, 0.708661377, 0)
 Status.Size = UDim2.new(0, 56, 0, 20)
 Status.Font = Enum.Font.Highway
 Status.FontSize = Enum.FontSize.Size14
-Status.Text = "off"
+Status.Text = "关闭"
 Status.TextColor3 = Color3.new(0.666667, 0, 0)
 Status.TextScaled = true
 Status.TextSize = 14
@@ -1344,7 +1399,7 @@ Credit.Position = UDim2.new(0.195238099, 0, 0.866141737, 0)
 Credit.Size = UDim2.new(0, 128, 0, 17)
 Credit.Font = Enum.Font.SourceSans
 Credit.FontSize = Enum.FontSize.Size18
-Credit.Text = "Created by KingLuna"
+Credit.Text = "越 HB穿墙"
 Credit.TextColor3 = Color3.new(1, 1, 1)
 Credit.TextSize = 16
 Credit.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
@@ -1352,9 +1407,9 @@ Credit.TextStrokeTransparency = 0
 Credit.TextWrapped = true
 
 Toggle.MouseButton1Click:connect(function()
-	if Status.Text == "off" then
+	if Status.Text == "关闭" then
 		Clipon = true
-		Status.Text = "on"
+		Status.Text = "开启"
 		Status.TextColor3 = Color3.new(0,185,0)
 		Stepped = game:GetService("RunService").Stepped:Connect(function()
 			if not Clipon == false then
@@ -1368,9 +1423,9 @@ Toggle.MouseButton1Click:connect(function()
 				Stepped:Disconnect()
 			end
 		end)
-	elseif Status.Text == "on" then
+	elseif Status.Text == "关闭" then
 		Clipon = false
-		Status.Text = "off"
+		Status.Text = "开启"
 		Status.TextColor3 = Color3.new(170,0,0)
 	end
 end)
@@ -1445,7 +1500,7 @@ local Button = Tab:Button({
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------战争大亨
 local Tab = Tabs.Settings:Tab({
-    Title = "战争大亨",
+    Title = "战争大亨(开始收费)",
     Icon = "layout-grid",
     Locked = false,
 })
@@ -1454,15 +1509,6 @@ local Section = Tab:Section({
     Title = "战争大亨",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
-    Title = "战争大亨XK",
-    Desc = "无卡中文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-    end
 })
 
 Window:SelectTab(2) -- Number of Tab
@@ -1488,15 +1534,6 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
-    Title = "最强战场丢垃圾桶",
-    Desc = "无卡英文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/V1.0.0.txt"))()
-    end
-})
-
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------DOORS
 local Tab = Tabs.Settings:Tab({
@@ -1517,15 +1554,6 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
-    end
-})
-
-local Button = Tab:Button({
-    Title = "DOORSXK",
-    Desc = "无卡中文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
     end
 })
 
@@ -1623,15 +1651,6 @@ local Section = Tab:Section({
 
 local Button = Tab:Button({
     Title = "刀刃球",
-    Desc = "无卡英文",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
-    end
-})
-
-local Button = Tab:Button({
-    Title = "刀刃球",
     Desc = "无卡中文 推荐",
     Locked = false,
     Callback = function()
@@ -1686,7 +1705,7 @@ local Section = Tab:Section({
 })
 
 local Button = Tab:Button({
-    Title = "火箭发射模拟器禁漫",
+    Title = "火箭发射模拟器",
     Desc = "无卡中文",
     Locked = false,
     Callback = function()
@@ -1709,7 +1728,7 @@ local Section = Tab:Section({
 })
 
 local Button = Tab:Button({
-    Title = "力量传奇自动吃蛋",
+    Title = "力量传奇吃蛋",
     Desc = "无卡中文",
     Locked = false,
     Callback = function()
@@ -1726,7 +1745,7 @@ local Tab = Tabs.Settings:Tab({
 })
 
 local Section = Tab:Section({ 
-    Title = "伐木大享A",
+    Title = "伐木大享",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -1741,4 +1760,26 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------打巴掌
+local Tab = Tabs.Settings:Tab({
+    Title = "打巴掌正在更新",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Section = Tab:Section({ 
+    Title = "打巴掌",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "打巴掌光环",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
