@@ -1656,17 +1656,6 @@ local Button = Tab:Button({
         pcl.Enabled = Value
     end
 })
-----------------------------------------------------------------------------------------------显示钥匙
-local Button = Tab:Button({
-    Title = "显示钥匙",
-    Desc = "点击加载透视钥匙",
-    Locked = false,
-    Callback = function()
-        for i,v in pairs(KeyChams) do
-            v.Enabled = Value
-        end
-    end
-})
 
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------墨水游戏
