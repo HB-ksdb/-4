@@ -83,20 +83,6 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
-local Section = Tab:Section({ 
-    Title = "不用点，会自动启动的放心",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-----------------------------------------------------------------------------------------------玩家进入通知
-local Button = Tab:Button({
-    Title = "玩家进入通知",
-    Desc = "",
-    Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))(),
-    Callback = function()
-        print("clicked")
-    end
-})
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
