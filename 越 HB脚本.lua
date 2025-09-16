@@ -106,8 +106,6 @@ local Button = Tab:Button({
         print("clicked")
     end
 })
-
-Tab:Select() -- Select Tab
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
