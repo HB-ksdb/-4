@@ -1831,7 +1831,7 @@ local Button = Tab:Button({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Utilities:Tab({
     Title = "设置",
     Icon = "bird", -- optional
     Locked = false,
@@ -1847,15 +1847,6 @@ local Button = Tab:Button({
     Title = "玩家进入通知",
     Desc = "",
     Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))(),
-    Callback = function()
-        print("clicked")
-    end
-})
-
-local Button = Tab:Button({
-    Title = "帧率",
-    Desc = "",
-    Locked = loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/FPS-Counter'))(),
     Callback = function()
         print("clicked")
     end
