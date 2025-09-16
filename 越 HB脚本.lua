@@ -82,6 +82,32 @@ local Paragraph = Tab:Paragraph({
     Thumbnail = "rbxassetid://79087575647853",
     ThumbnailSize = 120,
 })
+
+local Section = Tab:Section({ 
+    Title = "不用点，会自动启动的放心",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------玩家进入通知
+local Button = Tab:Button({
+    Title = "玩家进入通知",
+    Desc = "",
+    Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))(),
+    Callback = function()
+        print("clicked")
+    end
+})
+
+local Button = Tab:Button({
+    Title = "帧率",
+    Desc = "",
+    Locked = loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/FPS-Counter'))(),
+    Callback = function()
+        print("clicked")
+    end
+})
+
+Tab:Select() -- Select Tab
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
@@ -1432,6 +1458,35 @@ end)
     end
 })
 
+local Button = Tab:Button({
+    Title = "飞车",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/MHE1cbWF"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "爬墙",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "动作",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+       loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()
+    end
+})
+
+
+
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------其他脚本
 local Tab = Tabs.Main:Tab({
@@ -1475,7 +1530,7 @@ local Button = Tab:Button({
 ----------------------------------------------------------------------------------------------中等范围
 local Button = Tab:Button({
     Title = "中等范围",
-    Desc = "Test Button",
+    Desc = "",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/x13bwrFb"))()
@@ -1594,17 +1649,69 @@ local Tab = Tabs.Settings:Tab({
 })
 
 local Section = Tab:Section({ 
-    Title = "DOORS",
+    Title = "功能",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
+----------------------------------------------------------------------------------------------自动互动
+local Toggle = Tab:Toggle({
+    Title = "自动互动",
+    Desc = "点击加载自动互动",    
+    Type = "Checkbox",
+    Default = false,
+    Callback = function(state) 
+                if state then
+            autoInteract = true
+            while autoInteract do
+                for _, descendant in pairs(workspace:GetDescendants()) do
+                    if descendant:IsA("ProximityPrompt") then
+                        fireproximityprompt(descendant)
+                    end
+                end
+                task.wait(0.25) -- Adjust the wait time as needed
+            end
+        else
+            autoInteract = false
+        end    
+    end
+})
 
+----------------------------------------------------------------------------------------------门
 local Button = Tab:Button({
-    Title = "DOORS",
-    Desc = "无卡中文",
+    Title = "门",
+    Desc = "点击透视门",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/Roblox/main/ScriptHub.lua"))()
+        	loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/doors1"))()
+    end
+})
+----------------------------------------------------------------------------------------------刷怪菜单
+local Button = Tab:Button({
+    Title = "刷怪菜单",
+    Desc = "点击加载刷怪菜单",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/shuaguai"))()
+    end
+})
+----------------------------------------------------------------------------------------------屏幕亮光
+local Button = Tab:Button({
+    Title = "屏幕亮光",
+    Desc = "点击加载屏幕亮光",
+    Locked = false,
+    Callback = function()
+        pcl.Enabled = Value
+    end
+})
+----------------------------------------------------------------------------------------------显示钥匙
+local Button = Tab:Button({
+    Title = "显示钥匙",
+    Desc = "点击加载透视钥匙",
+    Locked = false,
+    Callback = function()
+        for i,v in pairs(KeyChams) do
+            v.Enabled = Value
+        end
     end
 })
 
