@@ -97,15 +97,6 @@ local Button = Tab:Button({
         print("clicked")
     end
 })
-
-local Button = Tab:Button({
-    Title = "帧率",
-    Desc = "",
-    Locked = loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/littlegui/main/FPS-Counter'))(),
-    Callback = function()
-        print("clicked")
-    end
-})
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
@@ -1650,28 +1641,6 @@ local Section = Tab:Section({
     Title = "功能",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
-})
-----------------------------------------------------------------------------------------------自动互动
-local Toggle = Tab:Toggle({
-    Title = "自动互动",
-    Desc = "点击加载自动互动",    
-    Type = "Checkbox",
-    Default = false,
-    Callback = function(state) 
-                if state then
-            autoInteract = true
-            while autoInteract do
-                for _, descendant in pairs(workspace:GetDescendants()) do
-                    if descendant:IsA("ProximityPrompt") then
-                        fireproximityprompt(descendant)
-                    end
-                end
-                task.wait(0.25) -- Adjust the wait time as needed
-            end
-        else
-            autoInteract = false
-        end    
-    end
 })
 
 ----------------------------------------------------------------------------------------------门
