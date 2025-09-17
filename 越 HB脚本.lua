@@ -1869,24 +1869,7 @@ local Button = Tab:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-        function isSpawned(player)
-   if workspace:FindFirstChild(player.Name) and player.Character:FindFirstChild("HumanoidRootPart") then
-       return true
-   else
-       return false
-   end
-end
-
-while wait() do
-   for i, v in pairs(game.Players:GetPlayers()) do
-       if isSpawned(v) and v ~= game.Players.LocalPlayer and not v.Character.Head:FindFirstChild("UnoReverseCard") then
-           if (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-               game:GetService("ReplicatedStorage").b:FireServer(v.Character["Right Arm"])
-               wait(0.1)
-           end
-       end
-   end
-end
+        
     end
 })
 
@@ -1908,15 +1891,6 @@ local Button = Tab:Button({
     Title = "玩家进入通知",
     Desc = "",
     Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))(),
-    Callback = function()
-        print("clicked")
-    end
-})
-
-local Button = Tab:Button({
-    Title = "帧率",
-    Desc = "",
-    Locked = 
     Callback = function()
         print("clicked")
     end
