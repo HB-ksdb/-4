@@ -1480,49 +1480,6 @@ local Button = Tab:Button({
 })
 
 Window:SelectTab(2) -- Number of Tab
-----------------------------------------------------------------------------------------------范围
-local Tab = Tabs.Main:Tab({
-    Title = "范围",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "使用范围中是关不掉的",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-----------------------------------------------------------------------------------------------普通范围
-local Button = Tab:Button({
-    Title = "普通范围",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/jiNwDbCN"))()
-    end
-})
-----------------------------------------------------------------------------------------------中等范围
-local Button = Tab:Button({
-    Title = "中等范围",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/x13bwrFb"))()
-    end
-})
-----------------------------------------------------------------------------------------------全图范围
-local Button = Tab:Button({
-    Title = "全图范围",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/KKY9EpZU"))()
-    end
-})
-
-Window:SelectTab(2) -- Number of Tab
-
 -----------------------------------------------------------------------------------------------自然灾害
 local Tab = Tabs.Settings:Tab({
     Title = "自然灾害",
