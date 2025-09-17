@@ -1479,24 +1479,8 @@ local Button = Tab:Button({
     end
 })
 
-----------------------------------------------------------------------------------------------范围
 Window:SelectTab(2) -- Number of Tab
-
-local Tab = Tabs.Main:Tab({
-    Title = "范围",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "使用范围中是关不掉的",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 ----------------------------------------------------------------------------------------------范围
-Window:SelectTab(2) -- Number of Tab
-
 local Tab = Tabs.Main:Tab({
     Title = "范围",
     Icon = "layout-grid", -- optional
@@ -1885,7 +1869,24 @@ local Button = Tab:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-        
+        function isSpawned(player)
+   if workspace:FindFirstChild(player.Name) and player.Character:FindFirstChild("HumanoidRootPart") then
+       return true
+   else
+       return false
+   end
+end
+
+while wait() do
+   for i, v in pairs(game.Players:GetPlayers()) do
+       if isSpawned(v) and v ~= game.Players.LocalPlayer and not v.Character.Head:FindFirstChild("UnoReverseCard") then
+           if (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+               game:GetService("ReplicatedStorage").b:FireServer(v.Character["Right Arm"])
+               wait(0.1)
+           end
+       end
+   end
+end
     end
 })
 
@@ -1915,7 +1916,7 @@ local Button = Tab:Button({
 local Button = Tab:Button({
     Title = "帧率",
     Desc = "",
-    Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/gclich/FPS-X-GUI/main/FPS_X.lua"))(),
+    Locked = 
     Callback = function()
         print("clicked")
     end
