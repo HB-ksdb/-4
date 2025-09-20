@@ -1617,12 +1617,12 @@ local Section = Tab:Section({
     TextSize = 17, -- Default Size
 })
 ----------------------------------------------------------------------------------------------一健到终点
-local Button = Tab:Button({
+TabHandles.MainGames:Button({
     Title = "一键到终点",
-    Desc = "",
-    Locked = false,
+    Desc = "瞬间传送到终点",
+    Icon = "zap",
     Callback = function()
-                if Workspace:FindFirstChild("RedLightGreenLight") and Workspace.RedLightGreenLight:FindFirstChild("sand") and Workspace.RedLightGreenLight.sand:FindFirstChild("crossedover") then
+        if Workspace:FindFirstChild("RedLightGreenLight") and Workspace.RedLightGreenLight:FindFirstChild("sand") and Workspace.RedLightGreenLight.sand:FindFirstChild("crossedover") then
             local pos = Workspace.RedLightGreenLight.sand.crossedover.Position + Vector3.new(0, 5, 0)
             Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
             WindUI:Notify({
@@ -1634,13 +1634,13 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------帮忙玩家扛起
-local Button = Tab:Button({
-    Title = "帮助玩家扛起",
-    Desc = "",
-    Locked = false,
+
+TabHandles.MainGames:Button({
+    Title = "帮助玩家",
+    Desc = "扛起玩家传送至终点",
+    Icon = "hand-helping",
     Callback = function()
-            if Loading then return end
+        if Loading then return end
         Loading = true
         for _, v in pairs(game.Players:GetPlayers()) do
             if v.Character:FindFirstChild("HumanoidRootPart") and v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt") and v.Character.HumanoidRootPart.CarryPrompt.Enabled == true then
@@ -1664,12 +1664,47 @@ local Button = Tab:Button({
         Loading = false
     end
 })
-----------------------------------------------------------------------------------------------恶搞玩家
-local Button = Tab:Button({
-    Title = "恶搞玩家",
-    Desc = "滚回起点",
-    Locked = false,
-    Callback = function()
+
+TabHandles.MainGames:Toggle({
+    Title = "自动帮助玩家",
+    Desc = "自动扛起未通关玩家传送到终点",
+    Value = false,
+    Callback = function(value)
+        _G.AutoHelpPlayer = value
+        while _G.AutoHelpPlayer do
+            pcall(function()
+                for _, v in pairs(game.Players:GetPlayers()) do
+                    if v ~= Player and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                        local carryPrompt = v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt")
+                        if carryPrompt and carryPrompt.Enabled and not v.Character:FindFirstChild("SafeRedLightGreenLight") then
+                            Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+                            wait(0.3)
+                            repeat
+                                fireproximityprompt(carryPrompt)
+                                task.wait(0.1)
+                            until not carryPrompt.Enabled or not carryPrompt.Parent
+                            wait(0.5)
+                            if Workspace:FindFirstChild("RedLightGreenLight") and Workspace.RedLightGreenLight:FindFirstChild("sand") and Workspace.RedLightGreenLight.sand:FindFirstChild("crossedover") then
+                                local pos = Workspace.RedLightGreenLight.sand.crossedover.Position + Vector3.new(0, 5, 0)
+                                Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
+                            end
+                            wait(0.4)
+                            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ClickedButton"):FireServer({tryingtoleave = true})
+                            break
+                        end
+                    end
+                end
+            end)
+            task.wait(2)
+        end
+    end
+})
+
+TabHandles.MainGames:Toggle({
+    Title = "自动恶搞玩家",
+    Desc = "扛起玩家让他滚回起点",
+    Value = false,
+    Callback = function(value)
         _G.AutoTrollPlayer = value
         while _G.AutoTrollPlayer do
             pcall(function()
@@ -1702,13 +1737,13 @@ local Section = Tab:Section({
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
-----------------------------------------------------------------------------------------------自动扣糖饼
-local Button = Tab:Button({
-    Title = "抠糖饼自动",
-    Desc = "一键扣完",
-    Locked = false,
+
+TabHandles.Dalgona:Button({
+    Title = "一键完成扣糖饼",
+    Desc = "瞬间完成扣糖饼",
+    Icon = "cookie",
     Callback = function()
-                pcall(function()
+        pcall(function()
             if ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("Games") then
                 local DalgonaClientModule = ReplicatedStorage.Modules.Games:FindFirstChild("DalgonaClient")
                 if DalgonaClientModule then
@@ -1732,13 +1767,13 @@ local Button = Tab:Button({
         end)
     end
 })
-----------------------------------------------------------------------------------------------抠糖饼
-local Button = Tab:Button({
-    Title = "瞬间扣完",
-    Desc = "扣糖饼",
-    Locked = false,
-    Callback = function()
-_G.AutoDalgona = value
+
+TabHandles.Dalgona:Toggle({
+    Title = "自动扣糖饼",
+    Desc = "自动完成扣糖饼",
+    Value = false,
+    Callback = function(value)
+        _G.AutoDalgona = value
         while _G.AutoDalgona do
             pcall(function()
                 if ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("Games") then
@@ -1766,13 +1801,13 @@ local Section = Tab:Section({
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
-----------------------------------------------------------------------------------------------自动拔河
-local Button = Tab:Button({
+
+TabHandles.Dalgona:Toggle({
     Title = "自动拔河",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-                _G.TugOfWar = value
+    Desc = "自动赢得拔河比赛",
+    Value = false,
+    Callback = function(value)
+        _G.TugOfWar = value
         while _G.TugOfWar do
             pcall(function()
                 ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("TemporaryReachedBindable"):FireServer({GameQTE = true})
@@ -1781,13 +1816,19 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------出口大门
-local Button = Tab:Button({
-    Title = "ESP出口大门",
-    Desc = "透视大门出口",
-    Locked = false,
-    Callback = function()
-                _G.DoorExit = value
+
+local Section = Tab:Section({ 
+    Title = "X",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+TabHandles.HideSeekESP:Toggle({
+    Title = "出口透视",
+    Desc = "显示出口大门",
+    Value = false,
+    Callback = function(value)
+        _G.DoorExit = value
         if value then
             task.spawn(function()
                 while _G.DoorExit do
@@ -1877,18 +1918,12 @@ local Button = Tab:Button({
     end
 })
 
-local Section = Tab:Section({ 
-    Title = "X额，有点不知道🤔",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-----------------------------------------------------------------------------------------------显示钥匙
-local Button = Tab:Button({
-    Title = "显示钥匙",
-    Desc = "显示掉落的钥匙",
-    Locked = false,
-    Callback = function()
-       _G.DoorKey = value
+TabHandles.HideSeekESP:Toggle({
+    Title = "钥匙透视",
+    Desc = "显示掉落钥匙",
+    Value = false,
+    Callback = function(value)
+        _G.DoorKey = value
         if value then
             task.spawn(function()
                 while _G.DoorKey do
@@ -1955,12 +1990,12 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------躲藏玩家透视
-local Button = Tab:Button({
+
+TabHandles.HideSeekESP:Toggle({
     Title = "躲藏玩家透视",
-    Desc = "显示躲藏玩家",
-    Locked = false,
-    Callback = function()
+    Desc = "显示躲藏的玩家",
+    Value = false,
+    Callback = function(value)
         _G.HidePlayer = value
         if value then
             task.spawn(function()
@@ -2030,11 +2065,11 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------收集全部钥匙
-local Button = Tab:Button({
+
+TabHandles.HideSeekTeleport:Button({
     Title = "一键收集全部钥匙",
-    Desc = "",
-    Locked = false,
+    Desc = "自动收集钥匙",
+    Icon = "key",
     Callback = function()
         if Player:GetAttribute("IsHider") and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
             local OldCFrame = Player.Character.HumanoidRootPart.CFrame
@@ -2054,11 +2089,11 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------传送躲藏玩家
-local Button = Tab:Button({
-    Title = "传送到躲避玩家",
-    Desc = "Test Button",
-    Locked = false,
+
+TabHandles.HideSeekTeleport:Button({
+    Title = "传送到躲藏玩家",
+    Desc = "传送到躲藏玩家身边",
+    Icon = "eye",
     Callback = function()
         for i, v in pairs(game.Players:GetChildren()) do
             if v ~= Player and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
@@ -2077,17 +2112,23 @@ local Button = Tab:Button({
     end
 })
 
-local Section = Tab:Section({ 
-    Title = "功能",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
+TabHandles.Movement:Slider({
+    Title = "移动速度",
+    Desc = "自定义你的移速",
+    Value = { Min = 16, Max = 1000, Default = 50 },
+    Callback = function(val)
+        _G.Speed = val
+        if _G.AutoSpeed and Player.Character:FindFirstChild("Humanoid") then
+            Player.Character.Humanoid.WalkSpeed = val
+        end
+    end
 })
 
-local Button = Tab:Button({
-    Title = "速度开启",
+TabHandles.Movement:Toggle({
+    Title = "开启移速",
     Desc = "变成闪电侠",
-    Locked = false,
-    Callback = function()
+    Value = false,
+    Callback = function(value)
         _G.AutoSpeed = value
         if value and Player.Character:FindFirstChild("Humanoid") then
             Player.Character.Humanoid.WalkSpeed = _G.Speed or 50
@@ -2096,13 +2137,70 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------穿墙
-local Button = Tab:Button({
+
+TabHandles.Movement:Toggle({
+    Title = "无限跳",
+    Desc = "踏空",
+    Value = false,
+    Callback = function(value)
+        _G.InfiniteJump = value
+    end
+})
+
+TabHandles.Movement:Toggle({
+    Title = "锁定高度",
+    Desc = "锁定你所在位置高度",
+    Value = false,
+    Callback = function(value)
+        _G.Float = value
+        if value then
+            FloatConnection = RunService.Heartbeat:Connect(function()
+                if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+                    local rootPart = Player.Character.HumanoidRootPart
+                    local bodyVelocity = rootPart:FindFirstChild("FloatVelocity")
+
+                    if not bodyVelocity then
+                        bodyVelocity = Instance.new("BodyVelocity")
+                        bodyVelocity.Name = "FloatVelocity"
+                        bodyVelocity.MaxForce = Vector3.new(0, math.huge, 0)
+                        bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+                        bodyVelocity.Parent = rootPart
+                    end
+                end
+            end)
+            WindUI:Notify({
+                Title = "锁定高度已开启",
+                Content = "已开启",
+                Icon = "move",
+                Duration = 2
+            })
+        else
+            if FloatConnection then
+                FloatConnection:Disconnect()
+                FloatConnection = nil
+            end
+            if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+                local bodyVelocity = Player.Character.HumanoidRootPart:FindFirstChild("FloatVelocity")
+                if bodyVelocity then
+                    bodyVelocity:Destroy()
+                end
+            end
+            WindUI:Notify({
+                Title = "锁定高度已关闭",
+                Content = "已关闭",
+                Icon = "move",
+                Duration = 2
+            })
+        end
+    end
+})
+
+TabHandles.Movement:Toggle({
     Title = "穿墙",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-            _G.NoClip = value
+    Desc = "穿墙",
+    Value = false,
+    Callback = function(value)
+        _G.NoClip = value
         if value then
             NoClipConnection = RunService.Stepped:Connect(function()
                 if Player.Character then
@@ -2140,12 +2238,93 @@ local Button = Tab:Button({
         end
     end
 })
-----------------------------------------------------------------------------------------------防被甩飞
-local Button = Tab:Button({
+
+TabHandles.Utilities:Toggle({
+    Title = "自动跳过对话",
+    Desc = "自动跳过所有剧情对话",
+    Value = false,
+    Callback = function(value)
+        _G.AutoSkip = value
+        if value then
+            task.spawn(function()
+                while _G.AutoSkip do
+                    pcall(function()
+                        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("DialogueRemote"):FireServer("Skipped")
+                        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("TemporaryReachedBindable"):FireServer()
+                    end)
+                    task.wait(0.8)
+                end
+            end)
+        end
+    end
+})
+
+TabHandles.Utilities:Toggle({
+    Title = "零交互延迟",
+    Desc = "去除所有交互按钮的按住时间",
+    Value = false,
+    Callback = function(value)
+        _G.NoCooldownProximity = value
+        if value then
+            for i, v in pairs(Workspace:GetDescendants()) do
+                if v.ClassName == "ProximityPrompt" then
+                    v.HoldDuration = 0
+                end
+            end
+            if CooldownProximity then
+                CooldownProximity:Disconnect()
+            end
+            CooldownProximity = Workspace.DescendantAdded:Connect(function(Cooldown)
+                if _G.NoCooldownProximity and Cooldown:IsA("ProximityPrompt") then
+                    Cooldown.HoldDuration = 0
+                end
+            end)
+        else
+            if CooldownProximity then
+                CooldownProximity:Disconnect()
+                CooldownProximity = nil
+            end
+        end
+    end
+})
+
+TabHandles.Utilities:Toggle({
+    Title = "性能优化",
+    Desc = "降低画质提升帧率",
+    Value = false,
+    Callback = function(value)
+        _G.AntiLag = value
+        if value then
+            local Terrain = Workspace:FindFirstChildOfClass("Terrain")
+            if Terrain then
+                Terrain.WaterWaveSize = 0
+                Terrain.WaterWaveSpeed = 0
+                Terrain.WaterReflectance = 0
+                Terrain.WaterTransparency = 1
+            end
+            game.Lighting.GlobalShadows = false
+            game.Lighting.FogEnd = 9e9
+            game.Lighting.FogStart = 9e9
+
+            task.spawn(function()
+                while _G.AntiLag do
+                    pcall(function()
+                        for i, v in pairs(Workspace:FindFirstChild("Effects"):GetChildren()) do
+                            PartLagDe(v)
+                        end
+                    end)
+                    task.wait(1)
+                end
+            end)
+        end
+    end
+})
+
+TabHandles.Utilities:Toggle({
     Title = "防被甩飞",
-    Desc = "",
-    Locked = false,
-    Callback = function()
+    Desc = "防止被出生甩飞",
+    Value = false,
+    Callback = function(value)
         _G.AntiFling = value
         while _G.AntiFling do
             pcall(function()
@@ -2166,13 +2345,13 @@ local Section = Tab:Section({
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
-----------------------------------------------------------------------------------------------跳绳
-local Button = Tab:Button({
-    Title = "一跳完跳绳",
-    Desc = "Test Button",
-    Locked = false,
+
+TabHandles.OtherGames:Button({
+    Title = "一键完成跳绳",
+    Desc = "直接传送到跳绳终点",
+    Icon = "activity",
     Callback = function()
-                pcall(function()
+        pcall(function()
             if Workspace:FindFirstChild("JumpRope") and Workspace.JumpRope:FindFirstChild("Important") then
                 local model = Workspace.JumpRope.Important:FindFirstChild("Model")
                 if model and model:FindFirstChild("LEGS") then
@@ -2189,19 +2368,19 @@ local Button = Tab:Button({
         end)
     end
 })
-----------------------------------------------------------------------------------------------玻璃桥
+
 local Section = Tab:Section({ 
-    Title = "玻璃桥显示安全",
+    Title = "玻璃桥",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
-    Title = "玻璃娇",
-    Desc = "",
-    Locked = false,
+TabHandles.OtherGames:Button({
+    Title = "玻璃桥透视",
+    Desc = "显示玻璃桥安全玻璃",
+    Icon = "eye",
     Callback = function()
-                pcall(function()
+        pcall(function()
             if Workspace:FindFirstChild("GlassBridge") then
                 local GlassHolder = Workspace.GlassBridge:FindFirstChild("GlassHolder")
                 if GlassHolder then
@@ -2227,13 +2406,13 @@ local Button = Tab:Button({
         end)
     end
 })
-----------------------------------------------------------------------------------------------玻璃桥
-local Button = Tab:Button({
+
+TabHandles.OtherGames:Button({
     Title = "一键通过玻璃桥",
-    Desc = "",
-    Locked = false,
+    Desc = "直接传送到玻璃桥终点",
+    Icon = "zap",
     Callback = function()
-                pcall(function()
+        pcall(function()
             if Workspace:FindFirstChild("GlassBridge") and Workspace.GlassBridge:FindFirstChild("End") and Workspace.GlassBridge.End.PrimaryPart then
                 local pos = Workspace.GlassBridge.End.PrimaryPart.Position + Vector3.new(0, 8, 0)
                 Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
@@ -2248,6 +2427,24 @@ local Button = Tab:Button({
     end
 })
 
+TabHandles.OtherGames:Toggle({
+    Title = "自动抱团",
+    Desc = "自动完成抱团小游戏",
+    Value = false,
+    Callback = function(value)
+        _G.AutoMingle = value
+        while _G.AutoMingle do
+            pcall(function()
+                for i, v in ipairs(Player.Character:GetChildren()) do
+                    if v.Name == "RemoteForQTE" then
+                        v:FireServer()
+                    end
+                end
+            end)
+            task.wait(0.1)
+        end
+    end
+})
 
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------死铁轨
