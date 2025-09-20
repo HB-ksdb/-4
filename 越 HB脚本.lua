@@ -1460,8 +1460,6 @@ local Button = Tab:Button({
     end
 })
 
-
-
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------其他脚本
 local Tab = Tabs.Main:Tab({
@@ -1614,19 +1612,642 @@ local Tab = Tabs.Settings:Tab({
 })
 
 local Section = Tab:Section({ 
-    Title = "墨水游戏",
+    Title = "红绿灯",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------一健到终点
+local Button = Tab:Button({
+    Title = "一键到终点",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                if Workspace:FindFirstChild("RedLightGreenLight") and Workspace.RedLightGreenLight:FindFirstChild("sand") and Workspace.RedLightGreenLight.sand:FindFirstChild("crossedover") then
+            local pos = Workspace.RedLightGreenLight.sand.crossedover.Position + Vector3.new(0, 5, 0)
+            Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
+            WindUI:Notify({
+                Title = "传送成功",
+                Content = "已抵达终点！",
+                Icon = "check",
+                Duration = 2
+            })
+        end
+    end
+})
+----------------------------------------------------------------------------------------------帮忙玩家扛起
+local Button = Tab:Button({
+    Title = "帮助玩家扛起",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            if Loading then return end
+        Loading = true
+        for _, v in pairs(game.Players:GetPlayers()) do
+            if v.Character:FindFirstChild("HumanoidRootPart") and v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt") and v.Character.HumanoidRootPart.CarryPrompt.Enabled == true then
+                if v.Character:FindFirstChild("SafeRedLightGreenLight") == nil then
+                    Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+                    wait(0.3)
+                    repeat task.wait(0.1)
+                        fireproximityprompt(v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt"))
+                    until v.Character.HumanoidRootPart.CarryPrompt.Enabled == false
+                    wait(0.5)
+                    if Workspace:FindFirstChild("RedLightGreenLight") and Workspace.RedLightGreenLight:FindFirstChild("sand") and Workspace.RedLightGreenLight.sand:FindFirstChild("crossedover") then
+                        local pos = Workspace.RedLightGreenLight.sand.crossedover.Position + Vector3.new(0, 5, 0)
+                        Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
+                    end
+                    wait(0.4)
+                    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ClickedButton"):FireServer({tryingtoleave = true})
+                    break
+                end
+            end
+        end
+        Loading = false
+    end
+})
+----------------------------------------------------------------------------------------------恶搞玩家
+local Button = Tab:Button({
+    Title = "恶搞玩家",
+    Desc = "滚回起点",
+    Locked = false,
+    Callback = function()
+        _G.AutoTrollPlayer = value
+        while _G.AutoTrollPlayer do
+            pcall(function()
+                for _, v in pairs(game.Players:GetPlayers()) do
+                    if v.Character:FindFirstChild("HumanoidRootPart") and v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt") and v.Character.HumanoidRootPart.CarryPrompt.Enabled == true then
+                        if v.Character:FindFirstChild("SafeRedLightGreenLight") == nil then
+                            Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+                            wait(0.3)
+                            repeat task.wait(0.1)
+                                fireproximityprompt(v.Character.HumanoidRootPart:FindFirstChild("CarryPrompt"))
+                            until v.Character.HumanoidRootPart.CarryPrompt.Enabled == false
+                            wait(0.5)
+                            if Workspace:FindFirstChild("RedLightGreenLight") then
+                                Player.Character.HumanoidRootPart.CFrame = CFrame.new(-84, 1023, -537)
+                            end
+                            wait(0.4)
+                            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ClickedButton"):FireServer({tryingtoleave = true})
+                            break
+                        end
+                    end
+                end
+            end)
+            task.wait()
+        end
+    end
+})
+
+local Section = Tab:Section({ 
+    Title = "抠糖饼",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------自动扣糖饼
+local Button = Tab:Button({
+    Title = "抠糖饼自动",
+    Desc = "一键扣完",
+    Locked = false,
+    Callback = function()
+                pcall(function()
+            if ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("Games") then
+                local DalgonaClientModule = ReplicatedStorage.Modules.Games:FindFirstChild("DalgonaClient")
+                if DalgonaClientModule then
+                    for i, v in pairs(getreg()) do
+                        if typeof(v) == "function" and islclosure(v) then
+                            if getfenv(v).script == DalgonaClientModule then
+                                if getinfo(v).nups == 73 then
+                                    setupvalue(v, 31, 9e9)
+                                    WindUI:Notify({
+                                        Title = "椪糖完成",
+                                        Content = "抠图已完成！",
+                                        Icon = "check",
+                                        Duration = 3
+                                    })
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+})
+----------------------------------------------------------------------------------------------抠糖饼
+local Button = Tab:Button({
+    Title = "瞬间扣完",
+    Desc = "扣糖饼",
+    Locked = false,
+    Callback = function()
+_G.AutoDalgona = value
+        while _G.AutoDalgona do
+            pcall(function()
+                if ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("Games") then
+                    local DalgonaClientModule = ReplicatedStorage.Modules.Games:FindFirstChild("DalgonaClient")
+                    if DalgonaClientModule then
+                        for i, v in pairs(getreg()) do
+                            if typeof(v) == "function" and islclosure(v) then
+                                if getfenv(v).script == DalgonaClientModule then
+                                    if getinfo(v).nups == 73 then
+                                        setupvalue(v, 31, 9e9)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+            task.wait(5)
+        end
+    end
+})
+
+local Section = Tab:Section({ 
+    Title = "拔河",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------自动拔河
+local Button = Tab:Button({
+    Title = "自动拔河",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                _G.TugOfWar = value
+        while _G.TugOfWar do
+            pcall(function()
+                ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("TemporaryReachedBindable"):FireServer({GameQTE = true})
+            end)
+            task.wait(0.1)
+        end
+    end
+})
+----------------------------------------------------------------------------------------------出口大门
+local Button = Tab:Button({
+    Title = "ESP出口大门",
+    Desc = "透视大门出口",
+    Locked = false,
+    Callback = function()
+                _G.DoorExit = value
+        if value then
+            task.spawn(function()
+                while _G.DoorExit do
+            pcall(function()
+                if Workspace:FindFirstChild("HideAndSeekMap") then
+                    for i, v in pairs(Workspace:FindFirstChild("HideAndSeekMap"):GetChildren()) do
+                        if v.Name == "NEWFIXEDDOORS" then
+                            for k, m in pairs(v:GetChildren()) do
+                                if m.Name:find("Floor") and m:FindFirstChild("EXITDOORS") then
+                                    for _, a in pairs(m:FindFirstChild("EXITDOORS"):GetChildren()) do
+                                        if a:IsA("Model") and a:FindFirstChild("DoorRoot") then
+                                            -- Clean existing ESP
+                                            for _, z in pairs(a.DoorRoot:GetChildren()) do
+                                                if z.Name:find("Esp_") then
+                                                    z:Destroy()
+                                                end
+                                            end
+
+                                            -- Add highlight if enabled
+                                            if _G.EspHighlight and not a.DoorRoot:FindFirstChild("Esp_Highlight") then
+                                                local Highlight = Instance.new("Highlight")
+                                                Highlight.Name = "Esp_Highlight"
+                                                Highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                                                Highlight.OutlineColor = Color3.fromRGB(0, 255, 0)
+                                                Highlight.FillTransparency = 0.5
+                                                Highlight.OutlineTransparency = 0
+                                                Highlight.Adornee = a
+                                                Highlight.Parent = a.DoorRoot
+                                            end
+
+                                            -- Add GUI ESP if enabled
+                                            if _G.EspGui and not a.DoorRoot:FindFirstChild("Esp_Gui") then
+                                                local BillboardGui = Instance.new("BillboardGui")
+                                                BillboardGui.Name = "Esp_Gui"
+                                                BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                                                BillboardGui.StudsOffset = Vector3.new(0, 3, 0)
+                                                BillboardGui.AlwaysOnTop = true
+                                                BillboardGui.Parent = a.DoorRoot
+
+                                                local TextLabel = Instance.new("TextLabel")
+                                                TextLabel.Size = UDim2.new(1, 0, 1, 0)
+                                                TextLabel.BackgroundTransparency = 1
+                                                TextLabel.Text = "出口大门"
+                                                TextLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                                                TextLabel.TextScaled = true
+                                                TextLabel.Font = Enum.Font.SourceSansBold
+                                                TextLabel.Parent = BillboardGui
+
+                                                local UIStroke = Instance.new("UIStroke")
+                                                UIStroke.Color = Color3.new(0, 0, 0)
+                                                UIStroke.Thickness = 1.5
+                                                UIStroke.Parent = TextLabel
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+            task.wait(1)
+        end
+            end)
+        else
+            -- Clean up all door ESP when disabled
+            if Workspace:FindFirstChild("HideAndSeekMap") then
+                for i, v in pairs(Workspace:FindFirstChild("HideAndSeekMap"):GetChildren()) do
+                    if v.Name == "NEWFIXEDDOORS" then
+                        for k, m in pairs(v:GetChildren()) do
+                            if m.Name:find("Floor") and m:FindFirstChild("EXITDOORS") then
+                                for _, a in pairs(m:FindFirstChild("EXITDOORS"):GetChildren()) do
+                                    if a:IsA("Model") and a:FindFirstChild("DoorRoot") then
+                                        for _, z in pairs(a.DoorRoot:GetChildren()) do
+                                            if z.Name:find("Esp_") then
+                                                z:Destroy()
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+})
+
+local Section = Tab:Section({ 
+    Title = "X额，有点不知道🤔",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------显示钥匙
+local Button = Tab:Button({
+    Title = "显示钥匙",
+    Desc = "显示掉落的钥匙",
+    Locked = false,
+    Callback = function()
+       _G.DoorKey = value
+        if value then
+            task.spawn(function()
+                while _G.DoorKey do
+                    pcall(function()
+                        for _, a in pairs(Workspace.Effects:GetChildren()) do
+                            if a.Name:find("DroppedKey") and a:FindFirstChild("Handle") then
+                                -- Clean existing ESP
+                                for _, z in pairs(a.Handle:GetChildren()) do
+                                    if z.Name:find("Esp_") then
+                                        z:Destroy()
+                                    end
+                                end
+
+                                if _G.EspHighlight and not a.Handle:FindFirstChild("Esp_Highlight") then
+                                    local Highlight = Instance.new("Highlight")
+                                    Highlight.Name = "Esp_Highlight"
+                                    Highlight.FillColor = Color3.fromRGB(255, 255, 0)
+                                    Highlight.OutlineColor = Color3.fromRGB(255, 255, 0)
+                                    Highlight.FillTransparency = 0.3
+                                    Highlight.OutlineTransparency = 0
+                                    Highlight.Adornee = a
+                                    Highlight.Parent = a.Handle
+                                end
+
+                                if _G.EspGui and not a.Handle:FindFirstChild("Esp_Gui") then
+                                    local BillboardGui = Instance.new("BillboardGui")
+                                    BillboardGui.Name = "Esp_Gui"
+                                    BillboardGui.Size = UDim2.new(0, 150, 0, 40)
+                                    BillboardGui.StudsOffset = Vector3.new(0, 3, 0)
+                                    BillboardGui.AlwaysOnTop = true
+                                    BillboardGui.Parent = a.Handle
+
+                                    local TextLabel = Instance.new("TextLabel")
+                                    TextLabel.Size = UDim2.new(1, 0, 1, 0)
+                                    TextLabel.BackgroundTransparency = 1
+                                    TextLabel.Text = "钥匙"
+                                    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 0)
+                                    TextLabel.TextScaled = true
+                                    TextLabel.Font = Enum.Font.SourceSansBold
+                                    TextLabel.Parent = BillboardGui
+
+                                    local UIStroke = Instance.new("UIStroke")
+                                    UIStroke.Color = Color3.new(0, 0, 0)
+                                    UIStroke.Thickness = 1.5
+                                    UIStroke.Parent = TextLabel
+                                end
+                            end
+                        end
+                    end)
+                    task.wait(1)
+                end
+            end)
+        else
+            -- Clean up all key ESP when disabled
+            for _, a in pairs(Workspace.Effects:GetChildren()) do
+                if a.Name:find("DroppedKey") and a:FindFirstChild("Handle") then
+                    for _, z in pairs(a.Handle:GetChildren()) do
+                        if z.Name:find("Esp_") then
+                            z:Destroy()
+                        end
+                    end
+                end
+            end
+        end
+    end
+})
+----------------------------------------------------------------------------------------------躲藏玩家透视
+local Button = Tab:Button({
+    Title = "躲藏玩家透视",
+    Desc = "显示躲藏玩家",
+    Locked = false,
+    Callback = function()
+        _G.HidePlayer = value
+        if value then
+            task.spawn(function()
+                while _G.HidePlayer do
+                    pcall(function()
+                        for i, v in pairs(game.Players:GetChildren()) do
+                            if v ~= Player and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
+                                if v:GetAttribute("IsHider") then
+                                    -- Clean existing ESP first
+                                    for _, z in pairs(v.Character.Head:GetChildren()) do
+                                        if z.Name:find("Esp_") then
+                                            z:Destroy()
+                                        end
+                                    end
+
+                                    if _G.EspHighlight and not v.Character.Head:FindFirstChild("Esp_Highlight") then
+                                        local Highlight = Instance.new("Highlight")
+                                        Highlight.Name = "Esp_Highlight"
+                                        Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                                        Highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
+                                        Highlight.FillTransparency = 0.5
+                                        Highlight.OutlineTransparency = 0
+                                        Highlight.Adornee = v.Character
+                                        Highlight.Parent = v.Character.Head
+                                    end
+
+                                    if _G.EspGui and not v.Character.Head:FindFirstChild("Esp_Gui") then
+                                        local BillboardGui = Instance.new("BillboardGui")
+                                        BillboardGui.Name = "Esp_Gui"
+                                        BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                                        BillboardGui.StudsOffset = Vector3.new(0, 3, 0)
+                                        BillboardGui.AlwaysOnTop = true
+                                        BillboardGui.Parent = v.Character.Head
+
+                                        local TextLabel = Instance.new("TextLabel")
+                                        TextLabel.Size = UDim2.new(1, 0, 1, 0)
+                                        TextLabel.BackgroundTransparency = 1
+                                        TextLabel.Text = v.Name .. " (躲藏中)"
+                                        TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                                        TextLabel.TextScaled = true
+                                        TextLabel.Font = Enum.Font.SourceSansBold
+                                        TextLabel.Parent = BillboardGui
+
+                                        local UIStroke = Instance.new("UIStroke")
+                                        UIStroke.Color = Color3.new(0, 0, 0)
+                                        UIStroke.Thickness = 1.5
+                                        UIStroke.Parent = TextLabel
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                    task.wait(1)
+                end
+            end)
+        else
+            -- Clean up all player ESP when disabled
+            for i, v in pairs(game.Players:GetChildren()) do
+                if v ~= Player and v.Character and v.Character:FindFirstChild("Head") then
+                    for _, z in pairs(v.Character.Head:GetChildren()) do
+                        if z.Name:find("Esp_") then
+                            z:Destroy()
+                        end
+                    end
+                end
+            end
+        end
+    end
+})
+----------------------------------------------------------------------------------------------收集全部钥匙
+local Button = Tab:Button({
+    Title = "一键收集全部钥匙",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        if Player:GetAttribute("IsHider") and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+            local OldCFrame = Player.Character.HumanoidRootPart.CFrame
+            for _, a in pairs(Workspace.Effects:GetChildren()) do
+                if a.Name:find("DroppedKey") and a:FindFirstChild("Handle") then
+                    Player.Character.HumanoidRootPart.CFrame = a.Handle.CFrame
+                    wait(0.5)
+                end
+            end
+            Player.Character.HumanoidRootPart.CFrame = OldCFrame
+            WindUI:Notify({
+                Title = "收集完成",
+                Content = "已收集全部钥匙",
+                Icon = "check",
+                Duration = 3
+            })
+        end
+    end
+})
+----------------------------------------------------------------------------------------------传送躲藏玩家
+local Button = Tab:Button({
+    Title = "传送到躲避玩家",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        for i, v in pairs(game.Players:GetChildren()) do
+            if v ~= Player and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
+                if v:GetAttribute("IsHider") and v.Character.Humanoid.Health > 0 then
+                    Player.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+                    WindUI:Notify({
+                        Title = "传送成功",
+                        Content = "已传送到 " .. v.Name,
+                        Icon = "move",
+                        Duration = 2
+                    })
+                    break
+                end
+            end
+        end
+    end
+})
+
+local Section = Tab:Section({ 
+    Title = "功能",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
 local Button = Tab:Button({
-    Title = "墨水游戏",
-    Desc = "无卡英文",
+    Title = "速度开启",
+    Desc = "变成闪电侠",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterVaz/InkGameAzure/main/Protected_7974105512464815.lua.txt"))()
+        _G.AutoSpeed = value
+        if value and Player.Character:FindFirstChild("Humanoid") then
+            Player.Character.Humanoid.WalkSpeed = _G.Speed or 50
+        elseif Player.Character:FindFirstChild("Humanoid") then
+            Player.Character.Humanoid.WalkSpeed = 16
+        end
     end
 })
+----------------------------------------------------------------------------------------------穿墙
+local Button = Tab:Button({
+    Title = "穿墙",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            _G.NoClip = value
+        if value then
+            NoClipConnection = RunService.Stepped:Connect(function()
+                if Player.Character then
+                    for _, part in pairs(Player.Character:GetDescendants()) do
+                        if part:IsA("BasePart") and part.CanCollide then
+                            part.CanCollide = false
+                        end
+                    end
+                end
+            end)
+            WindUI:Notify({
+                Title = "穿墙已开启",
+                Content = "可自由穿透",
+                Icon = "move",
+                Duration = 2
+            })
+        else
+            if NoClipConnection then
+                NoClipConnection:Disconnect()
+                NoClipConnection = nil
+            end
+            if Player.Character then
+                for _, part in pairs(Player.Character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+            WindUI:Notify({
+                Title = "穿墙已关闭",
+                Content = "穿墙已关闭",
+                Icon = "move",
+                Duration = 2
+            })
+        end
+    end
+})
+----------------------------------------------------------------------------------------------防被甩飞
+local Button = Tab:Button({
+    Title = "防被甩飞",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        _G.AntiFling = value
+        while _G.AntiFling do
+            pcall(function()
+                if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+                    Player.Character.HumanoidRootPart.Anchored = true
+                    Player.Character.HumanoidRootPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                    Player.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                    Player.Character.HumanoidRootPart.Anchored = false
+                end
+            end)
+            task.wait(0.1)
+        end
+    end
+})
+
+local Section = Tab:Section({ 
+    Title = "跳绳",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+----------------------------------------------------------------------------------------------跳绳
+local Button = Tab:Button({
+    Title = "一跳完跳绳",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+                pcall(function()
+            if Workspace:FindFirstChild("JumpRope") and Workspace.JumpRope:FindFirstChild("Important") then
+                local model = Workspace.JumpRope.Important:FindFirstChild("Model")
+                if model and model:FindFirstChild("LEGS") then
+                    local pos = model.LEGS.Position
+                    Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
+                    WindUI:Notify({
+                        Title = "完成",
+                        Content = "已通关",
+                        Icon = "check",
+                        Duration = 3
+                    })
+                end
+            end
+        end)
+    end
+})
+----------------------------------------------------------------------------------------------玻璃桥
+local Section = Tab:Section({ 
+    Title = "玻璃桥显示安全",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "玻璃娇",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                pcall(function()
+            if Workspace:FindFirstChild("GlassBridge") then
+                local GlassHolder = Workspace.GlassBridge:FindFirstChild("GlassHolder")
+                if GlassHolder then
+                    for i, v in pairs(GlassHolder:GetChildren()) do
+                        for k, j in pairs(v:GetChildren()) do
+                            if j:IsA("Model") and j.PrimaryPart then
+                                local isSafe = not j.PrimaryPart:GetAttribute("exploitingisevil")
+                                local Color = isSafe and Color3.fromRGB(28, 235, 87) or Color3.fromRGB(248, 87, 87)
+                                j.PrimaryPart.Color = Color
+                                j.PrimaryPart.Transparency = 0
+                                j.PrimaryPart.Material = Enum.Material.Neon
+                            end
+                        end
+                    end
+                    WindUI:Notify({
+                        Title = "玻璃桥透视",
+                        Content = "已开启",
+                        Icon = "eye",
+                        Duration = 3
+                    })
+                end
+            end
+        end)
+    end
+})
+----------------------------------------------------------------------------------------------玻璃桥
+local Button = Tab:Button({
+    Title = "一键通过玻璃桥",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+                pcall(function()
+            if Workspace:FindFirstChild("GlassBridge") and Workspace.GlassBridge:FindFirstChild("End") and Workspace.GlassBridge.End.PrimaryPart then
+                local pos = Workspace.GlassBridge.End.PrimaryPart.Position + Vector3.new(0, 8, 0)
+                Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos, pos + Vector3.new(0, 0, -1))
+                WindUI:Notify({
+                    Title = "已通关",
+                    Content = "已传送到终点",
+                    Icon = "check",
+                    Duration = 3
+                })
+            end
+        end)
+    end
+})
+
 
 Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------死铁轨
