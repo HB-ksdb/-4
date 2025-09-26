@@ -12,7 +12,29 @@ local Window = WindUI:CreateWindow({
             Enabled = true,
             Callback = function() print("clicked") end,
             Anonymous = false
-        },    
+        },
+    
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "1234", "25ytgcjNB" },
+        
+        Note = "请输入你的卡密.没卡密加群1055870765",
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
+})
 
 Window:EditOpenButton({
     Title = "越 HB脚本",
