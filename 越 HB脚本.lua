@@ -1721,6 +1721,8 @@ local Toggle = Tab:Toggle({
     end
 })
 
+Tab:Select() -- Select Tab
+
 local Section = Tab:Section({ 
     Title = "自动推人",
     TextXAlignment = "Left",
@@ -1816,6 +1818,7 @@ local Toggle = Tab:Toggle({
     end
 })
 
+Tab:Select() -- Select Tab
 
 local Toggle = Tab:Toggle({
     Title = "自动砍人",
@@ -1876,6 +1879,8 @@ local Toggle = Tab:Toggle({
         end
     end
 })
+
+Tab:Select() -- Select Tab
 
 local Section = Tab:Section({ 
     Title = "速度增加提升",
