@@ -83,6 +83,120 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
+-- 用户名： 
+print("用户名： "..game.Players.LocalPlayer.Name)
+
+-- 显示名称： 
+print("显示名称： "..game.Players.LocalPlayer.DisplayName)
+
+-- 用户ID： 
+print("用户ID： "..game.Players.LocalPlayer.UserId)
+
+-- 个人资料链接： 
+print("个人资料链接： ".."roblox.com/users/"..game.Players.LocalPlayer.UserId.."/profile")
+
+-- 国家： 
+print("国家： "..game:GetService("LocalizationService"):GetCountryRegionForPlayerAsync(game.Players.LocalPlayer))
+
+-- 语言： 
+print("语言： "..game.Players.LocalPlayer.LocaleId)
+
+-- 账户年龄（天）： 
+print("账户年龄（天）： "..game.Players.LocalPlayer.AccountAge)
+
+-- 账户年龄（年）： 
+print("账户年龄（年）： "..math.floor(game.Players.LocalPlayer.AccountAge/365*100)/(100))
+
+-- 执行器： 
+print("执行器： "..identifyexecutor())
+
+-- 是否为会员： 
+local player = game.Players.LocalPlayer
+if player.MembershipType == Enum.MembershipType.Premium then
+    print("会员状态： 是")
+else
+    print("会员状态： 否")
+end
+
+-- 好友数量： 
+local req = http_request or request or (syn and syn.request)
+local HS = game:GetService("HttpService")
+local response = HS:JSONDecode(
+    req({
+        Url = "https://friends.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId.."/friends/count"
+    }).Body
+)
+print("好友数量： "..response.count)
+
+-- 用户简介： 
+local req = http_request or request or (syn and syn.request)
+local response = HS:JSONDecode(
+    req({
+        Url = "https://users.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId
+    }).Body
+)
+print("简介： ".."'"..response.description.."'")
+
+-- 关注数量： 
+local response = HS:JSONDecode(
+    req({
+        Url = "https://friends.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId.."/followings/count"
+    }).Body
+)
+print("关注数量： "..response.count)
+
+-- 粉丝数量： 
+local response = HS:JSONDecode(
+    req({
+        Url = "https://friends.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId.."/followers/count"
+    }).Body
+)
+print("粉丝数量： "..response.count)
+
+-- 账户创建日期： 
+local response = HS:JSONDecode(
+    req({
+        Url = "https://users.roblox.com/v1/users/"..game.Players.LocalPlayer.UserId
+    }).Body
+)
+print("账户创建日期： "..response.created)
+
+-- 是否有认证徽章： 
+print("认证徽章： "..tostring(response.hasVerifiedBadge))
+
+-- 设备： 
+local UserInputService = game:GetService("UserInputService")
+local device = "设备"
+
+if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
+    print(device.."： 移动设备")
+elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
+    print(device.."： 电脑")
+elseif UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
+    print(device.."： 带触摸屏的电脑")
+end
+
+-- 网络延迟： 
+print("网络延迟： "..game.Players.LocalPlayer:GetNetworkPing() * (1000).." 毫秒")
+
+-- IP地址： 
+local req = http_request or request or (syn and syn.request) 
+print("IP地址： "..req({ Url = "https://api.ipify.org/", Method = "Get" }).Body)
+
+-- 总游戏访问量： 
+local response = HS:JSONDecode(
+    req({
+        Url = "https://www.roblox.com/users/profile/playergames-json?userId="..game.Players.LocalPlayer.UserId
+    }).Body
+)
+
+local count = 0
+for _, v in ipairs(response.Games) do
+    count = count + v.Plays
+end
+print("总访问量： "..count)
+
+
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
