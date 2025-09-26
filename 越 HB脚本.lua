@@ -1840,55 +1840,6 @@ end
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
-    Title = "火箭发射台",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "登上火箭",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
-end)
-    end
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "自动收集燃料",
-    Value = false,    
-    Callback = function(state) 
-            isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
-end)
-    end
-})
-
-local Button = Tab:Button({
-    Title = "将玩家除掉",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
-end)
-    end
-})
-
-local Button = Tab:Button({
-    Title = "发射区台",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
-end)
-    end
-})
-
-
-Tab:Select() -- Select Tab
-
 local Tab = Tabs.Utilities:Tab({
     Title = "设置",
     Icon = "bird", -- optional
