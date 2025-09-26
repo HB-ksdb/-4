@@ -1832,7 +1832,7 @@ end
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "环山军区",
     Icon = "layout-grid", -- optional
     Locked = false,
@@ -1840,7 +1840,7 @@ local Tab = Window:Tab({
 
 local Button = Tab:Button({
     Title = "环山远程买饭",
-    Desc = "Test Button",
+    Desc = "",
     Locked = false,
     Callback = function()
         
