@@ -178,7 +178,7 @@ local Button = Tab:Button({
     end
 	end
 })
-
+Tab:Select() -- Select Tab
 
 local Tab = Window:Tab({
     Title = "功能",
@@ -338,3 +338,4 @@ local Button = Tab:Button({
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
 	end
 })
+Tab:Select() -- Select Tab

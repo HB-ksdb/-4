@@ -117,6 +117,7 @@ local Button = Tab:Button({
         end)
     end
 })
+Tab:Select() -- Select Tab
 
 local Tab = Tabs.Settings:Tab({
     Title = "透视",
@@ -790,4 +791,4 @@ local Toggle = Tab:Toggle({
     end
 end    
 })
-
+Tab:Select() -- Select Tab
