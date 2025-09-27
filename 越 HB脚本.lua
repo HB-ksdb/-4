@@ -17,7 +17,7 @@ local Window = WindUI:CreateWindow({
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://79972752992929"
+        Background = "rbxassetid://96291371536118"
     })
     
 
