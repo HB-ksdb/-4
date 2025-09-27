@@ -1,11 +1,13 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "越HB环山军区",
-    Icon = "door-open", -- lucide icon. optional
-    Author = "by .ftgs and .ftgs", -- optional
-})
-Size = UDim2.fromOffset(100, 100),
+        Title = "越 HB 脚本<font color='#00FF00'>1.0</font>  ",
+        Icon = "rbxassetid://4483362748",
+        IconTransparency = 0.5,
+        IconThemed = true,
+        Author = "作者:HB",
+        Folder = "CloudHub",            
+    Size = UDim2.fromOffset(100, 100),
         User = {
             Enabled = true,
             Callback = function() print("clicked") end,
