@@ -1,40 +1,25 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB 脚本<font color='#00FF00'>1.0</font>  ",
+        Title = "越 HB<font color='#00FF00'>1.5</font>",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:HB",
-        Folder = "CloudHub",            
-    Size = UDim2.fromOffset(100, 100),
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
         User = {
             Enabled = true,
             Callback = function() print("clicked") end,
             Anonymous = false
         },
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://96291371536118"
+    })
     
-    -- !  ↓  remove this all, 
-    -- !  ↓  if you DON'T need the key system
-    KeySystem = { 
-        -- ↓ Optional. You can remove it.
-        Key = { "1234" },
-        
-        Note = "请输入你的卡密.卡密1234,
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        SaveKey = false, -- automatically save and load the key.
-        
-        -- ↓ Optional. You can remove it.
-        -- API = {} ← Services. Read about it below ↓
-    },
-})
 
 Window:EditOpenButton({
     Title = "越 HB脚本",
@@ -54,7 +39,7 @@ Window:EditOpenButton({
 })
             
 Window:Tag({
-    Title = "v1.4越 HB",
+    Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
@@ -66,7 +51,7 @@ Window:Tag({
         Title = "火箭发射模拟器",
         Color = Color3.fromHex("#000000")
     })
-    
+
     local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
     Settings = Window:Section({ Title = "功能", Opened = true }),
@@ -213,129 +198,3 @@ local Button = Tab:Button({
 	end
 })
 
-local Button = Tab:Button({
-    Title = "发射台岛",
-    Desc = ",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "白云岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.13252258300781, 170.55825805664062, -60.4516716003418)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "浮漂岛",
-    Desc = "Test Button",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-66.51714324951172, 720.4866333007812, -5.391753196716309)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "卫星岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.2462043762207, 1429.4990234375, 1.3739361763000488)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "蜜蜂迷宫岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.5361199378967285, 3131.249267578125, -29.759048461914062)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "月球拯救岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.212917804718018, 5016.341796875, -19.815933227539062)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "暗物质岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(68.43186950683594, 6851.94091796875, 7.890637397766113)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "太空岩石岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(49.92888641357422, 8942.955078125, 8.674375534057617)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "零号火星岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.44503402709961, 11270.0927734375, -1.273137092590332)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "太空水晶岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11.579089164733887, 15295.6318359375, -27.54974365234375)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "月球浆果岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-14.601255416870117, 18410.9609375, 0.9418511986732483)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "铺路实岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3.272758960723877, 22539.494140625, 63.283935546875)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "流星岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-45.515689849853516, 27961.560546875, -7.358333110809326)
-	end
-})
-
-local Button = Tab:Button({
-    Title = "升级岛",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
-	end
-})
-Tab:Select() -- Select Tab
