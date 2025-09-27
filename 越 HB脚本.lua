@@ -1,13 +1,15 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB 脚本<font color='#00FF00'>1.5</font>  ",
+        Title = "越 HB<font color='#00FF00'>1.5</font>",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:HB",
-        Folder = "CloudHub",            
-    Size = UDim2.fromOffset(400, 300),
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
         User = {
             Enabled = true,
             Callback = function() print("clicked") end,
@@ -16,7 +18,8 @@ local Window = WindUI:CreateWindow({
         SideBarWidth = 200,
         ScrollBarEnabled = true,
         Background = "rbxassetid://79972752992929"
-    })    
+    })
+    
 
 Window:EditOpenButton({
     Title = "越 HB脚本",
