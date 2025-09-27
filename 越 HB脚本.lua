@@ -1,7 +1,7 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB 脚本<font color='#00FF00'>1.0</font>  ",
+        Title = "越 HB 脚本<font color='#00FF00'>1.5</font>  ",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -13,28 +13,10 @@ local Window = WindUI:CreateWindow({
             Callback = function() print("clicked") end,
             Anonymous = false
         },
-    
-    -- !  ↓  remove this all, 
-    -- !  ↓  if you DON'T need the key system
-    KeySystem = { 
-        -- ↓ Optional. You can remove it.
-        Key = { "25ytgcjNB", "25ytgcjNB" },
-        
-        Note = "请输入你的卡密.没卡密加群1055870765",
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        SaveKey = false, -- automatically save and load the key.
-        
-        -- ↓ Optional. You can remove it.
-        -- API = {} ← Services. Read about it below ↓
-    },
-})
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://79972752992929"
+    })    
 
 Window:EditOpenButton({
     Title = "越 HB脚本",
@@ -54,7 +36,7 @@ Window:EditOpenButton({
 })
             
 Window:Tag({
-    Title = "v1.4越 HB",
+    Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
