@@ -86,14 +86,6 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
-local Paragraph = Tab:Paragraph({
-    Title = "环山军区嘛，有点意思",
-    Desc = "等着被外挂制裁",
-    Color = "Red",
-    Image = "",
-    ImageSize = 30,
-    Thumbnail = "",
-    ThumbnailSize = 80,
     
     local Tabs = {
     Main = Window:Section({ Title = "越 HB功能", Opened = true }),
