@@ -1992,6 +1992,98 @@ WindUI:Notify({
 })
 
 Window:SelectTab(2) -- Number of Tab
+
+local Tab = Window:Tab({
+    Title = "越HB脚本",
+    Icon = "bird", -- optional
+    Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "DOORS",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E8%B6%8A%20HB%20DOORS.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
+local Button = Tab:Button({
+    Title = "火箭发射模拟器",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E8%B6%8A%20HB%20%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
+local Button = Tab:Button({
+    Title = "环山军区",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E8%B6%8A%20HB%E7%8E%AF%E5%B1%B1%E5%86%9B%E5%8C%BA.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
+local Button = Tab:Button({
+    Title = "墨水游戏",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E8%B6%8AHB%20%E5%A2%A8%E6%B0%B4%E6%B8%B8%E6%88%8F.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
+local Button = Tab:Button({
+    Title = "战争大亨",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
 -----------------------------------------------------------------------------------------------自然灾害
 local Tab = Tabs.Settings:Tab({
     Title = "自然灾害",
