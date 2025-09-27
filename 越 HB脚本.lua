@@ -617,7 +617,12 @@ mini2.MouseButton1Click:Connect(function()
 	main.Frame.BackgroundTransparency = 0 
 	closebutton.Position =  UDim2.new(0, 0, -1, 27)
 end)
-
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
     end
 })
 -----------------------------------------------------------------------------------------------子追
@@ -627,6 +632,13 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
+        
+    WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
     end
 })
 -----------------------------------------------------------------------------------------------隐身
@@ -636,72 +648,372 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
+        
+    WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
     end
 })
 -----------------------------------------------------------------------------------------------透视
-local Button = Tab:Button({
+local Toggle = Tab:Toggle({
     Title = "透视",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-       function getplrsname()
-for i,v in pairs(game:GetChildren()) do
-if v.ClassName == "Players" then
-return v.Name
+    Value = false,    
+    Callback = function(state) 
+		print(value)
+local c = workspace.CurrentCamera
+local ps = game:GetService("Players")
+local lp = ps.LocalPlayer
+local rs = game:GetService("RunService")
+
+local function esp(p,cr)
+	local h = cr:WaitForChild("Humanoid")
+	local hrp = cr:WaitForChild("Head")
+
+	local text = Drawing.new("Text")
+	text.Visible = false
+	text.Center = true
+	text.Outline = false 
+	text.Font = 3
+	text.Size = 16.16
+	text.Color = Color3.new(170,170,170)
+
+	local conection
+	local conection2
+	local conection3
+
+	local function dc()
+		text.Visible = false
+		text:Remove()
+		if conection then
+			conection:Disconnect()
+			conection = nil 
+		end
+		if conection2 then
+			conection2:Disconnect()
+			conection2 = nil 
+		end
+		if conection3 then
+			conection3:Disconnect()
+			conection3 = nil 
+		end
+	end
+
+	conection2 = cr.AncestryChanged:Connect(function(_,parent)
+		if not parent then
+			dc()
+		end
+	end)
+
+	conection3 = h.HealthChanged:Connect(function(v)
+		if (v<=0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
+			dc()
+		end
+	end)
+
+	conection = rs.RenderStepped:Connect(function()
+		local hrp_pos,hrp_onscreen = c:WorldToViewportPoint(hrp.Position)
+		if hrp_onscreen then
+			text.Position = Vector2.new(hrp_pos.X, hrp_pos.Y - 27)
+			text.Text = "[ "..p.Name.." ]"
+			text.Visible = true
+		else
+			text.Visible = false
+		end
+	end)
 end
+
+local function p_added(p)
+	if p.Character then
+		esp(p,p.Character)
+	end
+	p.CharacterAdded:Connect(function(cr)
+		esp(p,cr)
+	end)
 end
+
+for i,p in next, ps:GetPlayers() do 
+	if p ~= lp then
+		p_added(p)
+	end
 end
-local players = getplrsname()
-local plr = game[players].LocalPlayer
-coroutine.resume(coroutine.create(function()
-while wait(1) do
-coroutine.resume(coroutine.create(function()
-for _,v in pairs(game[players]:GetPlayers()) do
-if v.Name ~= plr.Name and v.Character then
-v.Character.HeadHB.CanCollide = false
-v.Character.HeadHB.Transparency = 10
-v.Character.HeadHB.Size = Vector3.new(100,100,100)
-v.Character.HumanoidRootPart.CanCollide = false
-v.Character.HumanoidRootPart.Transparency = 10
-v.Character.HumanoidRootPart.Size = Vector3.new(100,100,100)
+
+ps.PlayerAdded:Connect(p_added)
 end
+})
+
+LXBTab: AddButton({
+	Name = "绘制玩家位置",
+	Callback = function(value)
+		print(value)
+local plr = game.Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
+for i, v in pairs(game.Players:GetChildren()) do
+    local Top = Drawing.new("Line")
+    Top.Visible = false
+    Top.From = Vector2.new(0, 0)
+    Top.To = Vector2.new(200, 200)
+    Top.Color = Color3.fromRGB(255, 0, 0)
+    Top.Thickness = 2
+    Top.Transparency = 1
+
+    local Bottom = Drawing.new("Line")
+    Bottom.Visible = false
+    Bottom.From = Vector2.new(0, 0)
+    Bottom.To = Vector2.new(200, 200)
+    Bottom.Color = Color3.fromRGB(255, 0, 0)
+    Bottom.Thickness = 2
+    Bottom.Transparency = 1
+
+local Left = Drawing.new("Line")
+    Left.Visible = false
+    Left.From = Vector2.new(0, 0)
+    Left.To = Vector2.new(200, 200)
+    Left.Color = Color3.fromRGB(255, 0, 0)
+    Left.Thickness = 2
+    Left.Transparency = 1
+
+    local Right = Drawing.new("Line")
+    Right.Visible = false
+    Right.From = Vector2.new(0, 0)
+    Right.To = Vector2.new(200, 200)
+    Right.Color = Color3.fromRGB(255, 0, 0)
+    Right.Thickness = 2
+    Right.Transparency = 1
+
+    function ESP()
+        local connection
+        connection = game:GetService("RunService").RenderStepped:Connect(function()
+            if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v.Name ~= plr.Name and v.Character.Humanoid.Health > 0 then 
+                local ScreenPos, OnScreen = camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                if OnScreen then
+                    local Scale = v.Character.Head.Size.Y/2
+                    local Size = Vector3.new(2, 3, 0) * (Scale * 2)
+                    local humpos = camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+                    local TL = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, 0)).p)
+                    local TR = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, 0)).p)
+                    local BL = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, 0)).p)
+                    local BR = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, 0)).p)
+
+                    Top.From = Vector2.new(TL.X, TL.Y)
+                    Top.To = Vector2.new(TR.X, TR.Y)
+
+                    Left.From = Vector2.new(TL.X, TL.Y)
+                    Left.To = Vector2.new(BL.X, BL.Y)
+
+                    Right.From = Vector2.new(TR.X, TR.Y)
+                    Right.To = Vector2.new(BR.X, BR.Y)
+
+                    Bottom.From = Vector2.new(BL.X, BL.Y)
+                    Bottom.To = Vector2.new(BR.X, BR.Y)
+
+                    if v.TeamColor == plr.TeamColor then
+                        Top.Color = Color3.fromRGB(0, 255, 0)
+                        Left.Color = Color3.fromRGB(0, 255, 0)
+                        Bottom.Color = Color3.fromRGB(0, 255, 0)
+                        Right.Color = Color3.fromRGB(0, 255, 0)
+                    else 
+                        Top.Color = Color3.fromRGB(255, 0, 0)
+                        Left.Color = Color3.fromRGB(255, 0, 0)
+                        Bottom.Color = Color3.fromRGB(255, 0, 0)
+                        Right.Color = Color3.fromRGB(255, 0, 0)
+                    end
+
+                    Top.Visible = true
+                    Left.Visible = true
+                    Bottom.Visible = true
+                    Right.Visible = true
+                else 
+                    Top.Visible = false
+                    Left.Visible = false
+                    Bottom.Visible = false
+                    Right.Visible = false
+                end
+            else 
+                Top.Visible = false
+                Left.Visible = false
+                Bottom.Visible = false
+                Right.Visible = false
+                if game.Players:FindFirstChild(v.Name) == nil then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+    coroutine.wrap(ESP)()
 end
-end))
+
+game.Players.PlayerAdded:Connect(function(newplr) --Parameter gets the new player that has been added
+    local Top = Drawing.new("Line")
+    Top.Visible = false
+    Top.From = Vector2.new(0, 0)
+    Top.To = Vector2.new(200, 200)
+    Top.Color = Color3.fromRGB(255, 0, 0)
+    Top.Thickness = 2
+    Top.Transparency = 1
+
+    local Bottom = Drawing.new("Line")
+    Bottom.Visible = false
+    Bottom.From = Vector2.new(0, 0)
+    Bottom.To = Vector2.new(200, 200)
+    Bottom.Color = Color3.fromRGB(255, 0, 0)
+    Bottom.Thickness = 2
+    Bottom.Transparency = 1
+
+    local Left = Drawing.new("Line")
+    Left.Visible = false
+    Left.From = Vector2.new(0, 0)
+    Left.To = Vector2.new(200, 200)
+    Left.Color = Color3.fromRGB(255, 0, 0)
+        Left.Thickness = 2
+    Left.Transparency = 1
+
+    local Right = Drawing.new("Line")
+    Right.Visible = false
+    Right.From = Vector2.new(0, 0)
+    Right.To = Vector2.new(200, 200)
+    Right.Color = Color3.fromRGB(255, 0, 0)
+    Right.Thickness = 2
+    Right.Transparency = 1
+
+    function ESP()
+        local connection
+        connection = game:GetService("RunService").RenderStepped:Connect(function()
+            if newplr.Character ~= nil and newplr.Character:FindFirstChild("HumanoidRootPart") ~= nil and newplr.Name ~= plr.Name  and newplr.Character.Humanoid.Health > 0 then
+                local ScreenPos, OnScreen = camera:WorldToViewportPoint(newplr.Character.HumanoidRootPart.Position)
+                if OnScreen then
+                    local Scale = newplr.Character.Head.Size.Y/2
+                    local Size = Vector3.new(2, 3, 0) * (Scale * 2)
+                    local humpos = camera:WorldToViewportPoint(newplr.Character.HumanoidRootPart.Position)
+                    local TL = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, 0)).p)
+                    local TR = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, 0)).p)
+                    local BL = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, 0)).p)
+                    local BR = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, 0)).p)
+
+                    Top.From = Vector2.new(TL.X, TL.Y)
+                    Top.To = Vector2.new(TR.X, TR.Y)
+
+                    Left.From = Vector2.new(TL.X, TL.Y)
+                    Left.To = Vector2.new(BL.X, BL.Y)
+
+                    Right.From = Vector2.new(TR.X, TR.Y)
+                    Right.To = Vector2.new(BR.X, BR.Y)
+
+                    Bottom.From = Vector2.new(BL.X, BL.Y)
+                    Bottom.To = Vector2.new(BR.X, BR.Y)
+
+                    if newplr.TeamColor == plr.TeamColor then
+                        Top.Color = Color3.fromRGB(0, 255, 0)
+                        Left.Color = Color3.fromRGB(0, 255, 0)
+                        Bottom.Color = Color3.fromRGB(0, 255, 0)
+                        Right.Color = Color3.fromRGB(0, 255, 0)
+                    else 
+                        Top.Color = Color3.fromRGB(255, 0, 0)
+                        Left.Color = Color3.fromRGB(255, 0, 0)
+                        Bottom.Color = Color3.fromRGB(255, 0, 0)
+                        Right.Color = Color3.fromRGB(255, 0, 0)
+                    end
+
+                    Top.Visible = true
+                    Left.Visible = true
+                    Bottom.Visible = true
+                    Right.Visible = true
+                else 
+                    Top.Visible = false
+                    Left.Visible = false
+                    Bottom.Visible = false
+                    Right.Visible = false
+                end
+            else 
+                Top.Visible = false
+                Left.Visible = false
+                Bottom.Visible = false
+                Right.Visible = false
+                if game.Players:FindFirstChild(newplr.Name) == nil then
+                    connection:Disconnect()
+                end
+            end
+        end)
+    end
+    coroutine.wrap(ESP)()
+end)
 end
-end))
-function CreateSG(name,parent,face)
-local SurfaceGui = Instance.new("SurfaceGui",parent)
-SurfaceGui.Parent = parent
-SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-SurfaceGui.Face = Enum.NormalId[face]
-SurfaceGui.LightInfluence = 0
-SurfaceGui.ResetOnSpawn = false
-SurfaceGui.Name = name
-SurfaceGui.AlwaysOnTop = true
-local Frame = Instance.new("Frame",SurfaceGui)
-Frame.BackgroundColor3 = Color3.fromRGB(85, 170, 255)
-Frame.Size = UDim2.new(1,0,1,0)
+})
+
+LXBTab: AddButton({
+	Name = "绘制玩家边框",
+	Callback = function(value)
+		print(value)
+local FillColor = Color3.fromRGB(65,255,0)
+local DepthMode = "AlwaysOnTop"
+local FillTransparency = 0.5
+local OutlineColor = Color3.fromRGB(255,255,255)
+local OutlineTransparency = 0
+
+local CoreGui = game:FindService("CoreGui")
+local Players = game:FindService("Players")
+local lp = Players.LocalPlayer
+local connections = {}
+
+local Storage = Instance.new("Folder")
+Storage.Parent = CoreGui
+Storage.Name = "Highlight_Storage"
+
+local function Highlight(plr)
+    local Highlight = Instance.new("Highlight")
+    Highlight.Name = plr.Name
+    Highlight.FillColor = FillColor
+    Highlight.DepthMode = DepthMode
+    Highlight.FillTransparency = FillTransparency
+    Highlight.OutlineColor = OutlineColor
+    Highlight.OutlineTransparency = 0
+    Highlight.Parent = Storage
+    
+    local plrchar = plr.Character
+    if plrchar then
+        Highlight.Adornee = plrchar
+    end
+
+    connections[plr] = plr.CharacterAdded:Connect(function(char)
+        Highlight.Adornee = char
+    end)
 end
-while wait(1) do
-for i,v in pairs (game:GetService("Players"):GetPlayers()) do
-if v ~= game:GetService("Players").LocalPlayer and v.Character ~= nil and
-v.Character:FindFirstChild("LowerTorso") and v.Character.LowerTorso:FindFirstChild("cham") == nil then
-for i,v in pairs (v.Character:GetChildren()) do
-if v:IsA("MeshPart") or v.Name == "LowerTorso" then
-CreateSG("cham",v,"Back")
-CreateSG("cham",v,"Front")
-CreateSG("cham",v,"Left")
-CreateSG("cham",v,"Right")
-CreateSG("cham",v,"Right")
-CreateSG("cham",v,"Top")
-CreateSG("cham",v,"Bottom")
+
+Players.PlayerAdded:Connect(Highlight)
+for i,v in next, Players:GetPlayers() do
+    Highlight(v)
 end
-end
-end
-end
-end
+
+Players.PlayerRemoving:Connect(function(plr)
+    local plrname = plr.Name
+    if Storage[plrname] then
+        Storage[plrname]:Destroy()
+    end
+    if connections[plr] then
+        connections[plr]:Disconnect()
+    end
+end)
     end
 })
+
+
+local Toggle = Tab:Toggle({
+    Title = "透视骨骼",
+    Value = false,    
+    Callback = function(state) 
+        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/ESPs/main/UniversalSkeleton.lua"))()
+local Skeletons = {}
+for _, Player in next, game.Players:GetChildren() do
+	table.insert(Skeletons, Library:NewSkeleton(Player, true));
+end
+game.Players.PlayerAdded:Connect(function(Player)
+	table.insert(Skeletons, Library:NewSkeleton(Player, true));
+end) 
+    end
+})
+
 -----------------------------------------------------------------------------------------------越快越慢
 local Button = Tab:Button({
     Title = "跑的越快就越慢",
@@ -709,6 +1021,13 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
+        
+        WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
     end
 })
 -----------------------------------------------------------------------------------------------防甩飞
@@ -776,6 +1095,13 @@ for i,v in ipairs(Services.Players:GetPlayers()) do
    end
 end
 Services.Players.PlayerAdded:Connect(PlayerAdded)
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
     end
 })
 -----------------------------------------------------------------------------------------------撸关R15
@@ -785,6 +1111,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+        
+    WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+        
     end
 })
 -----------------------------------------------------------------------------------------------撸关R6
@@ -794,6 +1128,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+        
+    WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+        
     end
 })
 -----------------------------------------------------------------------------------------------甩飞
@@ -1299,6 +1641,14 @@ closeButton.MouseButton1Click:Connect(function()
 	end
 	ultimateFling:Destroy()
 end)
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
     end
 })
 -----------------------------------------------------------------------------------------------穿墙
@@ -1430,6 +1780,14 @@ Toggle.MouseButton1Click:connect(function()
 		Status.TextColor3 = Color3.new(170,0,0)
 	end
 end)
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
     end
 })
 
@@ -1438,7 +1796,139 @@ local Button = Tab:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/MHE1cbWF"))()
+            local Speed = 100
+
+	-- Gui to Lua
+	-- Version: 3.2
+	local HumanoidRP = game.Players.LocalPlayer.Character.HumanoidRootPart
+	-- Instances:
+
+	local ScreenGui = Instance.new("ScreenGui")
+	local W = Instance.new("TextButton")
+	local S = Instance.new("TextButton")
+	local A = Instance.new("TextButton")
+	local D = Instance.new("TextButton")
+	local Fly = Instance.new("TextButton")
+	local unfly = Instance.new("TextButton")
+	local StopFly = Instance.new("TextButton")
+
+	--Properties:
+
+	ScreenGui.Parent = game.CoreGui
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	unfly.Name = "上"
+	unfly.Parent = ScreenGui
+	unfly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	unfly.Position = UDim2.new(0.694387913, 0, 0.181818187, 0)
+	unfly.Size = UDim2.new(0, 72, 0, 50)
+	unfly.Font = Enum.Font.SourceSans
+	unfly.Text = "停止飞行"
+	unfly.TextColor3 = Color3.fromRGB(127, 34, 548)
+	unfly.TextScaled = true
+	unfly.TextSize = 14.000
+	unfly.TextWrapped = 
+		unfly.MouseButton1Down:Connect(function()
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+	end)
+
+	StopFly.Name = "关闭飞行"
+	StopFly.Parent = ScreenGui
+	StopFly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	StopFly.Position = UDim2.new(0.695689976, 0, 0.0213903747, 0)
+	StopFly.Size = UDim2.new(0, 71, 0, 50)
+	StopFly.Font = Enum.Font.SourceSans
+	StopFly.Text = "关闭飞行"
+	StopFly.TextColor3 = Color3.fromRGB(170, 0, 255)
+	StopFly.TextScaled = true
+	StopFly.TextSize = 14.000
+	StopFly.TextWrapped = true
+	StopFly.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = true
+	end)
+
+	Fly.Name = "开启飞车"
+	Fly.Parent = ScreenGui
+	Fly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Fly.Position = UDim2.new(0.588797748, 0, 0.0213903747, 0)
+	Fly.Size = UDim2.new(0, 66, 0, 50)
+	Fly.Font = Enum.Font.SourceSans
+	Fly.Text = "飞行"
+	Fly.TextColor3 = Color3.fromRGB(170, 0, 127)
+	Fly.TextScaled = true
+	Fly.TextSize = 14.000
+	Fly.TextWrapped = true
+	Fly.MouseButton1Down:Connect(function()
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 5000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+	end)
+
+	W.Name = "W"
+	W.Parent = ScreenGui
+	W.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	W.Position = UDim2.new(0.161668837, 0, 0.601604283, 0)
+	W.Size = UDim2.new(0, 58, 0, 50)
+	W.Font = Enum.Font.SourceSans
+	W.Text = "↑"
+	W.TextColor3 = Color3.fromRGB(226, 226, 526)
+	W.TextScaled = true
+	W.TextSize = 5.000
+	W.TextWrapped = true
+	W.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = false
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+		wait(.1)
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 50000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BV.Velocity = game.Workspace.CurrentCamera.CFrame.LookVector * Speed
+	end)
+
+
+	S.Name = "S"
+	S.Parent = ScreenGui
+	S.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	S.Position = UDim2.new(0.161668837, 0, 0.735294104, 0)
+	S.Size = UDim2.new(0, 58, 0, 50)
+	S.Font = Enum.Font.SourceSans
+	S.Text = "↓"
+	S.TextColor3 = Color3.fromRGB(255, 255, 255)
+	S.TextScaled = true
+	S.TextSize = 14.000
+	S.TextWrapped = true
+	S.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = false
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+		wait(.1)
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 5000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BV.Velocity = game.Workspace.CurrentCamera.CFrame.LookVector * -Speed
+	end)
+	
+	WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+	
     end
 })
 
@@ -1448,6 +1938,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1457,6 +1955,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
        loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()
+       
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})       
+       
     end
 })
 
@@ -1474,6 +1980,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1497,6 +2011,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Super-ring-Parts-V6-28581"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1521,6 +2043,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1561,65 +2091,24 @@ local Button = Tab:Button({
     end
 })
 
-Window:SelectTab(2) -- Number of Tab
------------------------------------------------------------------------------------------------DOORS
-local Tab = Tabs.Settings:Tab({
-    Title = "DOORS",
-    Icon = "door-open",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "功能",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-----------------------------------------------------------------------------------------------门
 local Button = Tab:Button({
-    Title = "门",
-    Desc = "点击透视门",
+    Title = "最强战场隐身道具",
+    Desc = "无卡",
     Locked = false,
     Callback = function()
-        	loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/doors1"))()
-    end
-})
-----------------------------------------------------------------------------------------------刷怪菜单
-local Button = Tab:Button({
-    Title = "刷怪菜单",
-    Desc = "点击加载刷怪菜单",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/shuaguai"))()
-    end
-})
-----------------------------------------------------------------------------------------------屏幕亮光
-local Button = Tab:Button({
-    Title = "屏幕亮光",
-    Desc = "点击加载屏幕亮光",
-    Locked = false,
-    Callback = function()
-        pcl.Enabled = Value
-    end
-})
-
-Window:SelectTab(2) -- Number of Tab
------------------------------------------------------------------------------------------------墨水游戏
-local Tab = Tabs.Settings:Tab({
-    Title = "墨水游戏",
+        loadstring(game:HttpGet("https://gist.githubusercontent.com/skid123skidlol/cd0d2dce51b3f20ad1aac941da06a1a1/raw/f58b98cce7d51e53ade94e7bb460e4f24fb7e0ff/%257BFE%257D%2520Invisible%2520Tool%2520(can%2520hold%2520tools)",true))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
     Icon = "layout-grid",
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "越HB墨水",
-    Desc = "卡密1234",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/yanglizhiyanglizhi000-collab/-4/main/%E8%B6%8AHB%20%E5%A2%A8%E6%B0%B4%E6%B8%B8%E6%88%8F.lua"))()
+})        
+        
     end
 })
 
+Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------死铁轨
 local Tab = Tabs.Settings:Tab({
     Title = "死铁轨",
@@ -1639,6 +2128,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1662,6 +2159,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1671,6 +2176,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/NEHUB2/NE/refs/heads/main/855.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1694,6 +2207,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1703,6 +2224,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/autoparrybest"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1725,7 +2254,15 @@ local Button = Tab:Button({
     Desc = "无卡英文 推荐",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Brinxhub12/brinx-hub-comebac1/refs/heads/main/brinx%20come%20back"))();
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Brinxhub12/brinx-hub-comebac1/refs/heads/main/brinx%20come%20back"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1749,6 +2286,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/refs/heads/main/jmjmjmjmjmjm114514.txt"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1772,6 +2317,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.github.com/114514541883484/Zephyr-wave/main/agreement.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -1795,6 +2348,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(("https://raw.githubusercontent.com/NOOBARMYSCRIPTER/NOOBARMYSCRIPTER/main/AXE%20LOOP%20SCRIPT"), true))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
