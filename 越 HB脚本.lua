@@ -7,7 +7,7 @@ local Window = WindUI:CreateWindow({
         IconThemed = true,
         Author = "作者:HB",
         Folder = "CloudHub",            
-    Size = UDim2.fromOffset(100, 100),
+    Size = UDim2.fromOffset(400, 300),
         User = {
             Enabled = true,
             Callback = function() print("clicked") end,
@@ -1634,7 +1634,7 @@ WindUI:Notify({
 
 Window:SelectTab(2) -- Number of Tab
 
-local Tab = Window:Tab({
+local Tab = Tabs.Settings:Tab({
     Title = "越HB脚本",
     Icon = "bird", -- optional
     Locked = false,
