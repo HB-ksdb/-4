@@ -1,43 +1,28 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB 脚本<font color='#00FF00'>1.0DOORS</font>  ",
+        Title = "越 HB<font color='#00FF00'>1.5</font>",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:HB",
-        Folder = "CloudHub",            
-    Size = UDim2.fromOffset(100, 100),
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
         User = {
             Enabled = true,
             Callback = function() print("clicked") end,
             Anonymous = false
         },
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://96291371536118"
+    })
     
-    -- !  ↓  remove this all, 
-    -- !  ↓  if you DON'T need the key system
-    KeySystem = { 
-        -- ↓ Optional. You can remove it.
-        Key = { "1234" },
-        
-        Note = "请输入你的卡密.卡密1234,
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        SaveKey = false, -- automatically save and load the key.
-        
-        -- ↓ Optional. You can remove it.
-        -- API = {} ← Services. Read about it below ↓
-    },
-})
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "越 HB脚本 DOORS",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -54,7 +39,7 @@ Window:EditOpenButton({
 })
             
 Window:Tag({
-    Title = "v1.4越 HB",
+    Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
@@ -117,7 +102,6 @@ local Button = Tab:Button({
         end)
     end
 })
-Tab:Select() -- Select Tab
 
 local Tab = Tabs.Settings:Tab({
     Title = "透视",
@@ -791,4 +775,4 @@ local Toggle = Tab:Toggle({
     end
 end    
 })
-Tab:Select() -- Select Tab
+
