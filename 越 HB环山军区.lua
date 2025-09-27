@@ -14,23 +14,26 @@ local Window = WindUI:CreateWindow({
             Anonymous = false
         },
 
-WindUI:Popup({
-    Title = "越HB环山军区",
-    Icon = "info",
-    Content = "没什么好说的😠",
-    Buttons = {
-        {
-            Title = "Cancel",
-            Callback = function() end,
-            Variant = "Tertiary",
-        },
-        {
-            Title = "Continue",
-            Icon = "arrow-right",
-            Callback = function() end,
-            Variant = "Primary",
-        }
-    }
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "1234" },
+        
+        Note = "请输入你的卡密.卡密1234",
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
 })
 
 Window:Tag({
@@ -119,6 +122,7 @@ local Slider = Tab:Slider({
         end
     end
 })
+
 -----------------------------------------------------------------------------------------------速度
 local Slider = Tab:Slider({
     Title = "速度",
@@ -628,8 +632,17 @@ mini2.MouseButton1Click:Connect(function()
 	closebutton.Position =  UDim2.new(0, 0, -1, 27)
 end)
 
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
     end
 })
+
+
 
 local Button = Tab:Button({
     Title = "子追穿墙",
@@ -637,6 +650,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+        
     end
 })
 
@@ -646,6 +667,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+        
     end
 })
 
@@ -714,6 +743,14 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
@@ -845,6 +882,14 @@ Toggle.MouseButton1Click:connect(function()
 		Status.TextColor3 = Color3.new(170,0,0)
 	end
 end)
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
     end
 })
 
