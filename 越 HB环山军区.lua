@@ -96,7 +96,7 @@ local Paragraph = Tab:Paragraph({
     Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
 }
 
-local Tab = Window:Tab({
+local Tab = Tabs.Main:Tab({
     Title = "穿墙跑进去",
     Icon = "", -- optional
     Locked = false,
