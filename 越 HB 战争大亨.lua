@@ -153,47 +153,29 @@ local function addRainbowTitleToLocalPlayer(player, titleText)
     addTitleToCharacter(character)
     player.CharacterAdded:Connect(addTitleToCharacter)
 end
-
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+addRainbowTitleToLocalPlayer(LP, "AlienX VIP")
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syndromehsh/Lua/baff0bc41893a32f8e997d840241ad4b3d26ab4d/AlienX/AlienX%20Wind%203.0%20UI.txt"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB 脚本<font color='#00FF00'>1.0战争大亨</font>  ",
-        Icon = "rbxassetid://4483362748",
-        IconTransparency = 0.5,
-        IconThemed = true,
-        Author = "作者:HB",
-        Folder = "CloudHub",            
-    Size = UDim2.fromOffset(100, 100),
-        User = {
-            Enabled = true,
-            Callback = function() print("clicked") end,
-            Anonymous = false
-        },
-    
-    -- !  ↓  remove this all, 
-    -- !  ↓  if you DON'T need the key system
-    KeySystem = { 
-        -- ↓ Optional. You can remove it.
-        Key = { "NBnonoKey", "1234" },
-        
-        Note = "请输入你的卡密.没卡密加群1055870765",
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        
-        
-        -- ↓ Optional. You can remove it.
-        SaveKey = false, -- automatically save and load the key.
-        
-        -- ↓ Optional. You can remove it.
-        -- API = {} ← Services. Read about it below ↓
+    Title = 'AlienX<font color="#00FF00">2.0</font>/ 战争大亨|XI团队出品必是精品',
+    Icon = "rbxassetid://4483362748",
+    IconThemed = true,
+    Author = "AlienX",
+    Folder = "CloudHub",
+    Size = UDim2.fromOffset(580, 440),
+    Transparent = true,
+    Theme = "Dark",
+    User = {
+        Enabled = true,
+        Callback = function() print("clicked") end,
+        Anonymous = false
     },
+    SideBarWidth = 200,
+    ScrollBarEnabled = true,
 })
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "打开脚本",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -208,26 +190,9 @@ Window:EditOpenButton({
     }),
     Draggable = true,
 })
-            
-Window:Tag({
-    Title = "v1.4越 HB",
-    Color = Color3.fromHex("#30ff6a")
-})
-
-Window:Tag({
-        Title = "战争大亨", -- 标签汉化
-        Color = Color3.fromHex("#315dff")
-    })
-
-local Tab = Window:Tab({
-    Title = "枪械功能",
-    Icon = "", -- optional
-    Locked = false,
-})
-
 
 local LockSection = Window:Section({
-    Title = "战争功能",
+    Title = "稳定功能",
     Opened = true,
 })
 
@@ -240,30 +205,30 @@ local function Btn(tab, title, callback)
 end
 
 local function Tg(tab, title, value, callback)
-    return tab:Toggle({Title = title, Image = "layout-grid", Value = value, Callback = callback})
+    return tab:Toggle({Title = title, Image = "bird", Value = value, Callback = callback})
 end
 
 local function Sld(tab, title, min, max, default, callback)
     return tab:Slider({Title = title, Step = 1, Value = {Min = min, Max = max, Default = default}, Callback = callback})
 end
 
-local A = AddTab(LockSection, "传送", )
-local B = AddTab(LockSection, "自动", )
-local C = AddTab(LockSection, "透视", )
-local D = AddTab(LockSection, "辅助", )
-local E = AddTab(LockSection, "自瞄", )
+local A = AddTab(LockSection, "传送", "rbxassetid://3944688398")
+local B = AddTab(LockSection, "自动", "rbxassetid://4450736564")
+local C = AddTab(LockSection, "透视", "rbxassetid://104955103991281")
+local D = AddTab(LockSection, "辅助", "rbxassetid://4483362458")
+local E = AddTab(LockSection, "自瞄", "rbxassetid://4483345998")
 
 local FunSection = Window:Section({
-    Title = "功能",
+    Title = "娱乐功能",
     Opened = true,
 })
 
-local F = AddTab(FunSection, "攻击", )
-local G = AddTab(FunSection, "武器", )
-local H = AddTab(FunSection, "玩家", )
-local I = AddTab(FunSection, "子追", )
+local F = AddTab(FunSection, "攻击", "rbxassetid://4384392464")
+local G = AddTab(FunSection, "武器", "rbxassetid://94831304996747")
+local H = AddTab(FunSection, "玩家", "rbxassetid://4335480896")
+local I = AddTab(FunSection, "子追", "rbxassetid://4483345998")
 
-Tab:Select(1) -- Select Tab
+Window:SelectTab(1)
 
 local Players = game:GetService("Players")
 local LP = Players.LocalPlayer
@@ -351,6 +316,24 @@ Tg(B,"自动升级",false,function(value)
         getgenv().autoTeleport = value
     end
 )
+
+
+B:Divider()
+
+
+B:Button({
+    Title = "自动重生",
+    Description = "正在开发中..",
+    Locked = true,
+})
+
+B:Button({
+    Title = "自动空投",
+    Description = "正在开发中..",
+    Locked = true,
+})
+
+
 
 getgenv().ESPEnabled = false
 getgenv().ShowBox = false
@@ -616,7 +599,7 @@ local function createESP(player)
                 local barX = headPos.X - barWidth / 2
                 local barY = headPos.Y - 20
 
-healthBarBackground.Size = Vector2.new(barWidth, barHeight)
+                healthBarBackground.Size = Vector2.new(barWidth, barHeight)
                 healthBarBackground.Position = Vector2.new(barX, barY)
                 healthBarBackground.Visible = true
 
@@ -715,7 +698,7 @@ healthBarBackground.Size = Vector2.new(barWidth, barHeight)
                 end
             else
                 tracer.Visible = false
-                end
+            end
 
             if getgenv().OutOfViewArrows and not onScreen then
                 local direction = (rootPart.Position - Camera.CFrame.Position).Unit
@@ -815,7 +798,7 @@ healthBarBackground.Size = Vector2.new(barWidth, barHeight)
                         skeletonLines[9].From = Vector2.new(rightLegPos.X, rightLegPos.Y)
                         skeletonLines[9].To = Vector2.new(rightLowerLegPos.X, rightLowerLegPos.Y)
                         skeletonLines[9].Visible = true
-                        end
+                    end
                 else
                     for _, line in pairs(skeletonLines) do
                         line.Visible = false
@@ -1015,7 +998,7 @@ RunService.RenderStepped:Connect(updateFOV)
 
 for _, player in pairs(Players:GetPlayers()) do
     if player ~= LocalPlayer then
-    createESP(player)
+        createESP(player)
     end
 end
 
@@ -1215,7 +1198,7 @@ D:Button({
 
                 return
             end
-            end
+        end
         
         local connection
         connection = player.CharacterAdded:Connect(function(newCharacter)
@@ -1415,7 +1398,7 @@ Btn(F, "刷新玩家列表", function()
     PlayerList = {}
     for _, player in ipairs(Plr:GetPlayers()) do
         if player ~= LP then
-        table.insert(PlayerList, player.Name)
+            table.insert(PlayerList, player.Name)
         end
     end
     excludeTargetsDropdown:Refresh(PlayerList)
