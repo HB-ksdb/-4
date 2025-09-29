@@ -197,21 +197,21 @@ local Tabs = {
 }
 
 local TabHandles = {
-    Elements = Tabs.Main:Tab({ Title = "自定义UI", Icon = "FileCode" }),
+    Elements = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
     YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
-    gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "ListCollapse" }),
-    ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "ListCollapse" }),
-    pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "ListCollapse" }),
-    tzgn = Tabs.gn:Tab({ Title = "最坚强战场", Icon = "ListCollapse" }),
-    fzgn = Tabs.gn:Tab({ Title = "死铁轨", Icon = "ListCollapse" }),
-    A = Tabs.gn:Tab({ Title = "森林99夜", Icon = "ListCollapse" }),
-    B = Tabs.gn:Tab({ Title = "刀刃球", Icon = "ListCollapse" }),
-    C = Tabs.gn:Tab({ Title = "偷走脑红", Icon = "ListCollapse" }),
-    D = Tabs.gn:Tab({ Title = "火箭发射模拟器", Icon = "ListCollapse" }),
-    E = Tabs.gn:Tab({ Title = "力量传奇", Icon = "ListCollapse" }),
-    F = Tabs.gn:Tab({ Title = "代木大享", Icon = "ListCollapse" }),
-    G = Tabs.gn:Tab({ Title = "巴掌模拟器", Icon = "ListCollapse" }),       
+    gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "layout-grid" }),
+    ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "layout-grid" }),
+    pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "layout-grid" }),
+    tzgn = Tabs.gn:Tab({ Title = "最坚强战场", Icon = "layout-grid" }),
+    fzgn = Tabs.gn:Tab({ Title = "死铁轨", Icon = "layout-grid" }),
+    A = Tabs.gn:Tab({ Title = "森林99夜", Icon = "layout-grid" }),
+    B = Tabs.gn:Tab({ Title = "刀刃球", Icon = "layout-grid" }),
+    C = Tabs.gn:Tab({ Title = "偷走脑红", Icon = "layout-grid" }),
+    D = Tabs.gn:Tab({ Title = "火箭发射模拟器", Icon = "layout-grid" }),
+    E = Tabs.gn:Tab({ Title = "力量传奇", Icon = "layout-grid" }),
+    F = Tabs.gn:Tab({ Title = "代木大享", Icon = "layout-grid" }),
+    G = Tabs.gn:Tab({ Title = "巴掌模拟器", Icon = "layout-grid" }),       
 }
 
 -----------------------------------------------------------------------------------------------跳跃
