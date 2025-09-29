@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "越 HB脚本 99夜",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -48,7 +48,7 @@ Window:Tag({
         Color = Color3.fromHex("#315dff")
     })
     local TimeTag = Window:Tag({
-        Title = "正在更新",
+        Title = "99夜",
         Color = Color3.fromHex("#000000")
     })
 
@@ -57,161 +57,6 @@ local Tabs = {
     Settings = Window:Section({ Title = "脚本", Opened = true }),
     Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
 }
-
-hookfunction(getnamecallmethod, function()
-  return
-end)
-for i, v in pairs({request, loadstring, base64.decode}) do
-  if isfunctionhooked(v) or not isfunctionhooked(getnamecallmethod) then
-    return
-  end
-end
-local HttpService = game:GetService("HttpService")
-local Plr = game:GetService("Players")
-local LP = Plr.LocalPlayer
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local ClientModule = require(LP:WaitForChild("PlayerScripts"):WaitForChild("Client"))
-local EatRemote = ClientModule and ClientModule.Events and ClientModule.Events.RequestConsumeItem
-getgenv().WS = LP.Character.Humanoid.WalkSpeed
-
-local AlienX = {
-      ["杀戮光环"] = false,
-      ["自动砍树"] = false,
-      ["自动进食"] = false,
-      ["透视孩子"] = false,
-      ["透视宝箱"] = false
-    }
-
-    local BL = {}
-    local ClientModule = require(LP:WaitForChild("PlayerScripts"):WaitForChild("Client"))
-    local EatRemote = ClientModule and ClientModule.Events and ClientModule.Events.RequestConsumeItem
-    local function AddESP(part, txt1, txt2, enabled)
-      local BG = part:FindFirstChild("BillboardGui")
-      if not BG then
-        local bg = Instance.new("BillboardGui")
-        bg.Adornee = part
-        bg.Parent = part
-        bg.Size = UDim2.new(0, 100, 0, 100)
-        bg.StudsOffset = Vector3.new(0, 3, 0)
-        bg.AlwaysOnTop = true
-        local TL = Instance.new("TextLabel", bg)
-        TL.Text = txt1 .. "\n" .. txt2 .. "m"
-        TL.Size = UDim2.new(1, 0, 0, 40)
-        TL.Position = UDim2.new(0, 0, 0, 0)
-        TL.BackgroundTransparency = 1
-        TL.TextColor3 = Color3.new(1, 1, 1)
-        TL.TextStrokeTransparency = 0.3
-        TL.Font = Enum.Font.GothamBold
-        TL.TextSize = 14
-        local Img = Instance.new("ImageLabel", bg)
-        Img.Position = UDim2.new(0, 20, 0, 40)
-        Img.Size = UDim2.new(0, 60, 0, 60)
-        Img.Image = part.Name:match("Chest") and "rbxassetid://108829629233834" or ""
-        Img.BackgroundTransparency = 1
-
-
-      else
-        local bg = BG
-        bg.TextLabel.Text = txt1 .. "\n" .. txt2 .. "m"
-        bg.Enabled = enabled
-      end
-    end
-
-local Tab = Tabs.Main:Tab({
-    Title = "光环",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
-
-local Toggle = Tab:Toggle({
-    Title = "杀戮光环",
-    Desc = "自动打怪和动物",
-    Icon = "check",
-    Value = false,
-    Callback = function(Value)
-AlienX["杀戮光环"] = Value
-    end
-})
-
-local Toggle = Tab:Toggle({
-    Title = "自动砍树",
-    Icon = "check",
-    Value = false,
-    Callback = function(Value)
-AlienX["自动砍树"] = Value
-    end
-})
-
-local Toggle = Tab:Toggle({
-    Title = "自动进食",
-    Desc = "自动吃东西，在范围内有食物的话",
-    Icon = "check",
-    Value = false,
-    Callback = function(Value)
-AlienX["自动进食"] = Value
-    end
-})
-
-local Toggle = Tab:Toggle({
-    Title = "瞬时互动",
-    Desc = "与物品互动无冷却",
-    Icon = "check",
-    Value = false,
-    Callback = function(Value)
-if Value then
-        if not connection then
-          connection = game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
-            prompt.HoldDuration = 0
-          end)
-        end
-       else
-        if connection then
-          connection:Disconnect()
-        end
-      end
-    end
-})
-
-local function TeleportToThing(thing)
-    -- 安全获取本地玩家角色部件
-    local LP = game.Players.LocalPlayer
-    local character = LP.Character or LP.CharacterAdded:Wait()
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-    
-    -- 遍历场景寻找目标物品
-    for _, obj in pairs(workspace:GetDescendants()) do
-        if obj:IsA("Model") and obj.Name == thing then
-            local part = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
-            if part then
-                -- 将玩家传送到目标物品位置（保留原始高度偏移）
-                humanoidRootPart.CFrame = part.CFrame * CFrame.new(0, 2, 0)
-                return true  -- 成功传送后退出
-            end
-        end
-    end
-    return false  -- 未找到目标
-end
-
-    local function tryEatFood(food)
-      if not EatRemote then warn("🚫 No EatRemote") return end
-      if not ReplicatedStorage:FindFirstChild("TempStorage") then warn("🚫 No TempStorage") return end
-      WindUI:Notify({Title = "HB脚本中心：", Content = "正在吃..." .. food.Name, Duration = 5})
-      food.Parent = ReplicatedStorage.TempStorage
-      local success, result = pcall(function()
-        return EatRemote:InvokeServer(food)
-      end)
-      if success and result and result.Success then
-        WindUI:Notify({Title = "HB脚本中心：", Content = "进食成功" .. food.Name, Duration = 5})
-        return
-       else
-        WindUI:Notify({Title = "HB脚本中心：", Content = "进食失败", Duration = 5})
-        return
-      end
-    end
-    local PlayerList = {}
-    for a, b in next, Plr:GetPlayers() do
-      table.insert(PlayerList, b.Name)
-    end
 
 local Tab = Tabs.Settings:Tab({
     Title = "收集",
