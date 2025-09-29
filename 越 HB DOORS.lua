@@ -54,9 +54,7 @@ Window:Tag({
 
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
-    gn = Window:Section({ Title = "功能", Opened = true }),
-    Settings = Window:Section({ Title = "UI设置", Opened = true }),
-    Utilities = Window:Section({ Title = "保存配置", Opened = true })
+    gn = Window:Section({ Title = "功能", Opened = true }),    
 }
 
 local TabHandles = {
@@ -66,9 +64,7 @@ local TabHandles = {
     ESPgn = Tabs.gn:Tab({ Title = "视觉功能", Icon = "layout-grid" }),
     pbgn = Tabs.gn:Tab({ Title = "屏蔽实体", Icon = "layout-grid" }),
     tzgn = Tabs.gn:Tab({ Title = "通知功能", Icon = "layout-grid" }),
-    fzgn = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),
-    Appearance = Tabs.Settings:Tab({ Title = "UI外观", Icon = "brush" }),
-    Config = Tabs.Utilities:Tab({ Title = "调整配置", Icon = "settings" })
+    fzgn = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),    
 }
 
 TabHandles.xx:Paragraph({
