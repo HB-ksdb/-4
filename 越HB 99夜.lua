@@ -1,199 +1,57 @@
-Window:OnDestroy(function()
-    print("Window destroyed")
-end)
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Rb脚本中心付费版：", 
-	Text = "成功", 
-	Icon = "rbxassetid://119970903874014" 
-})()
-  elseif game.GameId == 7709344486 then 
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Rb脚本中心付费版：", 
-	Text = "偷走脑红正在制作中，请等待更新！", 
-	Icon = "rbxassetid://119970903874014" 
-})()
-
-  else -- Not Support
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Rb脚本中心付费版：", 
-	Text = "请在支持的服务器中加载脚本！", 
-	Icon = "rbxassetid://119970903874014" 
-})()
-end
-    end
-})
-
-TabHandles.gn:Button({
-    Title = "加载森林中的99夜",
-    Desc = "手动",
-    Icon = "plus",
-    Callback = function()
-local WindUI = loadstring(game:HttpGet("https://pastebin.com/raw/qYYUTE4g"))()
-
-WindUI:Localization({
-    Enabled = true,
-    Prefix = "loc:",
-    DefaultLanguage = "ru",
-    Translations = {
-        ["ru"] = {
-            ["WINDUI_EXAMPLE"] = "WindUI Пример",
-            ["WELCOME"] = "Добро пожаловать в WindUI!",
-            ["LIB_DESC"] = "Библиотека для создания красивых интерфейсов",
-            ["SETTINGS"] = "Настройки",
-            ["APPEARANCE"] = "Внешний вид",
-            ["FEATURES"] = "Функционал",
-            ["UTILITIES"] = "Инструменты",
-            ["UI_ELEMENTS"] = "UI Элементы",
-            ["CONFIGURATION"] = "Конфигурация",
-            ["SAVE_CONFIG"] = "Сохранить конфигурацию",
-            ["LOAD_CONFIG"] = "Загрузить конфигурацию",
-            ["THEME_SELECT"] = "Выберите тему",
-            ["TRANSPARENCY"] = "Прозрачность окна"
-        },
-        ["en"] = {
-            ["WINDUI_EXAMPLE"] = "WindUI Example",
-            ["WELCOME"] = "Welcome to WindUI!",
-            ["LIB_DESC"] = "Beautiful UI library for Roblox",
-            ["SETTINGS"] = "Settings",
-            ["APPEARANCE"] = "Appearance",
-            ["FEATURES"] = "Features",
-            ["UTILITIES"] = "Utilities",
-            ["UI_ELEMENTS"] = "UI Elements",
-            ["CONFIGURATION"] = "Configuration",
-            ["SAVE_CONFIG"] = "Save Configuration",
-            ["LOAD_CONFIG"] = "Load Configuration",
-            ["THEME_SELECT"] = "Select Theme",
-            ["TRANSPARENCY"] = "Window Transparency"
-        }
-    }
-})
-
-WindUI.TransparencyValue = 0.2
-WindUI:SetTheme("Dark")
-
-local function gradient(text, startColor, endColor)
-    local result = ""
-    for i = 1, #text do
-        local t = (i - 1) / (#text - 1)
-        local r = math.floor((startColor.R + (endColor.R - startColor.R) * t) * 255)
-        local g = math.floor((startColor.G + (endColor.G - startColor.G) * t) * 255)
-        local b = math.floor((startColor.B + (endColor.B - startColor.B) * t) * 255)
-        result = result .. string.format('<font color="rgb(%d,%d,%d)">%s</font>', r, g, b, text:sub(i, i))
-    end
-    return result
-end
-
-local Confirmed = false
-
-WindUI:Popup({
-    Title = gradient("RbScript Hub", Color3.fromHex("#6A11CB"), Color3.fromHex("#2575FC")),
-    Icon = "sparkles",
-    IconThemed = true,
-    Content = "欢迎使用付费版！",
-    Buttons = {
-        {
-            Title = "取消",
-            --Icon = "",
-            Callback = function() end,
-            Variant = "Secondary", -- Primary, Secondary, Tertiary
-        },
-        {
-            Title = "确认",
-            Icon = "arrow-right",
-            Callback = function() Confirmed = true end,
-            Variant = "Primary", -- Primary, Secondary, Tertiary
-        }
-    }
-})
-
-repeat wait() until Confirmed
-
-local UserGui = Instance.new("ScreenGui", game.CoreGui)
-local UserLabel = Instance.new("TextLabel", UserGui)
-local UIGradient = Instance.new("UIGradient")
-
-UserGui.Name = "UserGui"
-UserGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-UserGui.Enabled = true
-UserLabel.Name = "UserLabel"
-UserLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-UserLabel.BackgroundTransparency = 1
-UserLabel.BorderColor3 = Color3.new(0, 0, 0)
-UserLabel.Position = UDim2.new(0.80, 0.80, 0.00090, 0)
-UserLabel.Size = UDim2.new(0, 135, 0, 50)
-UserLabel.Font = Enum.Font.GothamSemibold
-UserLabel.Text = "尊敬的："..game.Players.LocalPlayer.Character.Name.."付费版用户，欢迎使用Rb脚本中心！"
-UserLabel.TextColor3 = Color3.new(1, 1, 1)
-UserLabel.TextScaled = true
-UserLabel.TextSize = 14
-UserLabel.TextWrapped = true
-UserLabel.Visible = true
-
-UIGradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
-    ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)),
-    ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)),
-    ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)),
-    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)),
-    ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)),
-    ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)),
-    ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)),
-    ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)),
-    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))
-}
-UIGradient.Rotation = 10
-UIGradient.Parent = UserLabel
-
-local TweenService = game:GetService("TweenService")
-local tweeninfo = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
-local tween = TweenService:Create(UIGradient, tweeninfo, {Rotation = 360})
-tween:Play()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "Rb脚本中心",
-    Icon = "rbxassetid://105933835532108",
-    Author = "付费版 Yungengxin",
-    Folder = "脚本中心",
-    Size = UDim2.fromOffset(480, 360),
-    Theme = "Dark",
-    Background = WindUI:Gradient({
-        ["0"] = { Color = Color3.fromHex("#0f0c29"), Transparency = 1 },
-        ["100"] = { Color = Color3.fromHex("#302b63"), Transparency = 0.9 },
-    }, {
-        Rotation = 45,
-    }),
-    Background = "rbxassetid://133155269071576",
-    User = {
-        Enabled = true,
-        Anonymous = false,
-        Callback = function()
-        
-            WindUI:Notify({
-                Title = "您的用户ID：",
-                Content = (game:GetService("Players").LocalPlayer.UserId),
-                Duration = 3
-            })
-        end
-    },
-    SideBarWidth = 220,
-    HideSearchBar = false,
-    ScrollBarEnabled = true
-})
+        Title = "越 HB<font color='#00FF00'>1.5</font>",
+        Icon = "rbxassetid://4483362748",
+        IconTransparency = 0.5,
+        IconThemed = true,
+        Author = "作者:HB",
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
+        User = {
+            Enabled = true,
+            Callback = function() print("clicked") end,
+            Anonymous = false
+        },
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://96291371536118"
+    })
+    
 
+Window:EditOpenButton({
+    Title = "越 HB脚本",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 4,
+    Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromHex("FF0000")),
+        ColorSequenceKeypoint.new(0.16, Color3.fromHex("FF7F00")),
+        ColorSequenceKeypoint.new(0.33, Color3.fromHex("FFFF00")),
+        ColorSequenceKeypoint.new(0.5, Color3.fromHex("00FF00")),
+        ColorSequenceKeypoint.new(0.66, Color3.fromHex("0000FF")),
+        ColorSequenceKeypoint.new(0.83, Color3.fromHex("4B0082")),
+        ColorSequenceKeypoint.new(1, Color3.fromHex("9400D3"))
+    }),
+    Draggable = true,
+})
+            
 Window:Tag({
-    Title = "v1.0.0",
+    Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
-Window:CreateTopbarButton("theme-switcher", "moon", function()
-    WindUI:SetTheme(WindUI:GetCurrentTheme() == "Dark" and "Light" or "Dark")
-    WindUI:Notify({
-        Title = "Theme Changed",
-        Content = "Current theme: "..WindUI:GetCurrentTheme(),
-        Duration = 2
+Window:Tag({
+        Title = "越 HB版", -- 标签汉化
+        Color = Color3.fromHex("#315dff")
     })
-end, 990)
+    local TimeTag = Window:Tag({
+        Title = "正在更新",
+        Color = Color3.fromHex("#000000")
+    })
+
 
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
