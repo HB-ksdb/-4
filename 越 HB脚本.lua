@@ -198,6 +198,7 @@ local Tabs = {
 
 local TabHandles = {
     Elements = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
+    YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "layout-grid" }),
     ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "layout-grid" }),
     pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "layout-grid" }),
@@ -213,7 +214,7 @@ local TabHandles = {
 }
 
 -----------------------------------------------------------------------------------------------跳跃
-Slider = TabHandles.Main:Slider({
+Slider = TabHandles.YI:Slider({
     Title = "跳跃",
     Value = {
         Min = 50,
@@ -228,7 +229,7 @@ Slider = TabHandles.Main:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------速度
-Slider = TabHandles.Main:Slider({
+Slider = TabHandles.YI:Slider({
     Title = "速度",
     Value = {
         Min = 16,
@@ -243,7 +244,7 @@ Slider = TabHandles.Main:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------重量        
-Slider = TabHandles.Main:Slider({
+Slider = TabHandles.YI:Slider({
     Title = "重量",
     Value = {
         Min = 0.1,
@@ -256,7 +257,7 @@ Slider = TabHandles.Main:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------飞行
-Button =TabHandles.Main:Button({
+Button =TabHandles.YI:Button({
     Title = "飞行v1",
     Desc = "",
     Locked = false,
@@ -758,7 +759,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------子追
-Button = TabHandles.Main:Slider({
+Button = TabHandles.YI:Slider({
     Title = "子追穿墙",
     Desc = "",
     Locked = false,
@@ -788,7 +789,7 @@ Button = TabHandles.Main:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------隐身
-local Button = TabHandles.Main:Button({
+local Button = TabHandles.YI:Button({
     Title = "隐身自己",
     Desc = "",
     Locked = false,
@@ -818,7 +819,7 @@ local Button = TabHandles.Main:Button({
     end
 })
 
-Toggle = TabHandles.Main:Toggle({
+Toggle = TabHandles.YI:Toggle({
     Title = "透视骨骼",
     Value = false,    
     Callback = function(state) 
@@ -834,7 +835,7 @@ end)
 })
 
 -----------------------------------------------------------------------------------------------越快越慢
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "跑的越快就越慢",
     Desc = "",
     Locked = false,
@@ -864,7 +865,7 @@ Button = TabHandles.Main:Button({
     end
 })
 -----------------------------------------------------------------------------------------------防甩飞
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "防甩飞",
     Desc = "",
     Locked = false,
@@ -952,7 +953,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------撸关R15
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "撸关R15",
     Desc = "",
     Locked = false,
@@ -983,7 +984,7 @@ Button = TabHandles.Main:Button({
     end
 })
 -----------------------------------------------------------------------------------------------撸关R6
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "撸关R6",
     Desc = "",
     Locked = false,
@@ -1014,7 +1015,7 @@ Button = TabHandles.Main:Button({
     end
 })
 -----------------------------------------------------------------------------------------------甩飞
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "甩飞",
     Desc = "",
     Locked = false,
@@ -1541,7 +1542,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------穿墙
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "穿墙",
     Desc = "",
     Locked = false,
@@ -1694,7 +1695,7 @@ WindUI:Notify({
     end
 })
 
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "飞车",
     Desc = "",
     Locked = false,
@@ -1849,7 +1850,7 @@ Button = TabHandles.Main:Button({
     end
 })
 
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "爬墙",
     Desc = "",
     Locked = false,
@@ -1880,7 +1881,7 @@ WindUI:Notify({
     end
 })
 
-Button = TabHandles.Main:Button({
+Button = TabHandles.YI:Button({
     Title = "动作",
     Desc = "",
     Locked = false,
