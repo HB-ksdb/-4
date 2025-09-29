@@ -245,8 +245,6 @@ local Slider = Tab:Slider({
         game.Workspace.Gravity = value
     end
 })
-
-TabHandles.Elements:Divider()
 -----------------------------------------------------------------------------------------------飞行
 local Button = Tab:Button({
     Title = "飞行v1",
