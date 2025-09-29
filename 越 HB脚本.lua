@@ -192,18 +192,25 @@ local Paragraph = Tab:Paragraph({
 
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
-    Main = Window:Section({ Title = "越 HB通用", Opened = true }),
-    Settings = Window:Section({ Title = "脚本", Opened = true }),
-    Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
+    Main = Window:Section({ Title = "通用", Opened = true }),
+    gn = Window:Section({ Title = "功能", Opened = true }),    
 }
 
-local Tab = Tabs.Main:Tab({
-    Title = "越 HB通用",
-    Icon = "layout-grid",
-    Locked = false,
-})
+local TabHandles = {
+    xx = Tabs.Main:Tab({ Title = "游戏信息", Icon = "layout-grid" }),
+    Elements = Tabs.Main:Tab({ Title = "玩家功能", Icon = "layout-grid" }),
+    gn = Tabs.gn:Tab({ Title = "互动功能", Icon = "layout-grid" }),
+    ESPgn = Tabs.gn:Tab({ Title = "视觉功能", Icon = "layout-grid" }),
+    pbgn = Tabs.gn:Tab({ Title = "屏蔽实体", Icon = "layout-grid" }),
+    tzgn = Tabs.gn:Tab({ Title = "通知功能", Icon = "layout-grid" }),
+    fzgn = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),
+    A = Tabs.gn:Tab({ Title = "屏蔽实体", Icon = "layout-grid" }),
+    B = Tabs.gn:Tab({ Title = "通知功能", Icon = "layout-grid" }),
+    C = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),    
+}
+
 -----------------------------------------------------------------------------------------------跳跃
-local Slider = Tab:Slider({
+Slider = TabHandles.xx:Slider({
     Title = "跳跃",
     Value = {
         Min = 50,
@@ -218,7 +225,7 @@ local Slider = Tab:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------速度
-local Slider = Tab:Slider({
+Slider = TabHandles.xx:Slider({
     Title = "速度",
     Value = {
         Min = 16,
@@ -233,7 +240,7 @@ local Slider = Tab:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------重量        
-local Slider = Tab:Slider({
+Slider = TabHandles.xx:Slider({
     Title = "重量",
     Value = {
         Min = 0.1,
@@ -246,7 +253,7 @@ local Slider = Tab:Slider({
     end
 })
 -----------------------------------------------------------------------------------------------飞行
-local Button = Tab:Button({
+Button =TabHandles.xx:Button({
     Title = "飞行v1",
     Desc = "",
     Locked = false,
@@ -748,7 +755,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------子追
-local Button = Tab:Button({
+Button = TabHandles.xx:Slider({
     Title = "子追穿墙",
     Desc = "",
     Locked = false,
@@ -778,7 +785,7 @@ local Button = Tab:Button({
     end
 })
 -----------------------------------------------------------------------------------------------隐身
-local Button = Tab:Button({
+local Button = TabHandles.xx:Button({
     Title = "隐身自己",
     Desc = "",
     Locked = false,
@@ -808,7 +815,7 @@ local Button = Tab:Button({
     end
 })
 
-local Toggle = Tab:Toggle({
+Toggle = TabHandles.xx:Toggle({
     Title = "透视骨骼",
     Value = false,    
     Callback = function(state) 
@@ -824,7 +831,7 @@ end)
 })
 
 -----------------------------------------------------------------------------------------------越快越慢
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "跑的越快就越慢",
     Desc = "",
     Locked = false,
@@ -854,7 +861,7 @@ local Button = Tab:Button({
     end
 })
 -----------------------------------------------------------------------------------------------防甩飞
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "防甩飞",
     Desc = "",
     Locked = false,
@@ -942,7 +949,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------撸关R15
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "撸关R15",
     Desc = "",
     Locked = false,
@@ -973,7 +980,7 @@ local Button = Tab:Button({
     end
 })
 -----------------------------------------------------------------------------------------------撸关R6
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "撸关R6",
     Desc = "",
     Locked = false,
@@ -1004,7 +1011,7 @@ local Button = Tab:Button({
     end
 })
 -----------------------------------------------------------------------------------------------甩飞
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "甩飞",
     Desc = "",
     Locked = false,
@@ -1531,7 +1538,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------穿墙
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "穿墙",
     Desc = "",
     Locked = false,
@@ -1684,7 +1691,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "飞车",
     Desc = "",
     Locked = false,
@@ -1839,7 +1846,7 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "爬墙",
     Desc = "",
     Locked = false,
@@ -1870,7 +1877,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.xx:Button({
     Title = "动作",
     Desc = "",
     Locked = false,
@@ -1900,16 +1907,8 @@ WindUI:Notify({
        
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
------------------------------------------------------------------------------------------------其他脚本
-local Tab = Tabs.Main:Tab({
-    Title = "其他脚本",
-    Icon = "layout-grid",
-    Locked = false,
-})
 -----------------------------------------------------------------------------------------------xk脚本
-local Button = Tab:Button({
+Button = TabHandles.Elements:Button({
     Title = "XK脚本",
     Desc = "点击加载",
     Locked = false,
@@ -1929,6 +1928,9 @@ local Button = Tab:Button({
                 }}
             })
             loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+            
+    end
+})            
         
 WindUI:Notify({
     Title = "通知",
@@ -1940,15 +1942,7 @@ WindUI:Notify({
     end
 })
 
-Window:SelectTab(2) -- Number of Tab
-
-local Tab = Tabs.Settings:Tab({
-    Title = "越HB脚本",
-    Icon = "bird", -- optional
-    Locked = false,
-})
-
-local Button = Tab:Button({
+Button = TabHandles.gn:Button({
     Title = "DOORS",
     Desc = "",
     Locked = false,
@@ -1974,12 +1968,11 @@ WindUI:Notify({
     Content = "加载成功",
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
-})        
-        
-    end
 })
+    end
+})                
 
-local Button = Tab:Button({
+Button = TabHandles.gn:Button({
     Title = "火箭发射模拟器",
     Desc = "",
     Locked = false,
@@ -2010,7 +2003,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.gn:Button({
     Title = "环山军区",
     Desc = "",
     Locked = false,
@@ -2041,7 +2034,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.gn:Button({
     Title = "墨水游戏",
     Desc = "",
     Locked = false,
@@ -2071,40 +2064,8 @@ WindUI:Notify({
         
     end
 })
-
-local Button = Tab:Button({
-    Title = "战争大亨",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
-
-            Window:Dialog({
-                Title = "HB脚本中心",
-                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
-                Icon = "bell",
-                Buttons = {{
-                    Title = "确定",
-                    Variant = "Primary",
-                    Callback = function()
-                        print("ok")
-                    end
-                }}
-            })
-            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
-        
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
-        
-    end
-})
-
 -----------------------------------------------------------------------------------------------自然灾害
-local Tab = Tabs.Settings:Tab({
+Button = TabHandles.ESPgn:Button({
     Title = "自然灾害",
     Icon = "layout-grid",
     Locked = false,
@@ -2146,11 +2107,8 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
-
 -----------------------------------------------------------------------------------------------被遗弃
-local Tab = Tabs.Settings:Tab({
+Button = TabHandles.pbgn:Button({
     Title = "被遗弃",
     Icon = "layout-grid",
     Locked = false,
@@ -2192,24 +2150,8 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
------------------------------------------------------------------------------------------------战争大亨
-local Tab = Tabs.Settings:Tab({
-    Title = "战争大亨(开始收费)",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "战争大亨",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------最强战场
-local Tab = Tabs.Settings:Tab({
+Button = TabHandles.tzgn:Button({
     Title = "最强战场",
     Icon = "layout-grid",
     Locked = false,
@@ -2281,10 +2223,8 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------死铁轨
-local Tab = Tabs.Settings:Tab({
+Button = TabHandles.fzgn:Button({
     Title = "死铁轨",
     Icon = "layout-grid",
     Locked = false,
@@ -2326,16 +2266,8 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------森林99夜
-local Tab = Tabs.Settings:Tab({
-    Title = "林森99夜",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
+Button = TabHandles.A:Button({
     Title = "森林中的99夜",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
@@ -2372,7 +2304,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.B:Button({
     Title = "林森99夜",
     Desc = "无卡中文 推荐",
     Locked = false,
@@ -2402,16 +2334,8 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------刀刃球
-local Tab = Tabs.Settings:Tab({
-    Title = "刀刃球",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
+Button = TabHandles.B:Button({
     Title = "刀刃球",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
@@ -2448,7 +2372,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.B:Button({
     Title = "刀刃球红⭕️",
     Desc = "无卡中文 推荐",
     Locked = false,
@@ -2478,22 +2402,14 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------偷走脑红
-local Tab = Tabs.Settings:Tab({
-    Title = "偷走脑红",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "偷走脑红",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.C:Button({
     Title = "偷走脑红",
     Desc = "无卡英文 推荐",
     Locked = false,
@@ -2523,22 +2439,14 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------火箭发射模拟器
-local Tab = Tabs.Settings:Tab({
-    Title = "火箭发射模拟器",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "火箭发射模拟器",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.D:Button({
     Title = "火箭发射模拟器",
     Desc = "无卡中文",
     Locked = false,
@@ -2568,22 +2476,14 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------力量传奇
-local Tab = Tabs.Settings:Tab({
-    Title = "力量传奇",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "力量传奇",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.E:Button({
     Title = "力量传奇吃蛋",
     Desc = "无卡中文",
     Locked = false,
@@ -2613,22 +2513,14 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------伐木大享
-local Tab = Tabs.Settings:Tab({
-    Title = "伐木大享",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "伐木大享",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.F:Button({
     Title = "伐木大享AXE",
     Desc = "无卡英文",
     Locked = false,
@@ -2658,8 +2550,6 @@ WindUI:Notify({
         
     end
 })
-
-Window:SelectTab(2) -- Number of Tab
 -----------------------------------------------------------------------------------------------打巴掌
 local Tab = Tabs.Settings:Tab({
     Title = "打巴掌正在更新",
@@ -2667,7 +2557,7 @@ local Tab = Tabs.Settings:Tab({
     Locked = false,
 })
 
-local Section = Tab:Section({ 
+Button = TabHandles.G:Button({
     Title = "打巴掌",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
@@ -2720,15 +2610,7 @@ WindUI:Notify({
     Icon = "layout-grid",
 })
 
-Window:SelectTab(2) -- Number of Tab
-
-local Tab = Tabs.Utilities:Tab({
-    Title = "设置",
-    Icon = "bird", -- optional
-    Locked = false,
-})
-
-local Paragraph = Tab:Paragraph({
+Paragraph = TabHandles.H:Paragraph({
     Title = "自定义界面",
     Desc = "个性化您的体验",
     Image = "palette",
@@ -2742,7 +2624,7 @@ for themeName, _ in pairs(WindUI:GetThemes()) do
 end
 table.sort(themes)
 
-local Dropdown = Tab:Dropdown({
+Dropdown = TabHandles.H:Dropdown({
     Title = "主题选择",
     Values = themes,
     Value = "Dark",
@@ -2757,7 +2639,7 @@ local Dropdown = Tab:Dropdown({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.H:Button({
     Title = "透明度",
     Value = { 
         Min = 0,
@@ -2771,7 +2653,7 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.H:Button({
     Title = "启用黑色主题",
     Desc = "使用黑色调主题方案",
     Value = true,
@@ -2781,7 +2663,7 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.H:Button({
     Title = "创建新主题",
     Icon = "plus",
     Callback = function()
@@ -2798,7 +2680,7 @@ local Button = Tab:Button({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.H:Button({
     Title = "配置管理",
     Desc = "保存你的设置",
     Image = "save",
@@ -2814,7 +2696,7 @@ local MyPlayerData = {
     inventory = { "sword", "shield", "potion" }
 }
 
-local Keybind = Tab:Keybind({
+Keybind = TabHandles.xx:Keybind({
     Title = "配置名称",
     Value = configName,
     Callback = function(value)
@@ -2826,7 +2708,7 @@ local ConfigManager = Window.ConfigManager
 if ConfigManager then
     ConfigManager:Init(Window)
     
-local Toggle = Tab:Toggle({
+Toggle = TabHandles.xx:Toggle({
         Title = "保存配置",
         Icon = "save",
         Variant = "Primary",
@@ -2860,7 +2742,7 @@ local Toggle = Tab:Toggle({
         end
     })
 
-    local Button = Tab:Button({
+    Button = TabHandles.H:Button({
         Title = "加载配置",
         Icon = "folder",
         Callback = function()
@@ -2898,7 +2780,7 @@ local Toggle = Tab:Toggle({
         end
     })
 else
-    local Button = Tab:Button({
+    Button = TabHandles.H:Button({
         Title = "配置管理不可用",
         Desc = "此功能需要配置管理",
         Image = "alert-triangle",
@@ -2906,6 +2788,3 @@ else
         Color = "White"
     })
 end
-
-
-Tab:Select() -- Select Tab
