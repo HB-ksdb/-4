@@ -154,7 +154,7 @@ local Paragraph = Tab:Paragraph({
     Desc = "" .. identifyexecutor() .. "",
     Image = "rbxassetid://129287693322764",
     ImageSize = 42, -- default 30
-    Thumbnail = "rbxassetid://94512740386917",
+    Thumbnail = "rbxassetid://114457723265156",
     ThumbnailSize = 120, -- Thumbnail height
     Buttons = {{
         Title = "测试您注入器的UNC",
@@ -724,6 +724,21 @@ mini2.MouseButton1Click:Connect(function()
 	main.Frame.BackgroundTransparency = 0 
 	closebutton.Position =  UDim2.new(0, 0, -1, 27)
 end)
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
@@ -739,6 +754,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
     WindUI:Notify({
     Title = "通知",
@@ -755,6 +784,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
     WindUI:Notify({
     Title = "通知",
@@ -787,6 +830,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
         WindUI:Notify({
     Title = "通知",
@@ -862,6 +919,20 @@ for i,v in ipairs(Services.Players:GetPlayers()) do
 end
 Services.Players.PlayerAdded:Connect(PlayerAdded)
 
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
@@ -877,6 +948,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
     WindUI:Notify({
     Title = "通知",
@@ -894,6 +979,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
     WindUI:Notify({
     Title = "通知",
@@ -1408,6 +1507,20 @@ closeButton.MouseButton1Click:Connect(function()
 	ultimateFling:Destroy()
 end)
 
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
@@ -1546,6 +1659,20 @@ Toggle.MouseButton1Click:connect(function()
 		Status.TextColor3 = Color3.new(170,0,0)
 	end
 end)
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
 
 WindUI:Notify({
     Title = "通知",
@@ -1687,6 +1814,20 @@ local Button = Tab:Button({
 		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
 		BV.Velocity = game.Workspace.CurrentCamera.CFrame.LookVector * -Speed
 	end)
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
 	
 	WindUI:Notify({
     Title = "通知",
@@ -1704,6 +1845,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1721,6 +1876,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
        loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
        
 WindUI:Notify({
     Title = "通知",
@@ -1746,6 +1915,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1771,6 +1954,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20DOORS.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1788,6 +1985,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1805,6 +2016,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%E7%8E%AF%E5%B1%B1%E5%86%9B%E5%8C%BA.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1822,6 +2047,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8AHB%20%E5%A2%A8%E6%B0%B4%E6%B8%B8%E6%88%8F.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1839,6 +2078,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1869,6 +2122,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Super-ring-Parts-V6-28581"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1901,6 +2168,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1946,6 +2227,27 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
     end
 })
 
@@ -1955,6 +2257,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://gist.githubusercontent.com/skid123skidlol/cd0d2dce51b3f20ad1aac941da06a1a1/raw/f58b98cce7d51e53ade94e7bb460e4f24fb7e0ff/%257BFE%257D%2520Invisible%2520Tool%2520(can%2520hold%2520tools)",true))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -1986,6 +2302,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2017,6 +2347,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2034,6 +2378,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/NEHUB2/NE/refs/heads/main/855.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2065,6 +2423,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2082,6 +2454,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/autoparrybest"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2113,6 +2499,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Brinxhub12/brinx-hub-comebac1/refs/heads/main/brinx%20come%20back"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2144,6 +2544,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/refs/heads/main/jmjmjmjmjmjm114514.txt"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2175,6 +2589,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.github.com/114514541883484/Zephyr-wave/main/agreement.lua"))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2206,6 +2634,20 @@ local Button = Tab:Button({
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet(("https://raw.githubusercontent.com/NOOBARMYSCRIPTER/NOOBARMYSCRIPTER/main/AXE%20LOOP%20SCRIPT"), true))()
+
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
 WindUI:Notify({
     Title = "通知",
@@ -2257,6 +2699,27 @@ end
     end
 })
 
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
 Window:SelectTab(2) -- Number of Tab
 
 local Tab = Tabs.Utilities:Tab({
@@ -2265,7 +2728,7 @@ local Tab = Tabs.Utilities:Tab({
     Locked = false,
 })
 
-local Button = Tab:Button({
+local Paragraph = Tab:Paragraph({
     Title = "自定义界面",
     Desc = "个性化您的体验",
     Image = "palette",
@@ -2279,7 +2742,7 @@ for themeName, _ in pairs(WindUI:GetThemes()) do
 end
 table.sort(themes)
 
-local Button = Tab:Button({
+local Dropdown = Tab:Dropdown({
     Title = "主题选择",
     Values = themes,
     Value = "Dark",
