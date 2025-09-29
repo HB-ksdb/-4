@@ -53,726 +53,2339 @@ Window:Tag({
     })
 
 local Tabs = {
-    Main = Window:Section({ Title = "DOORS功能", Opened = true }),
-    Settings = Window:Section({ Title = "HD透视", Opened = true }),
-    Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
+    Main = Window:Section({ Title = "通用", Opened = true }),
+    gn = Window:Section({ Title = "功能", Opened = true }),
+    Settings = Window:Section({ Title = "UI设置", Opened = true }),
+    Utilities = Window:Section({ Title = "保存配置", Opened = true })
 }
 
-local Tab = Tabs.Main:Tab({
-    Title = "功能",
-    Icon = "layout-grid", -- optional
-    Locked = false,
+local TabHandles = {
+    xx = Tabs.Main:Tab({ Title = "游戏信息", Icon = "layout-grid" }),
+    Elements = Tabs.Main:Tab({ Title = "玩家功能", Icon = "layout-grid" }),
+    gn = Tabs.gn:Tab({ Title = "互动功能", Icon = "layout-grid" }),
+    ESPgn = Tabs.gn:Tab({ Title = "视觉功能", Icon = "layout-grid" }),
+    pbgn = Tabs.gn:Tab({ Title = "屏蔽实体", Icon = "layout-grid" }),
+    tzgn = Tabs.gn:Tab({ Title = "通知功能", Icon = "layout-grid" }),
+    fzgn = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),
+    Appearance = Tabs.Settings:Tab({ Title = "UI外观", Icon = "brush" }),
+    Config = Tabs.Utilities:Tab({ Title = "调整配置", Icon = "settings" })
+}
+
+TabHandles.xx:Paragraph({
+    Title = "您的游戏名称：",
+    Desc = ""..game:GetService("Players").LocalPlayer.DisplayName.."",
+    Buttons = {
+        {
+            Title = "复制您的名称",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard(game:GetService("Players").LocalPlayer.DisplayName)
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Icon = "copy",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Paragraph({
+    Title = "您的游戏用户名：",
+    Desc = ""..game:GetService("Players").LocalPlayer.Name.."",
+    Buttons = {
+        {
+            Title = "复制您的用户名",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard(game:GetService("Players").LocalPlayer.Name)
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Paragraph({
+    Title = "您的用户名ID：",
+    Desc = ""..game:GetService("Players").LocalPlayer.UserId.."",
+    Buttons = {
+        {
+            Title = "复制您的用户名ID",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard(game:GetService("Players").LocalPlayer.UserId)
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Paragraph({
+    Title = "您的账号注册时间（天）：",
+    Desc = ""..game:GetService("Players").LocalPlayer.AccountAge.."",
+    Buttons = {
+        {
+            Title = "复制您的注册时间",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard(game:GetService("Players").LocalPlayer.AccountAge)
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Paragraph({
+    Title = "您所在的服务器名称：",
+    Desc = ""..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.."",
+    Buttons = {
+        {
+            Title = "复制您所在的服务器名称",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Paragraph({
+    Title = "您所在的服务器ID：",
+    Desc = ""..game.PlaceId.."",
+    Buttons = {
+        {
+            Title = "复制您所在的服务器ID",
+            Icon = "copy",
+            Variant = "Primary",
+            Callback = function() 
+            
+            setclipboard("无法复制")
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功复制！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
 })
 
 
-local Toggle = Tab:Toggle({
-    Title = "自动完成心跳小游戏",
-    Value = false,    
-    Callback = function(state) 
-        firesignal(game.ReplicatedStorage.Bricks.ClutchHeartbeat.OnClientEvent) 
+
+TabHandles.xx:Paragraph({
+    Title = "您的注入器：",
+    Desc = ""..identifyexecutor().."",
+    Image = "rbxassetid://129287693322764",
+    ImageSize = 42, -- default 30
+    Thumbnail = "rbxassetid://94512740386917",
+    ThumbnailSize = 120, -- Thumbnail height
+    Buttons = {
+        {
+            Title = "测试您注入器的UNC",
+            Variant = "Primary",
+            Callback = function() 
+            Window:Dialog({
+            Title = "Rb脚本中心",
+            Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+            Icon = "bell",
+            Buttons = {
+                {
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function() 
+                        print("ok")
+                    end,
+                }
+            }
+        })
+            loadstring(game:HttpGet"https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+		WindUI:Notify({
+            Title = "Rb脚本中心---提示：",
+            Content = "已成功执行，请在控制台查看UNC！",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+
+            end,
+            Icon = "bird",
+        },
+    }
+})
+
+TabHandles.xx:Code({
+    Title = "Rb脚本中心交流群（主群）",
+    Code = [[https://qm.qq.com/q/csDfI4BZNm]],
+})
+
+TabHandles.xx:Code({
+    Title = "Rb脚本中心交流群（Discord群）",
+    Code = [[https://discord.gg/qZmW3PYd9T]],
+})
+
+
+
+local intensitySlider = TabHandles.Elements:Slider({
+    Title = "玩家速度",
+    Desc = "speedwalk",
+    Value = { Min = 0, Max = 1000, Default = 16 },
+    Callback = function(Value)
+        _G.WalkSpeedTp = Value
+    end
+})
+
+local featureToggle = TabHandles.Elements:Toggle({
+    Title = "开启速度",
+    Value = false,
+    Callback = function(Value) 
+        _G.SpeedWalk = Value
+while _G.SpeedWalk do
+if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.WalkSpeedTp
+end
+task.wait()
+end
+        WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = state and "已开启速度" or "已关闭速度",
+            Icon = state and "check" or "x",
+            Duration = 2
+        })
+    end
+})
+
+local intensitySlider = TabHandles.Elements:Slider({
+    Title = "玩家速度V2",
+    Desc = "tpwalk",
+    Value = { Min = 0, Max = 10, Default = 0 },
+    Callback = function(value)
+        local tpWalk = {}
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+local teleportDistance = value -- 每次传送的距离
+local isTeleporting = true -- 是否正在传送
+
+-- 禁用所有与移动相关的状态
+local function DisableDefaultMovement()
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, false)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, false)
+end
+
+-- 启用所有与移动相关的状态
+local function EnableDefaultMovement()
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, true)
+    humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, true)
+end
+
+-- 自定义传送函数
+local function Teleport()
+    if not isTeleporting or not rootPart or not humanoid then
+        return
+    end
+
+    -- 获取移动方向
+    local moveDirection = humanoid.MoveDirection
+    if moveDirection.Magnitude == 0 then
+        return -- 如果没有移动方向，则停止传送
+    end
+
+    -- 计算传送向量
+    local teleportVector = moveDirection * teleportDistance
+
+    -- 检测前方是否有障碍物
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = {character}
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+    local raycastResult = workspace:Raycast(rootPart.Position, teleportVector, raycastParams)
+
+    if raycastResult then
+        -- 如果有障碍物，调整传送向量
+        teleportVector = (raycastResult.Position - rootPart.Position).Unit * teleportDistance
+    end
+
+    -- 更新位置
+    rootPart.CFrame = rootPart.CFrame + teleportVector
+end
+
+-- 控制开关函数
+function tpWalk:Enabled(enabled)
+    isTeleporting = enabled
+    if enabled then DisableDefaultMovement() else EnableDefaultMovement() end
+end
+
+function tpWalk:GetEnabled()
+    return isTeleporting
+end
+
+function tpWalk:SetSpeed(speed)
+    teleportDistance = speed or 0.1
+end
+
+function tpWalk:GetSpeed()
+    return teleportDistance
+end
+
+-- 每帧更新传送
+RunService.Heartbeat:Connect(function()
+    if isTeleporting then
+        Teleport()
+    end
+end)
+
+return tpWalk
+    end
+})
+
+local intensitySlider = TabHandles.Elements:Slider({
+    Title = "玩家跳跃",
+    Desc = "JumpPower",
+    Value = { Min = 0, Max = 1000, Default = 50 },
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    end
+})
+
+local intensitySlider = TabHandles.Elements:Slider({
+    Title = "玩家重力",
+    Desc = "gravity",
+    Value = { Min = 0, Max = 1000, Default = 309 },
+    Callback = function(value)
+        game.Workspace.Gravity = value
     end
 })
 
 
-local Toggle = Tab:Toggle({
-    Title = "加速能量条",
-    Value = false,    
+
+TabHandles.Elements:Divider()
+
+local featureToggle = TabHandles.Elements:Toggle({
+    Title = "夜视",
+    Desc = "使你的游戏亮度提高",
+    Value = false,
     Callback = function(state) 
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/nengliangtiao"))()
+        if state then
+		    game.Lighting.Ambient = Color3.new(1, 1, 1)
+            else
+		    game.Lighting.Ambient = Color3.new(0, 0, 0)
+            end
+        WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = state and "夜视已开启，若仍不清楚可开启去雾功能" or "夜视已关闭",
+            Icon = state and "check" or "x",
+            Duration = 2
+        })
     end
 })
 
-
-local Toggle = Tab:Toggle({
-    Title = "50关解锁",
-    Value = false,    
-    Callback = function(state) 
-        local CurrentDoor = workspace.CurrentRooms[tostring(LatestRoom+1)]:WaitForChild("Door")
-        game.Players.LocalPlayer.Character:PivotTo(CF(CurrentDoor.Door.Position))
+xrayEnabled = false
+function xray()
+    for _, v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
+            v.LocalTransparencyModifier = xrayEnabled and 0.5 or 0
+        end
     end
+end
+
+local featureToggle = TabHandles.Elements:Toggle({
+    Title = "地图透视",
+    Desc = "Xray",
+    Value = false,
+    Callback = function(state) 
+        if state then
+		    xrayEnabled = true
+    xray()
+            else
+		    xrayEnabled = false
+    xray()
+            end
+        WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = state and "地图透视已开启，若仍不清楚可开启其他视觉功能" or "地图透视已关闭",
+            Icon = state and "check" or "x",
+            Duration = 2
+        })
+    end
+})
+
+local toggleState = false
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	wait(1)
+	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+function NoFog()
+    local c = game.Lighting
+    c.FogEnd = 100000
+    for r, v in pairs(c:GetDescendants()) do
+        if v:IsA("Atmosphere") then
+            v:Destroy()
+        end
+    end
+end
+TabHandles.Elements:Button({
+    Title = "去雾",
+    Desc = "一键去除游戏中的雾",
+    Icon = "bell",
+    Callback = function()
+NoFog()
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+        WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = "已去雾",
+            Icon = "bell",
+            Duration = 3
+        })
+    end
+})
+TabHandles.Elements:Divider()
+
+TabHandles.Elements:Button({
+    Title = "飞行",
+    Desc = "传统的飞行",
+    Icon = "bell",
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/CPSm1udG"))()
+local Sound = Instance.new("Sound",game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+        WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = "成功加载飞行",
+            Icon = "bell",
+            Duration = 3
+        })
+    end
+})
+
+local gnSlider = TabHandles.gn:Slider({
+    Title = "自动捡钥匙距离",
+    Value = { Min = 0, Max = 15, Default = 15 },
+    Callback = function(val)
+        val = keyrange
+    end
+})
+
+local gnSlider = TabHandles.gn:Slider({
+    Title = "自动拉拉杆距离",
+    Value = { Min = 0, Max = 15, Default = 15 },
+    Callback = function(val)
+        val = leverrange
+    end
+})
+
+local gnSlider = TabHandles.gn:Slider({
+    Title = "自动拾起书距离",
+    Value = { Min = 0, Max = 15, Default = 15 },
+    Callback = function(val)
+        val = bookrange
+    end
+})
+
+local pickupaura
+
+TabHandles.gn:Toggle({
+    Title = "自动捡钥匙",
+    Icon = "check",
+    Value = false,
+    Callback = function(val) 
+
+pickupaura = val
+
+        repeat task.wait(.5)
+
+            for _,v in pairs(bullshittable.KeyObtain) do
+
+                pcall(function()
+
+                    local mag = (lplr.Character.HumanoidRootPart.Position - v.Parent.Hitbox.Position).magnitude
+
+                    if mag < keyrange then 
+
+                        fireproximityprompt(v)
+
+                    end
+
+                end)
+
+             end
+
+        until not pickupaura 
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启自动捡钥匙" or "已关闭自动捡钥匙",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+local leveraura
+
+TabHandles.gn:Toggle({
+    Title = "自动拉拉杆",
+    Icon = "check",
+    Value = false,
+    Callback = function(val) 
+
+leveraura = val
+
+        repeat task.wait(.5)
+
+            for _,v in pairs(bullshittable.LeverForGate) do
+
+                pcall(function()
+
+                    local mag = (lplr.Character.HumanoidRootPart.Position - v.Parent.Main.Position).magnitude
+
+                    if mag < leverrange then 
+
+                        fireproximityprompt(v)
+
+                    end
+
+                end)
+
+             end
+
+        until not leveraura
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启自动拉拉杆" or "已关闭自动拉拉杆",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+local bookaura
+
+TabHandles.gn:Toggle({
+    Title = "自动拾起书",
+    Icon = "check",
+    Value = false,
+    Callback = function(val) 
+
+bookaura = val
+
+        repeat task.wait(.5)
+
+            for _,v in pairs(bullshittable.LiveHintBook) do
+
+                pcall(function()
+
+                    local mag = (lplr.HumanoidRootPart.Position - v.Parent.Cover2.Position).magnitude
+
+                    if mag < bookrange then 
+
+                        fireproximityprompt(v)
+
+                    end
+
+                end)
+
+             end
+
+        until not bookaura
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启自动拾起书" or "已关闭自动拾起书",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.gn:Toggle({
+    Title = "即时互动",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.NoCooldownProximity = Value
+if _G.NoCooldownProximity == true then
+for i, v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "ProximityPrompt" then
+v.HoldDuration = 0
+end
+end
+CooldownProximity = workspace.DescendantAdded:Connect(function(Cooldown)
+if _G.NoCooldownProximity == true then
+if Cooldown:IsA("ProximityPrompt") then
+Cooldown.HoldDuration = 0
+end
+end
+end)
+else
+if CooldownProximity then
+CooldownProximity:Disconnect()
+CooldownProximity = nil
+end
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启即时互动" or "已关闭即时互动",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+_G.Aura = {
+    "ActivateEventPrompt",
+    "AwesomePrompt",
+    "FusesPrompt",
+    "HerbPrompt",
+    "LeverPrompt",
+    "LootPrompt",
+    "ModulePrompt",
+    "SkullPrompt",
+    "UnlockPrompt",
+    "ValvePrompt",
+}
+
+TabHandles.gn:Toggle({
+    Title = "自动互动",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.AutoLoot = Value
+if _G.AutoLoot then
+lootables = {}
+local function LootCheck(v)
+    if not table.find(lootables, v) and v.Name ~= "Groundskeeper" and v:IsA("ProximityPrompt") and table.find(_G.Aura, v.Name) then
+        table.insert(lootables, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+if v:IsA("ProximityPrompt") then
+	LootCheck(v)
+end
+end
+ChildAllNext = workspace.DescendantAdded:Connect(function(v)
+if v:IsA("ProximityPrompt") then
+	LootCheck(v)
+end
+end)
+RemoveChild = workspace.DescendantRemoving:Connect(function(v)
+    for i = #lootables, 1, -1 do
+        if lootables[i] == v then
+            table.remove(lootables, i)
+            break
+        end
+    end
+end)
+else
+if ChildAllNext then
+ChildAllNext:Disconnect()
+ChildAllNext = nil
+end
+if RemoveChild then
+RemoveChild:Disconnect()
+RemoveChild = nil
+end
+end
+while _G.AutoLoot do
+for i, v in pairs(lootables) do
+	if v:IsA("ProximityPrompt") and table.find(_G.Aura, v.Name) and (v:GetAttribute("Interactions") == nil or v:GetAttribute("Interactions") <= 2) then
+		if Distance(v.Parent:GetPivot().Position) <= 12 then
+			fireproximityprompt(v)
+		end
+	end
+end
+task.wait(0.1)
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启自动互动" or "已关闭自动互动",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "全图高亮",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.FullBright = Value
+while _G.FullBright do
+game.Lighting.Brightness = 2
+game.Lighting.ClockTime = 14
+game.Lighting.FogEnd = 100000
+game.Lighting.GlobalShadows = false
+game.Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+task.wait()
+end
+for i, v in pairs(_G.GetOldBright) do
+game.Lighting[i] = v
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = "已开启全图高亮",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "去雾",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.Nofog = Value
+while _G.Nofog do
+game:GetService("Lighting").FogStart = 100000
+game:GetService("Lighting").FogEnd = 200000
+for i, v in pairs(game:GetService("Lighting"):GetChildren()) do
+if v.ClassName == "Atmosphere" then
+v.Density = 0
+v.Haze = 0
+end
+end
+task.wait()
+end
+game:GetService("Lighting").FogStart = 0
+game:GetService("Lighting").FogEnd = 1000
+for i, v in pairs(game:GetService("Lighting"):GetChildren()) do
+if v.ClassName == "Atmosphere" then
+v.Density = 0.3
+v.Haze = 1
+end
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = "已开启全图高亮",
+            Icon = "bell",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+
+if not isGarden then
+TabHandles.ESPgn:Toggle({
+    Title = (((isHotel or isBackdoor) and "钥匙/拉杆透视") or (isMines and "保险丝透视")),
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspKey = Value
+if _G.EspKey == false then
+_G.KeyAdd = {}
+if KeySpawn then
+KeySpawn:Disconnect()
+KeySpawn = nil
+end
+if KeyRemove then
+KeyRemove:Disconnect()
+KeyRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name:find("Key") or v.Name == "LeverForGate" or v.Name:find("FuseObtain") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function Keys(v)
+if ((v.Name:find("Key") or v.Name:find("FuseObtain")) and v:FindFirstChild("Hitbox")) or (v.Name == "LeverForGate" and v.PrimaryPart) then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(0, 0, 255)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(0, 0, 255)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(0, 0, 255) 
+	Highlight.OutlineColor = Color3.fromRGB(0, 0, 255) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and ((v.Name == "LeverForGate" and "拉杆") or (v.Name:find("Key") and "钥匙") or (v.Name:find("FuseObtain") and "保险丝")) or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance((v.Name == "LeverForGate" and v.PrimaryPart.Position) or ((v.Name:find("Key") or v.Name:find("FuseObtain")) and v.Hitbox.Position))).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 15
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckKey(v)
+    if not table.find(_G.KeyAdd, v) and ((v.Name:find("Key") or v.Name:find("FuseObtain")) and v:FindFirstChild("Hitbox")) or (v.Name == "LeverForGate" and v.PrimaryPart) then
+        table.insert(_G.KeyAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckKey(v)
+end
+KeySpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckKey(v)
+end)
+KeyRemove = workspace.DescendantRemoving:Connect(function(v)
+    for i = #_G.KeyAdd, 1, -1 do
+        if _G.KeyAdd[i] == v then
+            table.remove(_G.KeyAdd, i)
+            break
+        end
+    end
+end)
+end
+while _G.EspKey do
+for i, v in pairs(_G.KeyAdd) do
+if v:IsA("Model") then
+Keys(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+end
+
+TabHandles.ESPgn:Toggle({
+    Title = "门透视",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspDoor = Value
+if _G.EspDoor == false then
+for _, v in pairs(game.Workspace:FindFirstChild("CurrentRooms"):GetChildren()) do 
+if v:isA("Model") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+end
+while _G.EspDoor do
+for i, v in pairs(game.Workspace:FindFirstChild("CurrentRooms"):GetChildren()) do
+if v:IsA("Model") and v:FindFirstChild("Door") and v.Door:FindFirstChild("Door") then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(0, 255, 0)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(0, 255, 0)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(0, 255, 0) 
+	Highlight.OutlineColor = Color3.fromRGB(0, 255, 0) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v.Door
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and "门 "..((v.Door:FindFirstChild("Sign") and v.Door.Sign:FindFirstChild("Stinker") and v.Door.Sign.Stinker.Text) or (v.Door.Sign:FindFirstChild("SignText") and v.Door.Sign.SignText.Text)):gsub("^0+", "")..(v.Door:FindFirstChild("Lock") and " (锁住)" or "") or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.Door.Door.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 15
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v.Door
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = state and "已开启透视" or "已关闭透视",
+            Icon = state and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+if isBackdoor then
+local Toggle = Tab:Toggle({
+    Title = "透视时间拉杆",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspLeverTime = Value
+if _G.EspLeverTime == false then
+_G.TimeLeverAdd = {}
+if TimeLeverSpawn then
+TimeLeverSpawn:Disconnect()
+TimeLeverSpawn = nil
+end
+if TimeLeverRemove then
+TimeLeverRemove:Disconnect()
+TimeLeverRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name:find("TimerLever") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function LeverTimes(v)
+if v.Name:find("TimerLever") and v.PrimaryPart then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(0, 0, 255)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(0, 0, 255)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(0, 0, 255) 
+	Highlight.OutlineColor = Color3.fromRGB(0, 0, 255) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and "时间拉杆" or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.PrimaryPart.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 15
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckTimeLever(v)
+    if not table.find(_G.TimeLeverAdd, v) and v.Name == "TimerLever" then
+        table.insert(_G.TimeLeverAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckTimeLever(v)
+end
+TimeLeverSpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckTimeLever(v)
+end)
+TimeLeverRemove = workspace.DescendantRemoving:Connect(function(v)
+    for i = #_G.TimeLeverAdd, 1, -1 do
+        if _G.TimeLeverAdd[i] == v then
+            table.remove(_G.TimeLeverAdd, i)
+            break
+        end
+    end
+end)
+end
+while _G.EspLeverTime do
+for i, v in pairs(_G.TimeLeverAdd) do
+if v:IsA("Model") then
+LeverTimes(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+end
+
+if isHotel then
+TabHandles.ESPgn:Toggle({
+    Title = "透视书",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspBook = Value
+if _G.EspBook == false then
+_G.BookAdd = {}
+if BookSpawn then
+BookSpawn:Disconnect()
+BookSpawn = nil
+end
+if BookRemove then
+BookRemove:Disconnect()
+BookRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name:find("LiveHintBook") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function Books(v)
+if v.Name:find("LiveHintBook") and v.PrimaryPart then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(160, 32, 240)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(160, 32, 240)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(160, 32, 240) 
+	Highlight.OutlineColor = Color3.fromRGB(160, 32, 240) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and "书" or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.PrimaryPart.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 10
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckBook(v)
+    if not table.find(_G.BookAdd, v) and v.Name == "LiveHintBook" then
+        table.insert(_G.BookAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckBook(v)
+end
+BookSpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckBook(v)
+end)
+BookRemove = workspace.DescendantRemoving:Connect(function(v)
+    for i = #_G.BookAdd, 1, -1 do
+        if _G.BookAdd[i] == v then
+            table.remove(_G.BookAdd, i)
+            break
+        end
+    end
+end)
+end
+while _G.EspBook do
+for i, v in pairs(_G.BookAdd) do
+if v:IsA("Model") then
+Books(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "透视电箱",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspBreaker = Value
+if _G.EspBreaker == false then
+_G.BreakerAdd = {}
+if BreakerSpawn then
+BreakerSpawn:Disconnect()
+BreakerSpawn = nil
+end
+if BreakerRemove then
+BreakerRemove:Disconnect()
+BreakerRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name:find("LiveBreakerPolePickup") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function Breakers(v)
+if v.Name == "LiveBreakerPolePickup" and v:FindFirstChildOfClass("ProximityPrompt") then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(25, 25, 112)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(25, 25, 112)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(25, 25, 112) 
+	Highlight.OutlineColor = Color3.fromRGB(25, 25, 112) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and "电箱" or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.PrimaryPart.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 10
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckBreaker(v)
+    if not table.find(_G.BreakerAdd, v) and v.Name == "LiveBreakerPolePickup" then
+        table.insert(_G.BreakerAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckBreaker(v)
+end
+BreakerSpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckBreaker(v)
+end)
+BreakerRemove = workspace.DescendantRemoving:Connect(function(v)
+for i = #_G.BreakerAdd, 1, -1 do
+    if _G.BreakerAdd[i] == v then
+        table.remove(_G.BreakerAdd, i)
+        break
+    end
+end
+end)
+end
+while _G.EspBreaker do
+for i, v in pairs(_G.BreakerAdd) do
+if v.Name == "LiveBreakerPolePickup" then
+Breakers(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+end
+
+TabHandles.ESPgn:Toggle({
+    Title = "透视物品",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspItem = Value
+if _G.EspItem == false then
+_G.ItemAdd = {}
+if ItemSpawn then
+ItemSpawn:Disconnect()
+ItemSpawn = nil
+end
+if ItemRemove then
+ItemRemove:Disconnect()
+ItemRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name:find("Handle") then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function Items(v)
+if v.Name == "Handle" and v.Parent:FindFirstChildOfClass("ProximityPrompt") then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(255, 215, 0)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(255, 215, 0)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(255, 215, 0) 
+	Highlight.OutlineColor = Color3.fromRGB(255, 215, 0) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v.Parent
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and v.Parent.Name or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 10
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v.Parent
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckItem(v)
+    if not table.find(_G.ItemAdd, v) and v.Name == "Handle" then
+        table.insert(_G.ItemAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckItem(v)
+end
+ItemSpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckItem(v)
+end)
+ItemRemove = workspace.DescendantRemoving:Connect(function(v)
+for i = #_G.ItemAdd, 1, -1 do
+    if _G.ItemAdd[i] == v then
+        table.remove(_G.ItemAdd, i)
+        break
+    end
+end
+end)
+end
+while _G.EspItem do
+for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+	if v:IsA("Tool") then
+		for i, z in pairs(v:GetChildren()) do
+			if z.Name:find("Esp_") then
+				z:Destroy()
+			end
+		end
+	end
+end
+for i, v in pairs(_G.ItemAdd) do
+if v.Name == "Handle" then
+Items(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+_G.EspEntityNameDis = {
+	["FigureRig"] = "Figure",
+	["SallyMoving"] = "Sally Window",
+	["RushMoving"] = "Rush",
+	["Eyes"] = "Eyes",
+	["Groundskeeper"] = "Skeeper",
+	["BackdoorLookman"] = "Lookman",
+	["BackdoorRush"] = "Blitz",
+	["MandrakeLive"] = "Mandrake",
+	["GloombatSwarm"] = "Gloombat",
+	["GiggleCeiling"] = "Giggle",
+	["AmbushMoving"] = "Ambush"
+}
+
+TabHandles.ESPgn:Toggle({
+    Title = ((isHotel and "透视柜子/床") or (isMines and "透视柜子/垃圾桶/管道") or (isBackdoor and "透视柜子")),
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspHiding = Value
+if _G.EspHiding == false then
+_G.HidingAdd = {}
+if HidingSpawn then
+HidingSpawn:Disconnect()
+HidingSpawn = nil
+end
+if HidingRemove then
+HidingRemove:Disconnect()
+HidingRemove = nil
+end
+for _, v in pairs(workspace:GetDescendants()) do 
+if v.Name == "Bed" or v.Name == "Wardrobe" or v.Name == "Backdoor_Wardrobe" or v.Name == "Locker_Large" or v.Name == "Rooms_Locker" then
+for i, z in pairs(v:GetChildren()) do
+if z.Name:find("Esp_") then
+z:Destroy()
+end
+end
+end
+end
+else
+function Hidings(v)
+if (v.Name == "Bed" or v.Name == "Wardrobe" or v.Name == "Backdoor_Wardrobe" or v.Name == "Locker_Large" or v.Name == "Rooms_Locker") and v.PrimaryPart then
+if v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight").FillColor = Color3.fromRGB(50, 205, 50)
+	v:FindFirstChild("Esp_Highlight").OutlineColor = Color3.fromRGB(50, 205, 50)
+end
+if _G.EspHighlight == true and v:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(50, 205, 50) 
+	Highlight.OutlineColor = Color3.fromRGB(50, 205, 50) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v
+	Highlight.Parent = v
+	elseif _G.EspHighlight == false and v:FindFirstChild("Esp_Highlight") then
+	v:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v:FindFirstChild("Esp_Gui") and v["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and v.Name or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.PrimaryPart.Position)).."m)" or "")
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 10
+    v["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v:FindFirstChild("Esp_Gui") == nil then
+	GuiEsp = Instance.new("BillboardGui", v)
+	GuiEsp.Adornee = v
+	GuiEsp.Name = "Esp_Gui"
+	GuiEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiEsp.AlwaysOnTop = true
+	GuiEspText = Instance.new("TextLabel", GuiEsp)
+	GuiEspText.BackgroundTransparency = 1
+	GuiEspText.Font = Enum.Font.Code
+	GuiEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiEspText.TextSize = 15
+	GuiEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiEspText.TextStrokeTransparency = 0.5
+	GuiEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiEspText
+	elseif _G.EspGui == false and v:FindFirstChild("Esp_Gui") then
+	v:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+local function CheckHiding(v)
+    if not table.find(_G.HidingAdd, v) and v.Name == "Bed" or v.Name == "Wardrobe" or v.Name == "Backdoor_Wardrobe" or v.Name == "Locker_Large" or v.Name == "Rooms_Locker" then
+        table.insert(_G.HidingAdd, v)
+    end
+end
+for _, v in ipairs(workspace:GetDescendants()) do
+	CheckHiding(v)
+end
+BookSpawn = workspace.DescendantAdded:Connect(function(v)
+    CheckHiding(v)
+end)
+BookRemove = workspace.DescendantRemoving:Connect(function(v)
+    for i = #_G.HidingAdd, 1, -1 do
+        if _G.HidingAdd[i] == v then
+            table.remove(_G.HidingAdd, i)
+            break
+        end
+    end
+end)
+end
+while _G.EspHiding do
+for i, v in pairs(_G.HidingAdd) do
+if v:IsA("Model") then
+Hidings(v)
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "透视玩家",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspPlayer = Value
+if _G.EspPlayer == false then
+for i, v in pairs(game.Players:GetChildren()) do
+	if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
+		for x, b in pairs(v.Character:GetChildren()) do
+			if b.Name:find("Esp_") then
+				b:Destroy()
+			end
+		end
+	end
+end
+end
+while _G.EspPlayer do
+for i, v in pairs(game.Players:GetChildren()) do
+if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Head") and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
+if v.Character:FindFirstChild("Esp_Highlight") then
+	v.Character:FindFirstChild("Esp_Highlight").FillColor = Color3.new(255, 255, 255)
+	v.Character:FindFirstChild("Esp_Highlight").OutlineColor = Color3.new(255, 255, 255)
+end
+if _G.EspHighlight == true and v.Character:FindFirstChild("Esp_Highlight") == nil then
+	local Highlight = Instance.new("Highlight")
+	Highlight.Name = "Esp_Highlight"
+	Highlight.FillColor = Color3.fromRGB(255, 255, 255) 
+	Highlight.OutlineColor = Color3.fromRGB(255, 255, 255) 
+	Highlight.FillTransparency = 0.5
+	Highlight.OutlineTransparency = 0
+	Highlight.Adornee = v.Character
+	Highlight.Parent = v.Character
+	elseif _G.EspHighlight == false and v.Character:FindFirstChild("Esp_Highlight") then
+	v.Character:FindFirstChild("Esp_Highlight"):Destroy()
+end
+if v.Character:FindFirstChild("Esp_Gui") and v.Character["Esp_Gui"]:FindFirstChild("TextLabel") then
+	v.Character["Esp_Gui"]:FindFirstChild("TextLabel").Text = 
+	        (_G.EspName == true and v.Name or "")..
+            (_G.EspDistance == true and "\n距离: ("..string.format("%.0f", Distance(v.Character.HumanoidRootPart.Position)).."m)" or "")..
+            (_G.EspHealth == true and "\n血量: [ "..(v.Character.Humanoid.Health <= 0 and "Dead" or string.format("%.0f", (v.Character.Humanoid.Health))).." ]" or "")
+    v.Character["Esp_Gui"]:FindFirstChild("TextLabel").TextSize = _G.EspGuiTextSize or 10
+    v.Character["Esp_Gui"]:FindFirstChild("TextLabel").TextColor3 = _G.EspGuiTextColor or Color3.new(255, 255, 255)
+end
+if _G.EspGui == true and v.Character:FindFirstChild("Esp_Gui") == nil then
+	GuiPlayerEsp = Instance.new("BillboardGui", v.Character)
+	GuiPlayerEsp.Adornee = v.Character.Head
+	GuiPlayerEsp.Name = "Esp_Gui"
+	GuiPlayerEsp.Size = UDim2.new(0, 100, 0, 150)
+	GuiPlayerEsp.AlwaysOnTop = true
+	GuiPlayerEsp.StudsOffset = Vector3.new(0, 3, 0)
+	GuiPlayerEspText = Instance.new("TextLabel", GuiPlayerEsp)
+	GuiPlayerEspText.BackgroundTransparency = 1
+	GuiPlayerEspText.Font = Enum.Font.Code
+	GuiPlayerEspText.Size = UDim2.new(0, 100, 0, 100)
+	GuiPlayerEspText.TextSize = 15
+	GuiPlayerEspText.TextColor3 = Color3.new(0,0,0) 
+	GuiPlayerEspText.TextStrokeTransparency = 0.5
+	GuiPlayerEspText.Text = ""
+	local UIStroke = Instance.new("UIStroke")
+	UIStroke.Color = Color3.new(0, 0, 0)
+	UIStroke.Thickness = 1.5
+	UIStroke.Parent = GuiPlayerEspText
+	elseif _G.EspGui == false and v.Character:FindFirstChild("Esp_Gui") then
+	v.Character:FindFirstChild("Esp_Gui"):Destroy()
+end
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "文本显示",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspGui = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启文本显示" or "已关闭文本显示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "高亮显示",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspHighlight = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启高亮显示" or "已关闭高亮显示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+local intensitySlider = TabHandles.ESPgn:Slider({
+    Title = "文本大小",
+    Desc = "speedwalk",
+    Value = { Min = 5, Max = 50, Default = 10 },
+    Callback = function(Value)
+        _G.EspGuiTextSize = Value
+    end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "名称显示",
+    Desc = "需先开启“文本显示”",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspName = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启名称显示" or "已关闭名称显示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "距离显示",
+    Desc = "需先开启“文本显示”",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspDistance = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启距离显示" or "已关闭距离显示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.ESPgn:Toggle({
+    Title = "玩家血量显示",
+    Desc = "需先开启“文本显示”",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.EspHealth = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启血量显示" or "已关闭血量显示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+Screech = false
+ClutchHeart = false
+local old
+old = hookmetamethod(game,"__namecall",newcclosure(function(self,...)
+    local args = {...}
+    local method = getnamecallmethod()
+    if tostring(self) == "Screech" and method == "FireServer" and Screech == true then
+        args[1] = true
+        return old(self,unpack(args))
+    end
+    if tostring(self) == "ClutchHeartbeat" and method == "FireServer" and ClutchHeart == true then
+        args[2] = true
+        return old(self,unpack(args))
+    end
+    return old(self,...)
+end))
+
+workspace.DescendantAdded:Connect(function(v)
+if v:IsA("Model") and v.Name == "Screech" then
+v:Destroy()
+end
+end)
+
+TabHandles.pbgn:Toggle({
+    Title = "防Screech",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.AntiScreech = Value
+Screech = Value
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启防Screech" or "已关闭防Screech",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.pbgn:Toggle({
+    Title = "防Halt",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.NoHalt = Value
+local HaltShade = EntityModules:FindFirstChild("Shade") or EntityModules:FindFirstChild("_Shade")
+if HaltShade then
+    HaltShade.Name = _G.NoHalt and "_Shade" or "Shade"
+end
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启防Halt" or "已关闭防Halt",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.pbgn:Toggle({
+    Title = "防Eyes",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.NoEyes = Value
+while _G.NoEyes do
+if workspace:FindFirstChild("Eyes") or workspace:FindFirstChild("BackdoorLookman") then
+if game:GetService("ReplicatedStorage"):FindFirstChild("RemotesFolder") then
+game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("MotorReplication"):FireServer(-649)
+end
+end
+task.wait()
+end
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启防Eyes" or "已关闭防Eyes",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.pbgn:Toggle({
+    Title = "防Look Man",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.NoEyes = Value
+while _G.NoEyes do
+if workspace:FindFirstChild("Eyes") or workspace:FindFirstChild("BackdoorLookman") then
+if game:GetService("ReplicatedStorage"):FindFirstChild("RemotesFolder") then
+game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("MotorReplication"):FireServer(-649)
+end
+end
+task.wait()
+end
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启防Look Man" or "已关闭防Look Man",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+_G.EntityChoose = {"Rush", "Seek", "Eyes", "Sally Window", "LookMan", "Giggle", "GloombatSwarm", "Ambush", "A-60", "A-120", "Groundskeeper", "Mandrake", "Surge", "Monument" ,"Eyestalk" ,"Bramble" }
+
+TabHandles.tzgn:Toggle({
+    Title = "开启实体生成通知",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.NotifyEntity = Value
+if _G.NotifyEntity then
+    EntityChild = workspace.ChildAdded:Connect(function(child)
+        for _, v in ipairs(_G.EntityChoose) do
+            if child:IsA("Model") and child.Name:find(v) then
+                repeat task.wait() until not child:IsDescendantOf(workspace) or (game.Players.LocalPlayer:DistanceFromCharacter(child:GetPivot().Position) < 1000)
+                if child:IsDescendantOf(workspace) then
+                    WindUI:Notify({Title = v.." 已生成!", Duration = 5})
+                    if _G.NotifyEntityChat then
+                        local text = _G.ChatNotify or ""
+                        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(text..v.." 已生成!")
+                    end
+                end
+            end
+        end
+    end)
+else
+    if EntityChild then
+        EntityChild:Disconnect()
+        EntityChild = nil
+    end
+end
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启防Eyes" or "已关闭防Eyes",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.tzgn:Toggle({
+    Title = "开启聊天栏通知",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+_G.NotifyEntityChat = Value
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启聊天栏通知" or "已关闭防聊天栏通知",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+local intensitySlider = TabHandles.fzgn:Slider({
+    Title = "透明度",
+    Desc = "speedwalk",
+    Step = 0.1,
+    Value = { Min = 0, Max = 1, Default = 0.5 },
+    Callback = function(Value)
+        _G.TransparencyHide = Value
+    end
+})
+
+TabHandles.fzgn:Toggle({
+    Title = "柜子/床透明",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.HidingTransparency = Value
+while _G.HidingTransparency do
+if game.Players.LocalPlayer.Character:GetAttribute("Hiding") then
+	for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+		if v:IsA("ObjectValue") and v.Name == "HiddenPlayer" then
+			if v.Value == game.Players.LocalPlayer.Character then
+                local hidePart = {}
+                for _, i in pairs(v.Parent:GetChildren()) do
+                    if i:IsA("BasePart") then
+		                i.Transparency = _G.TransparencyHide or 0.5
+		                table.insert(hidePart, i)
+		            end
+		        end
+            repeat task.wait()
+                for _, h in pairs(hidePart) do
+                    h.Transparency = _G.TransparencyHide or 0.5
+                    task.wait()
+                end
+            until not game.Players.LocalPlayer.Character:GetAttribute("Hiding") or not _G.HidingTransparency
+            for _, n in pairs(hidePart) do
+                n.Transparency = 0
+                task.wait()
+            end
+            break
+		end
+	end
+end
+end
+task.wait()
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启透明" or "已关闭透明",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+if isHotel then
+TabHandles.fzgn:Toggle({
+    Title = "自动提示密码",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.NotifyEntity = Value
+if _G.NotifyEntity then
+local function Deciphercode(v)
+local Hints = game.Players.LocalPlayer.PlayerGui:WaitForChild("PermUI"):WaitForChild("Hints")
+
+local code = {[1] = " _",[2] = " _", [3] = " _", [4] = " _", [5] = " _"}
+    for i, v in pairs(v:WaitForChild("UI"):GetChildren()) do
+        if v:IsA("ImageLabel") and v.Name ~= "Image" then
+            for b, n in pairs(Hints:GetChildren()) do
+                if n:IsA("ImageLabel") and n.Visible and v.ImageRectOffset == n.ImageRectOffset then
+                    code[tonumber(v.Name)] = n:FindFirstChild("TextLabel").Text 
+                end
+            end
+        end
+    end 
+    return code
+end
+local function CodeAll(v)
+	if v:IsA("Tool") and v.Name == "LibraryHintPaper" then
+        local code = table.concat(Deciphercode(v))
+        if code then
+	        ui:Notify({Title = "Code: "..code, Duration = 5})
+			if _G.NotifyEntityChat2 then
+				if not _G.ChatNotify then
+					TextChat = ""
+				else
+					TextChat = _G.ChatNotify
+				end
+				if TextChat then
+					game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(TextChat..code)
+				end
+			end
+	        if workspace:FindFirstChild("Padlock") and Distance(workspace.Padlock:GetPivot().Position) <= 30 then
+				if game:GetService("ReplicatedStorage"):FindFirstChild("RemotesFolder") then
+					game:GetService("ReplicatedStorage"):WaitForChild("RemotesFolder"):WaitForChild("LP"):FireServer(code)
+				end
+			end
+		end
+    end
+end
+Getpaper = game.Players.LocalPlayer.Character.ChildAdded:Connect(function(v)
+CodeAll(v)
+end)
+else
+if Getpaper then
+Getpaper:Disconnect()
+Getpaper = nil
+end
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启自动提示" or "已关闭自动提示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+end
+
+TabHandles.fzgn:Toggle({
+    Title = "聊天栏提示密码",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.NotifyEntityChat2 = Value
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启聊天栏提示" or "已关闭聊天栏提示",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
+})
+
+TabHandles.fzgn:Toggle({
+    Title = "无限氧气",
+    Icon = "check",
+    Value = false,
+    Callback = function(Value) 
+
+_G.ActiveInfOxygen = Value 
+while _G.ActiveInfOxygen do 
+if game.Players.LocalPlayer.Character:GetAttribute("Oxygen") then
+game.Players.LocalPlayer.Character:SetAttribute("Oxygen",99999)
+end
+task.wait()
+end 
+if game.Players.LocalPlayer.Character:GetAttribute("Oxygen") then
+game.Players.LocalPlayer.Character:SetAttribute("Oxygen",100)
+end
+
+WindUI:Notify({
+            Title = "Rb脚本中心：",
+            Content = Value and "已开启无限氧气" or "已关闭无限氧气",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+	 end
 })
 
 local Button = Tab:Button({
-    Title = "删掉小蜘蛛",
-    Desc = "点加载",
-    Locked = false,
+    Title = "自定义界面",
+    Desc = "个性化您的体验",
+    Image = "palette",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local themes = {}
+for themeName, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themes, themeName)
+end
+table.sort(themes)
+
+local themeDropdown = TabHandles.Appearance:Dropdown({
+    Title = "主题选择",
+    Values = themes,
+    Value = "Dark",
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+        WindUI:Notify({
+            Title = "主题应用",
+            Content = theme,
+            Icon = "palette",
+            Duration = 2
+        })
+    end
+})
+
+local transparencySlider = TabHandles.Appearance:Slider({
+    Title = "透明度",
+    Value = { 
+        Min = 0,
+        Max = 1,
+        Default = 0.2,
+    },
+    Step = 0.1,
+    Callback = function(value)
+        Window:ToggleTransparency(tonumber(value) > 0)
+        WindUI.TransparencyValue = tonumber(value)
+    end
+})
+
+TabHandles.Appearance:Toggle({
+    Title = "启用黑色主题",
+    Desc = "使用黑色调主题方案",
+    Value = true,
+    Callback = function(state)
+        WindUI:SetTheme(state and "Dark" or "Light")
+        themeDropdown:Select(state and "Dark" or "Light")
+    end
+})
+
+TabHandles.Appearance:Button({
+    Title = "创建新主题",
+    Icon = "plus",
     Callback = function()
-                pcall(function()
-            game:GetService("ReplicatedStorage").Bricks.Jumpscare:Destroy()
-        end)
+        Window:Dialog({
+            Title = "创建主题",
+            Content = "此功能很快就会推出",
+            Buttons = {
+                {
+                    Title = "确认",
+                    Variant = "Primary"
+                }
+            }
+        })
     end
 })
 
-local Tab = Tabs.Settings:Tab({
-    Title = "透视",
-    Icon = "layout-grid", -- optional
-    Locked = false,
+TabHandles.Config:Paragraph({
+    Title = "配置管理",
+    Desc = "保存你的设置",
+    Image = "save",
+    ImageSize = 20,
+    Color = "White"
 })
 
-
-local Toggle = Tab:Toggle({
-    Title = "门显示",
-    Value = false,    
-    Callback = function(val)         
-            flags.espdoors = val
-    
-    if val then
-        local function setup(room)
-            local door = room:WaitForChild("Door"):WaitForChild("Door")
-            
-            task.wait(0.1)
-            local h = esp(door,Color3.fromRGB(255,240,0),door,"门")
-            table.insert(esptable.doors,h)
-            
-            door:WaitForChild("Open").Played:Connect(function()
-                h.delete()
-            end)
-            
-            door.AncestryChanged:Connect(function()
-                h.delete()
-            end)
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,room in pairs(workspace.CurrentRooms:GetChildren()) do
-            if room:FindFirstChild("Assets") then
-                setup(room) 
-            end
-        end
-        
-        repeat task.wait() until not flags.espdoors
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.doors) do
-            v.delete()
-        end 
-    end
-end
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "书显示",
-    Value = false,    
-    Callback = function(val) 
-           flags.espbooks = val
-    
-    if val then
-        local function check(v)
-            if v:IsA("Model") and (v.Name == "LiveHintBook" or v.Name == "LiveBreakerPolePickup") then
-                task.wait(0.1)
-                
-                local h = esp(v,Color3.fromRGB(160,190,255),v.PrimaryPart,"本子")
-                table.insert(esptable.books,h)
-                
-                v.AncestryChanged:Connect(function()
-                    if not v:IsDescendantOf(room) then
-                        h.delete() 
-                    end
-                end)
-            end
-        end
-        
-        local function setup(room)
-            if room.Name == "50" or room.Name == "100" then
-                room.DescendantAdded:Connect(function(v)
-                    check(v) 
-                end)
-                
-                for i,v in pairs(room:GetDescendants()) do
-                    check(v)
-                end
-            end
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,room in pairs(workspace.CurrentRooms:GetChildren()) do
-            setup(room) 
-        end
-        
-        repeat task.wait() until not flags.espbooks
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.books) do
-            v.delete()
-        end 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "柜子显示",
-    Value = false,    
-    Callback = function(val) 
-            flags.esplocker = val
-    
-    if val then
-        local function check(v)
-            if v:IsA("Model") then
-                task.wait(0.1)
-                if v.Name == "Wardrobe" then
-                    local h = esp(v.PrimaryPart,Color3.fromRGB(145,100,25),v.PrimaryPart,"老王家")
-                    table.insert(esptable.lockers,h) 
-                elseif (v.Name == "Rooms_Locker" or v.Name == "Rooms_Locker_Fridge") then
-                    local h = esp(v.PrimaryPart,Color3.fromRGB(145,100,25),v.PrimaryPart,"Locker")
-                    table.insert(esptable.lockers,h) 
-                end
-            end
-        end
-        
-        local function setup(room)
-            local assets = room:WaitForChild("Assets")
-            
-            if assets then
-                local subaddcon
-                subaddcon = assets.DescendantAdded:Connect(function(v)
-                    check(v) 
-                end)
-                
-                for i,v in pairs(assets:GetDescendants()) do
-                    check(v)
-                end
-                
-                task.spawn(function()
-                    repeat task.wait() until not flags.esplocker
-                    subaddcon:Disconnect()  
-                end) 
-            end 
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,v in pairs(workspace.CurrentRooms:GetChildren()) do
-            setup(room) 
-        end
-        
-        repeat task.wait() until not flags.esplocker
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.lockers) do
-            v.delete()
-        end 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "物品显示",
-    Value = false,    
-    Callback = function(val) 
-            flags.espitems = val
-    
-    if val then
-        local function check(v)
-            if v:IsA("Model") and (v:GetAttribute("Pickup") or v:GetAttribute("PropType")) then
-                task.wait(0.1)
-                
-                local part = (v:FindFirstChild("Handle") or v:FindFirstChild("Prop"))
-                local h = esp(part,Color3.fromRGB(160,190,255),part,v.Name)
-                table.insert(esptable.items,h)
-            end
-        end
-        
-        local function setup(room)
-            local assets = room:WaitForChild("Assets")
-            
-            if assets then  
-                local subaddcon
-                subaddcon = assets.DescendantAdded:Connect(function(v)
-                    check(v) 
-                end)
-                
-                for i,v in pairs(assets:GetDescendants()) do
-                    check(v)
-                end
-                
-                task.spawn(function()
-                    repeat task.wait() until not flags.espitems
-                    subaddcon:Disconnect()  
-                end) 
-            end 
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,room in pairs(workspace.CurrentRooms:GetChildren()) do
-            if room:FindFirstChild("Assets") then
-                setup(room) 
-            end
-        end
-        
-        repeat task.wait() until not flags.espitems
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.items) do
-            v.delete()
-        end 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "人物显示",
-    Value = false,    
-    Callback = function(val) 
-            flags.esphumans = val
-    
-    if val then
-        local function personesp(v)
-            v.CharacterAdded:Connect(function(vc)
-                local vh = vc:WaitForChild("Humanoid")
-                local torso = vc:WaitForChild("UpperTorso")
-                task.wait(0.1)
-                
-                local h = esp(vc,Color3.fromRGB(255,255,255),torso,v.DisplayName)
-                table.insert(esptable.people,h) 
-            end)
-            
-            if v.Character then
-                local vc = v.Character
-                local vh = vc:WaitForChild("Humanoid")
-                local torso = vc:WaitForChild("UpperTorso")
-                task.wait(0.1)
-                
-                local h = esp(vc,Color3.fromRGB(255,255,255),torso,v.DisplayName)
-                table.insert(esptable.people,h) 
-            end
-        end
-        
-        local addconnect
-        addconnect = game.Players.PlayerAdded:Connect(function(v)
-            if v ~= plr then
-                personesp(v)
-            end
-        end)
-        
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v ~= plr then
-                personesp(v) 
-            end
-        end
-        
-        repeat task.wait() until not flags.esphumans
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.people) do
-            v.delete()
-        end 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "金币显示",
-    Value = false,    
-    Callback = function(val) 
-    flags.espgold = val
-    
-    if val then
-        local function check(v)
-            if v:IsA("Model") then
-                task.wait(0.1)
-                local goldvalue = v:GetAttribute("GoldValue")
-                
-                if goldvalue and goldvalue >= flags.goldespvalue then
-                    local hitbox = v:WaitForChild("Hitbox")
-                    local h = esp(hitbox:GetChildren(),Color3.fromRGB(255,255,0),hitbox,"钱 [".. tostring(goldvalue).."]")
-                    table.insert(esptable.gold,h)
-                end
-            end
-        end
-        
-        local function setup(room)
-            local assets = room:WaitForChild("Assets")
-            
-            local subaddcon
-            subaddcon = assets.DescendantAdded:Connect(function(v)
-                check(v) 
-            end)
-            
-            for i,v in pairs(assets:GetDescendants()) do
-                check(v)
-            end
-            
-            task.spawn(function()
-                repeat task.wait() until not flags.espchest
-                subaddcon:Disconnect()  
-            end)  
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,room in pairs(workspace.CurrentRooms:GetChildren()) do
-            if room:FindFirstChild("Assets") then
-                setup(room) 
-            end
-        end
-        
-        repeat task.wait() until not flags.espgold
-        addconnect:Disconnect()
-        
-        for i,v in pairs(esptable.gold) do
-            v.delete()
-        end 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "怪物提醒",
-    Value = false,    
-    Callback = function(val) 
-    
-function tableContains(table, element)
-    for key, value in pairs(table) do
-        if key == element then
-            return true
-        end
-    end
-    return false
-end
-
-function notify(text)
-    notification:ForceNotify({
-        Name = "小玄奘 丨 Doors 丨 XK",
-        Text = text,
-        Icon = "rbxassetid://11401835376",
-        Duration = 5,
-    })
-    
-    local sound = Instance.new("Sound", workspace)
-sound.SoundId = "rbxassetid://6647898215"
-sound:Play()
-end
-
-local MS = {
-    ["RushMoving"] = "Rush出现",
-    ["AmbushMoving"] = "Ambush出现",
-    ["A60"] = "A60出现",
-    ["A120"] = "A120出现",
-    ["Eyes"] = "Eyes出现",
-    ["SeekMoving"] = "Seek追逐战",
-    ["seekMoving"] = "Seek追逐战",
-    ["JeffTheKiller"] = "JeffTheKiller出现",
-    ["A90"] = "A90出现"
+local configName = "default"
+local configFile = nil
+local MyPlayerData = {
+    name = "Player1",
+    level = 1,
+    inventory = { "sword", "shield", "potion" }
 }
 
-workspace.ChildAdded:Connect(function(child)
-    
-    if tableContains(MS, child.Name) then 
-        notify(MS[child.Name])
+TabHandles.Config:Input({
+    Title = "配置名称",
+    Value = configName,
+    Callback = function(value)
+        configName = value
     end
-end)
-end    
 })
 
-local Toggle = Tab:Toggle({
-    Title = "屏幕亮度",
-    Value = false,    
-    Callback = function(val) 
-    flags.light = val
-   
-    if val then
-        local l = Instance.new("PointLight")
-        l.Range = 10000
-        l.Brightness = 2
-        l.Parent = char.PrimaryPart
-       
-        repeat task.wait() until not flags.light
-        l:Destroy() 
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "一秒开锁",
-    Value = false,    
-    Callback = function(val) 
-            flags.instapp = val
+local ConfigManager = Window.ConfigManager
+if ConfigManager then
+    ConfigManager:Init(Window)
     
-    local holdconnect
-    holdconnect = game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(p)
-		fireproximityprompt(p)
-	end)
-    
-    repeat task.wait() until not flags.instapp
-    holdconnect:Disconnect()
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "删除Seek追逐",
-    Value = false,    
-    Callback = function(val) 
-            flags.noseek = val
-    
-    if val then
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            local trigger = room:WaitForChild("TriggerEventCollision",2)
+    TabHandles.Config:Button({
+        Title = "保存配置",
+        Icon = "save",
+        Variant = "Primary",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
             
-            if trigger then
-                trigger:Destroy() 
+            configFile:Register("featureToggle", featureToggle)
+            configFile:Register("intensitySlider", intensitySlider)
+            configFile:Register("modeDropdown", modeDropdown)
+            configFile:Register("themeDropdown", themeDropdown)
+            configFile:Register("transparencySlider", transparencySlider)
+            
+            configFile:Set("playerData", MyPlayerData)
+            configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
+            
+            if configFile:Save() then
+                WindUI:Notify({ 
+                    Title = "保存配置", 
+                    Content = "保存为："..configName,
+                    Icon = "check",
+                    Duration = 3
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "保存失败",
+                    Icon = "x",
+                    Duration = 3
+                })
             end
-        end)
-        
-        repeat task.wait() until not flags.noseek
-        addconnect:Disconnect()
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "删除拼图门",
-    Value = false,    
-    Callback = function(val) 
-    flags.nopuzzle = val
-    
-    if val then
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            local assets = room:WaitForChild("Assets")
-            local paintings = assets:WaitForChild("Paintings",2)
-            
-            if paintings then
-                local door = paintings:WaitForChild("MovingDoor",2)
-            
-                if door then
-                    door:Destroy() 
-                end 
-            end
-        end)
-        
-        repeat task.wait() until not flags.nopuzzle
-        addconnect:Disconnect()
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "删除小黑子",
-    Value = false,    
-    Callback = function(val) 
-            flags.noscreech = val
-        
-    if val then
-            screechremote.Parent = nil
-            repeat task.wait() until not flags.noscreech
-            screechremote.Parent = entityinfo
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "显示密码",
-    Value = false,    
-    Callback = function(val) 
-            flags.getcode = val
-    
-    if val then
-        local function deciphercode()
-        local paper = char:FindFirstChild("LibraryHintPaper")
-        local hints = plr.PlayerGui:WaitForChild("PermUI"):WaitForChild("Hints")
-        
-        local code = {[1]="_",[2]="_",[3]="_",[4]="_",[5]="_"}
-            
-            if paper then
-                for i,v in pairs(paper:WaitForChild("UI"):GetChildren()) do
-                    if v:IsA("ImageLabel") and v.Name ~= "Image" then
-                        for i,img in pairs(hints:GetChildren()) do
-                            if img:IsA("ImageLabel") and img.Visible and v.ImageRectOffset == img.ImageRectOffset then
-                                local num = img:FindFirstChild("TextLabel").Text
-                                
-                                code[tonumber(v.Name)] = num 
-                            end
-                        end
-                    end
-                end 
-            end
-            
-            return code
         end
-        
-        local addconnect
-        addconnect = char.ChildAdded:Connect(function(v)
-            if v:IsA("Tool") and v.Name == "LibraryHintPaper" then
-                task.wait()
-                
-                local code = table.concat(deciphercode())
-                
-                if code:find("_") then
-                    message("首先获取所有提示")
-                else
-                    message("这个密码是 ".. code)
+    })
+
+    TabHandles.Config:Button({
+        Title = "加载配置",
+        Icon = "folder",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            local loadedData = configFile:Load()
+            
+            if loadedData then
+                if loadedData.playerData then
+                    MyPlayerData = loadedData.playerData
                 end
-            end
-        end)
-        
-        repeat task.wait() until not flags.getcode
-        addconnect:Disconnect()
-    end
-end    
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "A-000无锁",
-    Value = false,    
-    Callback = function(val) 
-    flags.roomsnolock = val
-    
-    if val then
-        local function check(room)
-            local door = room:WaitForChild("RoomsDoor_Entrance",2)
-            
-            if door then
-                local prompt = door:WaitForChild("Door"):WaitForChild("EnterPrompt")
-                prompt.Enabled = true
-            end 
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            check(room)
-        end)
-        
-        for i,v in pairs(workspace.CurrentRooms:GetChildren()) do
-            check(room)
-        end
-        
-        repeat task.wait() until not flags.roomsnolock
-        addconnect:Disconnect()
-    end
-end  
-})
-
-
-local Toggle = Tab:Toggle({
-    Title = "自动拾取",
-    Value = false,    
-    Callback = function(val) 
-            flags.draweraura = val
-    
-    if val then
-        local function setup(room)
-            local function check(v)
-                if v:IsA("Model") then
-                    if v.Name == "DrawerContainer" then
-                        local knob = v:WaitForChild("Knobs")
-                        
-                        if knob then
-                            local prompt = knob:WaitForChild("ActivateEventPrompt")
-                            local interactions = prompt:GetAttribute("Interactions")
-                            
-                            if not interactions then
-                                task.spawn(function()
-                                    repeat task.wait(0.1)
-                                        if plr:DistanceFromCharacter(knob.Position) <= 12 then
-                                            fireproximityprompt(prompt)
-                                        end
-                                    until prompt:GetAttribute("Interactions") or not flags.draweraura
-                                end)
-                            end
-                        end
-                    elseif v.Name == "GoldPile" then
-                        local prompt = v:WaitForChild("LootPrompt")
-                        local interactions = prompt:GetAttribute("Interactions")
-                            
-                        if not interactions then
-                            task.spawn(function()
-                                repeat task.wait(0.1)
-                                    if plr:DistanceFromCharacter(v.PrimaryPart.Position) <= 12 then
-                                        fireproximityprompt(prompt) 
-                                    end
-                                until prompt:GetAttribute("Interactions") or not flags.draweraura
-                            end)
-                        end
-                    elseif v.Name:sub(1,8) == "ChestBox" then
-                        local prompt = v:WaitForChild("ActivateEventPrompt")
-                        local interactions = prompt:GetAttribute("Interactions")
-                        
-                        if not interactions then
-                            task.spawn(function()
-                                repeat task.wait(0.1)
-                                    if plr:DistanceFromCharacter(v.PrimaryPart.Position) <= 12 then
-                                        fireproximityprompt(prompt)
-                                    end
-                                until prompt:GetAttribute("Interactions") or not flags.draweraura
-                            end)
-                        end
-                    elseif v.Name == "RolltopContainer" then
-                        local prompt = v:WaitForChild("ActivateEventPrompt")
-                        local interactions = prompt:GetAttribute("Interactions")
-                        
-                        if not interactions then
-                            task.spawn(function()
-                                repeat task.wait(0.1)
-                                    if plr:DistanceFromCharacter(v.PrimaryPart.Position) <= 12 then
-                                        fireproximityprompt(prompt)
-                                    end
-                                until prompt:GetAttribute("Interactions") or not flags.draweraura
-                            end)
-                        end
-                    end 
-                end
-            end
-    
-            local subaddcon
-            subaddcon = room.DescendantAdded:Connect(function(v)
-                check(v) 
-            end)
-            
-            for i,v in pairs(room:GetDescendants()) do
-                check(v)
-            end
-            
-            task.spawn(function()
-                repeat task.wait() until not flags.draweraura
-                subaddcon:Disconnect() 
-            end)
-        end
-        
-        local addconnect
-        addconnect = workspace.CurrentRooms.ChildAdded:Connect(function(room)
-            setup(room)
-        end)
-        
-        for i,room in pairs(workspace.CurrentRooms:GetChildren()) do
-            if room:FindFirstChild("Assets") then
-                setup(room) 
+                
+                local lastSave = loadedData.lastSave or "Unknown"
+                WindUI:Notify({ 
+                    Title = "加载配置", 
+                    Content = "正在加载："..configName.."\n上次保存："..lastSave,
+                    Icon = "refresh-cw",
+                    Duration = 5
+                })
+                
+                TabHandles.Config:Paragraph({
+                    Title = "玩家数据",
+                    Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
+                        MyPlayerData.name, 
+                        MyPlayerData.level, 
+                        table.concat(MyPlayerData.inventory, ", "))
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "加载失败",
+                    Icon = "x",
+                    Duration = 3
+                })
             end
         end
-        
-        repeat task.wait() until not flags.draweraura
-        addconnect:Disconnect()
-    end
-end    
-})
+    })
+else
+    TabHandles.Config:Paragraph({
+        Title = "配置管理不可用",
+        Desc = "此功能需要配置管理",
+        Image = "alert-triangle",
+        ImageSize = 20,
+        Color = "White"
+    })
+end
+
 
