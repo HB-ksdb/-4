@@ -193,11 +193,11 @@ local Paragraph = Tab:Paragraph({
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
-    gn = Window:Section({ Title = "自定义UI", Opened = true }),    
+    gn = Window:Section({ Title = "脚本", Opened = true }),    
 }
 
 local TabHandles = {
-    Elements = Tabs.Main:Tab({ Title = "", Icon = "layout-grid" }),
+    Elements = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
     gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "layout-grid" }),
     ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "layout-grid" }),
     pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "layout-grid" }),
@@ -2515,12 +2515,6 @@ local Tab = Tabs.Settings:Tab({
 })
 
 Button = TabHandles.G:Button({
-    Title = "打巴掌",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
     Title = "打巴掌光环",
     Desc = "",
     Locked = false,
@@ -2567,7 +2561,7 @@ WindUI:Notify({
     Icon = "layout-grid",
 })
 
-Paragraph = TabHandles.gn:Paragraph({
+Paragraph = TabHandles.Elements:Paragraph({
     Title = "自定义界面",
     Desc = "个性化您的体验",
     Image = "palette",
@@ -2581,7 +2575,7 @@ for themeName, _ in pairs(WindUI:GetThemes()) do
 end
 table.sort(themes)
 
-Dropdown = TabHandles.gn:Dropdown({
+Dropdown = TabHandles.Elements:Dropdown({
     Title = "主题选择",
     Values = themes,
     Value = "Dark",
@@ -2596,7 +2590,7 @@ Dropdown = TabHandles.gn:Dropdown({
     end
 })
 
-Button = TabHandles.gn:Button({
+Button = TabHandles.Elements:Button({
     Title = "透明度",
     Value = { 
         Min = 0,
@@ -2610,7 +2604,7 @@ Button = TabHandles.gn:Button({
     end
 })
 
-Button = TabHandles.gn:Button({
+Button = TabHandles.Elements:Button({
     Title = "启用黑色主题",
     Desc = "使用黑色调主题方案",
     Value = true,
@@ -2620,7 +2614,7 @@ Button = TabHandles.gn:Button({
     end
 })
 
-Button = TabHandles.gn:Button({
+Button = TabHandles.Elements:Button({
     Title = "创建新主题",
     Icon = "plus",
     Callback = function()
@@ -2637,7 +2631,7 @@ Button = TabHandles.gn:Button({
     end
 })
 
-Button = TabHandles.gn:Button({
+Button = TabHandles.Elements:Button({
     Title = "配置管理",
     Desc = "保存你的设置",
     Image = "save",
@@ -2653,7 +2647,7 @@ local MyPlayerData = {
     inventory = { "sword", "shield", "potion" }
 }
 
-Keybind = TabHandles.gn:Keybind({
+Keybind = TabHandles.Elements:Keybind({
     Title = "配置名称",
     Value = configName,
     Callback = function(value)
@@ -2665,7 +2659,7 @@ local ConfigManager = Window.ConfigManager
 if ConfigManager then
     ConfigManager:Init(Window)
     
-Toggle = TabHandles.gn:Toggle({
+Toggle = TabHandles.Elements:Toggle({
         Title = "保存配置",
         Icon = "save",
         Variant = "Primary",
@@ -2699,7 +2693,7 @@ Toggle = TabHandles.gn:Toggle({
         end
     })
 
-    Button = TabHandles.gn:Button({
+    Button = TabHandles.Elements:Button({
         Title = "加载配置",
         Icon = "folder",
         Callback = function()
@@ -2719,7 +2713,7 @@ Toggle = TabHandles.gn:Toggle({
                     Duration = 5
                 })
                 
-                Button = TabHandles.gn:Button({
+                Button = TabHandles.Elements:Button({
                     Title = "玩家数据",
                     Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
                         MyPlayerData.name, 
@@ -2737,7 +2731,7 @@ Toggle = TabHandles.gn:Toggle({
         end
     })
 else
-    Button = TabHandles.gn:Button({
+    Button = TabHandles.Elements:Button({
         Title = "配置管理不可用",
         Desc = "此功能需要配置管理",
         Image = "alert-triangle",
