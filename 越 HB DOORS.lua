@@ -54,9 +54,7 @@ Window:Tag({
 
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
-    gn = Window:Section({ Title = "功能", Opened = true }),
-    Settings = Window:Section({ Title = "UI设置", Opened = true }),
-    Utilities = Window:Section({ Title = "保存配置", Opened = true })
+    gn = Window:Section({ Title = "功能", Opened = true }),    
 }
 
 local TabHandles = {
@@ -87,7 +85,7 @@ local Sound = Instance.new("Sound",game:GetService("SoundService"))
             Sound.SoundId = "rbxassetid://2865227271"
             Sound:Play()
 		WindUI:Notify({
-            Title = "Rb脚本中心---提示：",
+            Title = "HB脚本---提示：",
             Icon = "copy",
             Content = "已成功复制！",
             Icon = "bell",
@@ -253,7 +251,7 @@ TabHandles.xx:Paragraph({
     Desc = ""..identifyexecutor().."",
     Image = "rbxassetid://129287693322764",
     ImageSize = 42, -- default 30
-    Thumbnail = "rbxassetid://94512740386917",
+    Thumbnail = "rbxassetid://2865227271",
     ThumbnailSize = 120, -- Thumbnail height
     Buttons = {
         {
@@ -261,7 +259,7 @@ TabHandles.xx:Paragraph({
             Variant = "Primary",
             Callback = function() 
             Window:Dialog({
-            Title = "Rb脚本中心",
+            Title = "HB脚本",
             Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
             Icon = "bell",
             Buttons = {
@@ -280,7 +278,7 @@ local Sound = Instance.new("Sound",game:GetService("SoundService"))
             Sound.SoundId = "rbxassetid://2865227271"
             Sound:Play()
 		WindUI:Notify({
-            Title = "Rb脚本中心---提示：",
+            Title = "HB脚本中心---提示：",
             Content = "已成功执行，请在控制台查看UNC！",
             Icon = "bell",
             IconThemed = true, -- automatic color icon to theme 
@@ -292,18 +290,6 @@ local Sound = Instance.new("Sound",game:GetService("SoundService"))
         },
     }
 })
-
-TabHandles.xx:Code({
-    Title = "Rb脚本中心交流群（主群）",
-    Code = [[https://qm.qq.com/q/csDfI4BZNm]],
-})
-
-TabHandles.xx:Code({
-    Title = "Rb脚本中心交流群（Discord群）",
-    Code = [[https://discord.gg/qZmW3PYd9T]],
-})
-
-
 
 local intensitySlider = TabHandles.Elements:Slider({
     Title = "玩家速度",
@@ -326,128 +312,11 @@ end
 task.wait()
 end
         WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = state and "已开启速度" or "已关闭速度",
             Icon = state and "check" or "x",
             Duration = 2
         })
-    end
-})
-
-local intensitySlider = TabHandles.Elements:Slider({
-    Title = "玩家速度V2",
-    Desc = "tpwalk",
-    Value = { Min = 0, Max = 10, Default = 0 },
-    Callback = function(value)
-        local tpWalk = {}
-
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-
-local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-local rootPart = character:WaitForChild("HumanoidRootPart")
-
-local teleportDistance = value -- 每次传送的距离
-local isTeleporting = true -- 是否正在传送
-
--- 禁用所有与移动相关的状态
-local function DisableDefaultMovement()
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, false)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, false)
-end
-
--- 启用所有与移动相关的状态
-local function EnableDefaultMovement()
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Running, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics, true)
-    humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming, true)
-end
-
--- 自定义传送函数
-local function Teleport()
-    if not isTeleporting or not rootPart or not humanoid then
-        return
-    end
-
-    -- 获取移动方向
-    local moveDirection = humanoid.MoveDirection
-    if moveDirection.Magnitude == 0 then
-        return -- 如果没有移动方向，则停止传送
-    end
-
-    -- 计算传送向量
-    local teleportVector = moveDirection * teleportDistance
-
-    -- 检测前方是否有障碍物
-    local raycastParams = RaycastParams.new()
-    raycastParams.FilterDescendantsInstances = {character}
-    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
-
-    local raycastResult = workspace:Raycast(rootPart.Position, teleportVector, raycastParams)
-
-    if raycastResult then
-        -- 如果有障碍物，调整传送向量
-        teleportVector = (raycastResult.Position - rootPart.Position).Unit * teleportDistance
-    end
-
-    -- 更新位置
-    rootPart.CFrame = rootPart.CFrame + teleportVector
-end
-
--- 控制开关函数
-function tpWalk:Enabled(enabled)
-    isTeleporting = enabled
-    if enabled then DisableDefaultMovement() else EnableDefaultMovement() end
-end
-
-function tpWalk:GetEnabled()
-    return isTeleporting
-end
-
-function tpWalk:SetSpeed(speed)
-    teleportDistance = speed or 0.1
-end
-
-function tpWalk:GetSpeed()
-    return teleportDistance
-end
-
--- 每帧更新传送
-RunService.Heartbeat:Connect(function()
-    if isTeleporting then
-        Teleport()
-    end
-end)
-
-return tpWalk
     end
 })
 
@@ -514,7 +383,7 @@ local featureToggle = TabHandles.Elements:Toggle({
     xray()
             end
         WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = state and "地图透视已开启，若仍不清楚可开启其他视觉功能" or "地图透视已关闭",
             Icon = state and "check" or "x",
             Duration = 2
@@ -548,27 +417,8 @@ local Sound = Instance.new("Sound",game:GetService("SoundService"))
             Sound.SoundId = "rbxassetid://2865227271"
             Sound:Play()
         WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = "已去雾",
-            Icon = "bell",
-            Duration = 3
-        })
-    end
-})
-TabHandles.Elements:Divider()
-
-TabHandles.Elements:Button({
-    Title = "飞行",
-    Desc = "传统的飞行",
-    Icon = "bell",
-    Callback = function()
-loadstring(game:HttpGet("https://pastebin.com/raw/CPSm1udG"))()
-local Sound = Instance.new("Sound",game:GetService("SoundService"))
-            Sound.SoundId = "rbxassetid://2865227271"
-            Sound:Play()
-        WindUI:Notify({
-            Title = "Rb脚本中心：",
-            Content = "成功加载飞行",
             Icon = "bell",
             Duration = 3
         })
@@ -630,7 +480,7 @@ pickupaura = val
         until not pickupaura 
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启自动捡钥匙" or "已关闭自动捡钥匙",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -670,7 +520,7 @@ leveraura = val
         until not leveraura
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启自动拉拉杆" or "已关闭自动拉拉杆",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -710,7 +560,7 @@ bookaura = val
         until not bookaura
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启自动拾起书" or "已关闭自动拾起书",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -747,7 +597,7 @@ end
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启即时互动" or "已关闭即时互动",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -823,7 +673,7 @@ task.wait(0.1)
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启自动互动" or "已关闭自动互动",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -852,7 +702,7 @@ game.Lighting[i] = v
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = "已开启全图高亮",
             Icon = "bell",
             IconThemed = true, -- automatic color icon to theme 
@@ -889,7 +739,7 @@ end
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = "已开启全图高亮",
             Icon = "bell",
             IconThemed = true, -- automatic color icon to theme 
@@ -1005,7 +855,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1086,7 +936,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = state and "已开启透视" or "已关闭透视",
             Icon = state and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1201,7 +1051,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1317,7 +1167,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1431,7 +1281,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1555,7 +1405,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1683,7 +1533,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1765,7 +1615,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透视" or "已关闭透视",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1783,7 +1633,7 @@ TabHandles.ESPgn:Toggle({
 _G.EspGui = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启文本显示" or "已关闭文本显示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1801,7 +1651,7 @@ TabHandles.ESPgn:Toggle({
 _G.EspHighlight = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启高亮显示" or "已关闭高亮显示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1829,7 +1679,7 @@ TabHandles.ESPgn:Toggle({
 _G.EspName = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启名称显示" or "已关闭名称显示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1848,7 +1698,7 @@ TabHandles.ESPgn:Toggle({
 _G.EspDistance = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启距离显示" or "已关闭距离显示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1867,7 +1717,7 @@ TabHandles.ESPgn:Toggle({
 _G.EspHealth = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启血量显示" or "已关闭血量显示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1907,7 +1757,7 @@ TabHandles.pbgn:Toggle({
 _G.AntiScreech = Value
 Screech = Value
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启防Screech" or "已关闭防Screech",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1927,7 +1777,7 @@ if HaltShade then
     HaltShade.Name = _G.NoHalt and "_Shade" or "Shade"
 end
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启防Halt" or "已关闭防Halt",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1951,7 +1801,7 @@ end
 task.wait()
 end
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启防Eyes" or "已关闭防Eyes",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -1975,7 +1825,7 @@ end
 task.wait()
 end
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启防Look Man" or "已关闭防Look Man",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2014,7 +1864,7 @@ else
     end
 end
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启防Eyes" or "已关闭防Eyes",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2030,7 +1880,7 @@ TabHandles.tzgn:Toggle({
     Callback = function(Value) 
 _G.NotifyEntityChat = Value
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启聊天栏通知" or "已关闭防聊天栏通知",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2087,7 +1937,7 @@ task.wait()
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启透明" or "已关闭透明",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2154,7 +2004,7 @@ end
 end
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启自动提示" or "已关闭自动提示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2173,7 +2023,7 @@ TabHandles.fzgn:Toggle({
 _G.NotifyEntityChat2 = Value
 
 WindUI:Notify({
-            Title = "Rb脚本中心：",
+            Title = "HB脚本：",
             Content = Value and "已开启聊天栏提示" or "已关闭聊天栏提示",
             Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
@@ -2208,184 +2058,4 @@ WindUI:Notify({
         })
 	 end
 })
-
-local Button = Tab:Button({
-    Title = "自定义界面",
-    Desc = "个性化您的体验",
-    Image = "palette",
-    ImageSize = 20,
-    Color = "White"
-})
-
-local themes = {}
-for themeName, _ in pairs(WindUI:GetThemes()) do
-    table.insert(themes, themeName)
-end
-table.sort(themes)
-
-local themeDropdown = TabHandles.Appearance:Dropdown({
-    Title = "主题选择",
-    Values = themes,
-    Value = "Dark",
-    Callback = function(theme)
-        WindUI:SetTheme(theme)
-        WindUI:Notify({
-            Title = "主题应用",
-            Content = theme,
-            Icon = "palette",
-            Duration = 2
-        })
-    end
-})
-
-local transparencySlider = TabHandles.Appearance:Slider({
-    Title = "透明度",
-    Value = { 
-        Min = 0,
-        Max = 1,
-        Default = 0.2,
-    },
-    Step = 0.1,
-    Callback = function(value)
-        Window:ToggleTransparency(tonumber(value) > 0)
-        WindUI.TransparencyValue = tonumber(value)
-    end
-})
-
-TabHandles.Appearance:Toggle({
-    Title = "启用黑色主题",
-    Desc = "使用黑色调主题方案",
-    Value = true,
-    Callback = function(state)
-        WindUI:SetTheme(state and "Dark" or "Light")
-        themeDropdown:Select(state and "Dark" or "Light")
-    end
-})
-
-TabHandles.Appearance:Button({
-    Title = "创建新主题",
-    Icon = "plus",
-    Callback = function()
-        Window:Dialog({
-            Title = "创建主题",
-            Content = "此功能很快就会推出",
-            Buttons = {
-                {
-                    Title = "确认",
-                    Variant = "Primary"
-                }
-            }
-        })
-    end
-})
-
-TabHandles.Config:Paragraph({
-    Title = "配置管理",
-    Desc = "保存你的设置",
-    Image = "save",
-    ImageSize = 20,
-    Color = "White"
-})
-
-local configName = "default"
-local configFile = nil
-local MyPlayerData = {
-    name = "Player1",
-    level = 1,
-    inventory = { "sword", "shield", "potion" }
-}
-
-TabHandles.Config:Input({
-    Title = "配置名称",
-    Value = configName,
-    Callback = function(value)
-        configName = value
-    end
-})
-
-local ConfigManager = Window.ConfigManager
-if ConfigManager then
-    ConfigManager:Init(Window)
-    
-    TabHandles.Config:Button({
-        Title = "保存配置",
-        Icon = "save",
-        Variant = "Primary",
-        Callback = function()
-            configFile = ConfigManager:CreateConfig(configName)
-            
-            configFile:Register("featureToggle", featureToggle)
-            configFile:Register("intensitySlider", intensitySlider)
-            configFile:Register("modeDropdown", modeDropdown)
-            configFile:Register("themeDropdown", themeDropdown)
-            configFile:Register("transparencySlider", transparencySlider)
-            
-            configFile:Set("playerData", MyPlayerData)
-            configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
-            
-            if configFile:Save() then
-                WindUI:Notify({ 
-                    Title = "保存配置", 
-                    Content = "保存为："..configName,
-                    Icon = "check",
-                    Duration = 3
-                })
-            else
-                WindUI:Notify({ 
-                    Title = "错误", 
-                    Content = "保存失败",
-                    Icon = "x",
-                    Duration = 3
-                })
-            end
-        end
-    })
-
-    TabHandles.Config:Button({
-        Title = "加载配置",
-        Icon = "folder",
-        Callback = function()
-            configFile = ConfigManager:CreateConfig(configName)
-            local loadedData = configFile:Load()
-            
-            if loadedData then
-                if loadedData.playerData then
-                    MyPlayerData = loadedData.playerData
-                end
-                
-                local lastSave = loadedData.lastSave or "Unknown"
-                WindUI:Notify({ 
-                    Title = "加载配置", 
-                    Content = "正在加载："..configName.."\n上次保存："..lastSave,
-                    Icon = "refresh-cw",
-                    Duration = 5
-                })
-                
-                TabHandles.Config:Paragraph({
-                    Title = "玩家数据",
-                    Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
-                        MyPlayerData.name, 
-                        MyPlayerData.level, 
-                        table.concat(MyPlayerData.inventory, ", "))
-                })
-            else
-                WindUI:Notify({ 
-                    Title = "错误", 
-                    Content = "加载失败",
-                    Icon = "x",
-                    Duration = 3
-                })
-            end
-        end
-    })
-else
-    TabHandles.Config:Paragraph({
-        Title = "配置管理不可用",
-        Desc = "此功能需要配置管理",
-        Image = "alert-triangle",
-        ImageSize = 20,
-        Color = "White"
-    })
-end
-
 

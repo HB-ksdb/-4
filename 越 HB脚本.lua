@@ -245,6 +245,8 @@ local Slider = Tab:Slider({
         game.Workspace.Gravity = value
     end
 })
+
+TabHandles.Elements:Divider()
 -----------------------------------------------------------------------------------------------飞行
 local Button = Tab:Button({
     Title = "飞行v1",
@@ -2826,7 +2828,7 @@ local ConfigManager = Window.ConfigManager
 if ConfigManager then
     ConfigManager:Init(Window)
     
-local Button = Tab:Button({
+local Toggle = Tab:Toggle({
         Title = "保存配置",
         Icon = "save",
         Variant = "Primary",
