@@ -58,11 +58,6 @@ local Tabs = {
     Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
 }
 
-local Tab = Tabs.Main:Tab({
-    Title = "",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
 hookfunction(getnamecallmethod, function()
   return
 end)
@@ -121,6 +116,12 @@ local AlienX = {
         bg.Enabled = enabled
       end
     end
+
+local Tab = Tabs.Main:Tab({
+    Title = "光环",
+    Icon = "layout-grid", -- optional
+    Locked = false,
+})
 
 local Toggle = Tab:Toggle({
     Title = "杀戮光环",
