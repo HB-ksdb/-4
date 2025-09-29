@@ -298,39 +298,12 @@ TabHandles.xx:Code({
     Code = [[https://qm.qq.com/q/Zxd3KOhmY8]],
 })
 
-TabHandles.xx:Code({
-    Title = "",
-    Code = ,
-})
-
-
-
 local intensitySlider = TabHandles.Elements:Slider({
     Title = "玩家速度",
     Desc = "speedwalk",
     Value = { Min = 0, Max = 1000, Default = 16 },
     Callback = function(Value)
         _G.WalkSpeedTp = Value
-    end
-})
-
-local featureToggle = TabHandles.Elements:Toggle({
-    Title = "开启速度",
-    Value = false,
-    Callback = function(Value) 
-        _G.SpeedWalk = Value
-while _G.SpeedWalk do
-if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.WalkSpeedTp
-end
-task.wait()
-end
-        WindUI:Notify({
-            Title = "脚本中心：",
-            Content = state and "已开启速度" or "已关闭速度",
-            Icon = state and "check" or "x",
-            Duration = 2
-        })
     end
 })
 
@@ -351,8 +324,6 @@ local intensitySlider = TabHandles.Elements:Slider({
         game.Workspace.Gravity = value
     end
 })
-
-
 
 TabHandles.Elements:Divider()
 
