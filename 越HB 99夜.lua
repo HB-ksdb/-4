@@ -1585,22 +1585,3 @@ else
     })
 end
 
-local footerSection = Window:Section({
-    Title = "Rb脚本中心_付费版"
-})
-
-Window:OnClose(function()
-    print("Window closed")
-
-    if ConfigManager and configFile then
-        configFile:Set("playerData", MyPlayerData)
-        configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
-        configFile:Save()
-        print("Config auto-saved on close")
-    end
-end)
-
-Window:OnDestroy(function()
-    print("Window destroyed")
-end)
-end
