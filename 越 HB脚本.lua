@@ -1907,40 +1907,6 @@ WindUI:Notify({
        
     end
 })
------------------------------------------------------------------------------------------------xk脚本
-Button = TabHandles.Elements:Button({
-    Title = "XK脚本",
-    Desc = "点击加载",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-
-            Window:Dialog({
-                Title = "HB脚本中心",
-                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
-                Icon = "bell",
-                Buttons = {{
-                    Title = "确定",
-                    Variant = "Primary",
-                    Callback = function()
-                        print("ok")
-                    end
-                }}
-            })
-            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
-            
-    end
-})            
-        
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
-        
-    end
-})
 
 Button = TabHandles.gn:Button({
     Title = "DOORS",
@@ -2151,19 +2117,13 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------最强战场
-Button = TabHandles.tzgn:Button({
-    Title = "最强战场",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "最坚强战场",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.tzgn:Button({
     Title = "最强战场无限侧闪",
     Desc = "无卡英文",
     Locked = false,
@@ -2193,7 +2153,7 @@ WindUI:Notify({
     end
 })
 
-local Button = Tab:Button({
+Button = TabHandles.tzgn:Button({
     Title = "最强战场隐身道具",
     Desc = "无卡",
     Locked = false,
@@ -2224,19 +2184,13 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------死铁轨
-Button = TabHandles.fzgn:Button({
-    Title = "死铁轨",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 local Section = Tab:Section({ 
     Title = "死铁轨",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
-local Button = Tab:Button({
+Button = TabHandles.fzgn:Button({
     Title = "死铁轨",
     Desc = "无卡中文",
     Locked = false,
