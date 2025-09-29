@@ -68,6 +68,128 @@ local Paragraph = Tab:Paragraph({
     ThumbnailSize = 120,
 })
 
+local Paragraph = Tab:Paragraph({
+    Title = "您的用户名ID：",
+    Desc = "" .. game:GetService("Players").LocalPlayer.UserId .. "",
+    Buttons = {{
+        Title = "复制您的用户名ID",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("Players").LocalPlayer.UserId)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "您所在的服务器名称：",
+    Desc = "" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "",
+    Buttons = {{
+        Title = "复制您所在的服务器名称",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "您的账号注册时间（天）：",
+    Desc = "" .. game:GetService("Players").LocalPlayer.AccountAge .. "",
+    Buttons = {{
+        Title = "复制您的注册时间",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("Players").LocalPlayer.AccountAge)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "您的注入器：",
+    Desc = "" .. identifyexecutor() .. "",
+    Image = "rbxassetid://129287693322764",
+    ImageSize = 42, -- default 30
+    Thumbnail = "rbxassetid://94512740386917",
+    ThumbnailSize = 120, -- Thumbnail height
+    Buttons = {{
+        Title = "测试您注入器的UNC",
+        Variant = "Primary",
+        Callback = function()
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功执行，请在控制台查看UNC！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
 -----------------------------------------------------------------------------------------------通用    
 local Tabs = {
     Main = Window:Section({ Title = "越 HB通用", Opened = true }),
@@ -2143,19 +2265,184 @@ local Tab = Tabs.Utilities:Tab({
     Locked = false,
 })
 
-local Section = Tab:Section({ 
-    Title = "不用点，会自动启动的放心",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-----------------------------------------------------------------------------------------------玩家进入通知
 local Button = Tab:Button({
-    Title = "玩家进入通知",
-    Desc = "",
-    Locked = loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))(),
-    Callback = function()
-        print("clicked")
+    Title = "自定义界面",
+    Desc = "个性化您的体验",
+    Image = "palette",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local themes = {}
+for themeName, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themes, themeName)
+end
+table.sort(themes)
+
+local Button = Tab:Button({
+    Title = "主题选择",
+    Values = themes,
+    Value = "Dark",
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+        WindUI:Notify({
+            Title = "主题应用",
+            Content = theme,
+            Icon = "palette",
+            Duration = 2
+        })
     end
 })
+
+local Button = Tab:Button({
+    Title = "透明度",
+    Value = { 
+        Min = 0,
+        Max = 1,
+        Default = 0.2,
+    },
+    Step = 0.1,
+    Callback = function(value)
+        Window:ToggleTransparency(tonumber(value) > 0)
+        WindUI.TransparencyValue = tonumber(value)
+    end
+})
+
+local Button = Tab:Button({
+    Title = "启用黑色主题",
+    Desc = "使用黑色调主题方案",
+    Value = true,
+    Callback = function(state)
+        WindUI:SetTheme(state and "Dark" or "Light")
+        themeDropdown:Select(state and "Dark" or "Light")
+    end
+})
+
+local Button = Tab:Button({
+    Title = "创建新主题",
+    Icon = "plus",
+    Callback = function()
+        Window:Dialog({
+            Title = "创建主题",
+            Content = "此功能很快就会推出",
+            Buttons = {
+                {
+                    Title = "确认",
+                    Variant = "Primary"
+                }
+            }
+        })
+    end
+})
+
+local Button = Tab:Button({
+    Title = "配置管理",
+    Desc = "保存你的设置",
+    Image = "save",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local configName = "default"
+local configFile = nil
+local MyPlayerData = {
+    name = "Player1",
+    level = 1,
+    inventory = { "sword", "shield", "potion" }
+}
+
+local Keybind = Tab:Keybind({
+    Title = "配置名称",
+    Value = configName,
+    Callback = function(value)
+        configName = value
+    end
+})
+
+local ConfigManager = Window.ConfigManager
+if ConfigManager then
+    ConfigManager:Init(Window)
+    
+local Button = Tab:Button({
+        Title = "保存配置",
+        Icon = "save",
+        Variant = "Primary",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            
+            configFile:Register("featureToggle", featureToggle)
+            configFile:Register("intensitySlider", intensitySlider)
+            configFile:Register("modeDropdown", modeDropdown)
+            configFile:Register("themeDropdown", themeDropdown)
+            configFile:Register("transparencySlider", transparencySlider)
+            
+            configFile:Set("playerData", MyPlayerData)
+            configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
+            
+            if configFile:Save() then
+                WindUI:Notify({ 
+                    Title = "保存配置", 
+                    Content = "保存为："..configName,
+                    Icon = "check",
+                    Duration = 3
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "保存失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+
+    local Button = Tab:Button({
+        Title = "加载配置",
+        Icon = "folder",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            local loadedData = configFile:Load()
+            
+            if loadedData then
+                if loadedData.playerData then
+                    MyPlayerData = loadedData.playerData
+                end
+                
+                local lastSave = loadedData.lastSave or "Unknown"
+                WindUI:Notify({ 
+                    Title = "加载配置", 
+                    Content = "正在加载："..configName.."\n上次保存："..lastSave,
+                    Icon = "refresh-cw",
+                    Duration = 5
+                })
+                
+                local Button = Tab:Button({
+                    Title = "玩家数据",
+                    Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
+                        MyPlayerData.name, 
+                        MyPlayerData.level, 
+                        table.concat(MyPlayerData.inventory, ", "))
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "加载失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+else
+    local Button = Tab:Button({
+        Title = "配置管理不可用",
+        Desc = "此功能需要配置管理",
+        Image = "alert-triangle",
+        ImageSize = 20,
+        Color = "White"
+    })
+end
+
 
 Tab:Select() -- Select Tab
