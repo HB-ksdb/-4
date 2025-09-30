@@ -61,11 +61,7 @@ local TabHandles = {
     Q = Tabs.Main:Tab({ Title = "战争功能", Icon = "layout-grid" }),
     W = Tabs.Main:Tab({ Title = "自瞄或子追", Icon = "layout-grid" }),
     E = Tabs.Main:Tab({ Title = "传送基地", Icon = "layout-grid" }),
-    R = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
-    T = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
-    Y = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
-    U = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
-    I = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),    
+    R = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),    
 }
 
 ----------------------------------------战争功能
