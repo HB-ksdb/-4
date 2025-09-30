@@ -1,3 +1,5 @@
+--对了，想要充r，推荐使用3fplayer他家靠谱又安全，而且不黑r输入我的专属口令KL98
+
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -67,19 +69,12 @@ local TabHandles = {
 }
 
 Toggle = TabHandles.Q:Toggle({
-    Title = "",
+    Title = "自动收集燃料",
     Value = false,    
-    Callback = function(state)         
+    Callback = function(ARL)         
    
           isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
 
-WindUI:Notify({
-            Title = "HB脚本中心：",
-            Content = Value and "已开启" or "已关闭",
-            Icon = Value and "check" or "x",
-            IconThemed = true, -- automatic color icon to theme 
-            Duration = 5,
-        })
     end
 })
     
@@ -89,12 +84,6 @@ Button = TabHandles.Q:Button({
     Callback = function(state) 
         game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
                  
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})                 
     end
 })                 
    
@@ -104,12 +93,6 @@ Button = TabHandles.Q:Button({
     Callback = function(state) 
                game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })       
 local TabHandles.YI:Paragraph({
@@ -242,12 +225,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -258,12 +235,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.13252258300781, 170.55825805664062, -60.4516716003418)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
     
@@ -274,12 +245,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-66.51714324951172, 720.4866333007812, -5.391753196716309)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -290,12 +255,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.2462043762207, 1429.4990234375, 1.3739361763000488)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
     
@@ -306,12 +265,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.5361199378967285, 3131.249267578125, -29.759048461914062)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -322,12 +275,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.212917804718018, 5016.341796875, -19.815933227539062)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
     
@@ -338,12 +285,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(68.43186950683594, 6851.94091796875, 7.890637397766113)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -354,12 +295,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(49.92888641357422, 8942.955078125, 8.674375534057617)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
     
@@ -370,12 +305,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.44503402709961, 11270.0927734375, -1.273137092590332)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -386,12 +315,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11.579089164733887, 15295.6318359375, -27.54974365234375)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
     
@@ -402,12 +325,6 @@ Button = TabHandles.W:Button({
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-14.601255416870117, 18410.9609375, 0.9418511986732483)
             
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
     end
 })
    
@@ -417,13 +334,7 @@ Button = TabHandles.W:Button({
     Callback = function(state)         
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3.272758960723877, 22539.494140625, 63.283935546875)
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
+             
     end
 })
     
@@ -433,13 +344,7 @@ Button = TabHandles.W:Button({
     Callback = function(state)         
    
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-45.515689849853516, 27961.560546875, -7.358333110809326)
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
+             
     end
 })
    
@@ -448,13 +353,7 @@ Button = TabHandles.W:Button({
     Value = false,    
     Callback = function(state)         
    r.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})            
+             
     end
 })
 
@@ -472,12 +371,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -493,12 +386,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 }))
 
@@ -514,12 +401,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -535,12 +416,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -556,12 +431,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 }))
 
@@ -577,12 +446,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -598,12 +461,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -619,12 +476,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -640,12 +491,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -661,12 +506,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -683,12 +522,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 Button = TabHandles.E:Button({
@@ -703,12 +536,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -724,12 +551,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -745,12 +566,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -766,12 +581,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -787,12 +596,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 ---------------------------------------------背包
@@ -809,12 +612,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -830,12 +627,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -851,12 +642,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -872,12 +657,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -893,12 +672,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -914,12 +687,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -935,12 +702,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -958,12 +719,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -979,12 +734,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1000,12 +749,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1021,12 +764,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1042,12 +779,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1063,12 +794,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1084,12 +809,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1105,12 +824,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1126,12 +839,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1147,12 +854,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1168,12 +869,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
@@ -1189,12 +884,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
 
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
     end
 })
 
