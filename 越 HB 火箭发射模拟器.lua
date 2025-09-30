@@ -62,9 +62,7 @@ local Tabs = {
 local TabHandles = {
   YI = Tabs.Main:Tab({ Title = "信息roblox", Icon = "layout-grid" }),
   Q = Tabs.Main:Tab({ Title = "传送或收集", Icon = "layout-grid" }),
-  W = Tabs.gn:Tab({ Title = "远程购买火箭", Icon = "layout-grid" }),
-  E = Tabs.gn:Tab({ Title = "远程购买背包", Icon = "layout-grid" }),
-  R = Tabs.gn:Tab({ Title = "远程购买收集燃料", Icon = "layout-grid" }),
+  W = Tabs.gn:Tab({ Title = "传送岛", Icon = "layout-grid" }),  
   T = Tabs.gn:Tab({ Title = "自定义Ul", Icon = "layout-grid" }),       
 }
 

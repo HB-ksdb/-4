@@ -2638,7 +2638,7 @@ Toggle = TabHandles.ER:Toggle({
 ---------------------------------------------------------------------------------------------越HB脚本
 Button = TabHandles.gn:Button({
     Title = "DOORS",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20DOORS.lua"))()
@@ -2668,7 +2668,7 @@ WindUI:Notify({
 
 Button = TabHandles.gn:Button({
     Title = "火箭发射模拟器",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%A8%A1%E6%8B%9F%E5%99%A8.lua"))()
