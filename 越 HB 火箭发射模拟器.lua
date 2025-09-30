@@ -348,28 +348,6 @@ WindUI:Notify({
 })
 
 Button = TabHandles.E:Button({
-    Title = "加成英勇",
-    Value = false,    
-    Callback = function(state)         
-   
-local args = {
-    [1] = "Rocket",
-    [2] = 2
-}
-
-game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
-
-WindUI:Notify({
-    Title = "通知",
-    Content = "购买成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
-
-    end
-}))
-
-Button = TabHandles.E:Button({
     Title = "火刃",
     Value = false,    
     Callback = function(state)         
