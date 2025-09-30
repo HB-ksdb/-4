@@ -211,7 +211,9 @@ local TabHandles = {
     D = Tabs.gn:Tab({ Title = "火箭发射模拟器", Icon = "layout-grid" }),
     E = Tabs.gn:Tab({ Title = "力量传奇", Icon = "layout-grid" }),
     F = Tabs.gn:Tab({ Title = "代木大享", Icon = "layout-grid" }),
-    G = Tabs.gn:Tab({ Title = "巴掌模拟器", Icon = "layout-grid" }),       
+    G = Tabs.gn:Tab({ Title = "巴掌模拟器（正在更新）", Icon = "layout-grid" }),
+    H = Tabs.gn:Tab({ Title = "墨水游戏", Icon = "layout-grid" }),
+           
 }
 
 -----------------------------------------------------------------------------------------------跳跃
@@ -760,7 +762,7 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------子追
-Button = TabHandles.YI:Slider({
+Button = TabHandles.YI:Button({
     Title = "子追穿墙",
     Desc = "",
     Locked = false,
@@ -820,7 +822,7 @@ local Button = TabHandles.YI:Button({
     end
 })
 
-Toggle = TabHandles.YI:Toggle({
+Button = TabHandles.YI:Button({
     Title = "透视骨骼",
     Value = false,    
     Callback = function(state) 
@@ -831,17 +833,7 @@ for _, Player in next, game.Players:GetChildren() do
 end
 game.Players.PlayerAdded:Connect(function(Player)
 	table.insert(Skeletons, Library:NewSkeleton(Player, true));
-end) 
-    end
-})
-
------------------------------------------------------------------------------------------------越快越慢
-Button = TabHandles.YI:Button({
-    Title = "跑的越快就越慢",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/7fLqezjn"))()
+end)
 
             Window:Dialog({
                 Title = "HB脚本中心",
@@ -857,12 +849,12 @@ Button = TabHandles.YI:Button({
             })
             loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
         
-        WindUI:Notify({
+    WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
-})
+}) 
     end
 })
 -----------------------------------------------------------------------------------------------防甩飞
@@ -1912,7 +1904,7 @@ WindUI:Notify({
        
     end
 })
-
+---------------------------------------------------------------------------------------------透视ESP
 getgenv().ESPEnabled = false
 getgenv().ShowBox = false
 getgenv().ShowHealth = false
@@ -2600,7 +2592,7 @@ Players.PlayerRemoving:Connect(function(player)
         ESPComponents[player] = nil
     end
 end)
-
+---------------------------------------------------------------------------------------------透视功能
 Toggle = TabHandles.ER:Toggle({
     Title = "透视开启", 
     Value = false, 
@@ -2643,7 +2635,7 @@ Toggle = TabHandles.ER:Toggle({
     end
 })
 
-
+---------------------------------------------------------------------------------------------越HB脚本
 Button = TabHandles.gn:Button({
     Title = "DOORS",
     Desc = "",
@@ -2797,6 +2789,37 @@ WindUI:Notify({
         
     end
 })
+
+Button = TabHandles.ESPgn:Button({
+    Title = "物理磁铁",
+    Desc = "可以把下面的东西吸上来可以踩",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/cytj777i/6669178/main/%E5%8D%95%E4%B8%80%E7%89%A9%E4%BD%93%E9%A3%9E%E8%A1%8C%E8%BD%BD%E8%87%AA%E5%B7%B1%E6%9C%80%E7%BB%88%E4%BC%98%E5%8C%96%E7%89%88"))()
+        
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                                
+    end
+})
+
 -----------------------------------------------------------------------------------------------被遗弃
 Button = TabHandles.pbgn:Button({
     Title = "被遗弃XK",
@@ -3216,6 +3239,38 @@ WindUI:Notify({
     Icon = "layout-grid",
 })
 
+---------------------------------------------------------------------------------------------墨水游戏
+Button = TabHandles.H:Button({
+    Title = "墨水单人服务器（可以赚金币）",
+    Desc = "点击后就可以进入单人服务器",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/veil0x14/LocalScripts/refs/heads/main/pg.lua"))()
+        
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                
+    end
+})
+
+---------------------------------------------------------------------------------------------UI自定义
 local Button = TabHandles.SAN:Button({
     Title = "自定义界面",
     Desc = "个性化您的体验",
