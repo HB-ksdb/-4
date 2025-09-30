@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "越 HB脚本 火箭发射模拟器",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -52,149 +52,1180 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
-    local Tabs = {
-    Main = Window:Section({ Title = "越 HB通用", Opened = true }),
-    Settings = Window:Section({ Title = "功能", Opened = true }),
-    Utilities = Window:Section({ Title = "越 HB设置", Opened = true })
+local Tabs = {
+    Main = Window:Section({ Title = "信息或功能", Opened = true }),
+    gn = Window:Section({ Title = "远程购买", Opened = true }),    
 }
 
-local Tab = Tabs.Main:Tab({
-    Title = "通用",
-    Icon = "layout-grid", -- optional
-    Locked = false,
+local TabHandles = {
+  YI = Tabs.Main:Tab({ Title = "信息roblox", Icon = "layout-grid" }),
+  Q = Tabs.Main:Tab({ Title = "传送或收集", Icon = "layout-grid" }),
+  W = Tabs.gn:Tab({ Title = "远程购买火箭", Icon = "layout-grid" }),
+  E = Tabs.gn:Tab({ Title = "远程购买背包", Icon = "layout-grid" }),
+  R = Tabs.gn:Tab({ Title = "远程购买收集燃料", Icon = "layout-grid" }),
+  T = Tabs.gn:Tab({ Title = "自定义Ul", Icon = "layout-grid" }),       
+}
+
+Toggle = TabHandles.Q:Toggle({
+        "自动收集燃料",
+        function()
+          isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
+
+WindUI:Notify({
+            Title = "HB脚本中心：",
+            Content = Value and "已开启" or "已关闭",
+            Icon = Value and "check" or "x",
+            IconThemed = true, -- automatic color icon to theme 
+            Duration = 5,
+        })
+                                     
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "登上火箭",
+        function()   
+                 game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
+                 
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                 
+                 
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "将玩家从所有座位移除",
+        function()
+            game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+
+local TabHandles.YI:Paragraph({
+    Title = "您的用户名ID：",
+    Desc = "" .. game:GetService("Players").LocalPlayer.UserId .. "",
+    Buttons = {{
+        Title = "复制您的用户名ID",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("Players").LocalPlayer.UserId)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
 })
 
-local Slider = Tab:Slider({
-    Title = "跳跃",
-    Value = {
-        Min = 50,
-        Max = 200,
-        Default = 50,
-    },
-    Increment = 1,
-    Callback = function(value)
-        if game.Players.LocalPlayer.Character then
-            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = value
+local TabHandles.YI:Paragraph({
+    Title = "您所在的服务器名称：",
+    Desc = "" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "",
+    Buttons = {{
+        Title = "复制您所在的服务器名称",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+local TabHandles.YI:Paragraph({
+    Title = "您的账号注册时间（天）：",
+    Desc = "" .. game:GetService("Players").LocalPlayer.AccountAge .. "",
+    Buttons = {{
+        Title = "复制您的注册时间",
+        Icon = "copy",
+        Variant = "Primary",
+        Callback = function()
+
+            setclipboard(game:GetService("Players").LocalPlayer.AccountAge)
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功复制！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+local TabHandles.YI:Paragraph({
+    Title = "您的注入器：",
+    Desc = "" .. identifyexecutor() .. "",
+    Image = "rbxassetid://129287693322764",
+    ImageSize = 42, -- default 30
+    Thumbnail = "rbxassetid://114457723265156",
+    ThumbnailSize = 120, -- Thumbnail height
+    Buttons = {{
+        Title = "测试您注入器的UNC",
+        Variant = "Primary",
+        Callback = function()
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+
+            local Sound = Instance.new("Sound", game:GetService("SoundService"))
+            Sound.SoundId = "rbxassetid://2865227271"
+            Sound:Play()
+            WindUI:Notify({
+                Title = "HB脚本中心---提示：",
+                Content = "已成功执行，请在控制台查看UNC！",
+                Icon = "bell",
+                IconThemed = true, -- automatic color icon to theme 
+                Duration = 5
+            })
+
+        end,
+        Icon = "bird"
+    }}
+})
+
+
+Button = TabHandles.Q:Button({
+        "发射台岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
         end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "白云岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.13252258300781, 170.55825805664062, -60.4516716003418)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "漂浮岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-66.51714324951172, 720.4866333007812, -5.391753196716309)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "卫星岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.2462043762207, 1429.4990234375, 1.3739361763000488)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "蜜蜂迷宫岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.5361199378967285, 3131.249267578125, -29.759048461914062)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "月球人援救岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.212917804718018, 5016.341796875, -19.815933227539062)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "暗物质岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(68.43186950683594, 6851.94091796875, 7.890637397766113)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "太空岩石岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(49.92888641357422, 8942.955078125, 8.674375534057617)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "零号火星岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.44503402709961, 11270.0927734375, -1.273137092590332)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "太空水晶岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11.579089164733887, 15295.6318359375, -27.54974365234375)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "月球浆果岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-14.601255416870117, 18410.9609375, 0.9418511986732483)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "铺路实岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3.272758960723877, 22539.494140625, 63.283935546875)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+    
+Button = TabHandles.Q:Button({
+        "流星岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-45.515689849853516, 27961.560546875, -7.358333110809326)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )   
+   
+Button = TabHandles.Q:Button({
+        "升级岛",
+        function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})            
+            
+        end
+    )
+
+------------------------------------------------------------------------------------------
+
+Button = TabHandles.W:Button({("英勇", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("加成英勇", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 2
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("火刃", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 3
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("加成火刃", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 4
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("阿特拉斯", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 5
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("普罗米修斯", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 6
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("双重阿特拉斯", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 7
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("寻星者", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 8
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("天空龙", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 9
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("强化天空龙", function()
+local args = {
+    [1] = "Rocket",
+    [2] = 10
+}
+
+game:GetService("ReplicatedStorage").BuyRocket:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+
+Button = TabHandles.W:Button({("双重", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("压缩罐", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 2
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("原子压缩罐", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 3
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("大型压缩罐", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 3
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("大型原子压缩罐", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 4
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.W:Button({("燃料棒", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 5
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+---------------------------------------------背包
+
+Button = TabHandles.E:Button({("火箭背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 6
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("双重火箭背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 7
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("胖胖火箭背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 8
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("双重胖胖火箭背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 9
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("绿色水晶背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 10
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("红色水晶背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 11
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.E:Button({("蓝色水晶背包", function()
+local args = {
+    [1] = "Backpack",
+    [2] = 12
+}
+
+game:GetService("ReplicatedStorage").BuyItem:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+------------------------------------------------------------------------------------------
+
+Button = TabHandles.R:Button({("标准燃料采集铲", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("新燃料采集铲", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 2
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("电动燃料采集铲", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 3
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("数字燃料采集铲", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 4
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("人工智能燃料采集器", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 5
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("采矿激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 6
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("红宝石采矿激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 7
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("霓虹采矿激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 8
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("太空水晶采矿激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 9
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("绿色水晶激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 10
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("红色水晶激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 11
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+Button = TabHandles.R:Button({("蓝色水晶激光", function()
+local args = {
+    [1] = "FuelScoop",
+    [2] = 12
+}
+
+game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer(unpack(args))
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})
+
+end)
+
+------------------------------------------------------------------------------------------
+
+local Button = TabHandles.T:Button({
+    Title = "自定义界面",
+    Desc = "个性化您的体验",
+    Image = "palette",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local themes = {}
+for themeName, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themes, themeName)
+end
+table.sort(themes)
+
+local themeDropdown = TabHandles.T:Dropdown({
+    Title = "主题选择",
+    Values = themes,
+    Value = "Dark",
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+        WindUI:Notify({
+            Title = "主题应用",
+            Content = theme,
+            Icon = "palette",
+            Duration = 2
+        })
     end
 })
------------------------------------------------------------------------------------------------速度
-local Slider = Tab:Slider({
-    Title = "速度",
-    Value = {
-        Min = 16,
-        Max = 400,
-        Default = 16,
-    },
-    Increment = 1,
-    Callback = function(value)
-        if game.Players.LocalPlayer.Character then
-            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = value
-        end
-    end
-})
------------------------------------------------------------------------------------------------重量        
-local Slider = Tab:Slider({
-    Title = "重量",
-    Value = {
-        Min = 0.1,
-        Max = 500.0,
-        Default = 196.2,
+
+local transparencySlider = TabHandles.T:Slider({
+    Title = "透明度",
+    Value = { 
+        Min = 0,
+        Max = 1,
+        Default = 0.2,
     },
     Step = 0.1,
     Callback = function(value)
-        game.Workspace.Gravity = value
+        Window:ToggleTransparency(tonumber(value) > 0)
+        WindUI.TransparencyValue = tonumber(value)
     end
 })
 
-local Tab = Tabs.Settings:Tab({
-    Title = "购买",
-    Icon = "layout-grid", -- optional
-    Locked = false,
-})
-
-local Button = Tab:Button({
-    Title = "自动购买火箭",
-    Desc = "",
-    Locked = false,
-    Callback = function(Value)
-    buyRocket = state
-    if buyRocket then
-        while buyRocket do
-            for i = 1, 10, 1 do
-                game:GetService("ReplicatedStorage").BuyRocket:InvokeServer("Rocket", i)
-                wait(1)
-            end
-        end
+TabHandles.T:Toggle({
+    Title = "启用黑色主题",
+    Desc = "使用黑色调主题方案",
+    Value = true,
+    Callback = function(state)
+        WindUI:SetTheme(state and "Dark" or "Light")
+        themeDropdown:Select(state and "Dark" or "Light")
     end
-	end
-})
-
-local Button = Tab:Button({
-    Title = "自动购买收集器",
-    Desc = "",
-    Locked = false,
-    Callback = function(Value)
-    buyFuel = state
-    if buyFuel then
-        while buyFuel do
-            for i = 1, 12, 1 do
-                game:GetService("ReplicatedStorage").BuyFuelScoop:InvokeServer("FuelScoop", i)
-                wait(1)
-            end
-        end
-    end
-	end
-})
-
-local Button = Tab:Button({
-    Title = "自动购买背包",
-    Desc = "",
-    Locked = false,
-    Callback = function(Value)
-    buyBackpack = state
-    if buyBackpack then
-        while buyBackpack do
-            for i = 1, 13, 1 do
-                game:GetService("ReplicatedStorage").BuyItem:InvokeServer("Backpack", i)
-                wait(1)
-            end
-        end
-    end
-	end
-})
-Tab:Select() -- Select Tab
-
-local Tab = Window:Tab({
-    Title = "功能",
-    Icon = "layout-grid", -- optional
-    Locked = false,
 })
 
 
-local Toggle = Tab:Toggle({
-    Title = "自动收集燃料",
-    Value = false,    
-    Callback = function(state) 
-    isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
-	end
-})
-
-local Button = Tab:Button({
-    Title = "登上火箭",
-    Desc = "",
-    Locked = false,
+TabHandles.T:Button({
+    Title = "创建新主题",
+    Icon = "plus",
     Callback = function()
-    game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
-	end
+        Window:Dialog({
+            Title = "创建主题",
+            Content = "此功能很快就会推出",
+            Buttons = {
+                {
+                    Title = "确认",
+                    Variant = "Primary"
+                }
+            }
+        })
+    end
 })
 
-local Button = Tab:Button({
-    Title = "将玩家移除位置",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
-	end
+TabHandles.T:Paragraph({
+    Title = "配置管理",
+    Desc = "保存你的设置",
+    Image = "save",
+    ImageSize = 20,
+    Color = "White"
 })
 
+local configName = "default"
+local configFile = nil
+local MyPlayerData = {
+    name = "Player1",
+    level = 1,
+    inventory = { "sword", "shield", "potion" }
+}
+
+TabHandles.T:Input({
+    Title = "配置名称",
+    Value = configName,
+    Callback = function(value)
+        configName = value
+    end
+})
+
+local ConfigManager = Window.ConfigManager
+if ConfigManager then
+    ConfigManager:Init(Window)
+    
+TabHandles.T:Button({
+        Title = "保存配置",
+        Icon = "save",
+        Variant = "Primary",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            
+            configFile:Register("featureToggle", featureToggle)
+            configFile:Register("intensitySlider", intensitySlider)
+            configFile:Register("modeDropdown", modeDropdown)
+            configFile:Register("themeDropdown", themeDropdown)
+            configFile:Register("transparencySlider", transparencySlider)
+            
+            configFile:Set("playerData", MyPlayerData)
+            configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
+            
+            if configFile:Save() then
+                WindUI:Notify({ 
+                    Title = "保存配置", 
+                    Content = "保存为："..configName,
+                    Icon = "check",
+                    Duration = 3
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "保存失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+
+    TabHandles.T:Button({
+        Title = "加载配置",
+        Icon = "folder",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            local loadedData = configFile:Load()
+            
+            if loadedData then
+                if loadedData.playerData then
+                    MyPlayerData = loadedData.playerData
+                end
+                
+                local lastSave = loadedData.lastSave or "Unknown"
+                WindUI:Notify({ 
+                    Title = "加载配置", 
+                    Content = "正在加载："..configName.."\n上次保存："..lastSave,
+                    Icon = "refresh-cw",
+                    Duration = 5
+                })
+                
+                Button = TabHandles.Elements:Button({
+                    Title = "玩家数据",
+                    Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
+                        MyPlayerData.name, 
+                        MyPlayerData.level, 
+                        table.concat(MyPlayerData.inventory, ", "))
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "加载失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+else
+    TabHandles.T:Paragraph({
+        Title = "配置管理不可用",
+        Desc = "此功能需要配置管理",
+        Image = "alert-triangle",
+        ImageSize = 20,
+        Color = "White"
+    })
+end
+    
