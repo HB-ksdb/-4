@@ -2698,6 +2698,37 @@ WindUI:Notify({
 })
 
 Button = TabHandles.gn:Button({
+    Title = "战争大亨",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
+        
+            Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+        
+end
+})
+
+Button = TabHandles.gn:Button({
     Title = "环山军区",
     Desc = "",
     Locked = false,
