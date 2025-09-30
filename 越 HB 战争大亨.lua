@@ -145,31 +145,6 @@ Button = TabHandles.Q:Button({
     end
 end
 })
-
-Button = TabHandles.:Button({
-    Title = "一键占领旗",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        local oldpos=lp.Character.HumanoidRootPart.CFrame
-local tycoon
-for i,c in next,workspace.Tycoon.Tycoons:GetChildren() do
-    if c:FindFirstChild("Owner") and c.Owner.Value ==lp then
-       tycoon=c.Name
-    end
-    end
-
-    if tostring( workspace["Game Systems"].CapturePoint['Captured Team'].Value)~=tycoon then
-        repeat game:GetService("RunService").Stepped:wait()
-    
-            tp(CFrame.new(70.7639999, 44.887001, 189)+Vector3.new(0,5,0))   
-           until tostring( workspace["Game Systems"].CapturePoint['Captured Team'].Value)==tycoon
-    end
-wait(12)
-tp(oldpos)
-end
-})
-
 ----------------------------------------透视功能
 --
 getgenv().ESPEnabled = false
