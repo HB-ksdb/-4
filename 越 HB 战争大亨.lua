@@ -1380,7 +1380,7 @@ Toggle = TabHandles.W:Toggle({
 end
 })
 
-Button = TabHandles.W:Button({
+Toggle = TabHandles.W:Toggle({
     Title = "掩体不瞄",
     Desc = "",
     Locked = false,
@@ -1393,8 +1393,7 @@ Slider = TabHandles.W:Slider({
     Title = "自瞄范围",
     Value = {
         Min = 1,
-        Max = 200,
-        Default = 50,
+        Max = 200,        
     },
     Increment = 1,
     Callback = function(s)
@@ -1407,8 +1406,7 @@ Slider = TabHandles.W:Slider({
     Title = "自瞄距离",
     Value = {
         Min = 1,
-        Max = 1200,
-        Default = 50,
+        Max = 1200,        
     },
     Increment = 1,
     Callback = function(s)
@@ -1420,8 +1418,7 @@ Slider = TabHandles.W:Slider({
     Title = "自瞄圈粗细",
     Value = {
         Min = 1,
-        Max = 10,
-        Default = 50,
+        Max = 10,        
     },
     Increment = 1,
     Callback = function(s)
@@ -1566,7 +1563,7 @@ Dropdown = TabHandles.E:Dropdown({
 })
 
 Button = TabHandles.E:Button({
-    Title = "",
+    Title = "刷新基地列表",
     Desc = "",
     Locked = false,
     Callback = function()
