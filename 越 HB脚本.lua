@@ -197,7 +197,7 @@ local Tabs = {
 }
 
 local TabHandles = {
-    Elements = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
+    SAN = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
     YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
     gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "layout-grid" }),
@@ -2768,18 +2768,6 @@ WindUI:Notify({
 })
 -----------------------------------------------------------------------------------------------自然灾害
 Button = TabHandles.ESPgn:Button({
-    Title = "自然灾害",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "自然灾害",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
     Title = "黑洞",
     Desc = "点击加载",
     Locked = false,
@@ -2811,18 +2799,6 @@ WindUI:Notify({
 })
 -----------------------------------------------------------------------------------------------被遗弃
 Button = TabHandles.pbgn:Button({
-    Title = "被遗弃",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
-local Section = Tab:Section({ 
-    Title = "被遗弃",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
     Title = "被遗弃XK",
     Desc = "无卡中文",
     Locked = false,
@@ -2853,12 +2829,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------最强战场
-local Section = Tab:Section({ 
-    Title = "最坚强战场",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.tzgn:Button({
     Title = "最强战场无限侧闪",
     Desc = "无卡英文",
@@ -2920,12 +2890,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------死铁轨
-local Section = Tab:Section({ 
-    Title = "死铁轨",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.fzgn:Button({
     Title = "死铁轨",
     Desc = "无卡中文",
@@ -2958,12 +2922,6 @@ WindUI:Notify({
 })
 -----------------------------------------------------------------------------------------------森林99夜
 Button = TabHandles.A:Button({
-    Title = "森林中的99夜",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
     Title = "林森99夜",
     Desc = "无卡中文",
     Locked = false,
@@ -2994,7 +2952,7 @@ WindUI:Notify({
     end
 })
 
-Button = TabHandles.B:Button({
+Button = TabHandles.A:Button({
     Title = "林森99夜",
     Desc = "无卡中文 推荐",
     Locked = false,
@@ -3026,12 +2984,6 @@ WindUI:Notify({
 })
 -----------------------------------------------------------------------------------------------刀刃球
 Button = TabHandles.B:Button({
-    Title = "刀刃球",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
-local Button = Tab:Button({
     Title = "刀刃球",
     Desc = "无卡中文 推荐",
     Locked = false,
@@ -3093,12 +3045,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------偷走脑红
-local Section = Tab:Section({ 
-    Title = "偷走脑红",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.C:Button({
     Title = "偷走脑红",
     Desc = "无卡英文 推荐",
@@ -3130,12 +3076,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------火箭发射模拟器
-local Section = Tab:Section({ 
-    Title = "火箭发射模拟器",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.D:Button({
     Title = "火箭发射模拟器",
     Desc = "无卡中文",
@@ -3167,12 +3107,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------力量传奇
-local Section = Tab:Section({ 
-    Title = "力量传奇",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.E:Button({
     Title = "力量传奇吃蛋",
     Desc = "无卡中文",
@@ -3204,12 +3138,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------伐木大享
-local Section = Tab:Section({ 
-    Title = "伐木大享",
-    TextXAlignment = "Left",
-    TextSize = 17, -- Default Size
-})
-
 Button = TabHandles.F:Button({
     Title = "伐木大享AXE",
     Desc = "无卡英文",
@@ -3241,12 +3169,6 @@ WindUI:Notify({
     end
 })
 -----------------------------------------------------------------------------------------------打巴掌
-local Tab = Tabs.Settings:Tab({
-    Title = "打巴掌正在更新",
-    Icon = "layout-grid",
-    Locked = false,
-})
-
 Button = TabHandles.G:Button({
     Title = "打巴掌光环",
     Desc = "",
@@ -3294,7 +3216,7 @@ WindUI:Notify({
     Icon = "layout-grid",
 })
 
-Paragraph = TabHandles.Elements:Paragraph({
+local Button = TabHandles.SAN:Button({
     Title = "自定义界面",
     Desc = "个性化您的体验",
     Image = "palette",
@@ -3308,7 +3230,7 @@ for themeName, _ in pairs(WindUI:GetThemes()) do
 end
 table.sort(themes)
 
-Dropdown = TabHandles.Elements:Dropdown({
+local themeDropdown = TabHandles.SAN:Dropdown({
     Title = "主题选择",
     Values = themes,
     Value = "Dark",
@@ -3323,7 +3245,7 @@ Dropdown = TabHandles.Elements:Dropdown({
     end
 })
 
-Button = TabHandles.Elements:Button({
+local transparencySlider = TabHandles.SAN:Slider({
     Title = "透明度",
     Value = { 
         Min = 0,
@@ -3337,7 +3259,7 @@ Button = TabHandles.Elements:Button({
     end
 })
 
-Button = TabHandles.Elements:Button({
+TabHandles.SAN:Toggle({
     Title = "启用黑色主题",
     Desc = "使用黑色调主题方案",
     Value = true,
@@ -3347,7 +3269,8 @@ Button = TabHandles.Elements:Button({
     end
 })
 
-Button = TabHandles.Elements:Button({
+
+TabHandles.SAN:Button({
     Title = "创建新主题",
     Icon = "plus",
     Callback = function()
@@ -3364,7 +3287,7 @@ Button = TabHandles.Elements:Button({
     end
 })
 
-Button = TabHandles.Elements:Button({
+TabHandles.SAN:Paragraph({
     Title = "配置管理",
     Desc = "保存你的设置",
     Image = "save",
@@ -3380,7 +3303,7 @@ local MyPlayerData = {
     inventory = { "sword", "shield", "potion" }
 }
 
-Keybind = TabHandles.Elements:Keybind({
+TabHandles.SAN:Input({
     Title = "配置名称",
     Value = configName,
     Callback = function(value)
@@ -3392,7 +3315,7 @@ local ConfigManager = Window.ConfigManager
 if ConfigManager then
     ConfigManager:Init(Window)
     
-Toggle = TabHandles.Elements:Toggle({
+TabHandles.SAN:Button({
         Title = "保存配置",
         Icon = "save",
         Variant = "Primary",
@@ -3426,7 +3349,7 @@ Toggle = TabHandles.Elements:Toggle({
         end
     })
 
-    Button = TabHandles.Elements:Button({
+    TabHandles.SAN:Button({
         Title = "加载配置",
         Icon = "folder",
         Callback = function()
@@ -3464,7 +3387,7 @@ Toggle = TabHandles.Elements:Toggle({
         end
     })
 else
-    Button = TabHandles.Elements:Button({
+    TabHandles.SAN:Paragraph({
         Title = "配置管理不可用",
         Desc = "此功能需要配置管理",
         Image = "alert-triangle",
