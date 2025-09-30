@@ -1,181 +1,28 @@
-local HttpService = game:GetService("HttpService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Plr = game:GetService("Players")
-local LP = Plr.LocalPlayer
-
-local Part = Instance.new("Part", workspace)
-Part.Material = Enum.Material.ForceField
-Part.Anchored = true
-Part.CanCollide = false
-Part.CastShadow = false
-Part.Shape = Enum.PartType.Ball
-Part.Color = Color3.fromRGB(132, 0, 255)
-Part.Transparency = 0.5
-
-local BaseGui = Instance.new("ScreenGui", game.CoreGui)
-BaseGui.Name = "BaseGui"
-
-local TL = Instance.new("TextLabel", BaseGui)
-TL.Name = "TL"
-TL.Parent = BaseGui
-TL.BackgroundColor3 = Color3.new(1, 1, 1)
-TL.BackgroundTransparency = 1
-TL.BorderColor3 = Color3.new(0, 0, 0)
-TL.Position = UDim2.new(0.95, -300, 0.85, 0)
-TL.Size = UDim2.new(0, 300, 0, 50)
-TL.FontFace = Font.new("rbxassetid://12187370000", Enum.FontWeight.Bold)
-TL.Text = ""
-TL.TextColor3 = Color3.new(1, 1, 1)
-TL.TextScaled = true
-TL.TextSize = 14
-TL.TextWrapped = true
-TL.Visible = true
-TL.RichText = true
-
-local function rainbowColor(hue)
-  return Color3.fromHSV(hue, 1, 1)
-end
-
-local function updateRainbowText(distance, ballSpeed, spamRadius, minDistance)
-  local hue = (tick() * 0.1) % 1
-  local color1 = rainbowColor(hue)
-  local color2 = rainbowColor((hue + 0.3) % 1)
-  local color3 = rainbowColor((hue + 0.6) % 1)
-  local color4 = rainbowColor((hue + 0.9) % 1)
-
-  TL.Text = string.format(
-  "<font color='#%s'>distance: %s</font>\n"..
-  "<font color='#%s'>ballSpeed: %s</font>\n"..
-  "<font color='#%s'>spamRadius: %s</font>\n"..
-  "<font color='#%s'>minDistance: %s</font>",
-  color1:ToHex(), tostring(distance),
-  color2:ToHex(), tostring(ballSpeed),
-  color3:ToHex(), tostring(spamRadius),
-  color4:ToHex(), tostring(minDistance)
-  )
-end
-
-local last1, last2
-local Cam = workspace.CurrentCamera
-
-local function ZJ()
-  local Nearest, Min = nil, math.huge
-  for A, B in next, workspace.Alive:GetChildren() do
-    if B.Name ~= LP.Name and B:FindFirstChild("HumanoidRootPart") then
-      local distance = LP:DistanceFromCharacter(B:GetPivot().Position)
-      if distance < Min then
-        Min = distance
-        Nearest = B
-      end
-    end
-  end
-  return Min
-end
-
-local function Parry()
-  task.spawn(function() game:GetService("VirtualInputManager"):SendMouseButtonEvent(0, 0, 0, true, nil, 0) end)
-end
-
-local function GetBall()
-  for a, b in next, workspace.Balls:GetChildren() do
-    if b:IsA("BasePart") and b:GetAttribute("realBall") then
-      return b
-    end
-  end
-end
-
-local function IsTarget(a)
-  return a:GetAttribute("target") == LP.Name
-end
-
-local function IsSpamming(a, b)
-  if not type(last1) == "number" then return false end
-  if not type(last2) == "number" then return false end
-  if last1 - last2 > 0.8 then
-    return false
-  end
-  if a > b then
-    return false
-  end
-  if #workspace.Alive:GetChildren() <= 1 then
-    return false
-  end
-  return true
-end
-
-local function addRainbowTitleToLocalPlayer(player, titleText)
-    local function addTitleToCharacter(character)
-        local head = character:FindFirstChild("Head") or character:WaitForChild("Head")
-        local old = head:FindFirstChild("PlayerTitle")
-        if old then old:Destroy() end
-        local billboardGui = Instance.new("BillboardGui")
-        billboardGui.Name = "PlayerTitle"
-        billboardGui.Adornee = head
-        billboardGui.Size = UDim2.new(4, 0, 1, 0)
-        billboardGui.StudsOffset = Vector3.new(0, 2, 0)
-        billboardGui.AlwaysOnTop = true
-        billboardGui.MaxDistance = 1000
-        local textLabel = Instance.new("TextLabel")
-        textLabel.Size = UDim2.new(1, 0, 1, 0)
-        textLabel.BackgroundTransparency = 1
-        textLabel.Text = titleText
-        textLabel.TextScaled = true
-        textLabel.Font = Enum.Font.GothamBold
-        textLabel.TextWrapped = true
-        textLabel.Parent = billboardGui
-        local stroke = Instance.new("UIStroke")
-        stroke.Thickness = 1
-        stroke.Color = Color3.new(1, 1, 1)
-        stroke.Parent = textLabel
-        local gradient = Instance.new("UIGradient")
-        gradient.Rotation = 90
-        gradient.Parent = textLabel
-        local connection
-        connection = game:GetService("RunService").RenderStepped:Connect(function()
-            local time = tick() * 0.5
-            gradient.Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromHSV(time % 1, 1, 1)),
-                ColorSequenceKeypoint.new(0.2, Color3.fromHSV((time + 0.2) % 1, 1, 1)),
-                ColorSequenceKeypoint.new(0.4, Color3.fromHSV((time + 0.4) % 1, 1, 1)),
-                ColorSequenceKeypoint.new(0.6, Color3.fromHSV((time + 0.6) % 1, 1, 1)),
-                ColorSequenceKeypoint.new(0.8, Color3.fromHSV((time + 0.8) % 1, 1, 1)),
-                ColorSequenceKeypoint.new(1, Color3.fromHSV(time % 1, 1, 1))
-            })
-        end)
-        billboardGui.AncestryChanged:Connect(function()
-            if not billboardGui:IsDescendantOf(game) then
-                if connection then connection:Disconnect() end
-            end
-        end)
-        billboardGui.Parent = head
-    end
-    local character = player.Character or player.CharacterAdded:Wait()
-    addTitleToCharacter(character)
-    player.CharacterAdded:Connect(addTitleToCharacter)
-end
-addRainbowTitleToLocalPlayer(LP, "AlienX VIP")
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syndromehsh/Lua/baff0bc41893a32f8e997d840241ad4b3d26ab4d/AlienX/AlienX%20Wind%203.0%20UI.txt"))()
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = 'AlienX<font color="#00FF00">2.0</font>/ 战争大亨|XI团队出品必是精品',
-    Icon = "rbxassetid://4483362748",
-    IconThemed = true,
-    Author = "AlienX",
-    Folder = "CloudHub",
-    Size = UDim2.fromOffset(580, 440),
-    Transparent = true,
-    Theme = "Dark",
-    User = {
-        Enabled = true,
-        Callback = function() print("clicked") end,
-        Anonymous = false
-    },
-    SideBarWidth = 200,
-    ScrollBarEnabled = true,
-})
+        Title = "越 HB<font color='#00FF00'>1.5</font>",
+        Icon = "rbxassetid://4483362748",
+        IconTransparency = 0.5,
+        IconThemed = true,
+        Author = "作者:HB",
+        Folder = "CloudHub",
+        Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
+        User = {
+            Enabled = true,
+            Callback = function() print("clicked") end,
+            Anonymous = false
+        },
+        SideBarWidth = 200,
+        ScrollBarEnabled = true,
+        Background = "rbxassetid://96291371536118"
+    })
+    
 
 Window:EditOpenButton({
-    Title = "打开脚本",
+    Title = "越 HB脚本",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -190,151 +37,327 @@ Window:EditOpenButton({
     }),
     Draggable = true,
 })
-
-local LockSection = Window:Section({
-    Title = "稳定功能",
-    Opened = true,
+            
+Window:Tag({
+    Title = "v1.5越 HB",
+    Color = Color3.fromHex("#30ff6a")
 })
 
-local function AddTab(section, title, icon)
-    return section:Tab({Title = title, Icon = icon})
-end
+Window:Tag({
+        Title = "越 HB版", -- 标签汉化
+        Color = Color3.fromHex("#315dff")
+    })
+    local TimeTag = Window:Tag({
+        Title = "正在更新",
+        Color = Color3.fromHex("#000000")
+    })
 
-local function Btn(tab, title, callback)
-    return tab:Button({Title = title, Callback = callback})
-end
-
-local function Tg(tab, title, value, callback)
-    return tab:Toggle({Title = title, Image = "bird", Value = value, Callback = callback})
-end
-
-local function Sld(tab, title, min, max, default, callback)
-    return tab:Slider({Title = title, Step = 1, Value = {Min = min, Max = max, Default = default}, Callback = callback})
-end
-
-local A = AddTab(LockSection, "传送", "rbxassetid://3944688398")
-local B = AddTab(LockSection, "自动", "rbxassetid://4450736564")
-local C = AddTab(LockSection, "透视", "rbxassetid://104955103991281")
-local D = AddTab(LockSection, "辅助", "rbxassetid://4483362458")
-local E = AddTab(LockSection, "自瞄", "rbxassetid://4483345998")
-
-local FunSection = Window:Section({
-    Title = "娱乐功能",
-    Opened = true,
-})
-
-local F = AddTab(FunSection, "攻击", "rbxassetid://4384392464")
-local G = AddTab(FunSection, "武器", "rbxassetid://94831304996747")
-local H = AddTab(FunSection, "玩家", "rbxassetid://4335480896")
-local I = AddTab(FunSection, "子追", "rbxassetid://4483345998")
-
-Window:SelectTab(1)
-
-local Players = game:GetService("Players")
-local LP = Players.LocalPlayer
-
-local PlayerList = {}
-for _, player in pairs(Players:GetPlayers()) do
-    if player ~= LP then
-        PlayerList[#PlayerList + 1] = player.Name
-    end
-end
-
-local Positions = {
-    ["Alpha"] = CFrame.new(-1197, 65, -4790),
-    ["Bravo"] = CFrame.new(-220, 65, -4919),
-    ["Charlie"] = CFrame.new(797, 65, -4740),
-    ["Delta"] = CFrame.new(2044, 65, -3984),
-    ["Echo"] = CFrame.new(2742, 65, -3031),
-    ["Foxtrot"] = CFrame.new(3045, 65, -1788),
-    ["Golf"] = CFrame.new(3376, 65, -562),
-    ["Hotel"] = CFrame.new(3290, 65, 587),
-    ["Juliet"] = CFrame.new(2955, 65, 1804),
-    ["Kilo"] = CFrame.new(2569, 65, 2926),
-    ["Lima"] = CFrame.new(989, 65, 3419),
-    ["Omega"] = CFrame.new(-319, 65, 3932),
-    ["Romeo"] = CFrame.new(-1479, 65, 3722),
-    ["Sierra"] = CFrame.new(-2528, 65, 2549),
-    ["Tango"] = CFrame.new(-3018, 65, 1503),
-    ["Victor"] = CFrame.new(-3587, 65, 634),
-    ["Yankee"] = CFrame.new(-3957, 65, -287),
-    ["Zulu"] = CFrame.new(-4049, 65, -1334)
+local Tabs = {
+    Main = Window:Section({ Title = "通用", Opened = true }),
+    gn = Window:Section({ Title = "功能", Opened = true }),    
 }
 
-Btn(A, "当前玩家基地: " .. LP.Team.Name, function() end)
-A:Dropdown({
-    Title = "传送基地", 
-    Values = {"Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Juliet", "Kilo", "Lima", "Omega", "Romeo", "Sierra", "Tango", "Victor", "Yankee", "Zulu"}, 
-    Value = "Alpha", 
-    Callback = function(d) 
-        if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
-            LP.Character:FindFirstChild("HumanoidRootPart").CFrame = Positions[d]
+local TabHandles = {
+    Q = Tabs.Main:Tab({ Title = "战争功能", Icon = "layout-grid" }),
+    W = Tabs.Main:Tab({ Title = "自瞄或子追", Icon = "layout-grid" }),
+    E = Tabs.Main:Tab({ Title = "传送基地", Icon = "layout-grid" }),
+    R = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
+    T = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
+    Y = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
+    U = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),
+    I = Tabs.gn:Tab({ Title = "", Icon = "layout-grid" }),    
+}
+
+----------------------------------------战争功能
+--
+
+Button = TabHandles.Q:Button({
+    Title = "飞行",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        local char = speaker.Character
+	if not char or not char.Humanoid then
+		return
+	end
+
+	local hum = char.Humanoid
+	if nowe == true then
+		nowe = false
+
+		hum:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		hum:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)	
+	else
+		nowe = true
+		updatespeed(char, hum)
+
+		char.Animate.Disabled = true
+		for i,v in next, hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end
+
+		hum:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		hum:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		hum:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+    
+    local function CheckRig()
+        if speaker.Character and speaker.Character:FindFirstChild("Torso") then
+                return speaker.Character.Torso
+        elseif speaker.Character and speaker.Character:FindFirstChild("LowerTorso") then
+                return speaker.Character.LowerTorso
         end
     end
-})
 
-local function GetAvailableBases()
-    local bases = {}
-    if not ExcludedBases then
-        ExcludedBases = {}
-    end
-    if not workspace:FindFirstChild("Tycoon") or not workspace.Tycoon:FindFirstChild("Tycoons") then
-        warn("Tycoon or Tycoons folder not found")
-        return bases
-    end
-    
-    local tycoons = workspace.Tycoon.Tycoons:GetChildren()
-    for _, tycoon in ipairs(tycoons) do
-        if not table.find(ExcludedBases, tycoon.Name) then
-            table.insert(bases, tycoon.Name)
-        end
-    end
-    
-    return bases
-end
 
-local BasesDropdown = B:Dropdown({
-    Title = "基地白名单{排除列表}", 
-    Values = GetAvailableBases(), 
-    Multi = true, 
-    Default = {}, 
-    Callback = function(Values) 
-        ExcludedBases = Values 
-    end
-})
+	local UpperTorso = CheckRig()
+	local flying = true
+	local deb = true
+	local ctrl = {f = 0, b = 0, l = 0, r = 0}
+	local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+	local maxspeed = 50
+	local speed = 0
 
-Btn(B, "刷新基地列表", function()
-    BasesDropdown:Refresh(GetAvailableBases())
+	local bg = Instance.new("BodyGyro", UpperTorso)
+	bg.P = 9e4
+	bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+	bg.cframe = UpperTorso.CFrame
+
+	local bv = Instance.new("BodyVelocity", UpperTorso)
+	bv.velocity = Vector3.new(0,0.1,0)
+	bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+
+	if nowe == true then
+		hum.PlatformStand = true
+	end
+
+	while nowe == true or hum.Health == 0 do
+		task.wait()
+
+		if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+			speed = speed+.5+(speed/maxspeed)
+			if speed > maxspeed then
+				speed = maxspeed
+			end
+		elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+			speed = speed-1
+			if speed < 0 then
+				speed = 0
+			end
+		end
+		if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+			bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+		elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+			bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+		else
+			bv.velocity = Vector3.new(0,0,0)
+		end
+
+		bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+	end
+
+	ctrl = {f = 0, b = 0, l = 0, r = 0}
+	lastctrl = {f = 0, b = 0, l = 0, r = 0}
+	speed = 0
+	bg:Destroy()
+	bv:Destroy()
+
+	hum.PlatformStand = false
+	char.Animate.Disabled = false
+	tpwalking = false
+end, false)
+
+Fly:Button("速度 + 1", function()
+	local char = speaker.Character
+	if char and char.Humanoid then
+		local hum = char.Humanoid
+		speeds = speeds + 1
+		updatespeed(char, hum)
+		end
 end)
 
-Tg(B,"自动箱子",false,function(value)
-        getgenv().auto = value
+Fly:Button("速度 - 1", function()
+	local char = speaker.Character
+	if char and char.Humanoid then
+		local hum = char.Humanoid
+		if speeds > 1 then
+			speeds = speeds - 1
+			updatespeed(char, hum)
+		end
     end
-)
+end)
 
-Tg(B,"自动升级",false,function(value)
-        getgenv().autoTeleport = value
+Fly:Button("上升", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
+end)
+
+Fly:Button("下降", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
+end)
+
+local Players = Select:Dropdown("选择玩家名字已开始下面的功能", 'Dropdown', LS.dropdown, function(v)
+    LS.playernamedied = v
+end)
+
+Select:Button("重置玩家名字", function()
+    shuaxinlb(true)
+    Players:SetOptions(LS.dropdown)
+end)
+
+Select:Toggle("锁定传送", 'ToggleTeleport', false, function(state)
+    if state then
+        LS.LoopTeleport = true
+        while LS.LoopTeleport do
+            local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+            local tp_player = game.Players:FindFirstChild(LS.playernamedied)
+            if tp_player and tp_player.Character and tp_player.Character.HumanoidRootPart then
+                HumRoot.CFrame = tp_player.Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
+            end
+            wait()
+        end
+        Notify("LSTM Archive", "已开启循环传送", "rbxassetid://", 5)
+    else
+        LS.LoopTeleport = false
+        Notify("LSTM Archive", "已停止循环传送", "rbxassetid://", 5)
     end
-)
+end
+})
+TabHandles.Elements:Divider()
 
+Button = TabHandles.Q:Button({
+    Title = "自动救人",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+      local RunService = game:GetService("RunService")
+    local CollectionService = game:GetService("CollectionService")
 
-B:Divider()
+    local REVIVE_PROMPT_TAG = "RevivePromptTag"
 
+    for _, prompt in ipairs(workspace:GetDescendants()) do
+        if prompt.Name == "RevivePrompt" then
+            CollectionService:AddTag(prompt, REVIVE_PROMPT_TAG)
+        end
+    end
 
-B:Button({
-    Title = "自动重生",
-    Description = "正在开发中..",
-    Locked = true,
+    workspace.DescendantAdded:Connect(function(descendant)
+        if descendant.Name == "RevivePrompt" then
+            CollectionService:AddTag(descendant, REVIVE_PROMPT_TAG)
+        end
+    end)
+
+    local function triggerPrompt(prompt)
+        if prompt.Parent then
+            fireproximityprompt(prompt)
+        end
+    end
+
+    while true do
+        local tagged = CollectionService:GetTagged(REVIVE_PROMPT_TAG)
+        for _, prompt in ipairs(tagged) do
+            coroutine.wrap(triggerPrompt)(prompt)
+        end
+        wait()
+    end  
+end
 })
 
-B:Button({
-    Title = "自动空投",
-    Description = "正在开发中..",
-    Locked = true,
+Button = TabHandles.Q:Button({
+    Title = "无后座",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        local replicationstorage = game.ReplicatedStorage
+    for i, v in pairs(replicationstorage.Weapons:GetDescendants()) do
+      if v.Name == "Auto" then
+        v.Value = true
+      end
+      if v.Name == "RecoilControl" then
+        v.Value = 0
+      end
+      if v.Name == "MaxSpread" then
+        v.Value = 0
+      end
+      if v.Name == "ReloadTime" then
+        v.Value = 0
+      end
+      if v.Name == "FireRate" then
+        v.Value = 0.05
+      end
+      if v.Name == "Crit" then
+        v.Value = 20
+      end
+    end
+end
 })
 
+Button = TabHandles.Q:Button({
+    Title = "删除门",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            for _, v in pairs(Workspace.Tycoon.Tycoons:GetChildren()) do
+        for _, y in pairs(v.PurchasedObjects:GetChildren()) do
+            if y.Name:find("Door") or y.Name:find("Gate") then y:destroy() end
+        end
+    end
+end
+})
 
+Button = TabHandles.:Button({
+    Title = "一键占领旗",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        local oldpos=lp.Character.HumanoidRootPart.CFrame
+local tycoon
+for i,c in next,workspace.Tycoon.Tycoons:GetChildren() do
+    if c:FindFirstChild("Owner") and c.Owner.Value ==lp then
+       tycoon=c.Name
+    end
+    end
 
+    if tostring( workspace["Game Systems"].CapturePoint['Captured Team'].Value)~=tycoon then
+        repeat game:GetService("RunService").Stepped:wait()
+    
+            tp(CFrame.new(70.7639999, 44.887001, 189)+Vector3.new(0,5,0))   
+           until tostring( workspace["Game Systems"].CapturePoint['Captured Team'].Value)==tycoon
+    end
+wait(12)
+tp(oldpos)
+end
+})
+
+----------------------------------------透视功能
+--
 getgenv().ESPEnabled = false
 getgenv().ShowBox = false
 getgenv().ShowHealth = false
@@ -544,7 +567,7 @@ local function createESP(player)
             end
             return
         end
-
+        
         if getgenv().TeamCheck and player.Team == LocalPlayer.Team then
             box.Visible = false
             healthBar.Visible = false
@@ -699,7 +722,7 @@ local function createESP(player)
             else
                 tracer.Visible = false
             end
-
+            
             if getgenv().OutOfViewArrows and not onScreen then
                 local direction = (rootPart.Position - Camera.CFrame.Position).Unit
                 local dotProduct = Camera.CFrame.RightVector:Dot(direction)
@@ -1023,7 +1046,7 @@ Players.PlayerRemoving:Connect(function(player)
     end
 end)
 
-C:Toggle({
+Toggle = TabHandles.R:Toggle({
     Title = "透视开启", 
     Value = false, 
     Callback = function(Value)
@@ -1031,7 +1054,7 @@ C:Toggle({
     end
 })
 
-C:Toggle({
+Toggle = TabHandles.R:Toggle({
     Title = "模型透视", 
     Value = false, 
     Callback = function(Value)
@@ -1039,7 +1062,7 @@ C:Toggle({
     end
 })
 
-C:Toggle({
+Toggle = TabHandles.R:Toggle({
     Title = "方框透视", 
     Value = false, 
     Callback = function(Value)
@@ -1049,7 +1072,7 @@ C:Toggle({
 
 
 
-C:Toggle({
+Toggle = TabHandles.R:Toggle({
     Title = "射线透视", 
     Value = false, 
     Callback = function(Value)
@@ -1057,14 +1080,13 @@ C:Toggle({
     end
 })
 
-C:Toggle({
+Toggle = TabHandles.R:Toggle({
     Title = "名字透视", 
     Value = false, 
     Callback = function(Value)
         getgenv().ShowName = Value
     end
 })
-
 
 local blockFDMG = false
 local oldNamecall = nil
@@ -1091,7 +1113,7 @@ local function removeHook()
     isHookActive = false
 end
 
-D:Button({
+Button = TabHandles.R:Button({
     Title = "坠落无伤害",
     Value = false,
     Callback = function(value)
@@ -1108,80 +1130,8 @@ D:Button({
         end
     end
 })
-
-D:Button({
-    Title = "删除所有门",
-    Callback = function()
-       for k,v in pairs(Workspace.Tycoon.Tycoons:GetChildren()) do
-            for x,y in pairs(v.PurchasedObjects:GetChildren()) do
-                if(y.Name:find("Door") or y.Name:find("Gate")) then y:destroy(); end;
-            end;
-        end;
-    end})
-
-D:Toggle({
-    Title = "无cd状态",
-    Callback = function()
-        local ContextActions = game:GetService("Workspace")[game.Players.LocalPlayer.Name].ContextActions
-        local ContextMain = require(ContextActions.ContextMain)
         
-        ContextMain:New({
-            RobPlayerLength = 0.1,
-            FixWallLength = 0.1,
-            CrackSafeLength = 0.1,
-            RobSafeLength = 0.1,
-            RobRegisterLength = 0.1,
-            PickCellLength = 0.1,
-            SkinAnimalLength = 0.1
-        }, 200, {
-            "Get out of my shop! Outlaws are not welcome here!",
-            "Hey, scoundrel! Get out before I call the sheriff!",
-            "You're an outlaw! We don't serve your type here!"
-        }, {
-            "This here's a bandit camp! Get out!",
-            "Get lost, cowboy!",
-            "Are you an outlaw? Didn't think so! Scram!"
-        })
-    end
-})
-
-local deathPosition = nil
-local deathOrientation = nil
-
-local function setupDeathTracking()
-    local player = game.Players.LocalPlayer
-    
-    player.CharacterAdded:Connect(function(character)
-        local humanoid = character:WaitForChild("Humanoid")
-        
-        humanoid.Died:Connect(function()
-            local rootPart = character:FindFirstChild("HumanoidRootPart")
-            if rootPart then
-                deathPosition = rootPart.Position
-                deathOrientation = rootPart.CFrame - rootPart.Position
-                print("死亡位置已记录: " .. tostring(deathPosition))
-            end
-        end)
-    end)
-    
-    if player.Character then
-        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-        if humanoid then
-            humanoid.Died:Connect(function()
-                local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
-                if rootPart then
-                    deathPosition = rootPart.Position
-                    deathOrientation = rootPart.CFrame - rootPart.Position
-                    print("死亡位置已记录: " .. tostring(deathPosition))
-                end
-            end)
-        end
-    end
-end
-
-setupDeathTracking()
-
-D:Button({
+Button = TabHandles.R:Button({
     Title = "原地重生",
     Description = "在死亡位置重生角色",
     Callback = function()
@@ -1240,6 +1190,366 @@ D:Button({
             end
         end)
     end
+})
+
+
+----------------------------------------子追或自瞄
+--
+Toggle = TabHandles.W:Toggle({
+    Title = "子追功能",
+    Desc = "",
+    Locked = false,
+    Callback = function(silent)
+        if silent then
+        local CurrentCamera = workspace.CurrentCamera
+local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function ClosestPlayer()
+    local MaxDist, Closest = math.huge
+    for I,V in pairs(Players.GetPlayers(Players)) do
+        if V == LocalPlayer then continue end
+        if V.Team == LocalPlayer then continue end
+        if not V.Character then continue end
+    local Head = V.Character.FindFirstChild(V.Character, "Head")
+        if not Head then continue end
+        local Pos, Vis = CurrentCamera.WorldToScreenPoint(CurrentCamera, Head.Position)
+        if not Vis then continue end
+        local MousePos, TheirPos = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2), Vector2.new(Pos.X, Pos.Y)
+        local Dist = (TheirPos - MousePos).Magnitude
+        if Dist < MaxDist then
+            MaxDist = Dist
+            Closest = V
+        end
+    end
+    return Closest
+end
+local MT = getrawmetatable(game)
+local OldNC = MT.__namecall
+local OldIDX = MT.__index
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Args, Method = {...}, getnamecallmethod()
+    if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
+        local CP = ClosestPlayer()
+        if CP and CP.Character and CP.Character.FindFirstChild(CP.Character, "Head") then
+            Args[1] = Ray.new(CurrentCamera.CFrame.Position, (CP.Character.Head.Position - CurrentCamera.CFrame.Position).Unit * 1000)
+            return OldNC(self, unpack(Args))
+        end
+    end
+    return OldNC(self, ...)
+end)
+MT.__index = newcclosure(function(self, K)
+    if K == "Clips" then
+        return workspace.Map
+    end
+    return OldIDX(self, K)
+end)
+setreadonly(MT, true)
+    else
+        local CurrentCamera = workspace.CurrentCamera
+local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+function ClosestPlayer()
+    local MaxDist, Closest = math.huge
+    for I,V in pairs(Players.GetPlayers(Players)) do
+        if V == LocalPlayer then continue end
+        if V.Team == LocalPlayer then continue end
+        if not V.Character then continue end
+        local Head = V.Character.FindFirstChild(V.Character, "Head")
+        if not Head then continue end
+        local Pos, Vis = CurrentCamera.WorldToScreenPoint(CurrentCamera, Head.Position)
+        if not Vis then continue end
+        local MousePos, TheirPos = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 0, workspace.CurrentCamera.ViewportSize.Y / 0), Vector2.new(Pos.X, Pos.Y)
+        local Dist = (TheirPos - MousePos).Magnitude
+        if Dist < MaxDist then
+            MaxDist = Dist
+            Closest = V
+        end
+    end
+    return Closest
+end
+local MT = getrawmetatable(game)
+local OldNC = MT.__namecall
+local OldIDX = MT.__index
+setreadonly(MT, false)
+MT.__namecall = newcclosure(function(self, ...)
+    local Args, Method = {...}, getnamecallmethod()
+    if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
+        local CP = ClosestPlayer()
+        if CP and CP.Character and CP.Character.FindFirstChild(CP.Character, "Head") then
+            Args[1] = Ray.new(CurrentCamera.CFrame.Position, (CP.Character.Head.Position - CurrentCamera.CFrame.Position).Unit * 1000)
+            return OldNC(self, unpack(Args))
+        end
+    end
+    return OldNC(self, ...)
+end)
+MT.__index = newcclosure(function(self, K)
+    if K == "Clips" then
+        return workspace.Map
+    end
+    return OldIDX(self, K)
+end)
+setreadonly(MT, true)
+    end
+end
+})
+
+Button = TabHandles.W:Button({
+    Title = "轰炸火箭筒",
+    Desc = "必须有火箭筒",
+    Locked = false,
+    Callback = function()
+        local argsTemplate = {
+    [1] = Vector3.new(),
+    [2] = Vector3.new(0, 1, 0),
+    [3] = game:GetService("Players").LocalPlayer.Character.RPG,
+    [4] = game:GetService("Players").LocalPlayer.Character.RPG,
+    [7] = "zxcvbnm4189Rocket2"
+}
+
+local localPlayer = game:GetService("Players").LocalPlayer
+local localPlayerTeam = localPlayer.Team
+
+while true do
+    local players = game:GetService("Players"):GetPlayers()
+    local localPlayerPosition = localPlayer.Character.HumanoidRootPart.Position
+    local upwardVector = Vector3.new(0, 1, 0)
+    local targetPosition = localPlayerPosition + upwardVector * 1000
+
+    for _, player in ipairs(players) do
+        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Torso") then
+            local args = table.clone(argsTemplate)
+            args[1] = targetPosition
+            args[5] = player.Character.Torso
+
+            game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("RocketHit"):FireServer(unpack(args))
+        end
+
+        if player ~= localPlayer and player.Team ~= localPlayerTeam then
+            local playerTeamName = player.Team and player.Team.Name
+            if playerTeamName then
+                local shield = workspace:WaitForChild("Tycoon"):WaitForChild("Tycoons"):FindFirstChild(playerTeamName)
+                if shield then
+                    shield = shield:FindFirstChild("PurchasedObjects")
+                    if shield then
+                        shield = shield:FindFirstChild("Base Shield")
+                        if shield then
+                            shield = shield:FindFirstChild("Shield")
+                            if shield then
+                                shield = shield:FindFirstChild("Shield4")
+                                if shield then
+                                    local args = table.clone(argsTemplate)
+                                    args[1] = targetPosition
+                                    args[5] = shield
+
+                                    game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("RocketHit"):FireServer(unpack(args))
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    wait(0)
+end
+end
+})
+
+Button = TabHandles.W:Button({
+    Title = "无限子弹",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    local function modifyGun(gun)
+        if gun then
+            gun.Ammo = 999999999999999
+            gun.Mode = "Auto"
+            gun.FireModes.Auto = true
+            gun.FireRate = 9999999999999999
+            gun.DamageMultiplier = 1000000000
+            gun.Distance = 1000000000
+            
+            gun.VRecoil = {0, 0}
+            gun.HRecoil = {0, 0}
+            gun.RecoilPunch = 0
+            gun.VPunchBase = 0
+            gun.HPunchBase = 0
+            gun.DPunchBase = 0
+            gun.MinRecoilPower = 0
+            gun.MaxRecoilPower = 0
+            
+            gun.BSpeed = 100000000
+            
+            gun.BDrop = 0
+            
+            gun.MinSpread = 0
+            gun.MaxSpread = 0
+        end
+    end
+    
+    for _, tool in ipairs(backpack:GetChildren()) do
+        local settingsModule = tool:FindFirstChild("ACS_Modulo") and tool["ACS_Modulo"]:FindFirstChild("Variaveis") and tool["ACS_Modulo"]["Variaveis"]:FindFirstChild("Settings")
+        if settingsModule then
+            local success, gun = pcall(require, settingsModule)
+            if success then
+                modifyGun(gun)
+            else
+                warn("Failed to modify gun: " .. tostring(gun))
+            end
+        end
+    end
+end
+})
+
+Button = TabHandles.W:Button({
+    Title = "爆炸狙",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            local player = game.Players.LocalPlayer
+    local backpack = player.Backpack
+    
+    for _, tool in ipairs(backpack:GetChildren()) do
+        local settingsModule = tool:FindFirstChild("ACS_Modulo") and tool["ACS_Modulo"]:FindFirstChild("Variaveis") and tool["ACS_Modulo"]["Variaveis"]:FindFirstChild("Settings")
+        if settingsModule then
+            local gun = require(settingsModule)
+            
+            if gun["Bullets"] then
+                gun["Bullets"] = 1
+            end
+            
+            if gun["Ammo"] then
+                gun["Ammo"] = 5000000
+            end
+            
+            if gun["Mode"] then
+                gun["Mode"] = "Auto"
+            end
+            
+            if gun["FireModes"] and gun["FireModes"]["Auto"] ~= nil then
+                gun["FireModes"]["Auto"] = true
+            end
+            
+            if gun["FireRate"] then
+                gun["FireRate"] = 1000000000
+            end
+            
+            if gun["DamageMultiplier"] then
+                gun["DamageMultiplier"] = 1000000000
+            end
+            
+            if gun["Distance"] then
+                gun["Distance"] = 1000000000
+            end
+            
+            if gun["VRecoil"] then
+                gun["VRecoil"] = {0, 0}
+            end
+            
+            if gun["HRecoil"] then
+                gun["HRecoil"] = {0, 0}
+            end
+            
+            if gun["RecoilPunch"] then
+                gun["RecoilPunch"] = 0
+            end
+            
+            if gun["VPunchBase"] then
+                gun["VPunchBase"] = 0
+            end
+            
+            if gun["HPunchBase"] then
+                gun["HPunchBase"] = 0
+            end
+            
+            if gun["DPunchBase"] then
+                gun["DPunchBase"] = 0
+            end
+            
+            if gun["MinRecoilPower"] then
+                gun["MinRecoilPower"] = 0
+            end
+            
+            if gun["MaxRecoilPower"] then
+                gun["MaxRecoilPower"] = 0
+            end
+    
+            if gun["BSpeed"] then
+                gun["BSpeed"] = 100000000
+            end
+            
+            if gun["BDrop"] then
+                gun["BDrop"] = 0
+            end
+    
+            if gun["MinSpread"] then
+                gun["MinSpread"] = 0
+            end
+            
+            if gun["MaxSpread"] then
+                gun["MaxSpread"] = 0
+            end
+        end
+    end
+end
+})
+
+Button = TabHandles.W:Button({
+    Title = "自动修电箱",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            if state then
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+
+        while state do
+            for _, room in pairs(workspace.Rooms:GetChildren()) do
+                local interactables = room:FindFirstChild("Interactables")
+                
+                if interactables then
+                    for _, generator in pairs(interactables:GetChildren()) do
+                        if generator.Name == "Generator" and generator:FindFirstChild("Fixed") and generator:FindFirstChild("RemoteFunction") and generator:FindFirstChild("RemoteEvent") then
+                            local proximityPrompt = generator.ProxyPart:FindFirstChild("ProximityPrompt")
+                            
+                            generator.RemoteFunction:InvokeServer()
+
+                            local distance = (character.PrimaryPart.Position - generator.ProxyPart.Position).Magnitude
+
+                            if distance <= proximityPrompt.MaxActivationDistance and generator.Fixed.Value < 100 then
+                                local args = {
+                                    [1] = true
+                                }
+                                generator.RemoteEvent:FireServer(unpack(args))
+                            end
+                        elseif generator.Name == "EncounterGenerator" and generator:FindFirstChild("Fixed") and generator:FindFirstChild("RemoteFunction") and generator:FindFirstChild("RemoteEvent") then
+                            local proximityPrompt = generator.ProxyPart:FindFirstChild("ProximityPrompt")
+                            
+                            generator.RemoteFunction:InvokeServer()
+
+                            local distance = (character.PrimaryPart.Position - generator.ProxyPart.Position).Magnitude
+
+                            if distance <= proximityPrompt.MaxActivationDistance and generator.Fixed.Value < 100 then
+                                local args = {
+                                    [1] = true
+                                }
+                                generator.RemoteEvent:FireServer(unpack(args))
+                            end
+                        end
+                    end
+                end
+            end
+            wait(0)
+        end
+    end
+end
 })
 
 local fov = 0
@@ -1313,33 +1623,74 @@ local function getClosestPlayerInFOV(trg_part)
     return nearest
 end
 
-Tg(E, "玩家自瞄", false, function(t)
-    autoAimEnabled = t
-end)
+Toggle = TabHandles.:Toggle({
+    Title = "玩家自瞄",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+        autoAimEnabled = t
+end
+})
 
-Tg(E, "显示范围", false, function(t)
-    fovVisible = t
+Toggle = TabHandles.:Toggle({
+    Title = "显示范围",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+        fovVisible = t
     FOVring.Visible = fovVisible
-end)
+end
+})
 
-Tg(E, "掩体不瞄", false, function(t)
-    ignoreCover = t
-end)
+Button = TabHandles.:Button({
+    Title = "掩体不瞄",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+        ignoreCover = t
+end
+})
 
-Sld(E, "自瞄范围", 1, 200, fov, function(s)
-    fov = tonumber(s)
+Slider = TabHandles.W:Slider({
+    Title = "自瞄范围",
+    Value = {
+        Min = 1,
+        Max = 200,
+        Default = 50,
+    },
+    Increment = 1,
+    Callback = function(s)
+        fov = tonumber(s)
     FOVring.Radius = fov
-end)
+    end
+})
 
-Sld(E, "自瞄距离", 1, 1200, maxDistance, function(s)
-    maxDistance = tonumber(s)
-end)
+Slider = TabHandles.W:Slider({
+    Title = "自瞄距离",
+    Value = {
+        Min = 1,
+        Max = 1200,
+        Default = 50,
+    },
+    Increment = 1,
+    Callback = function(s)
+        maxDistance = tonumber(s)
+    end
+})
 
-Sld(E, "自瞄圈粗细", 1, 10, FOVring.Thickness, function(s)
-    FOVring.Thickness = tonumber(s)
-end)
-
-E:Dropdown({
+Slider = TabHandles.W:Slider({
+    Title = "自瞄圈粗细",
+    Value = {
+        Min = 1,
+        Max = 10,
+        Default = 50,
+    },
+    Increment = 1,
+    Callback = function(s)
+        FOVring.Thickness = tonumber(s)        
+    end
+})
+Dropdown = TabHandles.W:Dropdown({
     Title = "选择自瞄目标", 
     Values = {"敌对", "全部"}, 
     Value = "敌对", 
@@ -1348,7 +1699,7 @@ E:Dropdown({
     end
 })
 
-E:Dropdown({
+Dropdown = TabHandles.W:Dropdown({
     Title = "选择自瞄位置", 
     Values = {"头部", "躯干"}, 
     Value = "头部", 
@@ -1361,7 +1712,7 @@ E:Dropdown({
     end
 })
 
-E:Dropdown({
+Dropdown = TabHandles.W:Dropdown({
     Title = "选择圈的颜色", 
     Values = {"红", "黄", "蓝", "绿", "青", "紫", "彩虹"}, 
     Value = "红", 
@@ -1383,7 +1734,7 @@ E:Dropdown({
     end
 })
 
-local excludeTargetsDropdown = F:Dropdown({
+Dropdown = TabHandles.W:Dropdown({
     Title = "不攻击的玩家(多选)", 
     Values = PlayerList, 
     Value = {}, 
@@ -1394,503 +1745,112 @@ local excludeTargetsDropdown = F:Dropdown({
     end
 })
 
-Btn(F, "刷新玩家列表", function()
-    PlayerList = {}
+Button = TabHandles.W:Button({
+    Title = "刷新玩家白名单",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+            PlayerList = {}
     for _, player in ipairs(Plr:GetPlayers()) do
         if player ~= LP then
             table.insert(PlayerList, player.Name)
         end
     end
     excludeTargetsDropdown:Refresh(PlayerList)
-end)
+end
+})
 
-Btn(F, "获取RPG", function()
-    local Players = game:GetService("Players")
-    local localPlayer = Players.LocalPlayer
-    local TycoonsFolder = workspace.Tycoon.Tycoons
-    local savedPosition
-    
-    local function findNearestTeleportPosition()
-        local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-        local playerPosition = humanoidRootPart.Position
-        local closestDistance = math.huge
-        local closestCFrame = nil
-        
-        for _, tycoonModel in ipairs(TycoonsFolder:GetChildren()) do
-            if tycoonModel:IsA("Model") then
-                local purchasedObjects = tycoonModel:FindFirstChild("PurchasedObjects")
-                if purchasedObjects then
-                    local rpgGiver = purchasedObjects:FindFirstChild("RPG Giver")
-                    if rpgGiver then
-                        local prompt = rpgGiver:FindFirstChild("Prompt")
-                        if prompt and prompt:IsA("BasePart") then
-                            local distance = (playerPosition - prompt.Position).Magnitude
-                            if distance < closestDistance then
-                                closestDistance = distance
-                                closestCFrame = prompt.CFrame
-                            end
-                        end
-                    end
-                end
-            end
-        end
-        
-        return closestCFrame
+
+
+----------------------------------------传送基地
+--
+
+local Positions = {
+    ["Alpha"] = CFrame.new(-1197, 65, -4790),
+    ["Bravo"] = CFrame.new(-220, 65, -4919),
+    ["Charlie"] = CFrame.new(797, 65, -4740),
+    ["Delta"] = CFrame.new(2044, 65, -3984),
+    ["Echo"] = CFrame.new(2742, 65, -3031),
+    ["Foxtrot"] = CFrame.new(3045, 65, -1788),
+    ["Golf"] = CFrame.new(3376, 65, -562),
+    ["Hotel"] = CFrame.new(3290, 65, 587),
+    ["Juliet"] = CFrame.new(2955, 65, 1804),
+    ["Kilo"] = CFrame.new(2569, 65, 2926),
+    ["Lima"] = CFrame.new(989, 65, 3419),
+    ["Omega"] = CFrame.new(-319, 65, 3932),
+    ["Romeo"] = CFrame.new(-1479, 65, 3722),
+    ["Sierra"] = CFrame.new(-2528, 65, 2549),
+    ["Tango"] = CFrame.new(-3018, 65, 1503),
+    ["Victor"] = CFrame.new(-3587, 65, 634),
+    ["Yankee"] = CFrame.new(-3957, 65, -287),
+    ["Zulu"] = CFrame.new(-4049, 65, -1334)
+}
+
+Dropdown = TabHandles.E:Dropdown({
+    Title = "传送基地", 
+    Values = {"Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Juliet", "Kilo", "Lima", "Omega", "Romeo", "Sierra", "Tango", "Victor", "Yankee", "Zulu"}, 
+    Value = "Alpha", 
+    Callback = function(d) 
+        if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
+            LP.Character:FindFirstChild("HumanoidRootPart").CFrame = Positions[d]
+        end        
+end
+})
+
+local function GetAvailableBases()
+    local bases = {}
+    if not ExcludedBases then
+        ExcludedBases = {}
+    end
+    if not workspace:FindFirstChild("Tycoon") or not workspace.Tycoon:FindFirstChild("Tycoons") then
+        warn("Tycoon or Tycoons folder not found")
+        return bases
     end
     
-    local function teleportPlayer()
-        local character = localPlayer.Character
-        if not character then
-            return
-        end
-        
-        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            savedPosition = humanoidRootPart.CFrame
-        end
-        
-        local targetCFrame = findNearestTeleportPosition()
-        if targetCFrame then
-            humanoidRootPart.CFrame = targetCFrame
-            
-            spawn(function()
-                while wait(0.5) do
-                    if not character.Parent then
-                        break
-                    end
-                    
-                    local backpack = localPlayer:FindFirstChild("Backpack")
-                    if backpack and backpack:FindFirstChild("RPG") then
-                        humanoidRootPart.CFrame = savedPosition
-                        break
-                    end
-                end
-            end)
-        else
-            WindUI:Notify({
-                Title = "ERROR",
-                Content = "未能找到附近的RPG",
-                Duration = 4,
-            })
+    local tycoons = workspace.Tycoon.Tycoons:GetChildren()
+    for _, tycoon in ipairs(tycoons) do
+        if not table.find(ExcludedBases, tycoon.Name) then
+            table.insert(bases, tycoon.Name)
         end
     end
     
-    teleportPlayer()
-end)
-
-local loopActive = false
-local rpgAttackThread = nil
-
-Tg(F, "RPG轰炸", false, function(t)
-    loopActive = t
-    
-    if t then
-        if rpgAttackThread then
-            coroutine.close(rpgAttackThread)
-            rpgAttackThread = nil
-        end
-        
-        rpgAttackThread = coroutine.create(function()
-            local Players = game:GetService("Players")
-            local LocalPlayer = Players.LocalPlayer
-            local ReplicatedStorage = game:GetService("ReplicatedStorage")
-            local RocketSystem = ReplicatedStorage:WaitForChild("RocketSystem")
-            local FireRocket = RocketSystem.Events.FireRocket
-            local RocketHit = RocketSystem.Events.RocketHit
-            local attackPhase = "attack"
-            local phaseStartTime = os.clock()
-            
-            while loopActive do
-                local currentTime = os.clock()
-                local elapsed = currentTime - phaseStartTime
-                
-                if not loopActive then break end
-                
-                if attackPhase == "attack" then
-                    if elapsed >= 3 then
-                        attackPhase = "pause"
-                        phaseStartTime = os.clock()
-                    else
-                        local character = LocalPlayer.Character
-                        if character and character:FindFirstChild("HumanoidRootPart") then
-                            local attackPosition = character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0)
-                            local weapon = character:FindFirstChild("RPG")
-                            
-                            if weapon then
-                                for _, player in ipairs(Players:GetPlayers()) do
-                                    if player ~= LocalPlayer and player.Character and not table.find(C_NPlayers, player.Name) then
-                                        local target = player.Character:FindFirstChild("HumanoidRootPart")
-                                        if target then
-                                            FireRocket:InvokeServer(Vector3.new(), weapon, weapon, attackPosition)
-                                            RocketHit:FireServer(attackPosition, Vector3.new(), weapon, weapon, target, nil, "asdfghvcqawRocket4")
-                                            task.wait(0.3)
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                elseif attackPhase == "pause" then
-                    if elapsed >= 2 then
-                        attackPhase = "attack"
-                        phaseStartTime = os.clock()
-                    end
-                end
-                
-                task.wait(0.1)
-            end
-        end)
-        
-        coroutine.resume(rpgAttackThread)
-    else
-        if rpgAttackThread then
-            coroutine.close(rpgAttackThread)
-            rpgAttackThread = nil
-        end
-    end
-end)
-
-local shieldAttackActive = false
-local shieldAttackThread = nil
-
-Tg(F, "护盾攻击", false, function(t)
-    shieldAttackActive = t
-    
-    if t then
-        if shieldAttackThread then
-            coroutine.close(shieldAttackThread)
-            shieldAttackThread = nil
-        end
-        
-        shieldAttackThread = coroutine.create(function()
-            while shieldAttackActive do
-                if not shieldAttackActive then break end
-                
-                local rpg = LP.Character and LP.Character:FindFirstChild("RPG")
-                if not rpg then
-                    task.wait(1)
-                    continue
-                end
-                
-                local attackPosition = LP.Character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0)
-                local tycoonFolder = workspace:WaitForChild("Tycoon"):WaitForChild("Tycoons")
-                
-                for _, tycoon in ipairs(tycoonFolder:GetChildren()) do
-                    if not shieldAttackActive then break end
-                    
-                    if tycoon:FindFirstChild("Owner") and tycoon.Owner.Value ~= LP then
-                        local shield = tycoon:FindFirstChild("PurchasedObjects", true) and
-                                      tycoon.PurchasedObjects:FindFirstChild("Base Shield", true) and
-                                      tycoon.PurchasedObjects["Base Shield"]:FindFirstChild("Shield", true) and
-                                      tycoon.PurchasedObjects["Base Shield"].Shield:FindFirstChild("Shield4", true)
-                        
-                        if shield then
-                            local fireArgs = { Vector3.new(0, 0, 0), rpg, rpg, attackPosition }
-                            
-                            for _ = 1, 2 do
-                                local hitArgs = {attackPosition, Vector3.new(0, -1, 0), rpg, rpg, shield, nil, string.format("%sRocket%d", string.char(math.random(65, 90)), math.random(1, 1000))}
-                                RocketSystem.Events.RocketHit:FireServer(unpack(hitArgs))
-                                RocketSystem.Events.FireRocket:InvokeServer(unpack(fireArgs))
-                                task.wait(0.3)
-                            end
-                        end
-                    end
-                end
-                
-                task.wait(0.3)
-            end
-        end)
-        
-        coroutine.resume(shieldAttackThread)
-    else
-        if shieldAttackThread then
-            coroutine.close(shieldAttackThread)
-            shieldAttackThread = nil
-        end
-    end
-end)
-
-RunService.RenderStepped:Connect(function()
-    updateDrawings()
-    
-    if autoAimEnabled then
-        local closestPlayer = getClosestPlayerInFOV(aimPosition)
-        if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild(aimPosition) then
-            lookAt(closestPlayer.Character[aimPosition].Position)
-        end
-    end
-    
-    if rainbowEnabled then
-        local t = tick() * 2
-        local r = math.abs(math.sin(t))
-        local g = math.abs(math.sin(t + 2 * math.pi / 3))
-        local b = math.abs(math.sin(t + 4 * math.pi / 3))
-        FOVring.Color = Color3.new(r, g, b)
-    end
-end)
-
-pcall(function()
-getgenv().autoTeleport = false 
-local function getDistance(objectPosition)
-    local player = game.Players.LocalPlayer
-    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-        local playerPosition = player.Character.HumanoidRootPart.Position
-        return (objectPosition - playerPosition).Magnitude
-    end
-    return math.huge
+    return bases
 end
 
-local function getClosestNeon()
-    local player = game.Players.LocalPlayer
-    local teamName = player.Team.Name
-    local buttonsFolder = workspace.Tycoon.Tycoons:FindFirstChild(teamName).UnpurchasedButtons
-
-    if buttonsFolder then
-        local closestNeon = nil
-        local closestDistance = math.huge 
-
-        for _, button in pairs(buttonsFolder:GetChildren()) do
-            if not button:FindFirstChild("Mission") then
-                local neon = button:FindFirstChild("Neon")
-                local price = button:FindFirstChild("Price")
-
-                if neon and price and price.Value ~= 0 then
-                    local distance = getDistance(neon.Position)
-                    if distance < closestDistance then
-                        closestNeon = neon
-                        closestDistance = distance
-                    end
-                end
-            end
-        end
-
-        return closestNeon
+Dropdown = TabHandles.E:Dropdown({
+    Title = "基地白名单{排除列表}", 
+    Values = GetAvailableBases(), 
+    Multi = true, 
+    Default = {}, 
+    Callback = function(Values) 
+        ExcludedBases = Values 
     end
+})
 
-    return nil
+Button = TabHandles.E:Button({
+    Title = "",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        BasesDropdown:Refresh(GetAvailableBases())
 end
+})
 
-local function teleportToClosestNeon()
-    local player = game.Players.LocalPlayer
-
-    while getgenv().autoTeleport do
-        wait(0.2) 
-
-        local closestNeon = getClosestNeon()
-
-        if closestNeon then
-            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                player.Character.HumanoidRootPart.CFrame = CFrame.new(closestNeon.Position)
-            end
-        else
-            warn("no neon found")
-        end
-    end
+Toggle = TabHandles.E:Toggle({
+    Title = "自动偷箱子",
+    Desc = "",
+    Locked = false,
+    Callback = function(value)
+        getgenv().auto = value
 end
+})
 
-local function checkTeleportToggle()
-    while true do
-        wait(0.5)
-        if getgenv().autoTeleport then
-            teleportToClosestNeon()
-        end
-    end
+Toggle = TabHandles.E:Toggle({
+    Title = "自动升级房子",
+    Desc = "",
+    Locked = false,
+    Callback = function(value)
+        getgenv().autoTeleport = value
 end
+})
 
-spawn(checkTeleportToggle)
-end)
-
-pcall(function()
-    local ps = game:GetService("Players")
-    local ws = game:GetService("Workspace")
-    local rs = game:GetService("ReplicatedStorage")
-    local rss = game:GetService("RunService")
-
-    local lp = ps.LocalPlayer
-    local crateRemote = rs:FindFirstChild("TankCrates") and rs.TankCrates:FindFirstChild("WeldCrate")
-    local hrp
-    getgenv().auto = false
-    local currentCrate 
-    local lastCrateCheck = 0
-    local crateCheckInterval = 5 
-
-    local function setupCharacter()
-        if lp.Character then
-            hrp = lp.Character:WaitForChild("HumanoidRootPart")
-        end
-    end
-
-    setupCharacter()
-    lp.CharacterAdded:Connect(function()
-        setupCharacter()
-    end)
-
-    local function tp(target)
-        if not getgenv().auto or not target or not hrp then return end
-        
-        local cf = typeof(target) == "CFrame" and target or target.CFrame
-        local success = pcall(function()
-            local randomOffset = Vector3.new(
-                math.random(-2, 2),
-                0,
-                math.random(-2, 2)
-            )
-            hrp.CFrame = cf + randomOffset
-        end)
-        
-        if not success then
-            warn("Teleport failed")
-        end
-    end
-
-    local function firePrompt(prompt, crate)
-        if not prompt then return end
-        
-        prompt.MaxActivationDistance = 10
-        fireproximityprompt(prompt, 1)
-        
-        if crate and crateRemote then
-            task.wait(0.1) 
-            pcall(crateRemote.InvokeServer, crateRemote, crate)
-        end
-    end
-
-    local function findCrate()
-        local crateWorkspace = ws:FindFirstChild("Game Systems") and ws["Game Systems"]:FindFirstChild("Crate Workspace")
-        if not crateWorkspace then return nil end
-        
-        for _, c in ipairs(crateWorkspace:GetChildren()) do
-            if c:GetAttribute("Owner") ~= lp.Name then
-                return c
-            end
-        end
-        return nil
-    end
-
-    local function getTycoon()
-        local leaderstats = lp:FindFirstChild("leaderstats")
-        if not leaderstats then return nil end
-        
-        local team = leaderstats:FindFirstChild("Team")
-        if not team then return nil end
-        
-        return ws.Tycoon.Tycoons:FindFirstChild(team.Value)
-    end
-
-    local function getSellPoint(tycoon)
-        if not tycoon then return nil end
-        
-        local essentials = tycoon:FindFirstChild("Essentials")
-        if not essentials then return nil end
-        
-        local oilCollector = essentials:FindFirstChild("Oil Collector")
-        if not oilCollector then return nil end
-        
-        local cratePromptPart = oilCollector:FindFirstChild("CratePromptPart")
-        if not cratePromptPart then return nil end
-        
-        return cratePromptPart
-    end
-
-    local function getWaitPoint(tycoon)
-        if not tycoon then return nil end
-        
-        local floor = tycoon:FindFirstChild("Floor")
-        if not floor then return nil end
-        
-        local floorOrigin = floor:FindFirstChild("FloorOrigin")
-        if not floorOrigin then return nil end
-        
-        return CFrame.new(
-            floorOrigin.Position.X + math.random(-10, 10),
-            floorOrigin.Position.Y + 3,
-            floorOrigin.Position.Z + math.random(-10, 10)
-        )
-    end
-
-    local function sellCrate(tycoon)
-        if not tycoon then return false end
-        
-        local sellPoint = getSellPoint(tycoon)
-        if not sellPoint then return false end
-        
-        tp(sellPoint)
-        task.wait(0.1) 
-        
-        local sellPrompt = sellPoint:FindFirstChild("SellPrompt")
-        if sellPrompt then
-            firePrompt(sellPrompt)
-            task.wait(0.1)
-            return true
-        end
-        
-        return false
-    end
-
-    function autofarmLoop()
-        while getgenv().auto and task.wait(0.1) do
-            local tycoon = getTycoon()
-            if not tycoon then continue end
-
-            local holdingCrate = false
-            local crateWorkspace = ws:FindFirstChild("Game Systems") and ws["Game Systems"]:FindFirstChild("Crate Workspace")
-            if crateWorkspace then
-                for _, crate in ipairs(crateWorkspace:GetChildren()) do
-                    if crate:GetAttribute("Holding") == lp.Name then
-                        holdingCrate = true
-                        currentCrate = crate
-                        break
-                    end
-                end
-            end
-
-            if holdingCrate then
-                if sellCrate(tycoon) then
-                    currentCrate = nil
-                    task.wait(1)
-                end
-            else
-                local currentTime = tick()
-                if currentTime - lastCrateCheck > crateCheckInterval then
-                    lastCrateCheck = currentTime
-                    
-                    local nextCrate = findCrate()
-                    if nextCrate then
-                        currentCrate = nextCrate
-                        tp(nextCrate)
-                        task.wait(0.5)
-                        
-                        local prompt = nextCrate:FindFirstChild("StealPrompt")
-                        if prompt then
-                            firePrompt(prompt, nextCrate)
-                            task.wait(0.01) 
-                        end
-                    else
-                        local waitPoint = getWaitPoint(tycoon)
-                        if waitPoint then
-                            tp(waitPoint)
-                            task.wait(0.1)
-                            if getgenv().auto then
-                                local humanoid = lp.Character and lp.Character:FindFirstChild("Humanoid")
-                                if humanoid then
-                                    humanoid.Jump = true
-                                    task.wait(0.2)
-                                    humanoid.Jump = false
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-
-    spawn(function()
-        while task.wait(0.1) do
-            if getgenv().auto then
-                autofarmLoop()
-            end
-        end
-    end)
-end)
