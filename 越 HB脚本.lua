@@ -200,6 +200,7 @@ local TabHandles = {
     SAN = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
     YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
+    SI = Tabs.Main:Tab({ Title = "子追功能", Icon = "layout-grid" }),
     gn = Tabs.gn:Tab({ Title = "越 HB", Icon = "layout-grid" }),
     ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "layout-grid" }),
     pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "layout-grid" }),
@@ -2632,6 +2633,159 @@ Toggle = TabHandles.ER:Toggle({
     Value = false, 
     Callback = function(Value)
         getgenv().ShowName = Value
+    end
+})
+
+
+
+local Workspace = game:GetService("Workspace")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local old
+local main = {
+    enable = false,
+    teamcheck = false,
+    friendcheck = false,
+    enablenpc = false
+}
+
+local function getClosestHead()
+    local closestHead
+    local closestDistance = math.huge
+    
+    if not LocalPlayer.Character then return end
+    if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return end
+    
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            local skip = false
+            
+            if main.teamcheck then
+                if player.Team == LocalPlayer.Team then
+                    skip = true
+                end
+            end
+            
+            if not skip and main.friendcheck then
+                if LocalPlayer:IsFriendsWith(player.UserId) then
+                    skip = true
+                end
+            end
+            
+            if not skip then
+                local character = player.Character
+                local root = character:FindFirstChild("HumanoidRootPart")
+                local head = character:FindFirstChild("Head")
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                local forcefield = character:FindFirstChild("ForceField")
+                
+                if root and head and humanoid and not forcefield and humanoid.Health > 0 then
+                    local distance = (root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestHead = head
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+    end
+    return closestHead
+end
+
+local function getClosestNpcHead()()
+    local closestNPC = nil
+    local closestDistance = math.huge
+    for _, object in ipairs(workspace:GetDescendants()) do
+        if object:IsA("Model") then
+            local humanoid = object:FindFirstChild("Humanoid") or object:FindFirstChildWhichIsA("Humanoid")
+            local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
+            if humanoid and hrp and humanoid.Health > 0 then
+                local isPlayer = false
+                for _, pl in ipairs(Players:GetPlayers()) do
+                    if pl.Character == object then
+                        isPlayer = true
+                    break
+                end
+            end
+            if not isPlayer then
+                local distance = (hrp.Position - Hrp.Position).Magnitude
+                if distance < closestDistance then
+                    closestDistance = distance
+                    closestNPC = object
+                end
+            end
+        end
+    end
+end
+return closestNPC
+end
+
+old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    local args = {...}
+    if main.enable and method == "Raycast" and not checkcaller() then
+        local origin = args[1] or Camera.CFrame.Position
+        local closestHead = getClosestHead()
+        if closestHead then
+            return {
+                Instance = closestHead,
+                Position = closestHead.Position,
+                Normal = (origin - closestHead.Position).Unit,
+                Material = Enum.Material.Plastic,
+                Distance = (closestHead.Position - origin).Magnitude
+            }
+        end
+    end
+    elseif main.enablenpc and method == "Raycast" and not checkcaller() then
+        local origin = args[1] or Camera.CFrame.Position
+        local closestnpcHead = getClosestNpcHead()
+        if closestnpcHead then
+            return {
+                Instance = closestnpcHead,
+                Position = closestnpcHead.Position,
+                Normal = (origin - closestnpcHead.Position).Unit,
+                Material = Enum.Material.Plastic,
+                Distance = (closestnpcHead.Position - origin).Magnitude
+            }
+        end
+    end
+    return old(self, ...)
+end))
+
+Toggle = TabHandles.SI:Toggle({
+    Title = "开启子弹追踪",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.enable = state
+    end
+})
+
+Toggle = TabHandles.SI:Toggle({
+    Title = "开启队伍验证",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.teamcheck = state
+    end
+})
+
+Toggle = TabHandles.SI:Toggle({
+    Title = "开启好友验证",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.friendcheck = state
+    end
+})
+
+Toggle = TabHandles.SI:Toggle({
+    Title = "开启NPC子弹追踪",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.enablenpc = state
     end
 })
 
