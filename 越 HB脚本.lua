@@ -2699,7 +2699,7 @@ WindUI:Notify({
 
 Button = TabHandles.gn:Button({
     Title = "战争大亨",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E6%88%98%E4%BA%89%E5%A4%A7%E4%BA%A8.lua"))()
