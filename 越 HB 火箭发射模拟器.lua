@@ -67,8 +67,10 @@ local TabHandles = {
 }
 
 Toggle = TabHandles.Q:Toggle({
-        "自动收集燃料",
-        function()
+    Title = "",
+    Value = false,    
+    Callback = function(state)         
+   
           isFuelScoopEnabled = ARL while true do wait() if isFuelScoopEnabled then for i, h in pairs(game.Players.LocalPlayer.Character:GetChildren()) do if h:IsA("Tool") and h.Name == "FuelScoop" then h:Activate() end end end end
 
 WindUI:Notify({
@@ -78,14 +80,14 @@ WindUI:Notify({
             IconThemed = true, -- automatic color icon to theme 
             Duration = 5,
         })
-                                     
-        end
-    )
+    end
+})
     
 Button = TabHandles.Q:Button({
-        "登上火箭",
-        function()   
-                 game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
+    Title = "",
+    Value = false,    
+    Callback = function(state) 
+        game:GetService("ReplicatedStorage"):WaitForChild("BoardRocket"):FireServer()
                  
 WindUI:Notify({
     Title = "通知",
@@ -93,25 +95,23 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })                 
-                 
-        end
-    )   
+    end
+})                 
    
 Button = TabHandles.Q:Button({
-        "将玩家从所有座位移除",
-        function()
-            game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
+    Title = "",
+    Value = false,    
+    Callback = function(state) 
+               game:GetService("ReplicatedStorage"):WaitForChild("RemovePlayer"):FireServer()
             
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
-})            
-            
-        end
-    )
-
+})
+    end
+})       
 local TabHandles.YI:Paragraph({
     Title = "您的用户名ID：",
     Desc = "" .. game:GetService("Players").LocalPlayer.UserId .. "",
@@ -235,9 +235,11 @@ local TabHandles.YI:Paragraph({
 })
 
 
-Button = TabHandles.Q:Button({
-        "发射台岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "发射台岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-123.15931701660156, 2.7371432781219482, 3.491959810256958)
             
 WindUI:Notify({
@@ -246,13 +248,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "白云岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "白云岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-76.13252258300781, 170.55825805664062, -60.4516716003418)
             
 WindUI:Notify({
@@ -261,13 +264,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "漂浮岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "漂浮岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-66.51714324951172, 720.4866333007812, -5.391753196716309)
             
 WindUI:Notify({
@@ -276,13 +280,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "卫星岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "卫星岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-34.2462043762207, 1429.4990234375, 1.3739361763000488)
             
 WindUI:Notify({
@@ -291,13 +296,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "蜜蜂迷宫岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "蜜蜂迷宫岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.5361199378967285, 3131.249267578125, -29.759048461914062)
             
 WindUI:Notify({
@@ -306,13 +312,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "月球人援救岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "月球人援救岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.212917804718018, 5016.341796875, -19.815933227539062)
             
 WindUI:Notify({
@@ -321,13 +328,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "暗物质岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "暗物质岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(68.43186950683594, 6851.94091796875, 7.890637397766113)
             
 WindUI:Notify({
@@ -336,13 +344,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "太空岩石岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "太空岩石岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(49.92888641357422, 8942.955078125, 8.674375534057617)
             
 WindUI:Notify({
@@ -351,13 +360,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "零号火星岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "零号火星岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(54.44503402709961, 11270.0927734375, -1.273137092590332)
             
 WindUI:Notify({
@@ -366,13 +376,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "太空水晶岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "太空水晶岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-11.579089164733887, 15295.6318359375, -27.54974365234375)
             
 WindUI:Notify({
@@ -381,13 +392,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "月球浆果岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "月球浆果岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-14.601255416870117, 18410.9609375, 0.9418511986732483)
             
 WindUI:Notify({
@@ -396,13 +408,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "铺路实岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "铺路实岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3.272758960723877, 22539.494140625, 63.283935546875)
             
 WindUI:Notify({
@@ -411,13 +424,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
     
-Button = TabHandles.Q:Button({
-        "流星岛",
-        function()
+Button = TabHandles.W:Button({
+    Title = "流星岛",
+    Value = false,    
+    Callback = function(state)         
+   
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-45.515689849853516, 27961.560546875, -7.358333110809326)
             
 WindUI:Notify({
@@ -426,14 +440,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )   
+    end
+})
    
-Button = TabHandles.Q:Button({
-        "升级岛",
-        function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
+Button = TabHandles.W:Button({
+    Title = "升级岛",
+    Value = false,    
+    Callback = function(state)         
+   r.HumanoidRootPart.CFrame = CFrame.new(-2.7595248222351074, 33959.98828125, 53.93095397949219)
             
 WindUI:Notify({
     Title = "通知",
@@ -441,13 +455,16 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })            
-            
-        end
-    )
+    end
+})
 
 ------------------------------------------------------------------------------------------
 
-Button = TabHandles.W:Button({("英勇", function()
+Button = TabHandles.E:Button({
+    Title = "英勇",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 1
@@ -461,10 +478,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("加成英勇", function()
+Button = TabHandles.E:Button({
+    Title = "加成英勇",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 2
@@ -478,10 +499,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+}))
 
-end)
-
-Button = TabHandles.W:Button({("火刃", function()
+Button = TabHandles.E:Button({
+    Title = "火刃",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 3
@@ -495,10 +520,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("加成火刃", function()
+Button = TabHandles.E:Button({
+    Title = "加成火刃",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 4
@@ -512,10 +541,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("阿特拉斯", function()
+Button = TabHandles.E:Button({
+    Title = "阿特拉斯",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 5
@@ -529,10 +562,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+}))
 
-end)
-
-Button = TabHandles.W:Button({("普罗米修斯", function()
+Button = TabHandles.E:Button({
+    Title = "普罗米修斯",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 6
@@ -546,10 +583,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("双重阿特拉斯", function()
+Button = TabHandlesE.:Button({
+    Title = "双重阿特拉斯",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 7
@@ -563,10 +604,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("寻星者", function()
+Button = TabHandles.E:Button({
+    Title = "寻星者",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 8
@@ -580,10 +625,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("天空龙", function()
+Button = TabHandles.E:Button({
+    Title = "天空龙",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 9
@@ -597,10 +646,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("强化天空龙", function()
+Button = TabHandles.E:Button({
+    Title = "强化天空龙",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Rocket",
     [2] = 10
@@ -614,11 +667,15 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
 
-
-Button = TabHandles.W:Button({("双重", function()
+Button = TabHandles.E:Button({
+    Title = "双重",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 1
@@ -632,10 +689,13 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
-
-end)
-
-Button = TabHandles.W:Button({("压缩罐", function()
+    end
+})
+Button = TabHandles.E:Button({
+    Title = "压缩罐",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 2
@@ -649,10 +709,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("原子压缩罐", function()
+Button = TabHandles.E:Button({
+    Title = "原子压缩罐",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 3
@@ -666,10 +730,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("大型压缩罐", function()
+Button = TabHandles.E:Button({
+    Title = "大型压缩罐",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 3
@@ -683,10 +751,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("大型原子压缩罐", function()
+Button = TabHandles.E:Button({
+    Title = "大型原子压缩罐",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 4
@@ -700,10 +772,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.W:Button({("燃料棒", function()
+Button = TabHandles.E:Button({
+    Title = "燃料棒",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 5
@@ -717,12 +793,15 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
-
-end)
-
+    end
+})
 ---------------------------------------------背包
 
-Button = TabHandles.E:Button({("火箭背包", function()
+Button = TabHandles.R:Button({
+    Title = "火箭背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 6
@@ -736,10 +815,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("双重火箭背包", function()
+Button = TabHandles.R:Button({
+    Title = "双重火箭背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 7
@@ -753,10 +836,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("胖胖火箭背包", function()
+Button = TabHandles.R:Button({
+    Title = "胖胖火箭背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 8
@@ -770,10 +857,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("双重胖胖火箭背包", function()
+Button = TabHandles.R:Button({
+    Title = "双重胖胖火箭背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 9
@@ -787,10 +878,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("绿色水晶背包", function()
+Button = TabHandles.R:Button({
+    Title = "绿色水晶背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 10
@@ -804,10 +899,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("红色水晶背包", function()
+Button = TabHandles.R:Button({
+    Title = "红色水晶背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 11
@@ -821,10 +920,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.E:Button({("蓝色水晶背包", function()
+Button = TabHandles.R:Button({
+    Title = "蓝色水晶背包",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "Backpack",
     [2] = 12
@@ -838,12 +941,16 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
-
-end)
+    end
+})
 
 ------------------------------------------------------------------------------------------
 
-Button = TabHandles.R:Button({("标准燃料采集铲", function()
+Button = TabHandles.R:Button({
+    Title = "标准燃料采集铲",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 1
@@ -857,10 +964,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("新燃料采集铲", function()
+Button = TabHandles.R:Button({
+    Title = "新燃料采集铲",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 2
@@ -874,10 +985,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("电动燃料采集铲", function()
+Button = TabHandles.R:Button({
+    Title = "电动燃料采集铲",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 3
@@ -891,10 +1006,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("数字燃料采集铲", function()
+Button = TabHandles.R:Button({
+    Title = "数字燃料采集铲",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 4
@@ -908,10 +1027,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("人工智能燃料采集器", function()
+Button = TabHandles.R:Button({
+    Title = "人工智能燃料采集器",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 5
@@ -925,10 +1048,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("采矿激光", function()
+Button = TabHandles.R:Button({
+    Title = "采矿激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 6
@@ -942,10 +1069,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("红宝石采矿激光", function()
+Button = TabHandles.R:Button({
+    Title = "红宝石采矿激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 7
@@ -959,10 +1090,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("霓虹采矿激光", function()
+Button = TabHandles.R:Button({
+    Title = "霓虹采矿激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 8
@@ -976,10 +1111,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("太空水晶采矿激光", function()
+Button = TabHandles.R:Button({
+    Title = "太空水晶采矿激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 9
@@ -993,10 +1132,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("绿色水晶激光", function()
+Button = TabHandles.R:Button({
+    Title = "绿色水晶激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 10
@@ -1010,10 +1153,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("红色水晶激光", function()
+Button = TabHandles.R:Button({
+    Title = "红色水晶激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 11
@@ -1027,10 +1174,14 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
+    end
+})
 
-end)
-
-Button = TabHandles.R:Button({("蓝色水晶激光", function()
+Button = TabHandles.R:Button({
+    Title = "蓝色水晶激光",
+    Value = false,    
+    Callback = function(state)         
+   
 local args = {
     [1] = "FuelScoop",
     [2] = 12
@@ -1044,8 +1195,8 @@ WindUI:Notify({
     Duration = 3, -- 3 seconds
     Icon = "layout-grid",
 })
-
-end)
+    end
+})
 
 ------------------------------------------------------------------------------------------
 
