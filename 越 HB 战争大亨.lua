@@ -1290,57 +1290,6 @@ Button = TabHandles.W:Button({
 end
 })
 
-Button = TabHandles.W:Button({
-    Title = "自动修电箱",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-            if state then
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-
-        while state do
-            for _, room in pairs(workspace.Rooms:GetChildren()) do
-                local interactables = room:FindFirstChild("Interactables")
-                
-                if interactables then
-                    for _, generator in pairs(interactables:GetChildren()) do
-                        if generator.Name == "Generator" and generator:FindFirstChild("Fixed") and generator:FindFirstChild("RemoteFunction") and generator:FindFirstChild("RemoteEvent") then
-                            local proximityPrompt = generator.ProxyPart:FindFirstChild("ProximityPrompt")
-                            
-                            generator.RemoteFunction:InvokeServer()
-
-                            local distance = (character.PrimaryPart.Position - generator.ProxyPart.Position).Magnitude
-
-                            if distance <= proximityPrompt.MaxActivationDistance and generator.Fixed.Value < 100 then
-                                local args = {
-                                    [1] = true
-                                }
-                                generator.RemoteEvent:FireServer(unpack(args))
-                            end
-                        elseif generator.Name == "EncounterGenerator" and generator:FindFirstChild("Fixed") and generator:FindFirstChild("RemoteFunction") and generator:FindFirstChild("RemoteEvent") then
-                            local proximityPrompt = generator.ProxyPart:FindFirstChild("ProximityPrompt")
-                            
-                            generator.RemoteFunction:InvokeServer()
-
-                            local distance = (character.PrimaryPart.Position - generator.ProxyPart.Position).Magnitude
-
-                            if distance <= proximityPrompt.MaxActivationDistance and generator.Fixed.Value < 100 then
-                                local args = {
-                                    [1] = true
-                                }
-                                generator.RemoteEvent:FireServer(unpack(args))
-                            end
-                        end
-                    end
-                end
-            end
-            wait(0)
-        end
-    end
-end
-})
-
 local fov = 0
 local maxDistance = 50
 local RunService = game:GetService("RunService")
@@ -1412,7 +1361,7 @@ local function getClosestPlayerInFOV(trg_part)
     return nearest
 end
 
-Toggle = TabHandles.:Toggle({
+Toggle = TabHandles.W:Toggle({
     Title = "玩家自瞄",
     Desc = "",
     Locked = false,
@@ -1421,7 +1370,7 @@ Toggle = TabHandles.:Toggle({
 end
 })
 
-Toggle = TabHandles.:Toggle({
+Toggle = TabHandles.W:Toggle({
     Title = "显示范围",
     Desc = "",
     Locked = false,
@@ -1431,7 +1380,7 @@ Toggle = TabHandles.:Toggle({
 end
 })
 
-Button = TabHandles.:Button({
+Button = TabHandles.W:Button({
     Title = "掩体不瞄",
     Desc = "",
     Locked = false,
