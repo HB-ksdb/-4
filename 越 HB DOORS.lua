@@ -751,7 +751,7 @@ WindUI:Notify({
 
 if not isGarden then
 TabHandles.ESPgn:Toggle({
-    Title = (((isHotel or isBackdoor) and "钥匙/拉杆透视") or (isMines and "保险丝透视")),
+    Title = "钥匙",
     Icon = "check",
     Value = false,
     Callback = function(Value) 
@@ -1429,7 +1429,7 @@ _G.EspEntityNameDis = {
 }
 
 TabHandles.ESPgn:Toggle({
-    Title = ((isHotel and "透视柜子/床") or (isMines and "透视柜子/垃圾桶/管道") or (isBackdoor and "透视柜子")),
+    Title = "透视柜子全部",
     Icon = "check",
     Value = false,
     Callback = function(Value) 
