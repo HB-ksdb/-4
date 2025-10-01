@@ -65,45 +65,6 @@ local TabHandles = {
 
 ----------------------------------------战争功能
 --
-
-Button = TabHandles.Q:Button({
-    Title = "自动救人",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-      local RunService = game:GetService("RunService")
-    local CollectionService = game:GetService("CollectionService")
-
-    local REVIVE_PROMPT_TAG = "RevivePromptTag"
-
-    for _, prompt in ipairs(workspace:GetDescendants()) do
-        if prompt.Name == "RevivePrompt" then
-            CollectionService:AddTag(prompt, REVIVE_PROMPT_TAG)
-        end
-    end
-
-    workspace.DescendantAdded:Connect(function(descendant)
-        if descendant.Name == "RevivePrompt" then
-            CollectionService:AddTag(descendant, REVIVE_PROMPT_TAG)
-        end
-    end)
-
-    local function triggerPrompt(prompt)
-        if prompt.Parent then
-            fireproximityprompt(prompt)
-        end
-    end
-
-    while true do
-        local tagged = CollectionService:GetTagged(REVIVE_PROMPT_TAG)
-        for _, prompt in ipairs(tagged) do
-            coroutine.wrap(triggerPrompt)(prompt)
-        end
-        wait()
-    end  
-end
-})
-
 Button = TabHandles.Q:Button({
     Title = "无后座",
     Desc = "",
@@ -145,6 +106,161 @@ Button = TabHandles.Q:Button({
     end
 end
 })
+
+Button = TabHandles.Q:Button({
+    Title = "获得RPG",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        local Players = game:GetService("Players")
+    local localPlayer = Players.LocalPlayer
+    local TycoonsFolder = workspace.Tycoon.Tycoons
+    local savedPosition
+    
+    local function findNearestTeleportPosition()
+        local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        local playerPosition = humanoidRootPart.Position
+        local closestDistance = math.huge
+        local closestCFrame = nil
+        
+        for _, tycoonModel in ipairs(TycoonsFolder:GetChildren()) do
+            if tycoonModel:IsA("Model") then
+                local purchasedObjects = tycoonModel:FindFirstChild("PurchasedObjects")
+                if purchasedObjects then
+                    local rpgGiver = purchasedObjects:FindFirstChild("RPG Giver")
+                    if rpgGiver then
+                        local prompt = rpgGiver:FindFirstChild("Prompt")
+                        if prompt and prompt:IsA("BasePart") then
+                            local distance = (playerPosition - prompt.Position).Magnitude
+                            if distance < closestDistance then
+                                closestDistance = distance
+                                closestCFrame = prompt.CFrame
+                            end
+                        end
+                    end
+                end
+            end
+        end
+        
+        return closestCFrame
+    end
+    
+    local function teleportPlayer()
+        local character = localPlayer.Character
+        if not character then
+            return
+        end
+        
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            savedPosition = humanoidRootPart.CFrame
+        end
+        
+        local targetCFrame = findNearestTeleportPosition()
+        if targetCFrame then
+            humanoidRootPart.CFrame = targetCFrame
+            
+            spawn(function()
+                while wait(0.5) do
+                    if not character.Parent then
+                        break
+                    end
+                    
+                    local backpack = localPlayer:FindFirstChild("Backpack")
+                    if backpack and backpack:FindFirstChild("RPG") then
+                        humanoidRootPart.CFrame = savedPosition
+                        break
+                    end
+                end
+            end)
+        else
+            WindUI:Notify({
+                Title = "ERROR",
+                Content = "未能找到附近的RPG",
+                Duration = 4,
+            })
+        end
+    end
+    
+    teleportPlayer()
+end
+})
+
+Button = TabHandles.Q:Button({
+    Title = "RPG轰炸",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+        loopActive = t
+    
+    if t then
+        if rpgAttackThread then
+            coroutine.close(rpgAttackThread)
+            rpgAttackThread = nil
+        end
+        
+        rpgAttackThread = coroutine.create(function()
+            local Players = game:GetService("Players")
+            local LocalPlayer = Players.LocalPlayer
+            local ReplicatedStorage = game:GetService("ReplicatedStorage")
+            local RocketSystem = ReplicatedStorage:WaitForChild("RocketSystem")
+            local FireRocket = RocketSystem.Events.FireRocket
+            local RocketHit = RocketSystem.Events.RocketHit
+            local attackPhase = "attack"
+            local phaseStartTime = os.clock()
+            
+            while loopActive do
+                local currentTime = os.clock()
+                local elapsed = currentTime - phaseStartTime
+                
+                if not loopActive then break end
+                
+                if attackPhase == "attack" then
+                    if elapsed >= 3 then
+                        attackPhase = "pause"
+                        phaseStartTime = os.clock()
+                    else
+                        local character = LocalPlayer.Character
+                        if character and character:FindFirstChild("HumanoidRootPart") then
+                            local attackPosition = character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0)
+                            local weapon = character:FindFirstChild("RPG")
+                            
+                            if weapon then
+                                for _, player in ipairs(Players:GetPlayers()) do
+                                    if player ~= LocalPlayer and player.Character and not table.find(C_NPlayers, player.Name) then
+                                        local target = player.Character:FindFirstChild("HumanoidRootPart")
+                                        if target then
+                                            FireRocket:InvokeServer(Vector3.new(), weapon, weapon, attackPosition)
+                                            RocketHit:FireServer(attackPosition, Vector3.new(), weapon, weapon, target, nil, "asdfghvcqawRocket4")
+                                            task.wait(0.3)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                elseif attackPhase == "pause" then
+                    if elapsed >= 2 then
+                        attackPhase = "attack"
+                        phaseStartTime = os.clock()
+                    end
+                end
+                
+                task.wait(0.1)
+            end
+        end)
+        
+        coroutine.resume(rpgAttackThread)
+    else
+        if rpgAttackThread then
+            coroutine.close(rpgAttackThread)
+            rpgAttackThread = nil
+        end
+    end
+end
+})
+
 ----------------------------------------透视功能
 --
 getgenv().ESPEnabled = false
@@ -984,170 +1100,6 @@ Button = TabHandles.R:Button({
 
 ----------------------------------------子追或自瞄
 --
-Toggle = TabHandles.W:Toggle({
-    Title = "子追功能",
-    Desc = "",
-    Locked = false,
-    Callback = function(silent)
-        if silent then
-        local CurrentCamera = workspace.CurrentCamera
-local Players = game.Players
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-function ClosestPlayer()
-    local MaxDist, Closest = math.huge
-    for I,V in pairs(Players.GetPlayers(Players)) do
-        if V == LocalPlayer then continue end
-        if V.Team == LocalPlayer then continue end
-        if not V.Character then continue end
-    local Head = V.Character.FindFirstChild(V.Character, "Head")
-        if not Head then continue end
-        local Pos, Vis = CurrentCamera.WorldToScreenPoint(CurrentCamera, Head.Position)
-        if not Vis then continue end
-        local MousePos, TheirPos = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2), Vector2.new(Pos.X, Pos.Y)
-        local Dist = (TheirPos - MousePos).Magnitude
-        if Dist < MaxDist then
-            MaxDist = Dist
-            Closest = V
-        end
-    end
-    return Closest
-end
-local MT = getrawmetatable(game)
-local OldNC = MT.__namecall
-local OldIDX = MT.__index
-setreadonly(MT, false)
-MT.__namecall = newcclosure(function(self, ...)
-    local Args, Method = {...}, getnamecallmethod()
-    if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
-        local CP = ClosestPlayer()
-        if CP and CP.Character and CP.Character.FindFirstChild(CP.Character, "Head") then
-            Args[1] = Ray.new(CurrentCamera.CFrame.Position, (CP.Character.Head.Position - CurrentCamera.CFrame.Position).Unit * 1000)
-            return OldNC(self, unpack(Args))
-        end
-    end
-    return OldNC(self, ...)
-end)
-MT.__index = newcclosure(function(self, K)
-    if K == "Clips" then
-        return workspace.Map
-    end
-    return OldIDX(self, K)
-end)
-setreadonly(MT, true)
-    else
-        local CurrentCamera = workspace.CurrentCamera
-local Players = game.Players
-local LocalPlayer = Players.LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-function ClosestPlayer()
-    local MaxDist, Closest = math.huge
-    for I,V in pairs(Players.GetPlayers(Players)) do
-        if V == LocalPlayer then continue end
-        if V.Team == LocalPlayer then continue end
-        if not V.Character then continue end
-        local Head = V.Character.FindFirstChild(V.Character, "Head")
-        if not Head then continue end
-        local Pos, Vis = CurrentCamera.WorldToScreenPoint(CurrentCamera, Head.Position)
-        if not Vis then continue end
-        local MousePos, TheirPos = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 0, workspace.CurrentCamera.ViewportSize.Y / 0), Vector2.new(Pos.X, Pos.Y)
-        local Dist = (TheirPos - MousePos).Magnitude
-        if Dist < MaxDist then
-            MaxDist = Dist
-            Closest = V
-        end
-    end
-    return Closest
-end
-local MT = getrawmetatable(game)
-local OldNC = MT.__namecall
-local OldIDX = MT.__index
-setreadonly(MT, false)
-MT.__namecall = newcclosure(function(self, ...)
-    local Args, Method = {...}, getnamecallmethod()
-    if Method == "FindPartOnRayWithIgnoreList" and not checkcaller() then
-        local CP = ClosestPlayer()
-        if CP and CP.Character and CP.Character.FindFirstChild(CP.Character, "Head") then
-            Args[1] = Ray.new(CurrentCamera.CFrame.Position, (CP.Character.Head.Position - CurrentCamera.CFrame.Position).Unit * 1000)
-            return OldNC(self, unpack(Args))
-        end
-    end
-    return OldNC(self, ...)
-end)
-MT.__index = newcclosure(function(self, K)
-    if K == "Clips" then
-        return workspace.Map
-    end
-    return OldIDX(self, K)
-end)
-setreadonly(MT, true)
-    end
-end
-})
-
-Button = TabHandles.W:Button({
-    Title = "轰炸火箭筒",
-    Desc = "必须有火箭筒",
-    Locked = false,
-    Callback = function()
-        local argsTemplate = {
-    [1] = Vector3.new(),
-    [2] = Vector3.new(0, 1, 0),
-    [3] = game:GetService("Players").LocalPlayer.Character.RPG,
-    [4] = game:GetService("Players").LocalPlayer.Character.RPG,
-    [7] = "zxcvbnm4189Rocket2"
-}
-
-local localPlayer = game:GetService("Players").LocalPlayer
-local localPlayerTeam = localPlayer.Team
-
-while true do
-    local players = game:GetService("Players"):GetPlayers()
-    local localPlayerPosition = localPlayer.Character.HumanoidRootPart.Position
-    local upwardVector = Vector3.new(0, 1, 0)
-    local targetPosition = localPlayerPosition + upwardVector * 1000
-
-    for _, player in ipairs(players) do
-        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Torso") then
-            local args = table.clone(argsTemplate)
-            args[1] = targetPosition
-            args[5] = player.Character.Torso
-
-            game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("RocketHit"):FireServer(unpack(args))
-        end
-
-        if player ~= localPlayer and player.Team ~= localPlayerTeam then
-            local playerTeamName = player.Team and player.Team.Name
-            if playerTeamName then
-                local shield = workspace:WaitForChild("Tycoon"):WaitForChild("Tycoons"):FindFirstChild(playerTeamName)
-                if shield then
-                    shield = shield:FindFirstChild("PurchasedObjects")
-                    if shield then
-                        shield = shield:FindFirstChild("Base Shield")
-                        if shield then
-                            shield = shield:FindFirstChild("Shield")
-                            if shield then
-                                shield = shield:FindFirstChild("Shield4")
-                                if shield then
-                                    local args = table.clone(argsTemplate)
-                                    args[1] = targetPosition
-                                    args[5] = shield
-
-                                    game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("RocketHit"):FireServer(unpack(args))
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-
-    wait(0)
-end
-end
-})
-
 Button = TabHandles.W:Button({
     Title = "无限子弹",
     Desc = "",
@@ -1197,98 +1149,6 @@ Button = TabHandles.W:Button({
 end
 })
 
-Button = TabHandles.W:Button({
-    Title = "爆炸狙",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-            local player = game.Players.LocalPlayer
-    local backpack = player.Backpack
-    
-    for _, tool in ipairs(backpack:GetChildren()) do
-        local settingsModule = tool:FindFirstChild("ACS_Modulo") and tool["ACS_Modulo"]:FindFirstChild("Variaveis") and tool["ACS_Modulo"]["Variaveis"]:FindFirstChild("Settings")
-        if settingsModule then
-            local gun = require(settingsModule)
-            
-            if gun["Bullets"] then
-                gun["Bullets"] = 1
-            end
-            
-            if gun["Ammo"] then
-                gun["Ammo"] = 5000000
-            end
-            
-            if gun["Mode"] then
-                gun["Mode"] = "Auto"
-            end
-            
-            if gun["FireModes"] and gun["FireModes"]["Auto"] ~= nil then
-                gun["FireModes"]["Auto"] = true
-            end
-            
-            if gun["FireRate"] then
-                gun["FireRate"] = 1000000000
-            end
-            
-            if gun["DamageMultiplier"] then
-                gun["DamageMultiplier"] = 1000000000
-            end
-            
-            if gun["Distance"] then
-                gun["Distance"] = 1000000000
-            end
-            
-            if gun["VRecoil"] then
-                gun["VRecoil"] = {0, 0}
-            end
-            
-            if gun["HRecoil"] then
-                gun["HRecoil"] = {0, 0}
-            end
-            
-            if gun["RecoilPunch"] then
-                gun["RecoilPunch"] = 0
-            end
-            
-            if gun["VPunchBase"] then
-                gun["VPunchBase"] = 0
-            end
-            
-            if gun["HPunchBase"] then
-                gun["HPunchBase"] = 0
-            end
-            
-            if gun["DPunchBase"] then
-                gun["DPunchBase"] = 0
-            end
-            
-            if gun["MinRecoilPower"] then
-                gun["MinRecoilPower"] = 0
-            end
-            
-            if gun["MaxRecoilPower"] then
-                gun["MaxRecoilPower"] = 0
-            end
-    
-            if gun["BSpeed"] then
-                gun["BSpeed"] = 100000000
-            end
-            
-            if gun["BDrop"] then
-                gun["BDrop"] = 0
-            end
-    
-            if gun["MinSpread"] then
-                gun["MinSpread"] = 0
-            end
-            
-            if gun["MaxSpread"] then
-                gun["MaxSpread"] = 0
-            end
-        end
-    end
-end
-})
 
 local fov = 0
 local maxDistance = 50
