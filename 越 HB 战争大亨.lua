@@ -1,7 +1,7 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-        Title = "越 HB<font color='#00FF00'>1.5</font>",
+        Title = "越 HB<font color='#00FF00'>1.5战争大亨</font>",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "越 HB脚本战争大亨",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -60,37 +60,147 @@ local TabHandles = {
     Q = Tabs.Main:Tab({ Title = "战争功能", Icon = "layout-grid" }),
     W = Tabs.Main:Tab({ Title = "自瞄或子追", Icon = "layout-grid" }),
     E = Tabs.Main:Tab({ Title = "传送基地", Icon = "layout-grid" }),
-    R = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),    
+    R = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),
+    T = Tabs.Main:Tab({ Title = "载具车辆", Icon = "layout-grid" }),    
 }
 
 ----------------------------------------战争功能
 --
-Button = TabHandles.Q:Button({
-    Title = "无后座",
+Toggle = TabHandles.Q:Toggle({
+    Title = "子弹无限",
     Desc = "",
     Locked = false,
-    Callback = function()
-        local replicationstorage = game.ReplicatedStorage
-    for i, v in pairs(replicationstorage.Weapons:GetDescendants()) do
-      if v.Name == "Auto" then
-        v.Value = true
-      end
-      if v.Name == "RecoilControl" then
-        v.Value = 0
-      end
-      if v.Name == "MaxSpread" then
-        v.Value = 0
-      end
-      if v.Name == "ReloadTime" then
-        v.Value = 0
-      end
-      if v.Name == "FireRate" then
-        v.Value = 0.05
-      end
-      if v.Name == "Crit" then
-        v.Value = 20
-      end
+    Callback = function(v)
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local gk = true 
+local uj = nil
+local deathConnection = nil
+
+local originalGunData = {}
+
+local function apn()
+    for i, v in next, getgc(false) do
+        if typeof(v) == "function" then
+            local info = getinfo(v)
+            if tostring(info.name) == "fireGun" then
+                local gunTable = getupvalue(v, 1)
+                
+                if not originalGunData[gunTable] then
+                    originalGunData[gunTable] = {}
+                    for key, value in pairs(gunTable) do
+                        if typeof(value) ~= "function" then
+                            originalGunData[gunTable][key] = value
+                        end
+                    end
+                    
+                    for key, value in pairs(gunTable) do
+                        if typeof(value) == "table" then
+                            originalGunData[gunTable][key] = {}
+                            for subKey, subValue in pairs(value) do
+                                originalGunData[gunTable][key][subKey] = subValue
+                            end
+                        end
+                    end
+                end
+                
+                rawset(gunTable, "Ammo", math.huge)
+                rawset(gunTable, "Distance", math.huge)
+                rawset(gunTable, "BSpeed", 99999)
+                rawset(gunTable, "BDrop", 0)
+                rawset(gunTable, "FireRate", 2000)
+                rawset(gunTable, "MaxSpread", 0)
+                rawset(gunTable, "MinSpread", 0)
+                rawset(gunTable.FireModes, "Auto", true)
+                rawset(gunTable.FireModes, "Semi", true)
+                rawset(gunTable.FireModes, "ChangeFiremode", true)
+                rawset(gunTable, "MinRecoilPower", 0)
+                rawset(gunTable, "MaxRecoilPower", 0)
+                rawset(gunTable, "RecoilPowerStepAmount", 0)
+                rawset(gunTable, "RecoilPunch", 0)
+                rawset(gunTable, "DPunchBase", 0)
+                rawset(gunTable, "AimRecover", 1)
+                rawset(gunTable, "HPunchBase", 0)
+                rawset(gunTable, "VPunchBase", 0)
+                rawset(gunTable, "PunchRecover", 1)
+                rawset(gunTable, "SwayBase", 0)
+                rawset(gunTable, "AimRecoilReduction", math.huge)
+                
+                for key, value in next, gunTable do
+                    if typeof(value) == "table" then
+                        for subKey, subValue in next, value do
+                            if typeof(subValue) == "number" then
+                                rawset(value, subKey, 0)
+                            end
+                        end
+                    end
+                end
+            end
+        end
     end
+end
+
+local function resetGuns()
+    for gunTable, data in pairs(originalGunData) do
+        for key, value in pairs(data) do
+            if typeof(value) == "table" then
+                if gunTable[key] then
+                    for subKey, subValue in pairs(value) do
+                        rawset(gunTable[key], subKey, subValue)
+                    end
+                end
+            else
+                rawset(gunTable, key, value)
+            end
+        end
+    end
+    originalGunData = {}
+end
+
+local function onCharacterDeath()
+    resetGuns() 
+    
+    if gk then
+        LocalPlayer.CharacterAdded:Wait()
+        task.wait(1)  
+        apn()
+    end
+end
+
+local function setupDeathListener()
+    if deathConnection then
+        deathConnection:Disconnect()
+        deathConnection = nil
+    end
+    
+    deathConnection = LocalPlayer.CharacterAdded:Connect(function(char)
+        local humanoid = char:WaitForChild("Humanoid")
+        humanoid.Died:Connect(onCharacterDeath)
+    end)
+    
+    if LocalPlayer.Character then
+        local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.Died:Connect(onCharacterDeath)
+        end
+    end
+end
+
+gk = true
+
+if LocalPlayer.Character then
+    apn()
+end
+
+setupDeathListener()
+
+uj = LocalPlayer.CharacterAdded:Connect(function()
+    if gk then
+        task.wait(1) 
+        apn()
+        setupDeathListener()  
+    end
+end)
 end
 })
 
@@ -104,6 +214,14 @@ Button = TabHandles.Q:Button({
             if y.Name:find("Door") or y.Name:find("Gate") then y:destroy() end
         end
     end
+    
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})    
+    
 end
 })
 
@@ -260,6 +378,108 @@ Button = TabHandles.Q:Button({
     end
 end
 })
+----------------------------------------传送基地
+--
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+
+local PlayerList = {}
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= LP then
+        PlayerList[#PlayerList + 1] = player.Name
+    end
+end
+
+local Positions = {
+    ["Alpha"] = CFrame.new(-1197, 65, -4790),
+    ["Bravo"] = CFrame.new(-220, 65, -4919),
+    ["Charlie"] = CFrame.new(797, 65, -4740),
+    ["Delta"] = CFrame.new(2044, 65, -3984),
+    ["Echo"] = CFrame.new(2742, 65, -3031),
+    ["Foxtrot"] = CFrame.new(3045, 65, -1788),
+    ["Golf"] = CFrame.new(3376, 65, -562),
+    ["Hotel"] = CFrame.new(3290, 65, 587),
+    ["Juliet"] = CFrame.new(2955, 65, 1804),
+    ["Kilo"] = CFrame.new(2569, 65, 2926),
+    ["Lima"] = CFrame.new(989, 65, 3419),
+    ["Omega"] = CFrame.new(-319, 65, 3932),
+    ["Romeo"] = CFrame.new(-1479, 65, 3722),
+    ["Sierra"] = CFrame.new(-2528, 65, 2549),
+    ["Tango"] = CFrame.new(-3018, 65, 1503),
+    ["Victor"] = CFrame.new(-3587, 65, 634),
+    ["Yankee"] = CFrame.new(-3957, 65, -287),
+    ["Zulu"] = CFrame.new(-4049, 65, -1334)
+}
+
+Dropdown = TabHandles.W:Dropdown({
+    Title = "传送基地", 
+    Values = {"Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Juliet", "Kilo", "Lima", "Omega", "Romeo", "Sierra", "Tango", "Victor", "Yankee", "Zulu"}, 
+    Value = "Alpha", 
+    Callback = function(d) 
+        if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
+            LP.Character:FindFirstChild("HumanoidRootPart").CFrame = Positions[d]
+        end        
+end
+})
+
+local function GetAvailableBases()
+    local bases = {}
+    if not ExcludedBases then
+        ExcludedBases = {}
+    end
+    if not workspace:FindFirstChild("Tycoon") or not workspace.Tycoon:FindFirstChild("Tycoons") then
+        warn("Tycoon or Tycoons folder not found")
+        return bases
+    end
+    
+    local tycoons = workspace.Tycoon.Tycoons:GetChildren()
+    for _, tycoon in ipairs(tycoons) do
+        if not table.find(ExcludedBases, tycoon.Name) then
+            table.insert(bases, tycoon.Name)
+        end
+    end
+    
+    return bases
+end
+
+Dropdown = TabHandles.W:Dropdown({
+    Title = "基地白名单{排除列表}", 
+    Values = GetAvailableBases(), 
+    Multi = true, 
+    Default = {}, 
+    Callback = function(Values) 
+        ExcludedBases = Values 
+    end
+})
+
+Button = TabHandles.E:Button({
+    Title = "刷新基地列表",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        BasesDropdown:Refresh(GetAvailableBases())
+end
+})
+
+Toggle = TabHandles.W:Toggle({
+    Title = "自动偷箱子",
+    Desc = "",
+    Locked = false,
+    Callback = function(value)
+        getgenv().auto = value
+end
+})
+
+Toggle = TabHandles.W:Toggle({
+    Title = "自动升级房子",
+    Desc = "",
+    Locked = false,
+    Callback = function(value)
+        getgenv().autoTeleport = value
+end
+})
+
+
 
 ----------------------------------------透视功能
 --
@@ -1033,6 +1253,13 @@ Button = TabHandles.R:Button({
                 removeHook()
             end
         end
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                
     end
 })
         
@@ -1094,61 +1321,118 @@ Button = TabHandles.R:Button({
                 })
             end
         end)
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
     end
 })
 
 
 ----------------------------------------子追或自瞄
 --
+TabHandles.W:Paragraph({
+    Title = "自瞄或无限子弹",
+    Desc = "无CD射速(需要重生一次，以便生效)无限子弹 (需要射击几枪)子弹无散射 (等待无限子弹开启)没有后坐力(等待无限子弹开启)",
+    Image = "save",
+    ImageSize = 20,
+    Color = "White"
+})
+
 Button = TabHandles.W:Button({
     Title = "无限子弹",
     Desc = "",
     Locked = false,
     Callback = function()
-            local player = game.Players.LocalPlayer
-    local backpack = player.Backpack
-    
-    local function modifyGun(gun)
-        if gun then
-            gun.Ammo = 999999999999999
-            gun.Mode = "Auto"
-            gun.FireModes.Auto = true
-            gun.FireRate = 9999999999999999
-            gun.DamageMultiplier = 1000000000
-            gun.Distance = 1000000000
-            
-            gun.VRecoil = {0, 0}
-            gun.HRecoil = {0, 0}
-            gun.RecoilPunch = 0
-            gun.VPunchBase = 0
-            gun.HPunchBase = 0
-            gun.DPunchBase = 0
-            gun.MinRecoilPower = 0
-            gun.MaxRecoilPower = 0
-            
-            gun.BSpeed = 100000000
-            
-            gun.BDrop = 0
-            
-            gun.MinSpread = 0
-            gun.MaxSpread = 0
-        end
-    end
-    
-    for _, tool in ipairs(backpack:GetChildren()) do
-        local settingsModule = tool:FindFirstChild("ACS_Modulo") and tool["ACS_Modulo"]:FindFirstChild("Variaveis") and tool["ACS_Modulo"]["Variaveis"]:FindFirstChild("Settings")
-        if settingsModule then
-            local success, gun = pcall(require, settingsModule)
-            if success then
-                modifyGun(gun)
-            else
-                warn("Failed to modify gun: " .. tostring(gun))
-            end
-        end
-    end
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XOTRXONY/Wartycoon/main/ZZDH.lua"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
 end
 })
 
+local bulletTrackingEnabled = true  
+local oldHook = nil
+
+Toggle = TabHandles.E:Toggle({
+    Title = "子追",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+    bulletTrackingEnabled = t
+
+local function setupBulletTracking()
+    local Workspace = game:GetService("Workspace")
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Camera = Workspace.CurrentCamera
+    
+    local function getClosestHead()
+        if not LocalPlayer.Character then return nil end
+        if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return nil end
+        
+        local closestHead = nil
+        local closestDistance = math.huge
+        
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer and player.Character then
+                local character = player.Character
+                local root = character:FindFirstChild("HumanoidRootPart")
+                local head = character:FindFirstChild("Head")
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                local forcefield = character:FindFirstChild("ForceField")
+                
+                if root and head and humanoid and not forcefield and humanoid.Health > 0 then
+                    local distance = (root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestHead = head
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+        
+        return closestHead
+    end
+    
+    if not oldHook then
+        oldHook = hookmetamethod(game, "__namecall", function(self, ...)
+            local method = getnamecallmethod()
+            local args = {...}
+            
+            if bulletTrackingEnabled and method == "Raycast" and not checkcaller() then
+                local origin = args[1] or Camera.CFrame.Position
+                local closestHead = getClosestHead()
+                
+                if closestHead then
+                    return {
+                        Instance = closestHead,
+                        Position = closestHead.Position,
+                        Normal = (origin - closestHead.Position).Unit,
+                        Material = Enum.Material.Plastic,
+                        Distance = (closestHead.Position - origin).Magnitude
+                    }
+                end
+            end
+            
+            return oldHook(self, ...)
+        end)
+    end
+end
+
+bulletTrackingEnabled = true
+setupBulletTracking() 
+end
+})
 
 local fov = 0
 local maxDistance = 50
@@ -1221,7 +1505,7 @@ local function getClosestPlayerInFOV(trg_part)
     return nearest
 end
 
-Toggle = TabHandles.W:Toggle({
+Toggle = TabHandles.E:Toggle({
     Title = "玩家自瞄",
     Desc = "",
     Locked = false,
@@ -1230,7 +1514,7 @@ Toggle = TabHandles.W:Toggle({
 end
 })
 
-Toggle = TabHandles.W:Toggle({
+Toggle = TabHandles.E:Toggle({
     Title = "显示范围",
     Desc = "",
     Locked = false,
@@ -1240,7 +1524,7 @@ Toggle = TabHandles.W:Toggle({
 end
 })
 
-Toggle = TabHandles.W:Toggle({
+Toggle = TabHandles.E:Toggle({
     Title = "掩体不瞄",
     Desc = "",
     Locked = false,
@@ -1249,7 +1533,7 @@ Toggle = TabHandles.W:Toggle({
 end
 })
 
-Slider = TabHandles.W:Slider({
+Slider = TabHandles.E:Slider({
     Title = "自瞄范围",
     Value = {
         Min = 1,
@@ -1262,7 +1546,7 @@ Slider = TabHandles.W:Slider({
     end
 })
 
-Slider = TabHandles.W:Slider({
+Slider = TabHandles.E:Slider({
     Title = "自瞄距离",
     Value = {
         Min = 1,
@@ -1274,7 +1558,7 @@ Slider = TabHandles.W:Slider({
     end
 })
 
-Slider = TabHandles.W:Slider({
+Slider = TabHandles.E:Slider({
     Title = "自瞄圈粗细",
     Value = {
         Min = 1,
@@ -1285,7 +1569,8 @@ Slider = TabHandles.W:Slider({
         FOVring.Thickness = tonumber(s)        
     end
 })
-Dropdown = TabHandles.W:Dropdown({
+
+Dropdown = TabHandles.E:Dropdown({
     Title = "选择自瞄目标", 
     Values = {"敌对", "全部"}, 
     Value = "敌对", 
@@ -1294,7 +1579,7 @@ Dropdown = TabHandles.W:Dropdown({
     end
 })
 
-Dropdown = TabHandles.W:Dropdown({
+Dropdown = TabHandles.E:Dropdown({
     Title = "选择自瞄位置", 
     Values = {"头部", "躯干"}, 
     Value = "头部", 
@@ -1307,7 +1592,7 @@ Dropdown = TabHandles.W:Dropdown({
     end
 })
 
-Dropdown = TabHandles.W:Dropdown({
+Dropdown = TabHandles.E:Dropdown({
     Title = "选择圈的颜色", 
     Values = {"红", "黄", "蓝", "绿", "青", "紫", "彩虹"}, 
     Value = "红", 
@@ -1329,7 +1614,7 @@ Dropdown = TabHandles.W:Dropdown({
     end
 })
 
-Dropdown = TabHandles.W:Dropdown({
+Dropdown = TabHandles.E:Dropdown({
     Title = "不攻击的玩家(多选)", 
     Values = PlayerList, 
     Value = {}, 
@@ -1340,7 +1625,7 @@ Dropdown = TabHandles.W:Dropdown({
     end
 })
 
-Button = TabHandles.W:Button({
+Button = TabHandles.E:Button({
     Title = "刷新玩家白名单",
     Desc = "",
     Locked = false,
@@ -1354,98 +1639,255 @@ Button = TabHandles.W:Button({
     excludeTargetsDropdown:Refresh(PlayerList)
 end
 })
-
-
-
-----------------------------------------传送基地
---
-
-local Positions = {
-    ["Alpha"] = CFrame.new(-1197, 65, -4790),
-    ["Bravo"] = CFrame.new(-220, 65, -4919),
-    ["Charlie"] = CFrame.new(797, 65, -4740),
-    ["Delta"] = CFrame.new(2044, 65, -3984),
-    ["Echo"] = CFrame.new(2742, 65, -3031),
-    ["Foxtrot"] = CFrame.new(3045, 65, -1788),
-    ["Golf"] = CFrame.new(3376, 65, -562),
-    ["Hotel"] = CFrame.new(3290, 65, 587),
-    ["Juliet"] = CFrame.new(2955, 65, 1804),
-    ["Kilo"] = CFrame.new(2569, 65, 2926),
-    ["Lima"] = CFrame.new(989, 65, 3419),
-    ["Omega"] = CFrame.new(-319, 65, 3932),
-    ["Romeo"] = CFrame.new(-1479, 65, 3722),
-    ["Sierra"] = CFrame.new(-2528, 65, 2549),
-    ["Tango"] = CFrame.new(-3018, 65, 1503),
-    ["Victor"] = CFrame.new(-3587, 65, 634),
-    ["Yankee"] = CFrame.new(-3957, 65, -287),
-    ["Zulu"] = CFrame.new(-4049, 65, -1334)
-}
-
-Dropdown = TabHandles.E:Dropdown({
-    Title = "传送基地", 
-    Values = {"Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "Juliet", "Kilo", "Lima", "Omega", "Romeo", "Sierra", "Tango", "Victor", "Yankee", "Zulu"}, 
-    Value = "Alpha", 
-    Callback = function(d) 
-        if LP.Character and LP.Character:FindFirstChild("HumanoidRootPart") then
-            LP.Character:FindFirstChild("HumanoidRootPart").CFrame = Positions[d]
-        end        
-end
-})
-
-local function GetAvailableBases()
-    local bases = {}
-    if not ExcludedBases then
-        ExcludedBases = {}
-    end
-    if not workspace:FindFirstChild("Tycoon") or not workspace.Tycoon:FindFirstChild("Tycoons") then
-        warn("Tycoon or Tycoons folder not found")
-        return bases
-    end
-    
-    local tycoons = workspace.Tycoon.Tycoons:GetChildren()
-    for _, tycoon in ipairs(tycoons) do
-        if not table.find(ExcludedBases, tycoon.Name) then
-            table.insert(bases, tycoon.Name)
-        end
-    end
-    
-    return bases
-end
-
-Dropdown = TabHandles.E:Dropdown({
-    Title = "基地白名单{排除列表}", 
-    Values = GetAvailableBases(), 
-    Multi = true, 
-    Default = {}, 
-    Callback = function(Values) 
-        ExcludedBases = Values 
-    end
-})
-
-Button = TabHandles.E:Button({
-    Title = "刷新基地列表",
+----------------------------------------------------------------------------------------------
+Button = TabHandles.T:Button({
+    Title = "载具无限子弹",
     Desc = "",
     Locked = false,
     Callback = function()
-        BasesDropdown:Refresh(GetAvailableBases())
+_G.AutoModifyEnabled = true
+_G.FireRateValue = 2000
+_G.InfiniteOverheat = true
+_G.ZeroCooldown = true
+
+local processedObjects = setmetatable({}, {__mode = "v"})
+local weaponCache = setmetatable({}, {__mode = "v"})
+local lastScanTime = 0
+local SCAN_INTERVAL = 5 
+
+local function isWeaponObject(obj)
+    if type(obj) ~= "table" then return false end
+    
+    if weaponCache[obj] ~= nil then
+        return weaponCache[obj]
+    end
+    
+    local hasFireRate = rawget(obj, "FireRate") ~= nil
+    local hasOverheat = rawget(obj, "OverheatCount") ~= nil
+    
+    local isWeapon = hasFireRate and hasOverheat
+    weaponCache[obj] = isWeapon
+    
+    return isWeapon
+end
+
+local function modifyWeapon(weapon)
+    if not weapon._OriginalFireRate then
+        weapon._OriginalFireRate = weapon.FireRate
+        weapon._OriginalOverheatIncrement = weapon.OverheatIncrement
+        weapon._OriginalCooldownTime = weapon.CooldownTime
+        weapon._OriginalOverheatCount = weapon.OverheatCount
+        weapon._OriginalDepleteDelay = weapon.DepleteDelay
+    end
+    
+    if _G.ZeroCooldown then
+        rawset(weapon, "OverheatIncrement", 0)
+        rawset(weapon, "CooldownTime", 0)
+    else
+        rawset(weapon, "OverheatIncrement", weapon._OriginalOverheatIncrement)
+        rawset(weapon, "CooldownTime", weapon._OriginalCooldownTime)
+    end
+    
+    rawset(weapon, "FireRate", _G.FireRateValue)
+    
+    if _G.InfiniteOverheat then
+        rawset(weapon, "OverheatCount", math.huge)
+        rawset(weapon, "DepleteDelay", math.huge)
+    else
+        rawset(weapon, "OverheatCount", weapon._OriginalOverheatCount)
+        rawset(weapon, "DepleteDelay", weapon._OriginalDepleteDelay)
+    end
+    
+    processedObjects[weapon] = true
+end
+
+local function scanForWeapons()
+    local objects = getgc(true)
+    local foundWeapons = {}
+    
+    for i = 1, #objects do
+        local obj = objects[i]
+        if isWeaponObject(obj) and not processedObjects[obj] then
+            table.insert(foundWeapons, obj)
+        end
+    end
+    
+    for i = 1, #foundWeapons do
+        modifyWeapon(foundWeapons[i])
+    end
+    
+    local registry = debug.getregistry()
+    if isWeaponObject(registry) and not processedObjects[registry] then
+        modifyWeapon(registry)
+    end
+end
+
+spawn(function()
+    while true do
+        local currentTime = tick()
+        
+        if _G.AutoModifyEnabled and (currentTime - lastScanTime) >= SCAN_INTERVAL then
+            scanForWeapons()
+            lastScanTime = currentTime
+        end
+        
+        task.wait(1) 
+    end
+end)
 end
 })
 
-Toggle = TabHandles.E:Toggle({
-    Title = "自动偷箱子",
+Toggle = TabHandles.T:Toggle({
+    Title = "飞车",
     Desc = "",
     Locked = false,
-    Callback = function(value)
-        getgenv().auto = value
+    Callback = function()
+        local Speed = 50
+
+	-- Gui to Lua
+	-- Version: 3.2
+	local HumanoidRP = game.Players.LocalPlayer.Character.HumanoidRootPart
+	-- Instances:
+
+	local ScreenGui = Instance.new("ScreenGui")
+	local W = Instance.new("TextButton")
+	local S = Instance.new("TextButton")
+	local A = Instance.new("TextButton")
+	local D = Instance.new("TextButton")
+	local Fly = Instance.new("TextButton")
+	local unfly = Instance.new("TextButton")
+	local StopFly = Instance.new("TextButton")
+
+	--Properties:
+
+	ScreenGui.Parent = game.CoreGui
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	unfly.Name = "关掉"
+	unfly.Parent = ScreenGui
+	unfly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	unfly.Position = UDim2.new(0.694387913, 0, 0.181818187, 0)
+	unfly.Size = UDim2.new(0, 72, 0, 50)
+	unfly.Font = Enum.Font.SourceSans
+	unfly.Text = "关掉"
+	unfly.TextColor3 = Color3.fromRGB(170, 0, 255)
+	unfly.TextScaled = true
+	unfly.TextSize = 14.000
+	unfly.TextWrapped = 
+		unfly.MouseButton1Down:Connect(function()
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+	end)
+
+	StopFly.Name = "停"
+	StopFly.Parent = ScreenGui
+	StopFly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	StopFly.Position = UDim2.new(0.695689976, 0, 0.0213903747, 0)
+	StopFly.Size = UDim2.new(0, 71, 0, 50)
+	StopFly.Font = Enum.Font.SourceSans
+	StopFly.Text = "停"
+	StopFly.TextColor3 = Color3.fromRGB(170, 0, 255)
+	StopFly.TextScaled = true
+	StopFly.TextSize = 14.000
+	StopFly.TextWrapped = true
+	StopFly.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = true
+	end)
+
+	Fly.Name = "飞"
+	Fly.Parent = ScreenGui
+	Fly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Fly.Position = UDim2.new(0.588797748, 0, 0.0213903747, 0)
+	Fly.Size = UDim2.new(0, 66, 0, 50)
+	Fly.Font = Enum.Font.SourceSans
+	Fly.Text = "飞"
+	Fly.TextColor3 = Color3.fromRGB(170, 0, 127)
+	Fly.TextScaled = true
+	Fly.TextSize = 14.000
+	Fly.TextWrapped = true
+	Fly.MouseButton1Down:Connect(function()
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 5000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+	end)
+
+	W.Name = "W"
+	W.Parent = ScreenGui
+	W.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	W.Position = UDim2.new(0.161668837, 0, 0.601604283, 0)
+	W.Size = UDim2.new(0, 58, 0, 50)
+	W.Font = Enum.Font.SourceSans
+	W.Text = "↑"
+	W.TextColor3 = Color3.fromRGB(226, 226, 526)
+	W.TextScaled = true
+	W.TextSize = 5.000
+	W.TextWrapped = true
+	W.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = false
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+		wait(.1)
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 50000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BV.Velocity = game.Workspace.CurrentCamera.CFrame.LookVector * Speed
+	end)
+
+
+	S.Name = "S"
+	S.Parent = ScreenGui
+	S.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	S.Position = UDim2.new(0.161668837, 0, 0.735294104, 0)
+	S.Size = UDim2.new(0, 58, 0, 50)
+	S.Font = Enum.Font.SourceSans
+	S.Text = "↓"
+	S.TextColor3 = Color3.fromRGB(255, 255, 255)
+	S.TextScaled = true
+	S.TextSize = 14.000
+	S.TextWrapped = true
+	S.MouseButton1Down:Connect(function()
+		HumanoidRP.Anchored = false
+		HumanoidRP:FindFirstChildOfClass("BodyVelocity"):Destroy()
+		HumanoidRP:FindFirstChildOfClass("BodyGyro"):Destroy()
+		wait(.1)
+		local BV = Instance.new("BodyVelocity",HumanoidRP)
+		local BG = Instance.new("BodyGyro",HumanoidRP)
+		BG.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+		BG.D = 5000
+		BG.P = 50000
+		BG.CFrame = game.Workspace.CurrentCamera.CFrame
+		BV.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BV.Velocity = game.Workspace.CurrentCamera.CFrame.LookVector * -Speed
+	end)
 end
 })
 
-Toggle = TabHandles.E:Toggle({
-    Title = "自动升级房子",
+Toggle = TabHandles.T:Toggle({
+    Title = "直升机无限烟火",
     Desc = "",
     Locked = false,
-    Callback = function(value)
-        getgenv().autoTeleport = value
+    Callback = function()
+    
+local flareInterval = 0.5
+
+while true do
+    local args = {
+        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"):WaitForChild("Misc"):WaitForChild("Turrets"):WaitForChild("AH Weapons"):WaitForChild("Flares"),
+        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"),
+        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"):WaitForChild("Misc"):WaitForChild("Turrets"):WaitForChild("SoundPart")
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("Events"):WaitForChild("FireFlare"):FireServer(unpack(args))
+    
+    wait(flareInterval)
+end
 end
 })
-
