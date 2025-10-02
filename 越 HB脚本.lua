@@ -17,7 +17,7 @@ local Window = WindUI:CreateWindow({
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://96291371536118"
+        Background = "rbxassetid://140054046278600"
     })
     
 
@@ -2943,6 +2943,38 @@ WindUI:Notify({
         
     end
 })
+
+Button = TabHandles.tzgn:Button({
+    Title = "最强战场自动躲避平a",
+    Desc = "无卡",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/IdkRandomUsernameok/PublicAssets/refs/heads/main/Releases/MUI.lua"))()
+        
+             Window:Dialog({
+                Title = "HB脚本中心",
+                Content = "温馨提示：请勿点击多次，\n否则会造成游戏卡顿!",
+                Icon = "bell",
+                Buttons = {{
+                    Title = "确定",
+                    Variant = "Primary",
+                    Callback = function()
+                        print("ok")
+                    end
+                }}
+            })
+            loadstring(game:HttpGet "https://raw.githubusercontent.com/Yungengxin/roblox/refs/heads/main/unc")()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+                       
+end
+})
+
 -----------------------------------------------------------------------------------------------死铁轨
 Button = TabHandles.fzgn:Button({
     Title = "死铁轨",
