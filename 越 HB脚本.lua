@@ -259,6 +259,7 @@ Slider = TabHandles.YI:Slider({
         game.Workspace.Gravity = value
     end
 })
+TabHandles.YI:Divider()
 -----------------------------------------------------------------------------------------------飞行
 Button =TabHandles.YI:Button({
     Title = "飞行v1",
