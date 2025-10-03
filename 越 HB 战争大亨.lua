@@ -66,144 +66,6 @@ local TabHandles = {
 
 ----------------------------------------战争功能
 --
-Toggle = TabHandles.Q:Toggle({
-    Title = "子弹无限",
-    Desc = "",
-    Locked = false,
-    Callback = function(v)
-    local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local gk = true 
-local uj = nil
-local deathConnection = nil
-
-local originalGunData = {}
-
-local function apn()
-    for i, v in next, getgc(false) do
-        if typeof(v) == "function" then
-            local info = getinfo(v)
-            if tostring(info.name) == "fireGun" then
-                local gunTable = getupvalue(v, 1)
-                
-                if not originalGunData[gunTable] then
-                    originalGunData[gunTable] = {}
-                    for key, value in pairs(gunTable) do
-                        if typeof(value) ~= "function" then
-                            originalGunData[gunTable][key] = value
-                        end
-                    end
-                    
-                    for key, value in pairs(gunTable) do
-                        if typeof(value) == "table" then
-                            originalGunData[gunTable][key] = {}
-                            for subKey, subValue in pairs(value) do
-                                originalGunData[gunTable][key][subKey] = subValue
-                            end
-                        end
-                    end
-                end
-                
-                rawset(gunTable, "Ammo", math.huge)
-                rawset(gunTable, "Distance", math.huge)
-                rawset(gunTable, "BSpeed", 99999)
-                rawset(gunTable, "BDrop", 0)
-                rawset(gunTable, "FireRate", 2000)
-                rawset(gunTable, "MaxSpread", 0)
-                rawset(gunTable, "MinSpread", 0)
-                rawset(gunTable.FireModes, "Auto", true)
-                rawset(gunTable.FireModes, "Semi", true)
-                rawset(gunTable.FireModes, "ChangeFiremode", true)
-                rawset(gunTable, "MinRecoilPower", 0)
-                rawset(gunTable, "MaxRecoilPower", 0)
-                rawset(gunTable, "RecoilPowerStepAmount", 0)
-                rawset(gunTable, "RecoilPunch", 0)
-                rawset(gunTable, "DPunchBase", 0)
-                rawset(gunTable, "AimRecover", 1)
-                rawset(gunTable, "HPunchBase", 0)
-                rawset(gunTable, "VPunchBase", 0)
-                rawset(gunTable, "PunchRecover", 1)
-                rawset(gunTable, "SwayBase", 0)
-                rawset(gunTable, "AimRecoilReduction", math.huge)
-                
-                for key, value in next, gunTable do
-                    if typeof(value) == "table" then
-                        for subKey, subValue in next, value do
-                            if typeof(subValue) == "number" then
-                                rawset(value, subKey, 0)
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
-local function resetGuns()
-    for gunTable, data in pairs(originalGunData) do
-        for key, value in pairs(data) do
-            if typeof(value) == "table" then
-                if gunTable[key] then
-                    for subKey, subValue in pairs(value) do
-                        rawset(gunTable[key], subKey, subValue)
-                    end
-                end
-            else
-                rawset(gunTable, key, value)
-            end
-        end
-    end
-    originalGunData = {}
-end
-
-local function onCharacterDeath()
-    resetGuns() 
-    
-    if gk then
-        LocalPlayer.CharacterAdded:Wait()
-        task.wait(1)  
-        apn()
-    end
-end
-
-local function setupDeathListener()
-    if deathConnection then
-        deathConnection:Disconnect()
-        deathConnection = nil
-    end
-    
-    deathConnection = LocalPlayer.CharacterAdded:Connect(function(char)
-        local humanoid = char:WaitForChild("Humanoid")
-        humanoid.Died:Connect(onCharacterDeath)
-    end)
-    
-    if LocalPlayer.Character then
-        local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
-        if humanoid then
-            humanoid.Died:Connect(onCharacterDeath)
-        end
-    end
-end
-
-gk = true
-
-if LocalPlayer.Character then
-    apn()
-end
-
-setupDeathListener()
-
-uj = LocalPlayer.CharacterAdded:Connect(function()
-    if gk then
-        task.wait(1) 
-        apn()
-        setupDeathListener()  
-    end
-end)
-end
-})
-
 Button = TabHandles.Q:Button({
     Title = "删除门",
     Desc = "",
@@ -1343,20 +1205,141 @@ TabHandles.W:Paragraph({
     Color = "White"
 })
 
-Button = TabHandles.W:Button({
-    Title = "无限子弹",
+Toggle = TabHandles.Q:Toggle({
+    Title = "子弹无限",
     Desc = "",
     Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XOTRXONY/Wartycoon/main/ZZDH.lua"))()
-        
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
-        
+    Callback = function(v)
+    local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local gk = true 
+local uj = nil
+local deathConnection = nil
+
+local originalGunData = {}
+
+local function apn()
+    for i, v in next, getgc(false) do
+        if typeof(v) == "function" then
+            local info = getinfo(v)
+            if tostring(info.name) == "fireGun" then
+                local gunTable = getupvalue(v, 1)
+                
+                if not originalGunData[gunTable] then
+                    originalGunData[gunTable] = {}
+                    for key, value in pairs(gunTable) do
+                        if typeof(value) ~= "function" then
+                            originalGunData[gunTable][key] = value
+                        end
+                    end
+                    
+                    for key, value in pairs(gunTable) do
+                        if typeof(value) == "table" then
+                            originalGunData[gunTable][key] = {}
+                            for subKey, subValue in pairs(value) do
+                                originalGunData[gunTable][key][subKey] = subValue
+                            end
+                        end
+                    end
+                end
+                
+                rawset(gunTable, "Ammo", math.huge)
+                rawset(gunTable, "Distance", math.huge)
+                rawset(gunTable, "BSpeed", 99999)
+                rawset(gunTable, "BDrop", 0)
+                rawset(gunTable, "FireRate", 2000)
+                rawset(gunTable, "MaxSpread", 0)
+                rawset(gunTable, "MinSpread", 0)
+                rawset(gunTable.FireModes, "Auto", true)
+                rawset(gunTable.FireModes, "Semi", true)
+                rawset(gunTable.FireModes, "ChangeFiremode", true)
+                rawset(gunTable, "MinRecoilPower", 0)
+                rawset(gunTable, "MaxRecoilPower", 0)
+                rawset(gunTable, "RecoilPowerStepAmount", 0)
+                rawset(gunTable, "RecoilPunch", 0)
+                rawset(gunTable, "DPunchBase", 0)
+                rawset(gunTable, "AimRecover", 1)
+                rawset(gunTable, "HPunchBase", 0)
+                rawset(gunTable, "VPunchBase", 0)
+                rawset(gunTable, "PunchRecover", 1)
+                rawset(gunTable, "SwayBase", 0)
+                rawset(gunTable, "AimRecoilReduction", math.huge)
+                
+                for key, value in next, gunTable do
+                    if typeof(value) == "table" then
+                        for subKey, subValue in next, value do
+                            if typeof(subValue) == "number" then
+                                rawset(value, subKey, 0)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+local function resetGuns()
+    for gunTable, data in pairs(originalGunData) do
+        for key, value in pairs(data) do
+            if typeof(value) == "table" then
+                if gunTable[key] then
+                    for subKey, subValue in pairs(value) do
+                        rawset(gunTable[key], subKey, subValue)
+                    end
+                end
+            else
+                rawset(gunTable, key, value)
+            end
+        end
+    end
+    originalGunData = {}
+end
+
+local function onCharacterDeath()
+    resetGuns() 
+    
+    if gk then
+        LocalPlayer.CharacterAdded:Wait()
+        task.wait(1)  
+        apn()
+    end
+end
+
+local function setupDeathListener()
+    if deathConnection then
+        deathConnection:Disconnect()
+        deathConnection = nil
+    end
+    
+    deathConnection = LocalPlayer.CharacterAdded:Connect(function(char)
+        local humanoid = char:WaitForChild("Humanoid")
+        humanoid.Died:Connect(onCharacterDeath)
+    end)
+    
+    if LocalPlayer.Character then
+        local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.Died:Connect(onCharacterDeath)
+        end
+    end
+end
+
+gk = true
+
+if LocalPlayer.Character then
+    apn()
+end
+
+setupDeathListener()
+
+uj = LocalPlayer.CharacterAdded:Connect(function()
+    if gk then
+        task.wait(1) 
+        apn()
+        setupDeathListener()  
+    end
+end)
 end
 })
 
