@@ -22,7 +22,7 @@ local Window = WindUI:CreateWindow({
     
 
 Window:EditOpenButton({
-    Title = "HB FXM脚本",
+    Title = "HB FXM脚本力量传奇",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
