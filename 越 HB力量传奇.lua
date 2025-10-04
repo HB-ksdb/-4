@@ -57,7 +57,7 @@ local Tabs = {
     gn = Window:Section({ Title = "功能", Opened = true }),    
 }
 
-local TabHandles = {
+local TabHandles = {    
     Q = Tabs.Main:Tab({ Title = "自动功能", Icon = "layout-grid" }),
     W = Tabs.Main:Tab({ Title = "传送功能", Icon = "layout-grid" }),
     E = Tabs.Main:Tab({ Title = "自动锻炼", Icon = "layout-grid" }),
@@ -65,8 +65,42 @@ local TabHandles = {
     T = Tabs.Main:Tab({ Title = "自动蹲起", Icon = "layout-grid" }),
     Y = Tabs.Main:Tab({ Title = "引体向上", Icon = "layout-grid" }),
     U = Tabs.Main:Tab({ Title = "自动举重", Icon = "layout-grid" }),
-    I = Tabs.Main:Tab({ Title = "自动投石", Icon = "layout-grid" }),    
+    I = Tabs.Main:Tab({ Title = "自动投石", Icon = "layout-grid" }),
+    SAN = Tabs.Main:Tab({ Title = "UI自定义", Icon = "layout-grid" }),    
 }
+
+TabHandles.Q:Input({
+    Title = "修改力量",
+    Value = configName,
+    Callback = function(FXM)
+      game:GetService("Players").LocalPlayer.leaderstats.Strength.Value = FXM  
+    end
+})
+
+TabHandles.Q:Input({
+    Title = "修改重生",
+    Value = configName,
+    Callback = function(FXM)
+        game:GetService("Players").LocalPlayer.leaderstats.Rebirths.Value = FXM
+    end
+})
+
+TabHandles.Q:Input({
+    Title = "修改击杀",
+    Value = configName,
+    Callback = function(FXM)
+        game:GetService("Players").LocalPlayer.leaderstats.Kills.Value = FXM
+    end
+})
+
+TabHandles.Q:Input({
+    Title = "修改获胜",
+    Value = configName,
+    Callback = function(FXM)
+        game:GetService("Players").LocalPlayer.leaderstats.Brawls.Value = FXM
+    end
+})
+TabHandles.Q:Divider()
 
 Toggle = TabHandles.Q:Toggle({
     Title = "自动重生",
@@ -713,6 +747,69 @@ Button = TabHandles.W:Button({
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8693.0927734375, 8.93972396850586, 2400.66259765625)
 end
 })
+
+
+local AutoTrainEnabled = false  -- 自动锻炼状态
+local TrainThread = nil         -- 自动锻炼线程
+-- 自动锻炼（修复线程管理）
+Toggle = TabHandles.E:Toggle({
+    Title = "自动锻炼",
+    Desc = "",
+    Locked = false,
+    Callback = function(Value)
+    AutoTrainEnabled = Value
+    -- 终止旧线程
+    if TrainThread then
+        task.cancel(TrainThread)
+        TrainThread = nil
+    end
+    -- 启动新线程
+    if AutoTrainEnabled then
+        TrainThread = task.spawn(function()
+            while AutoTrainEnabled do
+                local args = {[1] = "rep"}
+                local muscleEvent = game.Players.LocalPlayer:FindFirstChild("muscleEvent")
+                if muscleEvent then
+                    muscleEvent:FireServer(unpack(args))
+                end
+                task.wait(0.1)
+            end
+        end)
+    end
+end
+})
+
+local AutoPunchEnabled = false  -- 自动挥拳状态
+local PunchThread = nil         -- 自动挥拳线程
+
+-- 自动挥拳（保留优化后的代码）
+Toggle = TabHandles.E:Toggle({
+    Title = "自动挥拳",
+    Desc = "",
+    Locked = false,
+    Callback = function(Value)
+    AutoPunchEnabled = Value
+    -- 终止旧线程
+    if PunchThread then
+        task.cancel(PunchThread)
+        PunchThread = nil
+    end
+    -- 启动新线程
+    if AutoPunchEnabled then
+        PunchThread = task.spawn(function()
+            while AutoPunchEnabled do
+                local args = {[1] = "punch", [2] = "rightHand"}
+                local muscleEvent = game.Players.LocalPlayer:FindFirstChild("muscleEvent")
+                if muscleEvent then
+                    muscleEvent:FireServer(unpack(args))
+                end
+                task.wait(0.1)
+            end
+        end)
+    end
+ end
+})
+TabHandles.E:Divider()
 
 Toggle = TabHandles.E:Toggle({
     Title = "自动哑铃",
@@ -1478,3 +1575,182 @@ end
 end
 })
 
+local Button = TabHandles.SAN:Button({
+    Title = "自定义界面",
+    Desc = "个性化您的体验",
+    Image = "palette",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local themes = {}
+for themeName, _ in pairs(WindUI:GetThemes()) do
+    table.insert(themes, themeName)
+end
+table.sort(themes)
+
+local themeDropdown = TabHandles.SAN:Dropdown({
+    Title = "主题选择",
+    Values = themes,
+    Value = "Dark",
+    Callback = function(theme)
+        WindUI:SetTheme(theme)
+        WindUI:Notify({
+            Title = "主题应用",
+            Content = theme,
+            Icon = "palette",
+            Duration = 2
+        })
+    end
+})
+
+local transparencySlider = TabHandles.SAN:Slider({
+    Title = "透明度",
+    Value = { 
+        Min = 0,
+        Max = 1,
+        Default = 0.2,
+    },
+    Step = 0.1,
+    Callback = function(value)
+        Window:ToggleTransparency(tonumber(value) > 0)
+        WindUI.TransparencyValue = tonumber(value)
+    end
+})
+
+TabHandles.SAN:Toggle({
+    Title = "启用黑色主题",
+    Desc = "使用黑色调主题方案",
+    Value = true,
+    Callback = function(state)
+        WindUI:SetTheme(state and "Dark" or "Light")
+        themeDropdown:Select(state and "Dark" or "Light")
+    end
+})
+
+
+TabHandles.SAN:Button({
+    Title = "创建新主题",
+    Icon = "plus",
+    Callback = function()
+        Window:Dialog({
+            Title = "创建主题",
+            Content = "此功能很快就会推出",
+            Buttons = {
+                {
+                    Title = "确认",
+                    Variant = "Primary"
+                }
+            }
+        })
+    end
+})
+
+TabHandles.SAN:Paragraph({
+    Title = "配置管理",
+    Desc = "保存你的设置",
+    Image = "save",
+    ImageSize = 20,
+    Color = "White"
+})
+
+local configName = "default"
+local configFile = nil
+local MyPlayerData = {
+    name = "Player1",
+    level = 1,
+    inventory = { "sword", "shield", "potion" }
+}
+
+TabHandles.SAN:Input({
+    Title = "配置名称",
+    Value = configName,
+    Callback = function(value)
+        configName = value
+    end
+})
+
+local ConfigManager = Window.ConfigManager
+if ConfigManager then
+    ConfigManager:Init(Window)
+    
+TabHandles.SAN:Button({
+        Title = "保存配置",
+        Icon = "save",
+        Variant = "Primary",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            
+            configFile:Register("featureToggle", featureToggle)
+            configFile:Register("intensitySlider", intensitySlider)
+            configFile:Register("modeDropdown", modeDropdown)
+            configFile:Register("themeDropdown", themeDropdown)
+            configFile:Register("transparencySlider", transparencySlider)
+            
+            configFile:Set("playerData", MyPlayerData)
+            configFile:Set("lastSave", os.date("%Y-%m-%d %H:%M:%S"))
+            
+            if configFile:Save() then
+                WindUI:Notify({ 
+                    Title = "保存配置", 
+                    Content = "保存为："..configName,
+                    Icon = "check",
+                    Duration = 3
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "保存失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+
+    TabHandles.SAN:Button({
+        Title = "加载配置",
+        Icon = "folder",
+        Callback = function()
+            configFile = ConfigManager:CreateConfig(configName)
+            local loadedData = configFile:Load()
+            
+            if loadedData then
+                if loadedData.playerData then
+                    MyPlayerData = loadedData.playerData
+                end
+                
+                local lastSave = loadedData.lastSave or "Unknown"
+                WindUI:Notify({ 
+                    Title = "加载配置", 
+                    Content = "正在加载："..configName.."\n上次保存："..lastSave,
+                    Icon = "refresh-cw",
+                    Duration = 5
+                })
+                
+                Button = TabHandles.Elements:Button({
+                    Title = "玩家数据",
+                    Desc = string.format("名字: %s\n等级: %d\n库存: %s", 
+                        MyPlayerData.name, 
+                        MyPlayerData.level, 
+                        table.concat(MyPlayerData.inventory, ", "))
+                })
+            else
+                WindUI:Notify({ 
+                    Title = "错误", 
+                    Content = "加载失败",
+                    Icon = "x",
+                    Duration = 3
+                })
+            end
+        end
+    })
+else
+    TabHandles.SAN:Paragraph({
+        Title = "配置管理不可用",
+        Desc = "此功能需要配置管理",
+        Image = "alert-triangle",
+        ImageSize = 20,
+        Color = "White"
+    })
+end

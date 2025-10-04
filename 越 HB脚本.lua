@@ -2,7 +2,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 local Window = WindUI:CreateWindow({
         Title = "越 HB<font color='#00FF00'>1.5</font>",
-        Icon = "rbxassetid://4483362748",
+        Icon = "rbxassetid://1279310654146347060",
         IconTransparency = 0.5,
         IconThemed = true,
         Author = "作者:HB",
@@ -2521,7 +2521,7 @@ end
 
 Button = TabHandles.gn:Button({
     Title = "忍者传奇（收费）",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759563604610.lua.txt"))()
@@ -2534,6 +2534,15 @@ WindUI:Notify({
 })        
         
 end
+})
+
+Button = TabHandles.gn:Button({
+    Title = "力量传奇",
+    Desc = "制作完成",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759584343565.lua.txt"))()
+ end
 })
 
 Button = TabHandles.gn:Button({
