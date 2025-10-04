@@ -640,32 +640,6 @@ Button = TabHandles.W:Button({
     end)
 end
 })
-
-Dropdown = TabHandles.W:Dropdown({
-    Title = "传送", 
-    Values = {"肌肉之王[5]" "老版本转盘" "小岛屿" "出生点" "冰霜健身房[1]" "永恒健身房[15]" "传奇健身房[30]" "丛林健身房[60]"}, 
-    Value = "Alpha", 
-    Callback = function(Value) 
-if Value == "肌肉之王[5]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8746.65,27.33,-5856.49)
-    elseif Value == "老版本转盘" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1953.50,1.86,6180.04)
-    elseif Value == "小岛屿" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-38.96,12.38,1981.15)
-    elseif Value == "出生点" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2.05,15.17,248.05)
-    elseif Value == "冰霜健身房[1]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2834.72,15.17,-409.47)
-    elseif Value == "神话健身房[5]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2473.62,15.17,1073.36)
-    elseif Value == "永恒健身房[15]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-6980.48,15.17,-1285.60)
-    elseif Value == "传奇健身房[30]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4352.58,999.07,-3854.01)
-    elseif Value == "丛林健身房[60]" then
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8115.93,29.19,2398.15)
-    end
-    end)
 TabHandles.W:Divider()
 
 Button = TabHandles.W:Button({
@@ -1244,7 +1218,7 @@ end
 end
 })
 
-Toggle = TabHandles.T:Toggle({
+Toggle = TabHandles.Y:Toggle({
     Title = "神话",
     Desc = "",
     Locked = false,
@@ -1271,7 +1245,7 @@ end
 end
 })
 
-Toggle = TabHandles.T:Toggle({
+Toggle = TabHandles.Y:Toggle({
     Title = "传奇",
     Desc = "",
     Locked = false,
