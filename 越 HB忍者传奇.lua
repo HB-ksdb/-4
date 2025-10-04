@@ -295,14 +295,6 @@ Window:Tag({
         local F = AddTab("Boss","rbxassetid://3944669799")
         
         Window:SelectTab(1)        
-
-        Btn(A, "初始化第一步（别开会后悔）", function()
-            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
-        end)
-        
-        Btn(A, "初始化第二步", function()
-            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("elementMasteryEvent"):FireServer("Shadow Charge")
-        end)
         
         local isLooping = false
         local lastInputValue = 0
