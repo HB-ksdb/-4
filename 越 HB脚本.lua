@@ -2520,6 +2520,23 @@ end
 })
 
 Button = TabHandles.gn:Button({
+    Title = "忍者传奇（收费）",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759563604610.lua.txt"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+end
+})
+
+Button = TabHandles.gn:Button({
     Title = "环山军区",
     Desc = "",
     Locked = false,

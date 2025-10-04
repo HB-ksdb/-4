@@ -236,11 +236,28 @@ local Window = WindUI:CreateWindow({
             Callback = function() print("clicked") end,
             Anonymous = false
         },
-        SideBarWidth = 200,
-        ScrollBarEnabled = true,
-        Background = "rbxassetid://96291371536118"
-    })
-    
+            -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "HBkey_QWEHSHIHB" },
+        
+        Note = "请输入你的卡密",
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
+})
+
 
 Window:EditOpenButton({
     Title = "越 HB脚本",
@@ -286,46 +303,14 @@ Window:Tag({
         local function Tg(a, b, c, d)
             return a:Toggle({Title = b, Image = "bird", Value = c, Callback = d})
         end
+                
+        local B = AddTab("自动","rbxassetid://")
+        local C = AddTab("杀全","rbxassetid://")
+        local D = AddTab("辅助","rbxassetid://")
+        local E = AddTab("宠物","rbxassetid://")
+        local F = AddTab("Boss","rbxassetid://")
         
-        local A = AddTab("金币篡改","rbxassetid://4400700509")
-        local B = AddTab("自动功能","rbxassetid://4450736564")
-        local C = AddTab("杀戮功能","rbxassetid://4384392464")
-        local D = AddTab("辅助功能","rbxassetid://4483362458")
-        local E = AddTab("宠物功能","rbxassetid://7734034513")
-        local F = AddTab("Boss","rbxassetid://3944669799")
-        
-        Window:SelectTab(1)        
-        
-        local isLooping = false
-        local lastInputValue = 0
-
-        A:Input({
-            Title = "输入数字上传数据",
-            Value = "",
-            Placeholder = "请输入数字",
-            Callback = function(I)
-                local num = tonumber(I)
-                if num and num > 0 then
-                    lastInputValue = num
-                    game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", num)
-                end
-            end
-        })
-
-        A:Toggle({
-            Title = "循环上传",
-            Callback = function(Value)
-                isLooping = Value
-                if isLooping then
-                    spawn(function()
-                        while isLooping and lastInputValue > 0 do
-                            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", lastInputValue)
-                            wait(0.5)
-                        end
-                    end)
-                end
-            end
-        })
+        Window:SelectTab(1)                        
 
         Tg(B, "自动挥刀", false, function(AlineX)
             getgenv().AutoSwing = AlineX
