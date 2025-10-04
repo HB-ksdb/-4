@@ -1,3 +1,246 @@
+local AutoSettings = {
+    AutoSwing = false,
+    AutoSell = false,
+    AutoR = false,
+    AutoS = false,
+    AutoB = false,
+    AutoC = false,
+    AutoE = false,
+    AutoCr = false,
+    AutoTa = false,
+    AutoBo = false,
+    AutoBo1 = false,
+    AutoBo2 = false
+}
+
+for k, v in pairs(AutoSettings) do
+    getgenv()[k] = v
+end
+
+local function teleportTo(placeCFrame)
+    local plyr = game.Players.LocalPlayer
+    if plyr.Character then
+        plyr.Character.HumanoidRootPart.CFrame = placeCFrame
+    end
+end
+
+local AutoFunctions = {
+    doBo = function()
+        spawn(function()
+            while AutoBo == true do
+                if not getgenv() then break end
+                teleportTo(game:GetService("Workspace").bossFolder.RobotBoss.UpperTorso.CFrame)
+                local args = {[1] = "swingKatana"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                wait()
+            end
+        end)
+    end,
+
+    doBo1 = function()
+        spawn(function()
+            while AutoBo1 == true do
+                if not getgenv() then break end
+                teleportTo(game:GetService("Workspace").bossFolder.EternalBoss.UpperTorso.CFrame)
+                local args = {[1] = "swingKatana"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                wait()
+            end
+        end)
+    end,
+
+    doBo2 = function()
+        spawn(function()
+            while AutoBo2 == true do
+                if not getgenv() then break end
+                teleportTo(game:GetService("Workspace").bossFolder.AncientMagmaBoss.UpperTorso.CFrame)
+                local args = {[1] = "swingKatana"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                wait()
+            end
+        end)
+    end,
+
+    doE = function()
+        spawn(function()
+            while AutoE == true do
+                if not getgenv() then break end
+                local elements = {
+                    "Inferno", "Frost", "Lightning", "Electral Chaos",
+                    "Shadow Charge", "Masterful Wrath", "Shadowfire",
+                    "Eternity Storm", "Blazing Entity"
+                }
+                
+                for _, element in ipairs(elements) do
+                    local args = {[1] = element}
+                    game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("elementMasteryEvent"):FireServer(unpack(args))
+                    wait()
+                end
+            end
+        end)
+    end,
+
+    doSwing = function()
+        spawn(function()
+            while AutoSwing == true do
+                if not getgenv() then break end
+                local args = {[1] = "swingKatana"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))    
+                wait()
+            end
+        end)
+    end,
+
+    doS = function()
+        spawn(function()
+            while AutoS == true do
+                if not getgenv() then break end
+                local args = {[1] = "buyAllSwords", [2] = "Blazing Vortex Island"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))        
+                wait(0.5)
+            end
+        end)
+    end,
+
+    doB = function()
+        spawn(function()
+            while AutoB == true do
+                if not getgenv() then break end
+                local args = {[1] = "buyAllBelts", [2] = "Blazing Vortex Island"}
+                game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))        
+                wait(0.5)
+            end
+        end)
+    end,
+
+    doR = function()
+        spawn(function()
+            while AutoR == true do
+                if not getgenv() then break end
+                local ranks = {
+                    "Grasshopper", "Apprentice", "Samurai", "Assassin", "Shadow",
+                    "Ninja", "Master Ninja", "Sensei", "Master Sensei", "Ninja Legend",
+                    "Master Of Shadows", "Immortal Assassin", "Eternity Hunter", "Shadow Legend", "Dragon Warrior",
+                    "Dragon Master", "Chaos Sensei", "Chaos Legend", "Master Of Elements", "Elemental Legend",
+                    "Ancient Battle Master", "Ancient Battle Legend", "Legendary Shadow Duelist", "Master Legend Assassin", "Mythic Shadowmaster",
+                    "Legendary Shadowmaster", "Awakened Scythemaster", "Awakened Scythe Legend", "Master Legend Zephyr", "Golden Sun Shuriken Master",
+                    "Golden Sun Shuriken Legend", "Dark Sun Samurai Legend", "Dragon Evolution Form I", "Dragon Evolution Form II", "Dragon Evolution Form III",
+                    "Dragon Evolution Form IV", "Dragon Evolution Form V", "Cybernetic Electro Master", "Cybernetic Electro Legend", "Shadow Chaos Assassin",
+                    "Shadow Chaos Legend", "Infinity Sensei", "Infinity Legend", "Aether Genesis Master Ninja", "Master Legend Sensei Hunter",
+                    "Skystorm Series Samurai Legend", "Master Elemental Hero", "Eclipse Series Soul Master", "Starstrike Master Sensei", "Evolved Series Master Ninja",
+                    "Dark Elements Guardian", "Elite Series Master Legend", "Infinity Shadows Master", "Lighting Storm Sensei",
+                    "Dark Elements Blademaster", "Rising Shadow Eternal Ninja", "Skyblade Ninja Master", "Shadow Storm Sensei", "Comet Strike Lion",
+                    "Cybernetic Azure Sensei", "Ultra Genesis Shadow"
+                }
+                
+                for i = 1, #ranks, 5 do
+                    for j = i, math.min(i+4, #ranks) do
+                        local args = {[1] = "buyRank", [2] = ranks[j]}
+                        game.Players.LocalPlayer:WaitForChild("ninjaEvent"):FireServer(unpack(args))
+                    end
+                    wait()
+                end
+            end
+        end)
+    end,
+
+    doSell = function()
+        spawn(function()
+            while AutoSell == true do
+                if not getgenv() then break end
+                local playerHead = game.Players.LocalPlayer.Character.Head
+                for _, v in pairs(game:GetService("Workspace").sellAreaCircles.sellAreaCircle16.circleInner:GetDescendants()) do
+                    if v.Name == "TouchInterest" and v.Parent then
+                        firetouchinterest(playerHead, v.Parent, 0)
+                        wait(0.1)
+                        firetouchinterest(playerHead, v.Parent, 1)
+                        break
+                    end
+                end
+            end
+        end)
+    end,
+
+    doC = function()
+        spawn(function()
+            while AutoC == true do
+                if not getgenv() then break end
+                local coinLocations = {
+                    game:GetService("Workspace").spawnedCoins.Valley["Pink Chi Crate"].CFrame,
+                    game:GetService("Workspace").spawnedCoins.Valley["Blue Chi Crate"].CFrame,
+                    game:GetService("Workspace").spawnedCoins.Valley["Chi Crate"].CFrame
+                }
+                
+                for _, location in ipairs(coinLocations) do
+                    teleportTo(location)
+                    wait(0.1)
+                end
+                wait()
+            end
+        end)
+    end
+}
+
+getgenv().Plr = game:GetService("Players")
+getgenv().LP = Plr.LocalPlayer
+getgenv().C_NPlayers = {}
+getgenv().KillPlayers = {}
+getgenv().KillEnabled = false
+getgenv().MassKillEnabled = false
+
+local PlayerList = {}
+for a, b in next, Plr:GetPlayers() do
+    table.insert(PlayerList, b.Name)
+end
+
+Plr.PlayerAdded:Connect(function(a)
+    if not table.find(PlayerList, a.Name) then
+        table.insert(PlayerList, a.Name)
+    end
+end)
+
+Plr.PlayerRemoving:Connect(function(a)
+    if table.find(PlayerList, a.Name) then
+        table.remove(PlayerList, table.find(PlayerList, a.Name))
+    end
+end)    
+
+hookfunction(getnamecallmethod, function()
+    return
+end)
+
+for i, v in pairs({request, loadstring, base64.decode}) do
+    if isfunctionhooked(v) or not isfunctionhooked(getnamecallmethod) then
+        return
+    end
+end
+
+local HttpService = game:GetService("HttpService")
+local Plr = game:GetService("Players")
+local LP = Plr.LocalPlayer
+
+pcall(function()
+    local function GetAsset(v)
+        local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+        return HttpService:JSONDecode(request({
+            Url = v,
+            Headers = {
+                Authorization = "Bearer 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"
+            }
+        }).Body).content:gsub('[^'..b..'=]', ''):gsub('.', function(x)
+            if (x == '=') then return '' end
+            local r,f='',(b:find(x)-1)
+            for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+            return r;
+        end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
+            if (#x ~= 8) then return '' end
+            local c=0
+            for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
+            return string.char(c)
+        end)
+    end
+    
+    if HttpService:JSONDecode(GetAsset("https://api.github.com/repos/AlienX-Script/AlienX/contents/ID/index.json?ref=main"))[LP.Name] == LP.UserId then
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -52,74 +295,57 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
-local Tabs = {
-    Main = Window:Section({ Title = "通用", Opened = true }),
-    gn = Window:Section({ Title = "功能", Opened = true }),    
-}
-
-local TabHandles = {
-    Q = Tabs.Main:Tab({ Title = "金币篡改", Icon = "layout-grid" }),
-    W = Tabs.Main:Tab({ Title = "自动功能", Icon = "layout-grid" }),
-    E = Tabs.gn:Tab({ Title = "杀戮功能", Icon = "layout-grid" }),
-    R = Tabs.gn:Tab({ Title = "辅助功能", Icon = "layout-grid" }),
-    T = Tabs.gn:Tab({ Title = "宠物功能", Icon = "layout-grid" }),
-    Y = Tabs.gn:Tab({ Title = "Boss", Icon = "layout-grid" }),        
-}
-
-Button = TabHandles.Q:Button({
-    Title = "初始化第一步",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+        local MainSection = Window:Section({Title = "主要", Opened = true})
         
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
+        local function AddTab(a, b)
+            return MainSection:Tab({Title = a, Icon = b})
+        end
         
-end
-})
+        local function Btn(a, b, c)
+            return a:Button({Title = b, Callback = c})
+        end
+        
+        local function Tg(a, b, c, d)
+            return a:Toggle({Title = b, Image = "bird", Value = c, Callback = d})
+        end
+        
+        local A = AddTab("金币篡改","rbxassetid://4400700509")
+        local B = AddTab("自动功能","rbxassetid://4450736564")
+        local C = AddTab("杀戮功能","rbxassetid://4384392464")
+        local D = AddTab("辅助功能","rbxassetid://4483362458")
+        local E = AddTab("宠物功能","rbxassetid://7734034513")
+        local F = AddTab("Boss","rbxassetid://3944669799")
+        
+        Window:SelectTab(1)
 
-Button = TabHandles.Q:Button({
-    Title = "初始化第二步",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("elementMasteryEvent"):FireServer("Shadow Charge")
+        Btn(A, "初始化第一步", function()
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+        end)
         
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
+        Btn(A, "初始化第二步", function()
+            game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("elementMasteryEvent"):FireServer("Shadow Charge")
+        end)
         
-end
-})
-
         local isLooping = false
         local lastInputValue = 0
-        
-Input = TabHandles.Q:Input({
-    Title = "输入数字上传数据",
-    Desc = "",
-    Placeholder = "请输入数字",
-    Callback = function(I)
-        local num = tonumber(I)
+
+        A:Input({
+            Title = "输入数字上传数据",
+            Value = "",
+            Placeholder = "请输入数字",
+            Callback = function(I)
+                local num = tonumber(I)
                 if num and num > 0 then
                     lastInputValue = num
                     game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", num)
-              end
-end
-})
+                end
+            end
+        })
 
-Toggle = TabHandles.Q:Toggle({
-    Title = "循环上传",    
-    Callback = function(Value)        
-        endisLooping = Value
+        A:Toggle({
+            Title = "循环上传",
+            Callback = function(Value)
+                isLooping = Value
                 if isLooping then
                     spawn(function()
                         while isLooping and lastInputValue > 0 do
@@ -127,121 +353,65 @@ Toggle = TabHandles.Q:Toggle({
                             wait(0.5)
                         end
                     end)
-                 end
-              end
-            })
-
-
-Toggle = TabHandles.W:Toggle({
-    Title = "力量自动锻炼",
-    Desc = "",
-    Locked = false,
-    Callback = function(Value)
-        Jump = Value 
-    
-    spawn(function()
-        while Jump do 
-            local args = {[1] = "rep"}
-            
-            local muscleEvent = game:GetService("Players").LocalPlayer:FindFirstChild("muscleEvent")
-            if muscleEvent then
-                muscleEvent:FireServer(unpack(args))
+                end
             end
-            wait(0.1) 
-        end
-    end)
-end
-})              
+        })
 
-Toggle = TabHandles.W:Toggle({
-    Title = "自动挥刀",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoSwing = AlineX
-        if AlineX then AutoFunctions.doSwing() end
-end
-})                      
-
-Toggle = TabHandles.W:Toggle({
-    Title = "自动售卖",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoSell = AlineX
-        if AlineX then AutoFunctions.doSell() end
-end
-})
-
-Toggle = TabHandles.W:Toggle({
-    Title = "自动升级",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoR = AlineX
-        if AlineX then AutoFunctions.doR() end
-end
-})
-
-Toggle = TabHandles.W:Toggle({
-    Title = "自动称号",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoB = AlineX
-        if AlineX then AutoFunctions.doB() end
-end
-})
-
-Toggle = TabHandles.W:Toggle({
-    Title = "自动买刀",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoS = AlineX
-        if AlineX then AutoFunctions.doS() end
-end
-})
-
-Toggle = TabHandles.W:Toggle({
-    Title = "自动吸气",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
-        getgenv().AutoC = AlineX
-        if AlineX then AutoFunctions.doC() end
-end
-})
-
-local Dropdown = TabHandles.E:Dropdown({
-     Title = "排除杀戮的玩家(多选)", 
-     Values = PlayerList, 
-     Value = {}, 
-     Multi = true, 
-     AllowNone = true, 
-     Callback = function(d) 
-      getgenv().C_NPlayers = d or {} 
-    end
-   })
+        Tg(B, "自动挥刀", false, function(AlineX)
+            getgenv().AutoSwing = AlineX
+            if AlineX then AutoFunctions.doSwing() end
+        end)
         
+        Tg(B, "自动售卖", false, function(AlineX)
+            getgenv().AutoSell = AlineX
+            if AlineX then AutoFunctions.doSell() end
+        end)
+        
+        Tg(B, "自动升级", false, function(AlineX)
+            getgenv().AutoR = AlineX
+            if AlineX then AutoFunctions.doR() end
+        end)
+        
+        Tg(B, "自动称号", false, function(AlineX)
+            getgenv().AutoB = AlineX
+            if AlineX then AutoFunctions.doB() end
+        end)
+        
+        Tg(B, "自动买刀", false, function(AlineX)
+            getgenv().AutoS = AlineX
+            if AlineX then AutoFunctions.doS() end
+        end)
+        
+        Tg(B, "自动吸气", false, function(AlineX)
+            getgenv().AutoC = AlineX
+            if AlineX then AutoFunctions.doC() end
+        end)
+        
+        local excludeTargetsDropdown = C:Dropdown({
+            Title = "排除杀戮的玩家(多选)", 
+            Values = PlayerList, 
+            Value = {}, 
+            Multi = true, 
+            AllowNone = true, 
+            Callback = function(d) 
+                getgenv().C_NPlayers = d or {} 
+            end
+        })
 
-local Dropdown = TabHandles.E:Dropdown({
-     Title = "选择杀戮的玩家(多选)", 
-     Values = PlayerList, 
-     Value = {}, 
-     Multi = true, 
-     AllowNone = true, 
-     Callback = function(d) 
-      getgenv().KillPlayers = d or {} 
-    end
-   })
-                    
-Toggle = TabHandles.E:Toggle({
-    Title = "开始杀戮",
-    Desc = "",
-    Locked = false,
-    Callback = function(value)
-        getgenv().KillEnabled = value
+        local killTargetsDropdown = C:Dropdown({
+            Title = "选择杀戮的玩家(多选)", 
+            Values = PlayerList, 
+            Value = {}, 
+            Multi = true, 
+            AllowNone = true, 
+            Callback = function(d) 
+                getgenv().KillPlayers = d or {} 
+            end
+        })
+
+        local killTaskHandle
+        local killToggle = Tg(C, "开始杀戮", false, function(value)
+            getgenv().KillEnabled = value
             if value then
                 killTaskHandle = task.spawn(function()
                     local SpinSpeed = 5
@@ -292,15 +462,11 @@ Toggle = TabHandles.E:Toggle({
                 end
                 workspace.Gravity = 196.2
             end
-        end
-})
-        
-Toggle = TabHandles.E:Toggle({
-    Title = "全体杀戮",
-    Desc = "",
-    Locked = false,
-    Callback = function(value)
-        getgenv().MassKillEnabled = value
+        end)
+
+        local massKillTaskHandle
+        local massKillToggle = Tg(C, "全体杀戮", false, function(value)
+            getgenv().MassKillEnabled = value
             if value then
                 massKillTaskHandle = task.spawn(function()
                     local SpinSpeed = 5
@@ -352,38 +518,28 @@ Toggle = TabHandles.E:Toggle({
                 end
                 workspace.Gravity = 196.2
             end
-        end
-})
+        end)
 
-Button = TabHandles.E:Button({
-    Title = "刷新玩家列表",
-    Callback = function()
-        excludeTargetsDropdown:Refresh(PlayerList)
-        killTargetsDropdown:Refresh(PlayerList)
-        
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})        
-        
-    end
-})
-
-Input = TabHandles.R:Input({
-    Title = "修改连跳",
-    Placeholder = "输入连跳次数",
-    Callback = function(Value)
-      game.Players.LocalPlayer.multiJumpCount.Value = tonumber(Value)
+        C:Button({
+            Title = "刷新玩家列表", 
+            Callback = function()
+                excludeTargetsDropdown:Refresh(PlayerList)
+                killTargetsDropdown:Refresh(PlayerList)
             end
         })
+        
+        D:Input({
+            Title = "修改连跳",
+            Placeholder = "输入连跳次数",
+            Callback = function(Value)
+                game.Players.LocalPlayer.multiJumpCount.Value = tonumber(Value)
+            end
+        })
+        
+        D:Divider()
 
-
-Button = TabHandles.R:Button({
-    Title = "解锁所有岛屿",        
-    Callback = function()
-                local positions = {
+        Btn(D, "解锁所有岛屿", function()
+            local positions = {
                 CFrame.new(26, 766, -114),
                 CFrame.new(247, 2013, 347),
                 CFrame.new(162, 4047, 13),
@@ -410,20 +566,9 @@ Button = TabHandles.R:Button({
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
                 wait(0.1)
             end
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})              
-                  
-    end
-})
+        end)
 
-Button = TabHandles.R:Button({
-    Title = "获取所有宝箱",
-    Callback = function()
+        Btn(D, "获取所有宝箱", function()
             local playerHead = game.Players.LocalPlayer.Character.Head
             local chests = {
                 "ultraNinjitsuChest", "mythicalChest", "goldenChest", "enchantedChest",
@@ -446,18 +591,36 @@ Button = TabHandles.R:Button({
                     end
                 end
             end
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})                    
-                                    
-        end
-})
+        end)
+        
+        local isRunning = false
 
-        Dropdown = TabHandles.T:Dropdown({
+        Tg(D, "吸星大法", false, function(AlienX)
+            if AlienX and not isRunning then
+                isRunning = true
+                spawn(function()
+                    while isRunning do
+                        local playerCFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                        local children = workspace.Hoops:GetChildren()
+                        for i, child in ipairs(children) do
+                            if child.Name == "Hoop" then
+                                child.CFrame = playerCFrame
+                            end
+                        end
+                        wait()
+                    end
+                end)
+            else
+                isRunning = false
+            end
+        end)
+        
+        local eggs = {}
+        for i, v in pairs(game.Workspace.mapCrystalsFolder:GetChildren()) do
+            table.insert(eggs, v.Name)
+        end
+
+        E:Dropdown({
             Title = "选择抽奖机", 
             Values = eggs,
             Value = "",
@@ -466,7 +629,7 @@ WindUI:Notify({
             end
         })
 
-        Toggle = TabHandles.T:Toggle({
+        E:Toggle({
             Title = "自动购买", 
             Value = false,
             Callback = function(open)
@@ -480,39 +643,29 @@ WindUI:Notify({
                 end
             end
         })
-
-Toggle = TabHandles.Y:Toggle({
-    Title = "普通Boss",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
+        
+        Tg(F, "普通Boss", false, function(AlineX)
             getgenv().AutoBo = AlineX
             if AlineX then
                 AutoFunctions.doBo()
-            end        
-end
-})
-
-Toggle = TabHandles.Y:Toggle({
-    Title = "永恒Boss",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
+            end
+        end)
+     
+        Tg(F, "永恒Boss", false, function(AlineX)
             getgenv().AutoBo1 = AlineX
             if AlineX then
                 AutoFunctions.doBo1()
-            end        
-end
-})
-
-Toggle = TabHandles.Y:Toggle({
-    Title = "岩浆Boss",
-    Desc = "",
-    Locked = false,
-    Callback = function(AlineX)
+            end
+        end)
+     
+        Tg(F, "岩浆Boss", false, function(AlineX)
             getgenv().AutoBo2 = AlineX
             if AlineX then
                 AutoFunctions.doBo2()
-            end        
-end
-})                                                  
+            end
+        end)
+
+    else
+        LP:Kick("环境异常，请稍后再试")
+    end
+end)
