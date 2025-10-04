@@ -219,28 +219,6 @@ local HttpService = game:GetService("HttpService")
 local Plr = game:GetService("Players")
 local LP = Plr.LocalPlayer
 
-pcall(function()
-    local function GetAsset(v)
-        local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-        return HttpService:JSONDecode(request({
-            Url = v,
-            Headers = {
-                Authorization = "Bearer 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"
-            }
-        }).Body).content:gsub('[^'..b..'=]', ''):gsub('.', function(x)
-            if (x == '=') then return '' end
-            local r,f='',(b:find(x)-1)
-            for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
-            return r;
-        end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-            if (#x ~= 8) then return '' end
-            local c=0
-            for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
-            return string.char(c)
-        end)
-    end
-    
-    if HttpService:JSONDecode(GetAsset("https://api.github.com/repos/AlienX-Script/AlienX/contents/ID/index.json?ref=main"))[LP.Name] == LP.UserId then
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -317,6 +295,7 @@ Window:Tag({
         local F = AddTab("Boss","rbxassetid://3944669799")
         
         Window:SelectTab(1)
+        
 
         Btn(A, "初始化第一步", function()
             game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("zenMasterEvent"):FireServer("convertGems", -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
@@ -664,8 +643,4 @@ Window:Tag({
                 AutoFunctions.doBo2()
             end
         end)
-
-    else
-        LP:Kick("环境异常，请稍后再试")
-    end
-end)
+        
