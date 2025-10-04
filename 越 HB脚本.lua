@@ -2538,7 +2538,7 @@ end
 
 Button = TabHandles.gn:Button({
     Title = "力量传奇",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759584343565.lua.txt"))()
