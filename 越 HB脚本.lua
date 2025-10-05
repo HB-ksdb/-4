@@ -2720,8 +2720,7 @@ Button = TabHandles.A:Button({
     Desc = "无卡中文",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8AHB%20FXM%2099%E5%A4%9C.lua"))()
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
