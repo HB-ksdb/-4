@@ -260,7 +260,7 @@ local Window = WindUI:CreateWindow({
 
 
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "HB FXM脚本忍者传奇",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 4,
@@ -286,7 +286,7 @@ Window:Tag({
         Color = Color3.fromHex("#315dff")
     })
     local TimeTag = Window:Tag({
-        Title = "正在更新",
+        Title = "忍者传奇",
         Color = Color3.fromHex("#000000")
     })
 
@@ -303,14 +303,161 @@ Window:Tag({
         local function Tg(a, b, c, d)
             return a:Toggle({Title = b, Image = "bird", Value = c, Callback = d})
         end
-                
-        local B = AddTab("自动","rbxassetid://")
-        local C = AddTab("杀全","rbxassetid://")
-        local D = AddTab("辅助","rbxassetid://")
-        local E = AddTab("宠物","rbxassetid://")
+        
+        local YI = AddTab("自动收集","rbxassetid://")        
+        local B = AddTab("自动功能","rbxassetid://")
+        local C = AddTab("杀戮功能","rbxassetid://")
+        local D = AddTab("辅助功能","rbxassetid://")
+        local E = AddTab("宠物功能","rbxassetid://")
         local F = AddTab("Boss","rbxassetid://")
         
-        Window:SelectTab(1)                        
+        
+        Window:SelectTab(1)
+        
+        Tg(YI,"收集金币", "Suction all", false, function(state)
+    Interstellar.spawnedCoins = state
+    if Interstellar.spawnedCoins then
+        while Interstellar.spawnedCoins do
+            for i, v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+                if v.Name == "Purple Coin Crate" then--Blue Coin
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                wait(2)
+                end
+            end
+        end
+    end
+end)
+
+        Tg(YI,"收集气", "Suction all", false, function(state)
+    Interstellar.spawnedCoins = state
+    if Interstellar.spawnedCoins then
+        while Interstellar.spawnedCoins do
+            for i, v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+                if v.Name == "Blue Chi Crate" then 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                wait(2)
+                end
+            end
+        end
+    end
+end)        
+
+        Btn(YI, "解锁全部通行证", false, function()        
+game:GetService("ReplicatedStorage").gamepassIds["+2 Pet Slots"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+3 Pet Slots"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+4 Pet Slots"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+100 Capacity"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+200 Capacity"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+20 Capacity"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["+60 Capacity"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["Infinite Ammo"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["Infinite Ninjitsu"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["Permanent Islands Unlock"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x2 Coins"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x2 Damage"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x2 Health"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x2 Ninjitsu"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x2 Speed"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["Faster Sword"].Parent = game.Players.LocalPlayer.ownedGamepasses
+game:GetService("ReplicatedStorage").gamepassIds["x3 Pet Clones"].Parent = game.Players.LocalPlayer.ownedGamepasses
+end)
+
+Btn(YI,"传送到出生点", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(25.665502548217773, 3.4228405952453613, 29.919952392578125)
+end)
+
+Btn(YI,"传送到附魔岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(51.17238235473633, 766.1807861328125, -138.44842529296875)
+end)
+
+Btn(YI,"传送到星界岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(207.2932891845703, 2013.88037109375, 237.36672973632812)
+end)
+
+Btn(YI,"传送到神秘岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(171.97178649902344, 4047.380859375, 42.0699577331543)
+end)
+
+Btn(YI,"传送到太空岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(148.83824157714844, 5657.18505859375, 73.5014877319336)
+end)
+
+Btn(YI,"传送到冻土岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(139.28330993652344, 9285.18359375, 77.36406707763672)
+end)
+
+Btn(YI,"传送到永恒岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(149.34817504882812, 13680.037109375, 73.3861312866211)
+end)
+
+Btn(YI,"传送到沙暴岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(133.37144470214844, 17686.328125, 72.00334167480469)
+end)
+
+Btn(YI,"传送到雷暴岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(143.19349670410156, 24070.021484375, 78.05432891845703)
+end)
+
+Btn(YI,"传送到远古炼狱岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(141.27163696289062, 28256.294921875, 69.3790283203125)
+end)
+
+Btn(YI,"传送到午夜暗影岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(132.74267578125, 33206.98046875, 57.495574951171875)
+end)
+
+Btn(YI,"传送到神秘灵魂岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(137.76148986816406, 39317.5703125, 61.06639862060547)
+end)
+
+Btn(YI,"传送到冬季奇迹岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(137.2720184326172, 46010.5546875, 55.941951751708984)
+end)
+
+Btn(YI,"传送到黄金大师岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(128.32339477539062, 52607.765625, 56.69411849975586)
+end)
+
+Btn(YI,"传送到龙传奇岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(146.35226440429688, 59594.6796875, 77.53300476074219)
+end)
+
+Btn(YI,"传送到赛博传奇岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(137.3321075439453, 66669.1640625, 72.21722412109375)
+end)
+
+Btn(YI,"传送到天岚超能岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(135.48077392578125, 70271.15625, 57.02311325073242)
+end)
+
+Btn(YI,"传送到混沌传奇岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(148.58590698242188, 74442.8515625, 69.3177719116211)
+end)
+
+Btn(YI,"传送到灵魂融合岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(136.9700927734375, 79746.984375, 58.54051971435547)
+end)
+
+Btn(YI,"传送到黑暗元素岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(141.697265625, 83198.984375, 72.73107147216797)
+end)
+
+Btn(YI,"传送到内心和平岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(135.3157501220703, 87051.0625, 66.78429412841797)
+end)
+
+Btn(YI,"传送到炽烈漩涡岛", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(135.08216857910156, 91246.0703125, 69.56692504882812)
+end)
+
+Btn(YI,"传送到35倍金币区域", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(86.2938232421875, 91245.765625, 120.54232788085938)
+end)
+
+Btn(YI,"传送到复制宠物", function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4593.21337890625, 130.87181091308594, 1430.2239990234375)
+end)
+
 
         Tg(B, "自动挥刀", false, function(AlineX)
             getgenv().AutoSwing = AlineX
@@ -457,25 +604,7 @@ Window:Tag({
                                                         LP.Character.Humanoid:EquipTool(tool)
                                                     end
                                                 end
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                        task.wait()
-                    end
-                    workspace.Gravity = 196.2
-                end)
-            else
-                if massKillTaskHandle then
-                    task.cancel(massKillTaskHandle)
-                end
-                workspace.Gravity = 196.2
-            end
-        end)
-
-        C:Button({
+                                          C:Button({
             Title = "刷新玩家列表", 
             Callback = function()
                 excludeTargetsDropdown:Refresh(PlayerList)
@@ -619,4 +748,3 @@ Window:Tag({
                 AutoFunctions.doBo2()
             end
         end)
-        
