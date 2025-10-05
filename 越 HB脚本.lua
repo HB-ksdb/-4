@@ -24,20 +24,12 @@ local Window = WindUI:CreateWindow({
 Window:EditOpenButton({
     Title = "越 HB脚本",
     Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 4,
-    Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromHex("FF0000")),
-        ColorSequenceKeypoint.new(0.16, Color3.fromHex("FF7F00")),
-        ColorSequenceKeypoint.new(0.33, Color3.fromHex("FFFF00")),
-        ColorSequenceKeypoint.new(0.5, Color3.fromHex("00FF00")),
-        ColorSequenceKeypoint.new(0.66, Color3.fromHex("0000FF")),
-        ColorSequenceKeypoint.new(0.83, Color3.fromHex("4B0082")),
-        ColorSequenceKeypoint.new(1, Color3.fromHex("9400D3"))
-    }),
+    CornerRadius = UDim.new(0, 16),
+    StrokeThickness = 2,
+    Color = openButtonColor,
     Draggable = true,
 })
-            
+
 Window:Tag({
     Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
@@ -2542,6 +2534,23 @@ Button = TabHandles.gn:Button({
     Locked = false,
     Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759584343565.lua.txt"))()
+        
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})        
+        
+    end
+})
+
+Button = TabHandles.gn:Button({
+    Title = "森林99夜",
+    Desc = "制作完成",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8AHB%20FXM%2099%E5%A4%9C.lua"))()
         
 WindUI:Notify({
     Title = "通知",
