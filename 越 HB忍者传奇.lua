@@ -566,6 +566,7 @@ end)
             end
         end)
 
+
         local massKillTaskHandle
         local massKillToggle = Tg(C, "全体杀戮", false, function(value)
             getgenv().MassKillEnabled = value
@@ -604,7 +605,25 @@ end)
                                                         LP.Character.Humanoid:EquipTool(tool)
                                                     end
                                                 end
-                                          C:Button({
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                        task.wait()
+                    end
+                    workspace.Gravity = 196.2
+                end)
+            else
+                if massKillTaskHandle then
+                    task.cancel(massKillTaskHandle)
+                end
+                workspace.Gravity = 196.2
+            end
+        end)
+
+        C:Button({
             Title = "刷新玩家列表", 
             Callback = function()
                 excludeTargetsDropdown:Refresh(PlayerList)
@@ -703,6 +722,7 @@ end)
         for i, v in pairs(game.Workspace.mapCrystalsFolder:GetChildren()) do
             table.insert(eggs, v.Name)
         end
+
 
         E:Dropdown({
             Title = "选择抽奖机", 
