@@ -2575,10 +2575,10 @@ WindUI:Notify({
 
 Button = TabHandles.gn:Button({
     Title = "环山军区",
-    Desc = "",
+    Desc = "制作完成",
     Locked = false,
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%E7%8E%AF%E5%B1%B1%E5%86%9B%E5%8C%BA.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E7%8E%AF%E5%B1%B1%E5%86%9B%E5%8C%BA%E5%8A%A0%E5%AF%86.txt"))()
 
 WindUI:Notify({
     Title = "通知",
