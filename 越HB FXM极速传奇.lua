@@ -79,7 +79,7 @@ Button = TabHandles.Q:Button({
         end
 })
 
-local Button = TabHandles.SAN:Button({
+local Button = TabHandles.Q:Button({
     Title = "全部开自动刷经验，刷很快！！！",
     Desc = "个性化您的体验",
     Image = "palette",
