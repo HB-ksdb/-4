@@ -193,6 +193,7 @@ local TabHandles = {
     YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),    
     gn = Tabs.Main:Tab({ Title = "越 HB脚本", Icon = "layout-grid" }),
+    QI = Tabs.Main:Tab({ Title = "越 HB工具", Icon = "layout-grid" }),
     ESPgn = Tabs.gn:Tab({ Title = "自然灾害", Icon = "layout-grid" }),
     pbgn = Tabs.gn:Tab({ Title = "被遗弃", Icon = "layout-grid" }),
     tzgn = Tabs.gn:Tab({ Title = "最坚强战场", Icon = "layout-grid" }),
@@ -2461,6 +2462,16 @@ Toggle = TabHandles.ER:Toggle({
 })
 
 ---------------------------------------------------------------------------------------------越HB脚本
+
+local Button = TabHandles.gn:Button({
+    Title = "支持人",
+    Desc = "合作人：FXM 支持：小猫土豆 支持：小皮",
+    Image = "palette",
+    ImageSize = 20,
+    Color = "White"
+})
+
+
 Button = TabHandles.gn:Button({
     Title = "DOORS",
     Desc = "制作完成",
@@ -2595,6 +2606,178 @@ WindUI:Notify({
         
     end
 })
+
+Toggle = TabHandles.QI:Toggle({
+    Title = "坐标工具",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local Window = Rayfield:CreateWindow({
+    Name = "坐标仪",
+    Size = UDim2.fromOffset(300, 150),
+    ConfigurationSaving = { Enabled = false }
+})
+
+local GeneralTab = Window:CreateTab("坐标仪", 4483345998)
+
+local coordSystem = {
+    isEnabled = true,
+    gui = nil,
+    updateConn = nil,
+    currentPos = Vector3.new(0, 0, 0)
+}
+
+local function createCoordUI()
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "StandaloneCoordDisplay"
+    gui.Parent = player.PlayerGui
+
+    local container = Instance.new("Frame")
+    container.Size = UDim2.new(0, 240, 0, 60)
+    container.Position = UDim2.new(1, -250, 0, 10)
+    container.BackgroundTransparency = 1
+    container.Parent = gui
+
+    local coordFrame = Instance.new("Frame")
+    coordFrame.Size = UDim2.new(0, 200, 1, 0)
+    coordFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+    coordFrame.BackgroundTransparency = 0.7
+    coordFrame.BorderSizePixel = 1
+    coordFrame.Parent = container
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextSize = 14
+    textLabel.Text = "坐标加载中..."
+    textLabel.Parent = coordFrame
+
+    local copyBtn = Instance.new("TextButton")
+    copyBtn.Size = UDim2.new(0, 35, 1, 0)
+    copyBtn.Position = UDim2.new(0, 205, 0, 0)
+    copyBtn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    copyBtn.BackgroundTransparency = 0.5
+    copyBtn.Text = "复"
+    copyBtn.TextColor3 = Color3.new(1, 1, 1)
+    copyBtn.TextSize = 14
+    copyBtn.BorderSizePixel = 1
+    copyBtn.Parent = container
+
+    copyBtn.MouseButton1Click:Connect(function()
+        if setclipboard and coordSystem.currentPos then
+            local coordStr = string.format("X: %.2f, Y: %.2f, Z: %.2f",
+                coordSystem.currentPos.X,
+                coordSystem.currentPos.Y,
+                coordSystem.currentPos.Z
+            )
+            setclipboard(coordStr)
+            Rayfield:Notify({
+                Title = "复制成功",
+                Content = coordStr,
+                Duration = 2
+            })
+        end
+    end)
+
+    local isDragging = false
+    local dragStartPos = nil
+    local containerStartPos = nil
+
+    container.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch then
+            isDragging = true
+            dragStartPos = input.Position
+            containerStartPos = container.Position
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if isDragging and input.UserInputType == Enum.UserInputType.Touch then
+            local delta = input.Position - dragStartPos
+            container.Position = UDim2.new(
+                containerStartPos.X.Scale,
+                containerStartPos.X.Offset + delta.X,
+                containerStartPos.Y.Scale,
+                containerStartPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch and isDragging then
+            isDragging = false
+        end
+    end)
+
+    return {
+        gui = gui,
+        container = container,
+        text = textLabel
+    }
+end
+
+coordSystem.gui = createCoordUI()
+
+local function formatCoord(pos)
+    return string.format("X: %.2f\nY: %.2f\nZ: %.2f", pos.X, pos.Y, pos.Z)
+end
+
+local function updateCoord()
+    local char = player.Character
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if root then
+        coordSystem.currentPos = root.Position
+        coordSystem.gui.text.Text = formatCoord(root.Position)
+    else
+        coordSystem.gui.text.Text = "等待角色加载..."
+        coordSystem.currentPos = nil
+    end
+end
+
+local function setEnabled(state)
+    coordSystem.isEnabled = state
+    coordSystem.gui.container.Visible = state
+    if state then
+        coordSystem.updateConn = RunService.Heartbeat:Connect(updateCoord)
+        updateCoord()
+    else
+        coordSystem.updateConn:Disconnect()
+    end
+end
+
+GeneralTab:CreateToggle({
+    Name = "开启坐标显示",
+    CurrentValue = coordSystem.isEnabled,
+    Callback = setEnabled
+})
+
+setEnabled(coordSystem.isEnabled)
+
+Window:OnClose(function()
+    if coordSystem.updateConn then
+        coordSystem.updateConn:Disconnect()
+    end
+    coordSystem.gui.gui:Destroy()
+    Rayfield = nil
+end)
+
+Rayfield:Notify({
+    Title = "坐标仪就绪",
+    Content = "作者HB FXM",
+    Duration = 3
+})
+
+ end
+})
+
 -----------------------------------------------------------------------------------------------自然灾害
 Button = TabHandles.ESPgn:Button({
     Title = "黑洞",
