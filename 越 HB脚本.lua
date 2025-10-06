@@ -2574,6 +2574,23 @@ WindUI:Notify({
 })
 
 Button = TabHandles.gn:Button({
+    Title = "极速传奇",
+    Desc = "未完成，但还可以使用",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8AHB%20FXM%E6%9E%81%E9%80%9F%E4%BC%A0%E5%A5%87.lua"))()
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
+
+Button = TabHandles.gn:Button({
     Title = "环山军区",
     Desc = "制作完成",
     Locked = false,
