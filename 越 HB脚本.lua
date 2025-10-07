@@ -2471,6 +2471,22 @@ local Button = TabHandles.gn:Button({
     Color = "White"
 })
 
+Button = TabHandles.gn:Button({
+    Title = "模仿者",
+    Desc = "未制作完成，但还可以用",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8AHB%20FXM%E6%A8%A1%E4%BB%BF%E8%80%85.lua"))()
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 3, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
 
 Button = TabHandles.gn:Button({
     Title = "DOORS",
