@@ -292,24 +292,6 @@ WindUI:Notify({
  end
 })
 
-Button = TabHandles.Q:Button({
-    Title = "传送红怪谈话",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new( -318.53,  19.76,  3659.18)
-            
-WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = , -- 3 seconds
-    Icon = "layout-grid",
-})                        
-            
- end
-})
-
-
 -----------------------------------透视功能------------------------------------------------
 
 getgenv().ESPEnabled = false
