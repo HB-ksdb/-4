@@ -102,7 +102,7 @@ WindUI:Notify({
  end
 })
 
-Button = TabHandles.:Button({
+Button = TabHandles.Q:Button({
     Title = "放毒老鼠地方",
     Desc = "",
     Locked = false,
