@@ -1,3 +1,34 @@
+-----------------黑名单系统------------------
+local blacklist = {
+    "BadPlayer1",
+    "Hacker123",
+    "CheaterABC",
+    "",
+    "要拉黑的用户名2"
+    -- 在这里添加要拉黑的用户名
+}
+
+-- 检查当前玩家是否在黑名单中
+local function checkBlacklist()
+    local localPlayer = game.Players.LocalPlayer
+    local username = localPlayer.Name
+    
+    -- 遍历黑名单检查
+    for _, blacklistedName in ipairs(blacklist) do
+        if username == blacklistedName then
+            -- 如果在黑名单中，执行踢出代码
+            game.Players.LocalPlayer:Kick("你已被HB FXM脚本加入至黑名单，我让你惹HB FXM现在好了吧？你活该！")
+            return true
+        end
+    end
+    return false
+end
+
+-- 立即执行检查
+if checkBlacklist() then
+    return  -- 如果在黑名单中，停止执行后续代码
+end
+-----------------彩虹字符------------------
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
@@ -256,7 +287,7 @@ TabHandles.YI:Divider()
 -----------------------------------------------------------------------------------------------飞行
 Button =TabHandles.YI:Button({
     Title = "飞行v1",
-    Desc = "",
+    Desc = "HB FXM飞行",
     Locked = false,
     Callback = function()
         local main = Instance.new("ScreenGui")
@@ -736,23 +767,7 @@ end)
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-})
-    end
-})
------------------------------------------------------------------------------------------------子追
-Button = TabHandles.YI:Button({
-    Title = "子追穿墙",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/Silent%20aim/1.1"))()
-        
-    WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
     end
@@ -760,7 +775,7 @@ Button = TabHandles.YI:Button({
 -----------------------------------------------------------------------------------------------隐身
 local Button = TabHandles.YI:Button({
     Title = "隐身自己",
-    Desc = "",
+    Desc = "隐身别人看不到的",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
@@ -768,37 +783,15 @@ local Button = TabHandles.YI:Button({
     WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
-    end
-})
-
-Button = TabHandles.YI:Button({
-    Title = "透视骨骼",
-    Value = false,    
-    Callback = function(state) 
-        local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/ESPs/main/UniversalSkeleton.lua"))()
-local Skeletons = {}
-for _, Player in next, game.Players:GetChildren() do
-	table.insert(Skeletons, Library:NewSkeleton(Player, true));
-end
-game.Players.PlayerAdded:Connect(function(Player)
-	table.insert(Skeletons, Library:NewSkeleton(Player, true));
-end)
-                    
-    WindUI:Notify({
-    Title = "通知",
-    Content = "加载成功",
-    Duration = 3, -- 3 seconds
-    Icon = "layout-grid",
-}) 
     end
 })
 -----------------------------------------------------------------------------------------------防甩飞
 Button = TabHandles.YI:Button({
     Title = "防甩飞",
-    Desc = "",
+    Desc = "别人想甩飞你是不可能的",
     Locked = false,
     Callback = function()
         local Services = setmetatable({}, {__index = function(Self, Index)
@@ -864,7 +857,7 @@ Services.Players.PlayerAdded:Connect(PlayerAdded)
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
     end
@@ -872,7 +865,7 @@ WindUI:Notify({
 -----------------------------------------------------------------------------------------------撸关R15
 Button = TabHandles.YI:Button({
     Title = "撸关R15",
-    Desc = "",
+    Desc = "R15",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
@@ -880,7 +873,7 @@ Button = TabHandles.YI:Button({
     WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
         
@@ -889,7 +882,7 @@ Button = TabHandles.YI:Button({
 -----------------------------------------------------------------------------------------------撸关R6
 Button = TabHandles.YI:Button({
     Title = "撸关R6",
-    Desc = "",
+    Desc = "R6",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
@@ -897,7 +890,7 @@ Button = TabHandles.YI:Button({
     WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
         
@@ -906,7 +899,7 @@ Button = TabHandles.YI:Button({
 -----------------------------------------------------------------------------------------------甩飞
 Button = TabHandles.YI:Button({
     Title = "甩飞",
-    Desc = "",
+    Desc = "没鸟用",
     Locked = false,
     Callback = function()
         local ultimateFling = Instance.new("ScreenGui")
@@ -1410,7 +1403,7 @@ end)
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
 
@@ -1419,7 +1412,7 @@ WindUI:Notify({
 -----------------------------------------------------------------------------------------------穿墙
 Button = TabHandles.YI:Button({
     Title = "穿墙",
-    Desc = "",
+    Desc = "废了",
     Locked = false,
     Callback = function()
         local Workspace = game:GetService("Workspace")
@@ -1549,7 +1542,7 @@ end)
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
 
@@ -1558,7 +1551,7 @@ WindUI:Notify({
 
 Button = TabHandles.YI:Button({
     Title = "飞车",
-    Desc = "",
+    Desc = "坐在车上就飞",
     Locked = false,
     Callback = function()
             local Speed = 100
@@ -1690,7 +1683,7 @@ Button = TabHandles.YI:Button({
 	WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
 	
@@ -1699,7 +1692,7 @@ Button = TabHandles.YI:Button({
 
 Button = TabHandles.YI:Button({
     Title = "爬墙",
-    Desc = "",
+    Desc = "怎么都可以爬墙",
     Locked = false,
     Callback = function()
         loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
@@ -1707,7 +1700,7 @@ Button = TabHandles.YI:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -1716,7 +1709,7 @@ WindUI:Notify({
 
 Button = TabHandles.YI:Button({
     Title = "动作",
-    Desc = "",
+    Desc = "支持R15体型",
     Locked = false,
     Callback = function()
        loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()
@@ -1724,7 +1717,7 @@ Button = TabHandles.YI:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })       
        
@@ -2481,7 +2474,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })                        
             
@@ -2498,7 +2491,7 @@ Button = TabHandles.gn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
     end
@@ -2514,7 +2507,7 @@ Button = TabHandles.gn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2531,7 +2524,7 @@ Button = TabHandles.gn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })                        
         
@@ -2548,7 +2541,7 @@ Button = TabHandles.gn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2565,7 +2558,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfus
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2582,7 +2575,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2599,7 +2592,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })                        
             
@@ -2616,7 +2609,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E7%8
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2633,184 +2626,170 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
     end
 })
 
-Toggle = TabHandles.QI:Toggle({
-    Title = "坐标工具",
+  local CoordManager = {
+     isEnabled = false,
+     currentCoord = nil, -- 存储当前坐标仪实例
+     -- 依赖服务
+     Players = game:GetService("Players"),
+     RunService = game:GetService("RunService"),
+     UserInputService = game:GetService("UserInputService"),
+     StarterGui = game:GetService("StarterGui"),
+     LocalPlayer = game:GetService("Players").LocalPlayer
+ }
+ -- 1. 创建全新坐标仪实例（每次开启都新建）
+ function CoordManager:CreateNewCoord()
+     -- 先销毁已有实例（防止重复）
+     self:DestroyCoord()
+     -- 新建坐标仪UI容器
+     local gui = Instance.new("ScreenGui")
+     gui.Name = "FXM_CoordDisplay_" .. os.clock() -- 唯一命名，避免冲突
+     gui.Parent = self.LocalPlayer.PlayerGui
+     -- 坐标显示容器
+     local container = Instance.new("Frame")
+     container.Size = UDim2.new(0,240,0,60)
+     container.Position = UDim2.new(1,-250,0,10)
+     container.BackgroundTransparency = 1
+     container.Parent = gui
+     -- 坐标背景框
+     local coordFrame = Instance.new("Frame")
+     coordFrame.Size = UDim2.new(0,200,1,0)
+     coordFrame.BackgroundColor3 = Color3.new(0,0,0)
+     coordFrame.BackgroundTransparency = 0.7
+     coordFrame.BorderSizePixel = 1
+     coordFrame.Parent = container
+     -- 坐标文本
+     local textLabel = Instance.new("TextLabel")
+     textLabel.Size = UDim2.new(1,0,1,0)
+     textLabel.BackgroundTransparency = 1
+     textLabel.TextColor3 = Color3.new(1,1,1)
+     textLabel.Font = Enum.Font.SourceSansBold
+     textLabel.TextSize = 14
+     textLabel.Text = "坐标加载中..."
+     textLabel.Parent = coordFrame
+     -- 复制按钮
+     local copyBtn = Instance.new("TextButton")
+     copyBtn.Size = UDim2.new(0,35,1,0)
+     copyBtn.Position = UDim2.new(0,205,0,0)
+     copyBtn.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
+     copyBtn.BackgroundTransparency = 0.5
+     copyBtn.Text = "复"
+     copyBtn.TextColor3 = Color3.new(1,1,1)
+     copyBtn.TextSize = 14
+     copyBtn.BorderSizePixel = 1
+     copyBtn.Parent = container
+     -- 复制功能
+     copyBtn.MouseButton1Click:Connect(function()
+         local char = self.LocalPlayer.Character
+         local root = char and char:FindFirstChild("HumanoidRootPart")
+         if root and setclipboard then
+             local coordStr = string.format("X: %.2f, Y: %.2f, Z: %.2f",
+                 root.Position.X, root.Position.Y, root.Position.Z
+             )
+             setclipboard(coordStr)
+             self.StarterGui:SetCore("SendNotification",{
+                 Title = "复制成功",
+                 Text = coordStr,
+                 Duration = 2
+             })
+         end
+     end)
+     -- 拖拽移动
+     local isDragging = false
+     local dragStartPos, containerStartPos = nil, nil
+     container.InputBegan:Connect(function(input)
+         if input.UserInputType == Enum.UserInputType.Touch then
+             isDragging = true
+             dragStartPos = input.Position
+             containerStartPos = container.Position
+         end
+     end)
+     self.UserInputService.InputChanged:Connect(function(input)
+         if isDragging and input.UserInputType == Enum.UserInputType.Touch then
+             local delta = input.Position - dragStartPos
+             container.Position = UDim2.new(
+                 containerStartPos.X.Scale, containerStartPos.X.Offset + delta.X,
+                 containerStartPos.Y.Scale, containerStartPos.Y.Offset + delta.Y
+             )
+         end
+     end)
+     self.UserInputService.InputEnded:Connect(function(input)
+         if input.UserInputType == Enum.UserInputType.Touch and isDragging then
+             isDragging = false
+         end
+     end)
+     -- 坐标更新事件
+     local updateConn = self.RunService.Heartbeat:Connect(function()
+         local char = self.LocalPlayer.Character
+         local root = char and char:FindFirstChild("HumanoidRootPart")
+         if root then
+             textLabel.Text = string.format("X: %.2f\nY: %.2f\nZ: %.2f",
+                 root.Position.X, root.Position.Y, root.Position.Z
+             )
+         else
+             textLabel.Text = "等待角色加载..."
+         end
+     end)
+     -- 存储当前坐标仪实例信息（UI+更新事件）
+     self.currentCoord = {
+         gui = gui,
+         updateConn = updateConn
+     }
+     return self.currentCoord
+ end
+ -- 2. 销毁当前坐标仪实例（关闭时彻底清除）
+ function CoordManager:DestroyCoord()
+     if self.currentCoord then
+         -- 断开更新事件
+         if self.currentCoord.updateConn then
+             self.currentCoord.updateConn:Disconnect()
+             self.currentCoord.updateConn = nil
+         end
+         -- 销毁UI
+         if self.currentCoord.gui and self.currentCoord.gui.Parent then
+             self.currentCoord.gui:Destroy()
+             self.currentCoord.gui = nil
+         end
+         -- 清空实例标记
+         self.currentCoord = nil
+     end
+ end
+-- 3. 开关控制逻辑（开启=重建，关闭=销毁）
+ function CoordManager:Toggle(Value)
+     self.isEnabled = Value
+     if Value then
+         -- 开启：创建全新坐标仪
+         self:CreateNewCoord()
+         self.StarterGui:SetCore("SendNotification",{
+             Title = "HB FXM坐标仪",
+             Text = "坐标仪已重新加载并开启",
+             Duration = 2
+         })
+     else
+         -- 关闭：销毁当前坐标仪
+         self:DestroyCoord()
+         self.StarterGui:SetCore("SendNotification",{
+             Title = "HB FXM坐标仪",
+             Text = "坐标仪已关闭并销毁",
+             Duration = 2
+         })
+     end
+ end
+ -- 坐标仪开关按钮（默认关闭，切换时重建/销毁）
+ Toggle = TabHandles.QI:Toggle({
+    Title = "坐标仪",
     Desc = "",
     Locked = false,
-    Callback = function()
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-
-local Window = Rayfield:CreateWindow({
-    Name = "坐标仪",
-    Size = UDim2.fromOffset(300, 150),
-    ConfigurationSaving = { Enabled = false }
-})
-
-local GeneralTab = Window:CreateTab("坐标仪", 4483345998)
-
-local coordSystem = {
-    isEnabled = true,
-    gui = nil,
-    updateConn = nil,
-    currentPos = Vector3.new(0, 0, 0)
-}
-
-local function createCoordUI()
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "StandaloneCoordDisplay"
-    gui.Parent = player.PlayerGui
-
-    local container = Instance.new("Frame")
-    container.Size = UDim2.new(0, 240, 0, 60)
-    container.Position = UDim2.new(1, -250, 0, 10)
-    container.BackgroundTransparency = 1
-    container.Parent = gui
-
-    local coordFrame = Instance.new("Frame")
-    coordFrame.Size = UDim2.new(0, 200, 1, 0)
-    coordFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-    coordFrame.BackgroundTransparency = 0.7
-    coordFrame.BorderSizePixel = 1
-    coordFrame.Parent = container
-
-    local textLabel = Instance.new("TextLabel")
-    textLabel.Size = UDim2.new(1, 0, 1, 0)
-    textLabel.BackgroundTransparency = 1
-    textLabel.TextColor3 = Color3.new(1, 1, 1)
-    textLabel.Font = Enum.Font.SourceSansBold
-    textLabel.TextSize = 14
-    textLabel.Text = "坐标加载中..."
-    textLabel.Parent = coordFrame
-
-    local copyBtn = Instance.new("TextButton")
-    copyBtn.Size = UDim2.new(0, 35, 1, 0)
-    copyBtn.Position = UDim2.new(0, 205, 0, 0)
-    copyBtn.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
-    copyBtn.BackgroundTransparency = 0.5
-    copyBtn.Text = "复"
-    copyBtn.TextColor3 = Color3.new(1, 1, 1)
-    copyBtn.TextSize = 14
-    copyBtn.BorderSizePixel = 1
-    copyBtn.Parent = container
-
-    copyBtn.MouseButton1Click:Connect(function()
-        if setclipboard and coordSystem.currentPos then
-            local coordStr = string.format("X: %.2f, Y: %.2f, Z: %.2f",
-                coordSystem.currentPos.X,
-                coordSystem.currentPos.Y,
-                coordSystem.currentPos.Z
-            )
-            setclipboard(coordStr)
-            Rayfield:Notify({
-                Title = "复制成功",
-                Content = coordStr,
-                Duration = 2
-            })
-        end
-    end)
-
-    local isDragging = false
-    local dragStartPos = nil
-    local containerStartPos = nil
-
-    container.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch then
-            isDragging = true
-            dragStartPos = input.Position
-            containerStartPos = container.Position
-        end
-    end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if isDragging and input.UserInputType == Enum.UserInputType.Touch then
-            local delta = input.Position - dragStartPos
-            container.Position = UDim2.new(
-                containerStartPos.X.Scale,
-                containerStartPos.X.Offset + delta.X,
-                containerStartPos.Y.Scale,
-                containerStartPos.Y.Offset + delta.Y
-            )
-        end
-    end)
-
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch and isDragging then
-            isDragging = false
-        end
-    end)
-
-    return {
-        gui = gui,
-        container = container,
-        text = textLabel
-    }
-end
-
-coordSystem.gui = createCoordUI()
-
-local function formatCoord(pos)
-    return string.format("X: %.2f\nY: %.2f\nZ: %.2f", pos.X, pos.Y, pos.Z)
-end
-
-local function updateCoord()
-    local char = player.Character
-    local root = char and char:FindFirstChild("HumanoidRootPart")
-    if root then
-        coordSystem.currentPos = root.Position
-        coordSystem.gui.text.Text = formatCoord(root.Position)
-    else
-        coordSystem.gui.text.Text = "等待角色加载..."
-        coordSystem.currentPos = nil
-    end
-end
-
-local function setEnabled(state)
-    coordSystem.isEnabled = state
-    coordSystem.gui.container.Visible = state
-    if state then
-        coordSystem.updateConn = RunService.Heartbeat:Connect(updateCoord)
-        updateCoord()
-    else
-        coordSystem.updateConn:Disconnect()
-    end
-end
-
-GeneralTab:CreateToggle({
-    Name = "开启坐标显示",
-    CurrentValue = coordSystem.isEnabled,
-    Callback = setEnabled
-})
-
-setEnabled(coordSystem.isEnabled)
-
-Window:OnClose(function()
-    if coordSystem.updateConn then
-        coordSystem.updateConn:Disconnect()
-    end
-    coordSystem.gui.gui:Destroy()
-    Rayfield = nil
-end)
-
-Rayfield:Notify({
-    Title = "坐标仪就绪",
-    Content = "作者HB FXM",
-    Duration = 3
-})
-
+    Callback = function(Value)
+CoordManager:Toggle(Value)
  end
 })
-
 -----------------------------------------------------------------------------------------------自然灾害
 Button = TabHandles.ESPgn:Button({
     Title = "黑洞",
@@ -2839,10 +2818,43 @@ Button = TabHandles.ESPgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })                                
     end
+})
+
+Button = TabHandles.ESPgn:Button({
+    Title = "无敌少侠",
+    Desc = "用了它，你就会变成城市超人",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414"))()
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
+
+Button = TabHandles.ESPgn:Button({
+    Title = "防止摔跤伤害",
+    Desc = "就算掉下去了，也毫发无伤，掉到水里面也会死的",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/cytj777i/Fall-injury/main/防止摔落伤害"))()
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
 })
 
 -----------------------------------------------------------------------------------------------被遗弃
@@ -2856,7 +2868,7 @@ Button = TabHandles.pbgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2873,7 +2885,7 @@ Button = TabHandles.tzgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
     end
@@ -2889,7 +2901,7 @@ Button = TabHandles.tzgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2906,7 +2918,7 @@ Button = TabHandles.tzgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
                        
@@ -2924,7 +2936,7 @@ Button = TabHandles.fzgn:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2940,7 +2952,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2957,7 +2969,7 @@ Button = TabHandles.A:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2974,7 +2986,7 @@ Button = TabHandles.B:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -2991,7 +3003,7 @@ Button = TabHandles.B:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -3008,7 +3020,7 @@ Button = TabHandles.C:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -3025,7 +3037,7 @@ Button = TabHandles.D:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -3042,7 +3054,7 @@ Button = TabHandles.E:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -3059,7 +3071,7 @@ Button = TabHandles.F:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })        
         
@@ -3095,7 +3107,7 @@ end
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })
 
@@ -3110,7 +3122,7 @@ Button = TabHandles.H:Button({
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",
-    Duration = 3, -- 3 seconds
+    Duration = 1, -- 3 seconds
     Icon = "layout-grid",
 })                
     end
