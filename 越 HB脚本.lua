@@ -2689,7 +2689,7 @@ WindUI:Notify({
          local char = self.LocalPlayer.Character
          local root = char and char:FindFirstChild("HumanoidRootPart")
          if root and setclipboard then
-             local coordStr = string.format(" %.2f,  %.2f,  %.2f",
+             local coordStr = string.format("%.2f,  %.2f,  %.2f",
                  root.Position.X, root.Position.Y, root.Position.Z
              )
              setclipboard(coordStr)
