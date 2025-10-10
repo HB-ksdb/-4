@@ -2600,7 +2600,7 @@ WindUI:Notify({
 })
 
 Button = TabHandles.gn:Button({
-    Title = "环山军区",
+    Title = "环山军区（收费）",
     Desc = "制作完成",
     Locked = false,
     Callback = function()
