@@ -2791,6 +2791,32 @@ CoordManager:Toggle(Value)
  end
 })
 -----------------------------------------------------------------------------------------------自然灾害
+
+Button = TabHandles.ESPgn:Button({
+    Title = "指南针（可以用下面的地方显示不了地图）",
+    Desc = "要使用的话就必须买指南针",
+    Locked = false,
+    Callback = function()
+    
+local p = game.Players.LocalPlayer
+local r, c, h = game.ReplicatedStorage.Remotes.Compass, p.Backpack:WaitForChild("Compass"), p.Character:WaitForChild("Humanoid")
+h:EquipTool(c)
+task.wait()
+r:FireServer("Vote Map", 3)
+r:FireServer("Vote Map", 4)
+task.wait()
+h:UnequipTools()
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
+
 Button = TabHandles.ESPgn:Button({
     Title = "黑洞",
     Desc = "点击加载",
