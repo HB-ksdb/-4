@@ -1,4 +1,562 @@
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+if game.GameId == 7709344486 then  --- Doors Lobby
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Rb脚本中心付费版：", -- Required
+	Text = "正在加载...偷走脑红...", -- Required
+	Icon = "rbxassetid://119970903874014" -- Optional
+})
+
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+  fireproximityprompt(prompt)
+end)
+local Doors
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local ProximityPromptService = game:GetService("ProximityPromptService")
+local StarterGui = game:GetService("StarterGui")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MovementControlGui"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local backgroundFrame = Instance.new("Frame")
+backgroundFrame.Name = "Background"
+backgroundFrame.Size = UDim2.new(0, 220, 0, 60)
+backgroundFrame.Position = UDim2.new(1, -230, 0, 10)
+backgroundFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+backgroundFrame.BorderSizePixel = 0
+backgroundFrame.Active = true
+backgroundFrame.Parent = screenGui
+
+local uiCornerBg = Instance.new("UICorner")
+uiCornerBg.CornerRadius = UDim.new(0, 10)
+uiCornerBg.Parent = backgroundFrame
+
+local buttonFrame = Instance.new("Frame")
+buttonFrame.Name = "ButtonFrame"
+buttonFrame.Size = UDim2.new(0, 200, 0, 30)
+buttonFrame.Position = UDim2.new(0, 10, 0, 5)
+buttonFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+buttonFrame.BorderSizePixel = 0
+buttonFrame.Parent = backgroundFrame
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 10)
+uiCorner.Parent = buttonFrame
+
+local uiGradient = Instance.new("UIGradient")
+uiGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 100, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(130, 50, 230))
+})
+uiGradient.Rotation = 45
+uiGradient.Parent = buttonFrame
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Thickness = 2
+uiStroke.Color = Color3.fromRGB(50, 50, 50)
+uiStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+uiStroke.Parent = buttonFrame
+
+local textButton = Instance.new("TextButton")
+textButton.Name = "MainButton"
+textButton.Size = UDim2.new(1, -10, 1, -10)
+textButton.Position = UDim2.new(0, 5, 0, 5)
+textButton.BackgroundTransparency = 1
+textButton.Text = "开始"
+textButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+textButton.TextSize = 18
+textButton.Font = Enum.Font.GothamBold
+textButton.Parent = buttonFrame
+
+local subtitleLabel = Instance.new("TextLabel")
+subtitleLabel.Name = "Subtitle"
+subtitleLabel.Size = UDim2.new(1, -20, 0, 15)
+subtitleLabel.Position = UDim2.new(0, 10, 0, 40)
+subtitleLabel.BackgroundTransparency = 1
+subtitleLabel.Text = "Rb脚本中心付费版"
+subtitleLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+subtitleLabel.TextSize = 12
+subtitleLabel.Font = Enum.Font.Gotham
+subtitleLabel.TextXAlignment = Enum.TextXAlignment.Center
+subtitleLabel.Parent = backgroundFrame
+
+do
+    local dragging, dragStart, startPos
+    backgroundFrame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = backgroundFrame.Position
+        end
+    end)
+    backgroundFrame.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local delta = input.Position - dragStart
+            backgroundFrame.Position = UDim2.new(
+                startPos.X.Scale,
+                startPos.X.Offset + delta.X,
+                startPos.Y.Scale,
+                startPos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
+
+local itemName = "Laser Cape"
+local normalSpeed = 20
+local speed = 650
+local speedConnection = nil
+local isSpeedActive = false
+local isActive = false
+
+local customPart, followConn, slowConn
+
+local function FindDelivery()
+    local plots = workspace:FindFirstChild("Plots")
+    if not plots then return nil,nil end
+    for _, plot in pairs(plots:GetChildren()) do
+        local sign = plot:FindFirstChild("PlotSign")
+        if sign then
+            local yourBase = sign:FindFirstChild("YourBase")
+            if yourBase and yourBase.Enabled then
+                local hitbox = plot:FindFirstChild("DeliveryHitbox")
+                if hitbox and hitbox:IsA("BasePart") then
+                    local cf = hitbox.CFrame
+                    local size = hitbox.Size / 2
+                    local offset = -cf.LookVector * (size.Z + 10)
+                    return hitbox, cf.Position + offset, cf.LookVector
+                end
+            end
+        end
+    end
+    return nil,nil,nil
+end
+
+function addpart()
+    if customPart then return end
+    local hitbox,pos = FindDelivery()
+    if not hitbox then return end
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(10,5,10)
+    part.Anchored = true
+    part.Position = pos
+    part.Color = Color3.fromRGB(255,0,0)
+    part.Material = Enum.Material.Neon
+    part.Parent = workspace
+    customPart = part
+    followConn = RunService.Heartbeat:Connect(function()
+        if customPart and hitbox and hitbox.Parent then
+            local cf = hitbox.CFrame
+            local size = hitbox.Size/4
+            local offset = -cf.LookVector * (size.Z+15)
+            customPart.CFrame = CFrame.new(cf.Position+offset)
+        end
+    end)
+    slowConn = RunService.Heartbeat:Connect(function()
+        if customPart then
+            for _,plr in pairs(Players:GetPlayers()) do
+                if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+                    local hrp2 = plr.Character.HumanoidRootPart
+                    local hum = plr.Character:FindFirstChild("Humanoid")
+                    if hum and (hrp2.Position - customPart.Position).Magnitude <= 20 then
+                        hum.WalkSpeed = 0.1
+                        hum.JumpPower = 0.1
+                    end
+                end
+            end
+        end
+    end)
+end
+
+function removepart()
+    if customPart then customPart:Destroy() customPart = nil end
+    if followConn then followConn:Disconnect() end
+    if slowConn then slowConn:Disconnect() end
+end
+
+local floor1 = {
+    Vector3.new(-457, -8, -100), Vector3.new(-457, -8, 7), Vector3.new(-456, -8, 114), Vector3.new(-456, -8, 221),
+    Vector3.new(-363, -8, 221), Vector3.new(-364, -8, 112), Vector3.new(-365, -8, 4), Vector3.new(-364, -8, -103)
+}
+local floor2 = {
+    Vector3.new(-522, 12, -132), Vector3.new(-521, 12, -25), Vector3.new(-523, 12, 83), Vector3.new(-521, 12, 190),
+    Vector3.new(-300, 12, -70), Vector3.new(-298, 12, 36), Vector3.new(-299, 12, 143), Vector3.new(-299, 12, 250)
+}
+local floor2Secondary = {
+    [Vector3.new(-522, 12, -132)] = Vector3.new(-463, -8, -129),
+    [Vector3.new(-521, 12, -25)] = Vector3.new(-471, -8, -32),
+    [Vector3.new(-523, 12, 83)] = Vector3.new(-469, -8, 81),
+    [Vector3.new(-521, 12, 190)] = Vector3.new(-468, -8, 188),
+    [Vector3.new(-300, 12, -70)] = Vector3.new(-351, -8, -68),
+    [Vector3.new(-298, 12, 36)] = Vector3.new(-351, -8, 39),
+    [Vector3.new(-299, 12, 143)] = Vector3.new(-350, -8, 146),
+    [Vector3.new(-299, 12, 250)] = Vector3.new(-353, -8, 251)
+}
+
+local function getCurrentFloor()
+    local yPos = hrp.Position.Y
+    if yPos >= -8 and yPos <= -1 then
+        return floor1, "floor1"
+    elseif yPos >= 8 and yPos <= 15 then
+        return floor2, "floor2"
+    elseif yPos >= 16 then
+        return nil, "floor3"
+    else
+        return floor1, "floor1"
+    end
+end
+
+local function checkFloor3()
+    local _, floorName = getCurrentFloor()
+    if floorName == "floor3" then
+        StarterGui:SetCore("SendNotification", {
+            Title = "Jack 827",
+            Text = "不支持三楼",
+            Duration = 10
+        })
+        return true
+    end
+    return false
+end
+
+local function enableSpeedBoost()
+    if speedConnection then
+        speedConnection:Disconnect()
+    end
+    isSpeedActive = true
+    speedConnection = RunService.Heartbeat:Connect(function()
+        if humanoid and hrp and humanoid.MoveDirection.Magnitude > 0 then
+            local moveDir = humanoid.MoveDirection
+            hrp.Velocity = Vector3.new(moveDir.X * speed, hrp.Velocity.Y, moveDir.Z * speed)
+        end
+    end)
+end
+local function disableSpeedBoost()
+    if speedConnection then
+        speedConnection:Disconnect()
+        speedConnection = nil
+    end
+    isSpeedActive = false
+    humanoid.WalkSpeed = normalSpeed
+    hrp.Velocity = Vector3.new(0, hrp.Velocity.Y, 0)
+end
+
+function stopAll()
+    isActive = false
+    disableSpeedBoost()
+    if humanoid then
+        humanoid.PlatformStand = false
+    end
+    if hrp then
+        hrp.Velocity = Vector3.new(0, hrp.Velocity.Y, 0)
+    end
+end
+
+local function findClosestLocation(floor)
+    local closestLocation = nil
+    local shortestDistance = math.huge
+    for _, location in ipairs(floor) do
+        local distance = (hrp.Position - location).Magnitude
+        if distance < shortestDistance then
+            shortestDistance = distance
+            closestLocation = location
+        end
+    end
+    return closestLocation
+end
+
+local function useRemoteOnce()
+    local remote = ReplicatedStorage:FindFirstChild("Packages")
+    if remote then
+        remote = remote:FindFirstChild("Net")
+        if remote then
+            remote = remote:FindFirstChild("RE/UseItem")
+            if remote and game.Players.LocalPlayer.Character:FindFirstChild("LeftUpperArm") then
+                local args = {
+                    Vector3.new(-309.9, -4.71, 221.58),
+                    game.Players.LocalPlayer.Character:WaitForChild("LeftUpperArm")
+                }
+                remote:FireServer(unpack(args))
+            end
+        end
+    end
+end
+
+local function autoWalkTo(targetPosition, walkSpeed)
+    walkSpeed = walkSpeed or 50
+    local reached = false
+    spawn(function()
+        while not reached and character and hrp and isActive do
+            local direction = (targetPosition - hrp.Position)
+            local distance = direction.Magnitude
+            if distance < 1.4 then
+                reached = true
+                break
+            end
+            direction = direction.Unit
+            hrp.Velocity = Vector3.new(direction.X * walkSpeed, hrp.Velocity.Y, direction.Z * walkSpeed)
+            task.wait()
+        end
+        if hrp then
+            hrp.Velocity = Vector3.new(0, hrp.Velocity.Y, 0)
+        end
+    end)
+    repeat task.wait() until reached or not isActive
+    return reached
+end
+
+local function FindDeliveryPos()
+    local plots = workspace:FindFirstChild("Plots")
+    if not plots then return nil,nil end
+    for _, plot in pairs(plots:GetChildren()) do
+        local sign = plot:FindFirstChild("PlotSign")
+        if sign then
+            local yourBase = sign:FindFirstChild("YourBase")
+            if yourBase and yourBase.Enabled then
+                local hitbox = plot:FindFirstChild("DeliveryHitbox")
+                if hitbox and hitbox:IsA("BasePart") then
+                    local cf = hitbox.CFrame
+                    local size = hitbox.Size / 2
+                    local offset = -cf.LookVector * (size.Z + 10)
+                    return cf.Position + offset, cf.LookVector
+                end
+            end
+        end
+    end
+    return nil,nil
+end
+
+function activate()
+    if checkFloor3() then return end
+    isActive = true
+    local currentFloor, currentFloorName = getCurrentFloor()
+    local item = character:FindFirstChild(itemName) or player.Backpack:FindFirstChild(itemName)
+    if not item then isActive = false return end
+    humanoid:EquipTool(item)
+    useRemoteOnce()
+    enableSpeedBoost()
+    local closestLocation = findClosestLocation(currentFloor)
+    if closestLocation then
+        local success = autoWalkTo(closestLocation, 700)
+        if not success or not isActive then disableSpeedBoost() isActive = false return end
+        if currentFloorName == "floor2" and floor2Secondary[closestLocation] then
+            local secondarySuccess = autoWalkTo(floor2Secondary[closestLocation], 600)
+            if not secondarySuccess or not isActive then disableSpeedBoost() isActive = false return end
+        end
+    else
+        disableSpeedBoost()
+        isActive = false
+        return
+    end
+    local plotPos, lookVector = FindDeliveryPos()
+    if plotPos and lookVector then
+        autoWalkTo(plotPos, 900)
+        disableSpeedBoost()
+    else
+        disableSpeedBoost()
+    end
+    isActive = false
+end
+
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    humanoid = character:WaitForChild("Humanoid")
+    hrp = character:WaitForChild("HumanoidRootPart")
+    if isSpeedActive then
+        enableSpeedBoost()
+    end
+end)
+
+local running = false
+local waitingForInteraction = false
+
+local function StopAllModes()
+    stopAll()
+    running = false
+    waitingForInteraction = false
+    textButton.Text = "开始"
+    subtitleLabel.Text = "已停止"
+end
+
+local function StartRoutine()
+    if running then return end
+    running = true
+    subtitleLabel.Text = "执行中..."
+    activate()
+    running = false
+    StopAllModes()
+end
+
+local function StartWaiting()
+    if running or waitingForInteraction then return end
+    waitingForInteraction = true
+    textButton.Text = "停止"
+    subtitleLabel.Text = "等待..."
+end
+
+textButton.MouseButton1Click:Connect(function()
+    if not waitingForInteraction and not running then
+        StartWaiting()
+    else
+        StopAllModes()
+    end
+end)
+
+ProximityPromptService.PromptTriggered:Connect(function(prompt, plr)
+    if plr ~= player then return end
+    if not waitingForInteraction then return end
+    waitingForInteraction = false
+    subtitleLabel.Text = "等待1.4秒..."
+    task.delay(1.4, function()
+        if not running and not waitingForInteraction then
+            StartRoutine()
+        end
+    end)
+end)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Rb脚本中心付费版：", 
+	Text = "成功", 
+	Icon = "rbxassetid://119970903874014" 
+})()
+elseif game.GameId == 2440500124 then  --- Doors Lobby
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Rb脚本中心付费版：", -- Required
+	Text = "正在加载...Doors...", -- Required
+	Icon = "rbxassetid://119970903874014" -- Optional
+})
+local WindUI = loadstring(game:HttpGet("https://pastebin.com/raw/qYYUTE4g"))()
+
+local EntityModules = game:GetService("ReplicatedStorage").ModulesClient.EntityModules
+local gameData = game.ReplicatedStorage:WaitForChild("GameData")
+local floor = gameData:WaitForChild("Floor")
+local isMines = floor.Value == "Mines"
+local isHotel = floor.Value == "Hotel"
+local isBackdoor = floor.Value == "Backdoor"
+local isGarden = floor.Value == "Garden"
+
+function Distance(pos)
+	if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+		return (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - pos).Magnitude
+	end
+end
+
+_G.GetOldBright = {
+	Brightness = game.Lighting.Brightness,
+	ClockTime = game.Lighting.ClockTime,
+	FogEnd = game.Lighting.FogEnd,
+	GlobalShadows = game.Lighting.GlobalShadows,
+	OutdoorAmbient = game.Lighting.OutdoorAmbient
+}
+
+WindUI:Localization({
+    Enabled = true,
+    Prefix = "loc:",
+    DefaultLanguage = "ru",
+    Translations = {
+        ["ru"] = {
+            ["WINDUI_EXAMPLE"] = "WindUI Пример",
+            ["WELCOME"] = "Добро пожаловать в WindUI!",
+            ["LIB_DESC"] = "Библиотека для создания красивых интерфейсов",
+            ["SETTINGS"] = "Настройки",
+            ["APPEARANCE"] = "Внешний вид",
+            ["FEATURES"] = "Функционал",
+            ["UTILITIES"] = "Инструменты",
+            ["UI_ELEMENTS"] = "UI Элементы",
+            ["CONFIGURATION"] = "Конфигурация",
+            ["SAVE_CONFIG"] = "Сохранить конфигурацию",
+            ["LOAD_CONFIG"] = "Загрузить конфигурацию",
+            ["THEME_SELECT"] = "Выберите тему",
+            ["TRANSPARENCY"] = "Прозрачность окна"
+        },
+        ["en"] = {
+            ["WINDUI_EXAMPLE"] = "WindUI Example",
+            ["WELCOME"] = "Welcome to WindUI!",
+            ["LIB_DESC"] = "Beautiful UI library for Roblox",
+            ["SETTINGS"] = "Settings",
+            ["APPEARANCE"] = "Appearance",
+            ["FEATURES"] = "Features",
+            ["UTILITIES"] = "Utilities",
+            ["UI_ELEMENTS"] = "UI Elements",
+            ["CONFIGURATION"] = "Configuration",
+            ["SAVE_CONFIG"] = "Save Configuration",
+            ["LOAD_CONFIG"] = "Load Configuration",
+            ["THEME_SELECT"] = "Select Theme",
+            ["TRANSPARENCY"] = "Window Transparency"
+        }
+    }
+})
+
+WindUI.TransparencyValue = 0.2
+WindUI:SetTheme("Dark")
+
+local function gradient(text, startColor, endColor)
+    local result = ""
+    for i = 1, #text do
+        local t = (i - 1) / (#text - 1)
+        local r = math.floor((startColor.R + (endColor.R - startColor.R) * t) * 255)
+        local g = math.floor((startColor.G + (endColor.G - startColor.G) * t) * 255)
+        local b = math.floor((startColor.B + (endColor.B - startColor.B) * t) * 255)
+        result = result .. string.format('<font color="rgb(%d,%d,%d)">%s</font>', r, g, b, text:sub(i, i))
+    end
+    return result
+end
+
+
+local UserGui = Instance.new("ScreenGui", game.CoreGui)
+local UserLabel = Instance.new("TextLabel", UserGui)
+local UIGradient = Instance.new("UIGradient")
+
+UserGui.Name = "UserGui"
+UserGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+UserGui.Enabled = true
+UserLabel.Name = "UserLabel"
+UserLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+UserLabel.BackgroundTransparency = 1
+UserLabel.BorderColor3 = Color3.new(0, 0, 0)
+UserLabel.Position = UDim2.new(0.80, 0.80, 0.00090, 0)
+UserLabel.Size = UDim2.new(0, 135, 0, 50)
+UserLabel.Font = Enum.Font.GothamSemibold
+UserLabel.Text = "尊敬的："..game.Players.LocalPlayer.Character.Name.."付费版用户，欢迎使用Rb脚本中心！"
+UserLabel.TextColor3 = Color3.new(1, 1, 1)
+UserLabel.TextScaled = true
+UserLabel.TextSize = 14
+UserLabel.TextWrapped = true
+UserLabel.Visible = true
+
+UIGradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)),
+    ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)),
+    ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)),
+    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)),
+    ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)),
+    ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)),
+    ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)),
+    ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))
+}
+UIGradient.Rotation = 10
+UIGradient.Parent = UserLabel
+
+local TweenService = game:GetService("TweenService")
+local tweeninfo = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+local tween = TweenService:Create(UIGradient, tweeninfo, {Rotation = 360})
+tween:Play()
 
 local Window = WindUI:CreateWindow({
     Title = ((isHotel and "Rb脚本中心 | 酒店") or (isMines and "Rb脚本中心 | 矿井") or (isBackdoor and "Rb脚本中心 | 后门")),
@@ -1080,8 +1638,8 @@ end
 
 WindUI:Notify({
             Title = "Rb脚本中心：",
-            Content = state and "已开启透视" or "已关闭透视",
-            Icon = state and "check" or "x",
+            Content = Value and "已开启透视" or "已关闭透视",
+            Icon = Value and "check" or "x",
             IconThemed = true, -- automatic color icon to theme 
             Duration = 5,
         })
@@ -1089,7 +1647,7 @@ WindUI:Notify({
 })
 
 if isBackdoor then
-local Toggle = Tab:Toggle({
+TabHandles.ESPgn:Toggle({
     Title = "透视时间拉杆",
     Icon = "check",
     Value = false,
@@ -2202,7 +2760,7 @@ WindUI:Notify({
 	 end
 })
 
-local Button = Tab:Button({
+TabHandles.Appearance:Paragraph({
     Title = "自定义界面",
     Desc = "个性化您的体验",
     Image = "palette",
@@ -4368,67 +4926,7 @@ WindUI:Popup({
     }}
 })
 
-WindUI.Services.LuarmorService = {
-    Name = "Luarmor 验证",
-    Icon = "key",
-    Args = {"ScriptId", "Discord"},
-    New = function(ScriptId, Discord)
-        print("初始化Luarmor服务: ScriptId=", ScriptId, "Discord=", Discord)
-        
-        -- 安全加载Luarmor库
-        local success, API = pcall(function()
-            return loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()
-        end)
-        
-        if not success or not API then
-            warn("无法加载Luarmor库: " .. tostring(API))
-            return {
-                Verify = function() return false, "服务初始化失败" end,
-                Copy = function() return "无法复制" end
-            }
-        end
-        
-        API.script_id = ScriptId
-        
-        return {
-            Verify = function(key)
-                print("验证卡密: " .. tostring(key))
-                local status = API.check_key(key)
-                
-                if not status then
-                    warn("验证API返回nil")
-                    return false, "验证服务无响应"
-                end
-                
-                print("验证状态: ", status.code, " - ", status.message)
-                
-                if status.code == "KEY_VALID" then
-                    return true, "验证成功"
-                elseif status.code == "KEY_HWID_LOCKED" then
-                    return false, "HWID不匹配，请通过Discord重置"
-                elseif status.code == "KEY_EXPIRED" then
-                    return false, "卡密已过期"
-                else
-                    return false, "卡密无效 (" .. (status.message or "未知错误") .. ")"
-                end
-            end,
-            
-            Copy = function()
-                print("复制Discord链接: " .. Discord)
-                if setclipboard then
-                    setclipboard(Discord)
-                elseif toclipboard then
-                    toclipboard(Discord)
-                else
-                    return "无法复制，注入器不支持剪贴板操作"
-                end
-                return "Discord链接已复制"
-            end
-        }
-    end
-}
 
-local Window = WindUI:CreateWindow({
     Title = "Rb脚本中心",
     Icon = "rbxassetid://105933835532108",
     Author = "付费版 Yungengxin",
@@ -4460,36 +4958,7 @@ local Window = WindUI:CreateWindow({
             })
         end
     },
-    SideBarWidth = 220,
-KeySystem = {
-        Note = "请输入您的卡密进行验证",
-        Thumbnail = {
-            Image = "rbxassetid://119970903874014",
-            Title = "Rb脚本中心"
-        },
-        API = {{
-            Type = "LuarmorService",  -- 使用新的服务名称
-            ScriptId = "6fa2f5b2bc6d2ae88b069bdb76c0e1e8",  -- 确保这是正确的ScriptId
-            Discord = "https://ads.luarmor.net/get_key?for=Rb_Script_HUB_FFB-AGCdDBQkFGED"  -- 确保这是正确的Discord链接
-        }},
-        SaveKey = false
-    },
-    HideSearchBar = false,
-    ScrollBarEnabled = true
-})
-
-if Window.KeySystem and Window.KeySystem.API then
-    local service = Window.KeySystem.API[1]
-    if service and service.Verify then
-        -- 在实际验证流程中，这里会调用service:Verify(key)
-        print("服务验证函数可用")
-    else
-        warn("服务验证函数不可用")
-    end
-else
-    warn("KeySystem API未正确初始化")
-end
-
+    
 local UserGui = Instance.new("ScreenGui", game.CoreGui)
 local UserLabel = Instance.new("TextLabel", UserGui)
 local UIGradient = Instance.new("UIGradient")
@@ -5121,7 +5590,7 @@ TabHandles.xx:Paragraph({
     }}
 })
 
-local Toggle = Tab:Toggle({
+TabHandles.xx:Paragraph({
     Title = "您的账号注册时间（天）：",
     Desc = "" .. game:GetService("Players").LocalPlayer.AccountAge .. "",
     Buttons = {{
@@ -5148,7 +5617,7 @@ local Toggle = Tab:Toggle({
     }}
 })
 
-local Button = Tab:Button({
+TabHandles.xx:Paragraph({
     Title = "您所在的服务器名称：",
     Desc = "" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "",
     Buttons = {{
@@ -5202,7 +5671,7 @@ TabHandles.xx:Paragraph({
     }}
 })
 
-local Button = Tab:Button({
+TabHandles.xx:Paragraph({
     Title = "您的注入器：",
     Desc = "" .. identifyexecutor() .. "",
     Image = "rbxassetid://129287693322764",
@@ -5243,12 +5712,12 @@ local Button = Tab:Button({
     }}
 })
 
-local Button = Tab:Button({
+TabHandles.xx:Code({
     Title = "Rb脚本中心交流群（主群）",
     Code = [[https://qm.qq.com/q/csDfI4BZNm]]
 })
 
-local Button = Tab:Button({
+TabHandles.xx:Code({
     Title = "Rb脚本中心交流群（Discord群）",
     Code = [[https://discord.gg/qZmW3PYd9T]]
 })
