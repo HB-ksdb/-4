@@ -61,6 +61,23 @@ local TabHandles = {
 }
 
 Button = TabHandles.Q:Button({
+    Title = "HB FXM通用脚本",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759031266212.lua.txt",true))()
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
+TabHandles.Q:Divider()
+
+Button = TabHandles.Q:Button({
     Title = "指南针（可以用下面的地方显示不了地图）",
     Desc = "要使用的话就必须买指南针",
     Locked = false,
