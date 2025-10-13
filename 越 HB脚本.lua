@@ -277,6 +277,39 @@ Slider = TabHandles.YI:Slider({
 })
 TabHandles.YI:Divider()
 -----------------------------------------------------------------------------------------------飞行
+
+xrayEnabled = false
+function xray()
+    for _, v in pairs(workspace:GetDescendants()) do
+        if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and
+            not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
+            v.LocalTransparencyModifier = xrayEnabled and 0.5 or 0
+        end
+    end
+end
+
+local featureToggle = TabHandles.YI:Toggle({
+    Title = "地图透视",
+    Desc = "Xray",
+    Value = false,
+    Callback = function(state)
+        if state then
+            xrayEnabled = true
+            xray()
+        else
+            xrayEnabled = false
+            xray()
+        end
+        WindUI:Notify({
+            Title = "HB FXM：",
+            Content = state and "地图透视已开启，若仍不清楚可开启其他视觉功能" or
+                "地图透视已关闭",
+            Icon = state and "check" or "x",
+            Duration = 2
+        })
+    end
+})
+
 Button =TabHandles.YI:Button({
     Title = "飞行v1",
     Desc = "HB FXM飞行",
