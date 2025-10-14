@@ -96,14 +96,14 @@ local Window = WindUI:CreateWindow({
     })
     
 -- ================ 3.窗口显示 ================
-Window:EditOpenButton({
-    Title = "越 HB脚本",-- = 名字 =
-    Icon = "monitor",
-    CornerRadius = UDim.new(0, 16),
-    StrokeThickness = 2,
-    Color = openButtonColor,
-    Draggable = true,
-})
+        Window:EditOpenButton({
+            Title = " HB FXM脚本",
+            Icon = "sword",
+            CornerRadius = UDim.new(0, 16),
+            StrokeThickness = 2,
+            Color = ColorSequence.new(Color3.fromHex("FF0F7B"), Color3.fromHex("F89B29")),
+            Draggable = true
+        })
 
 
 
