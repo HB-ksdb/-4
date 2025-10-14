@@ -1,7 +1,33 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+        WindUI:Popup({
+            Title = "👑尊贵的"..game.Players.LocalPlayer.DisplayName.."用户",
+            Icon = "info",
+            Content = "欢迎使用HB FXM脚本",
+            Buttons = {
+                {
+                    Title = "取消",
+                    Callback = function() end,
+                    Variant = "Tertiary",
+                },
+                {
+                    Title = "执行",
+                    Icon = "arrow-right",
+                    Callback = function() 
+                        DDZX = true 
+                    end,
+                    Variant = "Primary",
+                }   
+            }
+        })
+
+        repeat
+            wait()
+        until DDZX
+       
+
 local Window = WindUI:CreateWindow({
-        Title = "越 HB<font color='#00FF00'>1.5</font>",
+        Title = " 越 HB<font color='#00FF00'>1.5</font>",
         Icon = "rbxassetid://4483362748",
         IconTransparency = 0.5,
         IconThemed = true,
@@ -100,6 +126,80 @@ WindUI:Notify({
 })                        
             
  end
+})
+
+Button = TabHandles.Q:Button({
+    Title = "防甩飞",
+    Desc = "别人想甩飞你是不可能的",
+    Locked = false,
+    Callback = function()
+        local Services = setmetatable({}, {__index = function(Self, Index)
+local NewService = game.GetService(game, Index)
+if NewService then
+Self[Index] = NewService
+end
+return NewService
+end})
+
+local LocalPlayer = Services.Players.LocalPlayer
+
+local function PlayerAdded(Player)
+   local Detected = false
+   local Character;
+   local PrimaryPart;
+
+   local function CharacterAdded(NewCharacter)
+       Character = NewCharacter
+       repeat
+           wait()
+           PrimaryPart = NewCharacter:FindFirstChild("HumanoidRootPart")
+       until PrimaryPart
+       Detected = false
+   end
+
+   CharacterAdded(Player.Character or Player.CharacterAdded:Wait())
+   Player.CharacterAdded:Connect(CharacterAdded)
+   Services.RunService.Heartbeat:Connect(function()
+       if (Character and Character:IsDescendantOf(workspace)) and (PrimaryPart and PrimaryPart:IsDescendantOf(Character)) then
+           if PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 or PrimaryPart.AssemblyLinearVelocity.Magnitude > 100 then
+               if Detected == false then
+                   game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                       Text = "Fling Exploit Detected Player : "..tostring(Player);
+                       Color = Color3.fromRGB(255, 200, 0);
+                   })
+               end
+               Detected = true
+               for i,v in ipairs(Character:GetDescendants()) do
+                   if v:IsA("BasePart") then
+                       v.CanCollide = false
+                       v.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                       v.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                       v.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                   end
+               end
+               PrimaryPart.CanCollide = false
+               PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+           end
+       end
+   end)
+end
+
+for i,v in ipairs(Services.Players:GetPlayers()) do
+   if v ~= LocalPlayer then
+       PlayerAdded(v)
+   end
+end
+Services.Players.PlayerAdded:Connect(PlayerAdded)            
+
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})
+    end
 })
 
 Button = TabHandles.Q:Button({

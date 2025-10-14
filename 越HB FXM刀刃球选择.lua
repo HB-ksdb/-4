@@ -1,7 +1,33 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+        WindUI:Popup({
+            Title = "👑尊贵的"..game.Players.LocalPlayer.DisplayName.."用户",
+            Icon = "info",
+            Content = "欢迎使用HB FXM脚本",
+            Buttons = {
+                {
+                    Title = "取消",
+                    Callback = function() end,
+                    Variant = "Tertiary",
+                },
+                {
+                    Title = "执行",
+                    Icon = "arrow-right",
+                    Callback = function() 
+                        DDZX = true 
+                    end,
+                    Variant = "Primary",
+                }   
+            }
+        })
+
+        repeat
+            wait()
+        until DDZX
+       
+
 local Window = WindUI:CreateWindow({
-        Title = "越 HB<font color='#00FF00'>1.5</font>",
+        Title = " 越 HB<font color='#00FF00'>1.5</font>",
         Icon = "rbxassetid://1279310654146347060",
         IconTransparency = 0.5,
         IconThemed = true,

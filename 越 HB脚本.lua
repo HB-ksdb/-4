@@ -1,22 +1,23 @@
------------------黑名单系统------------------
+-- ================ 黑名单 ================
+-- 名字用户（别人用不了脚本）
 local blacklist = {
     "BadPlayer1",
     "Hacker123",
     "CheaterABC",
     "",
     "要拉黑的用户名2"
-    -- 在这里添加要拉黑的用户名
+-- ================ 添加要拉黑的用户名 ================
 }
 
--- 检查当前玩家是否在黑名单中
+-- ================ 检查当前玩家是否在黑名单中 ================
 local function checkBlacklist()
     local localPlayer = game.Players.LocalPlayer
     local username = localPlayer.Name
     
-    -- 遍历黑名单检查
+-- ================ 遍历黑名单检查 ================
     for _, blacklistedName in ipairs(blacklist) do
         if username == blacklistedName then
-            -- 如果在黑名单中，执行踢出代码
+-- ================ 如果在黑名单中，执行踢出代码 ================
             game.Players.LocalPlayer:Kick("你已被HB FXM脚本加入至黑名单，我让你惹HB FXM现在好了吧？你活该！")
             return true
         end
@@ -24,21 +25,64 @@ local function checkBlacklist()
     return false
 end
 
--- 立即执行检查
+-- ================ 立即执行检查 ================
 if checkBlacklist() then
-    return  -- 如果在黑名单中，停止执行后续代码
+    return  -- = 如果在黑名单中，停止执行后续代码 =
 end
------------------彩虹字符------------------
+-- ================ 彩虹字符 ================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ================ 1.执行UI加载器…… ================
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+
+-- ================ 1.5.弹窗窗口显示 ================
+        WindUI:Popup({
+            Title = "👑尊贵的"..game.Players.LocalPlayer.DisplayName.."用户",
+            Icon = "info",
+            Content = "欢迎使用HB FXM脚本",
+            Buttons = {
+                {
+                    Title = "取消",
+                    Callback = function() end,
+                    Variant = "Tertiary",
+                },
+                {
+                    Title = "执行",
+                    Icon = "arrow-right",
+                    Callback = function() 
+                        DDZX = true 
+                    end,
+                    Variant = "Primary",
+                }   
+            }
+        })
+
+        repeat
+            wait()
+        until DDZX       
+
+-- ================ 2.Ul背景…… ================
 local Window = WindUI:CreateWindow({
         Title = "越 HB<font color='#00FF00'>1.5</font>",
-        Icon = "rbxassetid://1279310654146347060",
+        Icon = "rbxassetid://1279310654146347060",-- =  =背景右上角的图片
         IconTransparency = 0.5,
         IconThemed = true,
-        Author = "作者:HB",
+        Author = "作者:HB",-- = 名字 =
         Folder = "CloudHub",
-        Size = UDim2.fromOffset(400, 300),
+        Size = UDim2.fromOffset(400, 300),-- = 背景大小 =
         Transparent = true,
         Theme = "Light",
         User = {
@@ -48,12 +92,12 @@ local Window = WindUI:CreateWindow({
         },
         SideBarWidth = 200,
         ScrollBarEnabled = true,
-        Background = "rbxassetid://96291371536118"
+        Background = "rbxassetid://96291371536118"-- = 背景图ID =
     })
     
-
+-- ================ 3.窗口显示 ================
 Window:EditOpenButton({
-    Title = "越 HB脚本",
+    Title = "越 HB脚本",-- = 名字 =
     Icon = "monitor",
     CornerRadius = UDim.new(0, 16),
     StrokeThickness = 2,
@@ -61,10 +105,14 @@ Window:EditOpenButton({
     Draggable = true,
 })
 
+
+
 Window:Tag({
     Title = "v1.5越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
+
+
 
 Window:Tag({
         Title = "越 HB版", -- 标签汉化
@@ -75,8 +123,10 @@ Window:Tag({
         Color = Color3.fromHex("#000000")
     })
 
------------------------------------------------------------------------------------------------公告
-local Tab = Window:Tab({
+
+
+-- ================ 公告或通知 ================
+local Tab = Window:Tab({-- = Tab =
     Title = "公告",
     Icon = "layout-grid",
     Locked = false,
@@ -90,15 +140,19 @@ local Paragraph = Tab:Paragraph({
     Color = "White"
 })
 
+
+-- ================ 图片x ================
 local Paragraph = Tab:Paragraph({
     Title = "欢迎使用 越 HB脚本",
     Desc = "QQ群 1055870765",
-    Image = "rbxassetid://73478000258877",
+    Image = "rbxassetid://73478000258877",-- = ID照片小 =
     ImageSize = 42,
-    Thumbnail = "rbxassetid://79087575647853",
+    Thumbnail = "rbxassetid://79087575647853",-- = ID图片大 =
     ThumbnailSize = 120,
 })
 
+
+-- ================ 你的账号用户名ID ================
 local Paragraph = Tab:Paragraph({
     Title = "您的用户名ID：",
     Desc = "" .. game:GetService("Players").LocalPlayer.UserId .. "",
@@ -126,6 +180,8 @@ local Paragraph = Tab:Paragraph({
     }}
 })
 
+
+-- ================ 服务器名 ================
 local Paragraph = Tab:Paragraph({
     Title = "您所在的服务器名称：",
     Desc = "" .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name .. "",
@@ -153,6 +209,8 @@ local Paragraph = Tab:Paragraph({
     }}
 })
 
+
+-- ================ 账号注册时间天 ================
 local Paragraph = Tab:Paragraph({
     Title = "您的账号注册时间（天）：",
     Desc = "" .. game:GetService("Players").LocalPlayer.AccountAge .. "",
@@ -180,6 +238,8 @@ local Paragraph = Tab:Paragraph({
     }}
 })
 
+
+-- ================ 测试注入器 ================
 local Paragraph = Tab:Paragraph({
     Title = "您的注入器：",
     Desc = "" .. identifyexecutor() .. "",
@@ -221,7 +281,9 @@ local Paragraph = Tab:Paragraph({
     }}
 })
 
------------------------------------------------------------------------------------------------通用    
+
+
+-- ================ 选项下拉 ================
 local Tabs = {
     Main = Window:Section({ Title = "通用", Opened = true }),
 }
@@ -232,7 +294,10 @@ local TabHandles = {
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),    
 }
 
------------------------------------------------------------------------------------------------跳跃
+
+
+
+-- ================ 更改跳跃 ================
 Slider = TabHandles.YI:Slider({
     Title = "跳跃",
     Value = {
@@ -247,7 +312,7 @@ Slider = TabHandles.YI:Slider({
         end
     end
 })
------------------------------------------------------------------------------------------------速度
+-- ================ 更改速度 ================
 Slider = TabHandles.YI:Slider({
     Title = "速度",
     Value = {
@@ -262,7 +327,7 @@ Slider = TabHandles.YI:Slider({
         end
     end
 })
------------------------------------------------------------------------------------------------重量        
+-- ================ 更改重量 ================
 Slider = TabHandles.YI:Slider({
     Title = "重量",
     Value = {
@@ -276,7 +341,7 @@ Slider = TabHandles.YI:Slider({
     end
 })
 TabHandles.YI:Divider()
------------------------------------------------------------------------------------------------飞行
+-- ================ 通用下 ================
 
 xrayEnabled = false
 function xray()
@@ -797,7 +862,9 @@ WindUI:Notify({
 })
     end
 })
------------------------------------------------------------------------------------------------隐身
+
+
+
 local Button = TabHandles.YI:Button({
     Title = "隐身自己",
     Desc = "隐身别人看不到的",
@@ -813,7 +880,9 @@ local Button = TabHandles.YI:Button({
 })
     end
 })
------------------------------------------------------------------------------------------------防甩飞
+
+
+
 Button = TabHandles.YI:Button({
     Title = "防甩飞",
     Desc = "别人想甩飞你是不可能的",
@@ -887,7 +956,9 @@ WindUI:Notify({
 })
     end
 })
------------------------------------------------------------------------------------------------撸关R15
+
+
+
 Button = TabHandles.YI:Button({
     Title = "撸关R15",
     Desc = "R15",
@@ -904,7 +975,9 @@ Button = TabHandles.YI:Button({
         
     end
 })
------------------------------------------------------------------------------------------------撸关R6
+
+
+
 Button = TabHandles.YI:Button({
     Title = "撸关R6",
     Desc = "R6",
@@ -921,7 +994,10 @@ Button = TabHandles.YI:Button({
         
     end
 })
------------------------------------------------------------------------------------------------甩飞
+
+
+
+
 Button = TabHandles.YI:Button({
     Title = "甩飞",
     Desc = "没鸟用",
@@ -1434,6 +1510,9 @@ WindUI:Notify({
 
     end
 })
+
+
+
 -----------------------------------------------------------------------------------------------穿墙
 Button = TabHandles.YI:Button({
     Title = "穿墙",
@@ -1715,6 +1794,8 @@ Button = TabHandles.YI:Button({
     end
 })
 
+
+
 Button = TabHandles.YI:Button({
     Title = "爬墙",
     Desc = "怎么都可以爬墙",
@@ -1732,6 +1813,8 @@ WindUI:Notify({
     end
 })
 
+
+
 Button = TabHandles.YI:Button({
     Title = "动作",
     Desc = "支持R15体型",
@@ -1748,7 +1831,9 @@ WindUI:Notify({
        
     end
 })
----------------------------------------------------------------------------------------------透视ESP
+
+
+-- ================ 透视esp ================
 getgenv().ESPEnabled = false
 getgenv().ShowBox = false
 getgenv().ShowHealth = false
@@ -2436,7 +2521,7 @@ Players.PlayerRemoving:Connect(function(player)
         ESPComponents[player] = nil
     end
 end)
----------------------------------------------------------------------------------------------透视功能
+-- ================ 透视范围 ================
 Toggle = TabHandles.ER:Toggle({
     Title = "透视开启", 
     Value = false, 
@@ -2478,7 +2563,7 @@ Toggle = TabHandles.ER:Toggle({
         getgenv().ShowName = Value
     end
 })
----------------------------------------------------------------------------------------------UI自定义
+-- ================ UI自定义 ================
 local Button = TabHandles.SAN:Button({
     Title = "自定义界面",
     Desc = "个性化您的体验",
