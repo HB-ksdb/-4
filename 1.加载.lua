@@ -53,7 +53,7 @@ local function createFullscreenAnnouncement()
     subLabel.Size = UDim2.new(1, 0, 0.1, 0)
     subLabel.Position = UDim2.new(0, 0, 0.55, 0)
     subLabel.BackgroundTransparency = 1
-    subLabel.Text = " HB FXM 脚本免费，环山军区 忍者传奇收费"
+    subLabel.Text = " HB FXM 脚本免费"
     subLabel.TextColor3 = Color3.new(0.8, 0.8, 0.8)
     subLabel.TextScaled = true
     subLabel.Font = Enum.Font.Gotham
