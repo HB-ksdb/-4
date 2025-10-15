@@ -40,7 +40,7 @@ local function createFullscreenAnnouncement()
     mainLabel.Size = UDim2.new(1, 0, 0.2, 0)
     mainLabel.Position = UDim2.new(0, 0, 0.3, 0)
     mainLabel.BackgroundTransparency = 1
-    mainLabel.Text = "欢迎"..game.Players.LocalPlayer.DisplayName.."用户",
+    mainLabel.Text = "欢迎用户",
     mainLabel.TextColor3 = Color3.new(1, 1, 1)-- = 白色文字 =
     mainLabel.TextScaled = true
     mainLabel.Font = Enum.Font.GothamBlack
