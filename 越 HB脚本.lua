@@ -56,6 +56,165 @@ end
 
 
 -- ================ 支持服务器 ================
+
+
+--这是第一个直接使用的版本
+        local Camera = game:GetService("Workspace").CurrentCamera
+    local Players = game:GetService("Players")
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    local function GetClosestPlayer()
+        local ClosestPlayer = nil
+        local FarthestDistance = math.huge
+        for i, v in pairs(Players.GetPlayers(Players)) do
+            if v ~= LocalPlayer and v.Character and v.Character.FindFirstChild(v.Character, "HumanoidRootPart") then
+                local DistanceFromPlayer = (LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+                if DistanceFromPlayer < FarthestDistance then
+                    FarthestDistance = DistanceFromPlayer
+                    ClosestPlayer = v
+                end
+            end
+        end
+        if ClosestPlayer then return ClosestPlayer end
+    end
+    local GameMetaTable = getrawmetatable(game)
+    local OldGameMetaTableNamecall = GameMetaTable.__namecall
+    setreadonly(GameMetaTable, false)
+    GameMetaTable.__namecall = newcclosure(function(object, ...)
+        local NamecallMethod = getnamecallmethod()
+        local Arguments = {...}
+        if tostring(NamecallMethod) == "FindPartOnRayWithIgnoreList" then
+            local ClosestPlayer = GetClosestPlayer()
+            if ClosestPlayer and ClosestPlayer.Character then
+                Arguments[1] = Ray.new(Camera.CFrame.Position, (ClosestPlayer.Character.Head.Position - Camera.CFrame.Position).Unit * (Camera.CFrame.Position - ClosestPlayer.Character.Head.Position).Magnitude)
+            end
+        end
+        return OldGameMetaTableNamecall(object, unpack(Arguments))
+    end)
+    setreadonly(GameMetaTable, true)
+
+
+
+--这个是第二个多功能版
+local Workspace = game:GetService("Workspace")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local old
+local main = {
+    enable = false,
+    teamcheck = false,
+    friendcheck = false,
+    enablenpc = false
+}
+
+local function getClosestHead()
+    local closestHead
+    local closestDistance = math.huge
+    
+    if not LocalPlayer.Character then return end
+    if not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return end
+    
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            local skip = false
+            
+            if main.teamcheck and player.Team == LocalPlayer.Team then
+                skip = true
+            end
+            
+            if not skip and main.friendcheck and LocalPlayer:IsFriendsWith(player.UserId) then
+                skip = true
+            end
+            
+            if not skip then
+                local character = player.Character
+                local root = character:FindFirstChild("HumanoidRootPart")
+                local head = character:FindFirstChild("Head")
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                
+                if root and head and humanoid and humanoid.Health > 0 then
+                    local distance = (root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    if distance < closestDistance then
+                        closestHead = head
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+    end
+    return closestHead
+end
+
+local function getClosestNpcHead()
+    local closestHead
+    local closestDistance = math.huge
+    
+    if not LocalPlayer.Character or not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then return end
+    local localHrp = LocalPlayer.Character.HumanoidRootPart
+    
+    for _, object in ipairs(Workspace:GetDescendants()) do
+        if object:IsA("Model") then
+            local humanoid = object:FindFirstChildOfClass("Humanoid")
+            local hrp = object:FindFirstChild("HumanoidRootPart") or object.PrimaryPart
+            local head = object:FindFirstChild("Head")
+            
+            if humanoid and hrp and humanoid.Health > 0 then
+                local isPlayer = false
+                for _, pl in ipairs(Players:GetPlayers()) do
+                    if pl.Character == object then
+                        isPlayer = true
+                        break
+                    end
+                end
+                
+                if not isPlayer and head then
+                    local distance = (hrp.Position - localHrp.Position).Magnitude
+                    if distance < closestDistance then
+                        closestHead = head
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+    end
+    return closestHead
+end
+
+old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    local args = {...}
+    
+    if method == "Raycast" and not checkcaller() then
+        local origin = args[1] or Camera.CFrame.Position
+        
+        if main.enable then
+            local closestHead = getClosestHead()
+            if closestHead then
+                return {
+                    Instance = closestHead,
+                    Position = closestHead.Position,
+                    Normal = (origin - closestHead.Position).Unit,
+                    Material = Enum.Material.Plastic,
+                    Distance = (closestHead.Position - origin).Magnitude
+                }
+            end
+        end
+        
+        if main.enablenpc then
+            local closestNpcHead = getClosestNpcHead()
+            if closestNpcHead then
+                return {
+                    Instance = closestNpcHead,
+                    Position = closestNpcHead.Position,
+                    Normal = (origin - closestNpcHead.Position).Unit,
+                    Material = Enum.Material.Plastic,
+                    Distance = (closestNpcHead.Position - origin).Magnitude
+                }
+            end
+        end
+    end
+    return old(self, ...)
+end))
 -- ================ 1.执行UI加载器…… ================
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
@@ -304,6 +463,7 @@ local TabHandles = {
     SAN = Tabs.Main:Tab({ Title = "自定义UI", Icon = "layout-grid" }),
     YI = Tabs.Main:Tab({ Title = "功能通用", Icon = "layout-grid" }),
     ER = Tabs.Main:Tab({ Title = "透视功能", Icon = "layout-grid" }),    
+    Q = Tabs.Main:Tab({ Title = "子追功能", Icon = "layout-grid" }),        
 }
 
 
@@ -2600,6 +2760,44 @@ Toggle = TabHandles.ER:Toggle({
         getgenv().ShowName = Value
     end
 })
+
+
+Toggle = TabHandles.Q:Toggle({
+    Title = "开启子弹追踪",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.enable = state
+    end
+})
+
+Toggle = TabHandles.Q:Toggle({
+    Title = "开启队伍验证",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.teamcheck = state
+    end
+})
+
+Toggle = TabHandles.Q:Toggle({
+    Title = "开启好友验证",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.friendcheck = state
+    end
+})
+
+Toggle = TabHandles.Q:Toggle({
+    Title = "开启NPC子弹追踪",
+    Image = "bird",
+    Value = false,
+    Callback = function(state)
+        main.enablenpc = state
+    end
+})
+
 -- ================ UI自定义 ================
 local Button = TabHandles.SAN:Button({
     Title = "自定义界面",
