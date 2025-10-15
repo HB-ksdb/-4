@@ -1729,6 +1729,28 @@ end)
 end
 })
 
+Button = TabHandles.YI:Button({
+    Title = "偷别人的道具",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+-- ================ 偷道具 ================
+for i,v in pairs (game.Players:GetChildren()) do
+wait()
+for i,b in pairs (v.Backpack:GetChildren()) do
+b.Parent = game.Players.LocalPlayer.Backpack
+end
+end
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
 
 Button = TabHandles.YI:Button({
     Title = "环山里面",
