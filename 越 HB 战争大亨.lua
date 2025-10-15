@@ -1191,7 +1191,19 @@ end
 -- = 玩家自瞄 =-- = 显示范围 =-- = 掩体不瞄 =-- =  =-- =  =-- =  =
 
 
+local fov = 0
+local maxDistance = 50
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Cam = workspace.CurrentCamera
 
+local FOVring = Drawing.new("Circle")
+FOVring.Visible = false
+FOVring.Thickness = 0.5
+FOVring.Color = Color3.new(1, 1, 1)
+FOVring.Filled = false
+FOVring.Radius = fov
+FOVring.Position = Cam.ViewportSize / 2
 
 Toggle = TabHandles.R:Toggle({
     Title = "子弹无限",
