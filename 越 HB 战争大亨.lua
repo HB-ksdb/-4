@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 -- ================ 1.执行UI加载器…… ================
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
@@ -966,31 +955,6 @@ Toggle = TabHandles.W:Toggle({
     end
 })
 -- ================ ？？？？ ================
-
-local blockFDMG = false
-local oldNamecall = nil
-local isHookActive = false
-
-local function initHook()
-    if isHookActive then return end
-    
-    oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
-        if blockFDMG and getnamecallmethod() == "FireServer" and tostring(self) == "FDMG" then
-            return nil
-        end
-        return oldNamecall(self, ...)
-    end)
-    
-    isHookActive = true
-end
-
-local function removeHook()
-    if not isHookActive or not oldNamecall then return end
-    
-    hookmetamethod(game, "__namecall", oldNamecall)
-    oldNamecall = nil
-    isHookActive = false
-end
 
 Button = TabHandles.E:Button({
     Title = "坠落无伤害",
