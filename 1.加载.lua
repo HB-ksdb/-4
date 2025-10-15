@@ -22,7 +22,7 @@ gui.IgnoreGuiInset = true  -- 确保全屏覆盖
 gui.Parent = player:WaitForChild("PlayerGui")
 
 -- ================ 要加载的脚本URL（在这里修改你的脚本地址） ================
-local SCRIPT_URL = "https://raw.githubusercontent.com/HB-ksdb/-4/refs/heads/main/2.%E5%85%AC%E5%91%8A%E5%BC%B9%E7%AA%97.lua"
+local SCRIPT_URL = ""
 
 -- 创建全屏弹窗函数
 local function createFullscreenAnnouncement()
