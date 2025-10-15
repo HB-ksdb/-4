@@ -1435,6 +1435,36 @@ end
 bulletTrackingEnabled = true
 setupBulletTracking() 
 end
+})
+
+Toggle = TabHandles.R:Toggle({
+    Title = "显示范围",
+    Desc = "",
+    Locked = false,
+    Callback = function(t)
+    fovVisible = t
+    FOVring.bulletTrackingEnabled = fovVisible
+            
+ end
+}) 
+
+Slider = TabHandles.R:Slider({
+    Title = "自瞄范围",
+    Desc = "speedwalk",
+    Value = { Min = 1, Max = 200, },
+    Callback = function(s)
+    fov = tonumber(s)
+    FOVring.bulletTrackingEnabled = fov
+    end
+})
+
+Slider = TabHandles.R:Slider({
+    Title = "自瞄距离",
+    Desc = "speedwalk",
+    Value = { Min = 0, Max = 1200, },
+    Callback = function(s)
+    bulletTrackingEnabled = tonumber(s)
+    end
 })            
 -- ================  ================
 -- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
@@ -1903,146 +1933,3 @@ WindUI:Notify({
 
 -- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
 -- ================  ================
-
-Toggle = TabHandles.Y:Toggle({
-    Title = "载具无限子弹",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-_G.AutoModifyEnabled = true
-_G.FireRateValue = 2000
-_G.InfiniteOverheat = true
-_G.ZeroCooldown = true
-
-local processedObjects = setmetatable({}, {__mode = "v"})
-local weaponCache = setmetatable({}, {__mode = "v"})
-local lastScanTime = 0
-local SCAN_INTERVAL = 5 
-
-local function isWeaponObject(obj)
-    if type(obj) ~= "table" then return false end
-    
-    if weaponCache[obj] ~= nil then
-        return weaponCache[obj]
-    end
-    
-    local hasFireRate = rawget(obj, "FireRate") ~= nil
-    local hasOverheat = rawget(obj, "OverheatCount") ~= nil
-    
-    local isWeapon = hasFireRate and hasOverheat
-    weaponCache[obj] = isWeapon
-    
-    return isWeapon
-end
-
-local function modifyWeapon(weapon)
-    if not weapon._OriginalFireRate then
-        weapon._OriginalFireRate = weapon.FireRate
-        weapon._OriginalOverheatIncrement = weapon.OverheatIncrement
-        weapon._OriginalCooldownTime = weapon.CooldownTime
-        weapon._OriginalOverheatCount = weapon.OverheatCount
-        weapon._OriginalDepleteDelay = weapon.DepleteDelay
-    end
-    
-    if _G.ZeroCooldown then
-        rawset(weapon, "OverheatIncrement", 0)
-        rawset(weapon, "CooldownTime", 0)
-    else
-        rawset(weapon, "OverheatIncrement", weapon._OriginalOverheatIncrement)
-        rawset(weapon, "CooldownTime", weapon._OriginalCooldownTime)
-    end
-    
-    rawset(weapon, "FireRate", _G.FireRateValue)
-    
-    if _G.InfiniteOverheat then
-        rawset(weapon, "OverheatCount", math.huge)
-        rawset(weapon, "DepleteDelay", math.huge)
-    else
-        rawset(weapon, "OverheatCount", weapon._OriginalOverheatCount)
-        rawset(weapon, "DepleteDelay", weapon._OriginalDepleteDelay)
-    end
-    
-    processedObjects[weapon] = true
-end
-
-local function scanForWeapons()
-    local objects = getgc(true)
-    local foundWeapons = {}
-    
-    for i = 1, #objects do
-        local obj = objects[i]
-        if isWeaponObject(obj) and not processedObjects[obj] then
-            table.insert(foundWeapons, obj)
-        end
-    end
-    
-    for i = 1, #foundWeapons do
-        modifyWeapon(foundWeapons[i])
-    end
-    
-    local registry = debug.getregistry()
-    if isWeaponObject(registry) and not processedObjects[registry] then
-        modifyWeapon(registry)
-    end
-end
-
-spawn(function()
-    while true do
-        local currentTime = tick()
-        
-        if _G.AutoModifyEnabled and (currentTime - lastScanTime) >= SCAN_INTERVAL then
-            scanForWeapons()
-            lastScanTime = currentTime
-        end
-        
-        task.wait(1) 
-    end
-end)
-end
-})
--- ================  ================
--- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
-
-
-
-
-
-
-
-
--- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
--- ================  ================
-
-Toggle = TabHandles.Y:Toggle({
-    Title = "直升机无限烟火",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    
-local flareInterval = 0.5
-
-while true do
-    local args = {
-        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"):WaitForChild("Misc"):WaitForChild("Turrets"):WaitForChild("AH Weapons"):WaitForChild("Flares"),
-        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"),
-        workspace:WaitForChild("Game Systems"):WaitForChild("Helicopter Workspace"):WaitForChild("AH-6 Littlebird"):WaitForChild("Misc"):WaitForChild("Turrets"):WaitForChild("SoundPart")
-    }
-    
-    game:GetService("ReplicatedStorage"):WaitForChild("RocketSystem"):WaitForChild("Events"):WaitForChild("FireFlare"):FireServer(unpack(args))
-    
-    wait(flareInterval)
-end
-end
-})
--- ================  ================
--- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
-
-
-
-
-
-
-
--- =  =-- =  =-- =  =-- =  =-- =  =-- =  =-- =  =
--- ================  ================
-
