@@ -201,6 +201,7 @@ WindUI:Notify({
 Button = TabHandles.Q:Button({
     Title = "自动偷箱子",
     Desc = "",
+    Icon = "database",
     Locked = false,
     Callback = function(value)
         getgenv().auto = value
@@ -219,6 +220,7 @@ WindUI:Notify({
 Button = TabHandles.Q:Button({
     Title = "自动升级",
     Desc = "",
+    Icon = "bell",
     Locked = false,
     Callback = function(value)
         getgenv().autoTeleport = value
