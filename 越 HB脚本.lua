@@ -32,6 +32,20 @@ end
 -- ================ 彩虹字符 ================
 
 
+-- ================ 支持服务器 ================
+--支持服务器
+--通用
+--刀刃球
+--最强战场
+--环山军区（收费）
+--极速传奇
+--99夜
+--力量传奇
+--忍者传奇（收费）
+--战争大享
+--火箭发射模拟器 
+--自然灾害
+--doors
 
 
 
@@ -41,9 +55,7 @@ end
 
 
 
-
-
-
+-- ================ 支持服务器 ================
 -- ================ 1.执行UI加载器…… ================
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
@@ -105,7 +117,7 @@ local Window = WindUI:CreateWindow({
             Draggable = true
         })
 
-
+-- ================ 标题 ================
 
 Window:Tag({
     Title = "v1.5越 HB",
@@ -343,6 +355,31 @@ Slider = TabHandles.YI:Slider({
 TabHandles.YI:Divider()
 -- ================ 通用下 ================
 
+
+Button = TabHandles.YI:Button({
+    Title = "偷别人的道具",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+-- ================ 偷道具 ================
+for i,v in pairs (game.Players:GetChildren()) do
+wait()
+for i,b in pairs (v.Backpack:GetChildren()) do
+b.Parent = game.Players.LocalPlayer.Backpack
+end
+end
+            
+WindUI:Notify({
+    Title = "通知",
+    Content = "加载成功",
+    Duration = 1, -- 3 seconds
+    Icon = "layout-grid",
+})                        
+            
+ end
+})
+
+-- ================ 地图透视 ================
 xrayEnabled = false
 function xray()
     for _, v in pairs(workspace:GetDescendants()) do
@@ -2743,3 +2780,4 @@ else
         Color = "White"
     })
 end
+-- ================  ================
