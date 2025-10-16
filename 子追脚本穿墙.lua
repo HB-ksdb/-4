@@ -383,7 +383,7 @@ local Options = Library.Options
 local Toggles = Library.Toggles
 
 
-local Window = Library:CreateWindow({ Title = "Universal Silent Aim", Footer = "1.1正式版", Center = true, AutoShow = true })
+local Window = Library:CreateWindow({ Title = "HB FXM备用子追", Footer = "1.1正式版", Center = true, AutoShow = true })
 
 local Tabs = {
     Main = Window:AddTab("主页", "user"),
