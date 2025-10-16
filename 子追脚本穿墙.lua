@@ -1,4 +1,4 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua", true))()
+local repo = 'https://raw.githubusercontent.com/deividcomsono/Obsidian/main/'
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/kickbypass"))()
 
