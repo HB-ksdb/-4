@@ -1,7 +1,3 @@
-local repo = 'https://raw.githubusercontent.com/deividcomsono/Obsidian/main/'
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/fcsdsss/games/refs/heads/main/kickbypass"))()
-
 if not game:IsLoaded() then
     game.Loaded:Wait()
 end
@@ -378,13 +374,14 @@ function hideAllVisuals()
     if IndependentPanelFrame then IndependentPanelFrame.Visible = false end
 end
 
-local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
-local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
-local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
-local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
+local repo = 'https://raw.githubusercontent.com/deividcomsono/Obsidian/main/'
 
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 local Options = Library.Options
 local Toggles = Library.Toggles
+
 
 local Window = Library:CreateWindow({ Title = "Universal Silent Aim", Footer = "1.1正式版", Center = true, AutoShow = true })
 
