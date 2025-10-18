@@ -57,7 +57,7 @@ local Window = WindUI:CreateWindow({
         })
             
 Window:Tag({
-    Title = "v1.5越 HB",
+    Title = "v2.0越 HB",
     Color = Color3.fromHex("#30ff6a")
 })
 
@@ -83,7 +83,7 @@ Button = TabHandles.Q:Button({
     Desc = "",
     Locked = false,
     Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/obfuscated_script-1759031266212.lua.txt",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E4%B8%BB%E8%84%9A%E6%9C%AC.txt",true))()
 WindUI:Notify({
     Title = "通知",
     Content = "加载成功",

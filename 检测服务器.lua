@@ -5,7 +5,7 @@ if game.PlaceId == 6839171747 then--doors
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20DOORS.lua",true))()
 elseif game.PlaceId == 189707 then--自然灾害 
     YIJIAOBEN = "YIJIAOBEN"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3%E5%8A%A0%E5%AF%86.txt",true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%E8%87%AA%E7%84%B6%E7%81%BE%E5%AE%B3%E9%80%89%E6%8B%A9.lua",true))()
 elseif game.PlaceId == 5256165620 then--火箭发射模拟器 
     YIJIAOBEN = "YIJIAOBEN"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HB-ksdb/-4/main/%E8%B6%8A%20HB%20%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%A8%A1%E6%8B%9F%E5%99%A8%E9%80%89%E6%8B%A9.lua",true))()
