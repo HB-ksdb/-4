@@ -799,10 +799,10 @@ local function updatePlayerESP()
             
             if teamName == "Killer" and Config.ESP.Killer then
                 createHighlight(player.Character, Color3.fromRGB(255, 0, 0))
-                createLabel(player.Character, player.Name .. "\n[KILLER]", Color3.fromRGB(255, 0, 0))
+                createLabel(player.Character, player.Name .. "\n[杀手]", Color3.fromRGB(255, 0, 0))
             elseif teamName == "Survivors" and Config.ESP.Survivor then
                 createHighlight(player.Character, Color3.fromRGB(0, 255, 0))
-                createLabel(player.Character, player.Name .. "\n[SURVIVOR]", Color3.fromRGB(0, 255, 0))
+                createLabel(player.Character, player.Name .. "\n[幸存者]", Color3.fromRGB(0, 255, 0))
             else
                 removeHighlight(player.Character)
                 removeLabel(player.Character)
@@ -819,7 +819,7 @@ local function updateGeneratorESP()
         if not map then return end
         
         for _, obj in ipairs(map:GetDescendants()) do
-            if obj:IsA("Model") and obj.Name == "Generator" then
+            if obj:IsA("Model") and obj.Name == "发动机" then
                 createHighlight(obj, Color3.fromRGB(203, 132, 66))
                 createLabel(obj, "Generator", Color3.fromRGB(203, 132, 66))
             end
@@ -835,7 +835,7 @@ local function updateGateESP()
         if not map then return end
         
         for _, obj in ipairs(map:GetDescendants()) do
-            if obj:IsA("Model") and obj.Name == "Gate" then
+            if obj:IsA("Model") and obj.Name == "门电除尘器" then
                 createHighlight(obj, Color3.fromRGB(255, 255, 255))
                 createLabel(obj, "Gate", Color3.fromRGB(255, 255, 255))
             end
@@ -858,7 +858,7 @@ local function updateHookESP()
             local closestDist = math.huge
             
             for _, obj in ipairs(map:GetDescendants()) do
-                if obj:IsA("Model") and obj.Name == "Hook" then
+                if obj:IsA("Model") and obj.Name == "挂钩静电除尘器" then
                     local hookPart = obj:FindFirstChildWhichIsA("BasePart")
                     if hookPart then
                         local dist = (hookPart.Position - hrp.Position).Magnitude
@@ -871,7 +871,7 @@ local function updateHookESP()
             end
             
             for _, obj in ipairs(map:GetDescendants()) do
-                if obj:IsA("Model") and obj.Name == "Hook" then
+                if obj:IsA("Model") and obj.Name == "挂钩静电除尘器" then
                     removeHighlight(obj)
                     removeLabel(obj)
                 end
@@ -889,7 +889,7 @@ local function updateHookESP()
             end
         else
             for _, obj in ipairs(map:GetDescendants()) do
-                if obj:IsA("Model") and obj.Name == "Hook" then
+                if obj:IsA("Model") and obj.Name == "挂钩静电除尘器" then
                     if obj:FindFirstChild("Model") then
                         for _, part in ipairs(obj.Model:GetDescendants()) do
                             if part:IsA("MeshPart") then
@@ -913,7 +913,7 @@ local function updatePalletESP()
         if not map then return end
         
         for _, obj in ipairs(map:GetDescendants()) do
-            if obj:IsA("Model") and obj.Name == "Palletwrong" then
+            if obj:IsA("Model") and obj.Name == "托盘静电除尘器" then
                 createHighlight(obj, Color3.fromRGB(255, 255, 0))
                 createLabel(obj, "Pallet", Color3.fromRGB(255, 255, 0))
             end
@@ -926,7 +926,7 @@ local function updateWindowESP()
     
     safeCall(function()
         for _, obj in ipairs(Workspace:GetDescendants()) do
-            if obj:IsA("Model") and obj.Name == "Window" then
+            if obj:IsA("Model") and obj.Name == "窗户静电除尘器" then
                 createHighlight(obj, Color3.fromRGB(173, 216, 230))
                 createLabel(obj, "Window", Color3.fromRGB(173, 216, 230))
             end
@@ -945,7 +945,7 @@ local function updatePumpkinESP()
         if not pumpkins then return end
         
         for _, obj in ipairs(pumpkins:GetDescendants()) do
-            if obj:IsA("Model") and obj.Name:find("Pumpkin") then
+            if obj:IsA("Model") and obj.Name:find("南瓜电除尘器") then
                 createHighlight(obj, Color3.fromRGB(255, 140, 0))
                 createLabel(obj, "Pumpkin", Color3.fromRGB(255, 140, 0))
             end
@@ -1001,29 +1001,6 @@ local function stopESP()
     end
     clearAllESP()
     notify("ESP Stopped", "All ESP disabled", 2)
-end
-
--- ================ 防抓包(放最上面的开头) ================
-function Antihook()
-    return "Hook"
-end
-
-hookfunction(Antihook, function()
-    return "No Hook"
-end)
-
-hookfunction(game.HttpGet, print)
-
-if not isfunctionhooked(Antihook) or not isfunctionhooked(game.HttpGet) then
-    game:shutdown("别搞我")
-    while true do end
-end
-
-restorefunction(game.HttpGet)
-
-if isfunctionhooked(game.HttpGet) or isfunctionhooked(request) or isfunctionhooked(tostring) then
-    game:shutdown("666")
-    while true do end
 end
                 
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
